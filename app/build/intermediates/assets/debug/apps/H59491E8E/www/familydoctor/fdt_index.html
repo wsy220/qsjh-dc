@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>家庭医生</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../fonts/iconfont.css" />
+		<link rel="stylesheet" href="../plugs/qs/qs.common.new.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+		<link href="../css/hover.css" rel="stylesheet" />
+
+		<style>
+			.mui-bar-nav~.mui-content {
+				position: absolute;
+				/*padding-top: 44px;*/
+				height: 100%;
+				width: 100%;
+			}
+			
+			.mui-slider {
+				position: absolute;
+				height: 100%;
+				z-index: 1;
+				overflow: hidden;
+				width: 100%;
+				/*padding-bottom: 40px;*/
+			}
+			
+			.mui-slider .mui-slider-group {
+				font-size: 0;
+				height: 100%;
+				width: 100%;
+				position: absolute;
+				-webkit-transition: all 0s linear;
+				transition: all 0s linear;
+				white-space: nowrap;
+				/*padding-bottom: 113px;*/
+			}
+			
+			.mui-slider-indicator.mui-segmented-control {
+				background-color: #FFFFFF;
+				height: 45px;
+				text-align: center;
+				padding-top: 10px;
+			}
+			
+			.scroller {
+				padding-bottom: 0px;
+			}
+			
+			.mui-segmented-control.mui-segmented-control-inverted~.mui-slider-progress-bar {
+				background-color: #4d7acf;
+			}
+			
+			.mui-table-view .mui-media-object {
+				line-height: 42px;
+				max-width: 60px;
+				height: 60px;
+			}
+			
+			.cus-img-list {
+				margin-top: 9px;
+			}
+			
+			.cus-text-color-one {
+				color: #797979;
+			}
+			
+			.empty-img {
+				width: 50% !important;
+				margin: 0 auto;
+				display: table;
+				padding-top: 50px;
+			}
+			
+			.mui-popover {
+				height: 100px;
+				width: 120px;
+			}
+			
+			.mui-media-body {
+				padding: 3% 0 0 3%;
+			}
+			
+			.make-round {
+				border-radius: 50%;
+			}
+			
+			.mui-icon-search {
+				color: #FFFFFF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">家庭医生</h1>
+			<span style="float: right;">
+				<!--<button type="button" class="mui-btn" id="btn_fdt_detail">团队详情</button>-->
+				<span class="mui-icon mui-icon-search" id="btn_fdt_search"></span>
+			</span>
+		</header>
+		<div class="mui-row" style="position: absolute; z-index: 1;width: 100%;" id="cus-header">
+			<div class="mui-col-sm-12 mui-col-xs-12">
+				<div class="mui-row" id="btn_fdt_detail" style="background-color: #FFFFFF;margin: 3px;">
+					<div class="mui-col-xs-3" style="padding-left: 4%;">
+						<img src="../images/fdt/tdxx.png" style="width: 60px;" />
+					</div>
+					<div class="mui-col-xs-9" style="margin-top: 16px;">
+						<p>团队详情</p>
+					</div>
+				</div>
+			</div>
+			<!--<div class="mui-col-sm-6 mui-col-xs-6">
+				<div class="mui-row" id="message-list" style="background-color: #FFFFFF;margin: 3px 3px 3px 0;">
+					<div class="mui-col-xs-6">
+						<img src="../images/fdt/xxlb.png" style="width: 60px;margin-left: 25%;" />
+					</div>
+					<div class="mui-col-xs-6" style="margin-top: 16px;">
+						<p>消息列表</p>
+					</div>
+				</div>
+			</div>-->
+		</div>
+		<div class="mui-content" id="content">
+			<div id="content-slider" class="mui-slider">
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item mui-active" href="#item2patient" id="signedPatientItem">
+						已签约患者(<span id="sign-num">0</span>)
+					</a>
+					<a class="mui-control-item" href="#item3patient" id="unsignedPatientItem">
+						未签约患者(<span id="un-sign-num">0</span>)
+					</a>
+				</div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar" style="width: 50%;"></div>
+				<div class="mui-slider-group">
+					<div id="item2patient" class="mui-slider-item mui-control-content">
+						<div id="item2wrapper" class="mui-scroll-wrapper">
+							<div id="wrapper03" class="wrapper">
+								<div id="scroller" class="scroller">
+									<div id="signedDataDiv">
+										
+										<ul class="mui-table-view">
+
+											<!--<li class="mui-table-view-cell mui-media to-sign" data-id="{{value._id}}">
+												<a href="javascript:;">
+													<img class="mui-media-object mui-pull-left cus-img-list" src="../images/fdt/fdt_patient_img.png">
+
+													<img class="mui-media-object mui-pull-right cus-img-list" src="../images/fdt/fdt_patient_complete_signed.png">
+
+													<div class="mui-media-body">
+														<div>姓名：</div>
+														<div><span>男</span><span style="padding-left:20px">1950年</span></div>
+														<div class="cus-text-color-one">疾病：有病</div>
+													</div>
+												</a>
+											</li>-->
+
+										</ul>
+
+										<p><img class="empty-img" src="../images/no_data/1-01.png" data-preview-src="" data-preview-group="1"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="item3patient" class="mui-slider-item mui-control-content">
+						<div id="item3wrapper" class="mui-scroll-wrapper">
+							<div id="wrapper02" class="wrapper">
+								<div id="scroller" class="scroller">
+									<div id="unsignedDataDiv">
+										<p><img class="empty-img" src="../images/no_data/1-01.png" data-preview-src="" data-preview-group="1"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/iscroll/iscroll-probe.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.iscroll.new.js"></script>
+	<script>
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+
+		var signRate = 0;
+		var signNum = 0;
+		var unSignNum = 0;
+		mui.plusReady(function() {
+			//setPagePos();
+			// 加载完毕后关闭等待框，并展示页面
+			var currentView = plus.webview.currentWebview();
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+			refreshPage();
+			topoffset = immersed + 45;
+			console.log(topoffset)
+			document.getElementById('content').style.paddingTop = (topoffset + 61) + 'px';
+			document.getElementById('cus-header').style.paddingTop = topoffset + 'px';
+
+			$(".mui-slider .mui-slider-group").css("padding-bottom", (topoffset + 89))
+		});
+
+		var refreshPage = function() {
+			var currentFDT = JSON.parse(localStorage.getItem("currentFDT"));
+			console.log("获取当前家庭医生团队分配到的患者的签约率:" + getFDTPatientSignQuantity)
+			var func = function(data) {
+				console.log("获取当前家庭医生团队分配到的患者的签约率:" + JSON.stringify(data))
+				if(data.result == "success") {
+					$("#sign-num").html(data.obj.signQuantity);
+					$("#un-sign-num").html(data.obj.unSignQuantity);
+					signNum = data.obj.signQuantity;
+					unSignNum = data.obj.unSignQuantity;
+					signRate = data.obj.signRate;
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+			commonHttpUtils(getFDTPatientSignQuantity, 'POST', {
+				fdt: currentFDT._id
+			}, func, error);
+		}
+		//团队详情
+
+		$("#btn_fdt_search").click(function(event) {
+			var currentFDT = JSON.parse(localStorage.getItem("currentFDT"));
+			console.log("---------------------->" + currentFDT._id);
+			mui.openWindow({
+				url: 'fdt_search.html',
+				id: 'fdt_search',
+				extras: {
+					fdtId: currentFDT._id,
+				},
+				show: {
+					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true //自动显示等待框，默认为true
+				}
+			});
+		});
+		
+//		$("#message-list").click(function(event) {
+////			mui.toast("程序员正在努力开发中。。。")
+//			
+//			var currentFDT = JSON.parse(localStorage.getItem("currentFDT"));
+//			console.log("---------------------->" + currentFDT._id);
+//			mui.openWindow({
+//				url: '../chat/message_list.html',
+//				id: 'message_list',
+//				extras: {
+//					fdtId: currentFDT._id,
+//				},
+//				show: {
+//					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+//					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+//				},
+//				waiting: {
+//					autoShow: true //自动显示等待框，默认为true
+//				}
+//			});
+//		});
+
+		$("#btn_fdt_detail").click(function(event) {
+			var self = plus.webview.currentWebview();
+			//			console.log("调用显示患者详情页面：" + );
+			mui.openWindow({
+				url: 'fdt_detail.html',
+				id: 'fdt_detail',
+				extras: {
+					fdt_id: self.fdt_id,
+					signNum: signNum,
+					unSignNum: unSignNum,
+					signRate: signRate
+				},
+				show: {
+					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true //自动显示等待框，默认为true
+				}
+			});
+			mui('.mui-popover').popover('hide');
+		});
+
+		var userId = null;
+		var wrapper03;
+		var wrapper02;
+
+		mui.plusReady(function() {
+			loaded();
+			userId = localStorage.getItem("USERID");
+			mui(".mui-content").on("tap", ".to-sign", function() {
+				var patientId = $(this).attr("data-id");
+				console.log("调用显示患者详情页面：" + patientId);
+				mui.openWindow({
+					url: 'fdt_patient_detail.html',
+					id: 'fdt_patient_detail',
+					extras: {
+						fdtPatient_id: patientId
+					},
+					show: {
+						//autoShow: true, //页面loaded事件发生后自动显示，默认为true
+						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true, //自动显示等待框，默认为true
+						title: '正在加载...', //等待对话框上显示的提示内容
+
+					}
+				});
+			});
+		});
+
+		document.querySelector('.mui-slider').addEventListener('slide', function(event) {
+			var nm = mui("#content-slider").slider().getSlideNumber()
+			if(nm == '0') {
+				wrapper03.refresh()
+			} else if(nm == '1') {
+				wrapper02.refresh()
+			}
+		});
+
+		function processSignedAction(myScroll) {
+			var currentFDT = JSON.parse(localStorage.getItem("currentFDT"));
+			var signedurl = getfdtpatientUrl + "?fdt_id=" + currentFDT._id + "&node=YQ&page=" + myScroll.page + "&limit=" + myScroll.limit;
+			if(myScroll.page == 1) {
+				$("#signedDataDiv").html('<p><img class="empty-img" src="../images/no_data/1-01.png" data-preview-src="" data-preview-group="1"></p>');
+			}
+			var sussess = function(data) {
+				//				console.log("获取家庭医生团队已签约患者请求url:" + signedurl)
+				console.log("获取家庭医生团队已签约患者返回数据:" + JSON.stringify(data))
+				if(data.result == "success") {
+					if(data.obj.length != 0) {
+						if(myScroll.page == 1) {
+							$("#signedDataDiv").html('')
+						}
+						if(data.obj.length == myScroll.limit) {
+							myScroll.page = myScroll.page + 1;
+							myScroll.upFlag = true
+						} else {
+							myScroll.upFlag = false
+						}
+						var tlData = {
+							sub: data.obj
+						}
+						$("#signedDataDiv").processTL(templateRegister.fdtpatientList, tlData, 'append', function() {
+							myScroll.refresh()
+						})
+					} else {
+						myScroll.upFlag = false
+					}
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+			console.log(signedurl);
+			commonHttpUtils(signedurl, "get", "", sussess, error);
+		}
+
+		function processUnsignedAction(myScroll) {
+			var currentFDT = JSON.parse(localStorage.getItem("currentFDT"));
+			var unsignedurl = getfdtpatientUrl + "?fdt_id=" + currentFDT._id + "&node=YFP&page=" + myScroll.page + "&limit=" + myScroll.limit;
+			if(myScroll.page == 1) {
+				$("#unsignedDataDiv").html('<p><img class="empty-img" src="../images/no_data/1-01.png" data-preview-src="" data-preview-group="1"></p>');
+			}
+			var sussess = function(data) {
+				//				console.log("获取家庭医生团队未签约患者请求url:" + unsignedurl);
+				console.log("获取家庭医生团队未签约患者返回数据:" + JSON.stringify(data));
+				if(data.result == "success") {
+					if(data.obj.length != 0) {
+						if(myScroll.page == 1) {
+							$("#unsignedDataDiv").html('')
+						}
+						if(data.obj.length == myScroll.limit) {
+							myScroll.page = myScroll.page + 1;
+							myScroll.upFlag = true
+						} else {
+							myScroll.upFlag = false
+						}
+						$("#unsignedDataDiv").processTL(templateRegister.fdtpatientList, {
+							sub: data.obj
+						}, 'append', function() {
+							myScroll.refresh()
+						})
+					} else {
+						myScroll.upFlag = false
+					}
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+			commonHttpUtils(unsignedurl, "get", "", sussess, error);
+		}
+
+		function loaded() {
+			wrapper03 = $.initIscroll({
+				id: "wrapper03",
+				pullUpAction: processSignedAction,
+				pullDownAction: processSignedAction,
+				limit: 10
+			});
+			wrapper02 = $.initIscroll({
+				id: "wrapper02",
+				pullUpAction: processUnsignedAction,
+				pullDownAction: processUnsignedAction,
+				limit: 10
+			});
+			initFunction();
+		}
+
+		var initFunction = function() {
+			$('#item2patient').addClass('mui-active')
+			processSignedAction(wrapper03);
+			processUnsignedAction(wrapper02);
+		}
+
+		document.addEventListener('touchmove', function(e) {
+			e.preventDefault();
+		}, isPassive() ? {
+			capture: false,
+			passive: false
+		} : false);
+
+		function isPassive() {
+			var supportsPassiveOption = false;
+			try {
+				addEventListener("test", null, Object.defineProperty({}, 'passive', {
+					get: function() {
+						supportsPassiveOption = true;
+					}
+				}));
+			} catch(e) {}
+			return supportsPassiveOption;
+		}
+	</script>
+
+</html>

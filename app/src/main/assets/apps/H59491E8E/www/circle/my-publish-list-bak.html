@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>模版页面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+
+		<style>
+			.imgmsg {
+				max-width: 45%;
+				margin: 0 auto;
+				display: table;
+				padding-top: 50px;
+			}
+			
+			.mui-table-view:after {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				height: 0px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}
+			
+			.mui-table-view-chevron .mui-table-view-cell {
+				padding-right: 15px;
+			}
+			/*.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
+				margin-right: -70px;
+			}*/
+			
+			.mui-table-view-cell>a:not(.mui-btn) {
+				padding: 12px 20px;
+				background-color: #fff;
+			}
+			
+			.cus-badge-box {
+				position: relative;
+			}
+			
+			.mui-badge {
+				min-height: 10px;
+				position: absolute;
+				right: -4px;
+				font-size: 10px;
+				line-height: 1.4;
+				top: -3px;
+				margin-left: -10px;
+				padding: 1px 5px;
+				color: #fff;
+				background: #f52626;
+			}
+			
+			.cus-wd {
+				margin-right: 0px;
+				font-size: 14px;
+				float: right;
+				color: #8f8f94;
+			}
+			
+			.cus-time {
+				margin-right: 0px;
+				font-size: 12px;
+				float: right;
+				color: #8f8f94;
+			}
+			
+			.cus-title {
+				color: #353535;
+				font-size: 17px;
+				line-height: 24px;
+			}
+			
+			.mui-table-view .mui-media-object {
+				line-height: 85px;
+				max-width: 85px;
+				height: 85px;
+			}
+			
+			.cus-title-img {
+				height: 14px;
+				margin-right: 2px;
+			}
+			
+			.cus-time-img {
+				height: 10px;
+				margin-right: 2px;
+			}
+			
+			.banner {
+				width: 85px;
+				height: 85px;
+				overflow: hidden;
+				position: relative;
+			}
+			
+			.banner>a {
+				position: absolute;
+				top: -100%;
+				bottom: -100%;
+				left: -100%;
+				right: -100%;
+				text-align: center;
+			}
+			
+			.banner>a:before {
+				content: "";
+				display: inline-block;
+				vertical-align: middle;
+				height: 100%;
+			}
+			
+			.banner>a>img {
+				vertical-align: middle;
+			}
+			
+			.mui-table-view{
+				    background-color: #eee;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">我的文章</h1>
+		</header>
+		<div class="mui-content mui-table-view-chevron" id="content">
+			<ul id="OA_task_1" class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<div class="mui-slider-right mui-disabled">
+						<a class="mui-btn mui-btn-red">删除</a>
+					</div>
+					<div class="mui-slider-handle">
+						<div class="mui-media-object mui-pull-left cus-badge-box">
+							<div class="banner">
+								<a href="#"><img src="../images/advert/006.jpg" alt="" /></a>
+							</div>
+						</div>
+						<div class="mui-media-body">
+							<span class="cus-title"><img class="cus-title-img" src="../images/circle/fx.png">我的文章我的文章</span>
+							<div class="cus-wd"><img class="cus-time-img" src="../images/circle/hf.png">10000</div>
+							<p class='mui-ellipsis-2'>负责老人、儿童及功能障碍康复治疗的相关课程开发及培训工作；提供康复理疗咨询服务。需进行淋浴、皮肤护理、抚触按摩、脐带护理的新生儿需喂养指导的父母家长负责老</p>
+							<div class="cus-time">2017-02-01 02:02:01</div>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-slider-right mui-disabled">
+						<a class="mui-btn mui-btn-red">删除</a>
+					</div>
+					<div class="mui-slider-handle">
+						<div class="mui-media-object mui-pull-left cus-badge-box">
+							<div class="banner">
+								<a href="#"><img src="../images/advert/006.jpg" alt="" /></a>
+							</div>
+						</div>
+						<div class="mui-media-body">
+							<span class="cus-title"><img class="cus-title-img" src="../images/circle/fx.png">我的文章我的文章</span>
+							<div class="cus-wd"><img class="cus-time-img" src="../images/circle/hf.png">10000</div>
+							<p class='mui-ellipsis-2'>负责老人、儿童及功能障碍康复治疗的相关课程开发及培训工作；提供康复理疗咨询服务。需进行淋浴、皮肤护理、抚触按摩、脐带护理的新生儿需喂养指导的父母家长负责老</p>
+							<div class="cus-time">2017-02-01 02:02:01</div>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-slider-right mui-disabled">
+						<a class="mui-btn mui-btn-red">删除</a>
+					</div>
+					<div class="mui-slider-handle">
+						<div class="mui-media-object mui-pull-left cus-badge-box">
+							<div class="banner">
+								<a href="#"><img src="../images/advert/006.jpg" alt="" /></a>
+							</div>
+						</div>
+						<div class="mui-media-body">
+							<span class="cus-title"><img class="cus-title-img" src="../images/circle/fx.png">我的文章我的文章</span>
+							<div class="cus-wd"><img class="cus-time-img" src="../images/circle/hf.png">10000</div>
+							<p class='mui-ellipsis-2'>负责老人、儿童及功能障碍康复治疗的相关课程开发及培训工作；提供康复理疗咨询服务。需进行淋浴、皮肤护理、抚触按摩、脐带护理的新生儿需喂养指导的父母家长负责老</p>
+							<div class="cus-time">2017-02-01 02:02:01</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/iscroll/iscroll-probe.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.iscroll.new.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+	<script>
+		var wzfl = null;
+		mui.init({
+			keyEventBind: {
+				backbutton: true //打开back按键监听
+			},
+			beforeback: function() {
+				//返回true，继续页面关闭逻辑  
+				mui.back;
+				return true;
+			}
+		});
+
+		mui.plusReady(function() {
+			setPagePos();
+			var currentView = plus.webview.currentWebview();
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+
+			var btnArray = ['确认', '取消'];
+			$('#OA_task_1').on('tap', '.mui-btn', function(event) {
+				var elem = this;
+				var li = elem.parentNode.parentNode;
+				mui.confirm('确认删除该条记录？', 'Hello MUI', btnArray, function(e) {
+					if(e.index == 0) {
+						li.parentNode.removeChild(li);
+					} else {
+						setTimeout(function() {
+							mui.swipeoutClose(li);
+						}, 0);
+					}
+				});
+			});
+
+			$('#OA_task_1').on('tap', '.mui-table-view-cell', function(event) {
+				mui.openWindow({
+					url: 'publish-article-dtl.html',
+					id: 'publish-article-dtl.html',
+					show: {
+						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true, //自动显示等待框，默认为true
+						title: '正在加载...', //等待对话框上显示的提示内容
+					}
+				});
+			})
+
+		});
+	</script>
+
+</html>

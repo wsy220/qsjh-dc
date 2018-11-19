@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>订单详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<link rel="stylesheet" href="../fonts/iconfont.css" />
+		<link rel="stylesheet" href="../css/mui.imageviewer.css" />
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+		<style>
+			html {
+				font-size: 100%;
+			}
+			
+			h5 {
+				margin: 5px 7px;
+			}
+			
+			.mui-card .mui-control-content {
+				padding: 10px;
+			}
+			
+			ul {
+				font-size: 14px;
+				color: #333333;
+			}
+			
+			.mui-btn {
+				padding: 10px;
+			}
+			
+			#kefu {
+				font-size: 0.5rem;
+				line-height: 30px;
+			}
+			
+			header button img {
+				width: 0.3rem;
+			}
+			
+			.mui-bar {
+				box-shadow: 0 0 1px rgba(255, 255, 255, 1);
+			}
+			
+			.mui-content {
+				#background-color: #fff;
+			}
+			
+			.mui-segmented-control {
+				border-bottom: 3px solid #eeeeee!important;
+			}
+			
+			.mui-content .mui-segmented-control {
+				border: none;
+			}
+			
+			.right {
+				float: right;
+			}
+			
+			.mui-control-content {
+				min-height: 540px;
+			}
+			
+			.liangzi {
+				text-align: center
+			}
+			
+			.liangzi a img {
+				width: 80%;
+				margin: 10px 0px;
+			}
+			
+			.peixun_one {
+				height: 0.7rem;
+				width: 1.4rem;
+				line-height: 0.7rem;
+				background-color: #fba94f;
+				color: #fff;
+				text-align: center;
+				border-radius: 5px 5px;
+				margin-left: 10px;
+				margin-top: 10% !important;
+			}
+			
+			.mui-table-view-cell:after {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0px;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}
+			
+			.mui-ios .mui-table-view-cell {
+				-webkit-transform-style: preserve-3d;
+				transform-style: preserve-3d;
+				font-size: 15px;
+				color: #333333;
+				line-height: 0.6rem;
+			}
+			
+			.iconfont {
+				font-family: "iconfont" !important;
+				font-size: 20px;
+				font-style: normal;
+				color: #ff3300;
+				margin-left: 10px;
+				margin-top: 5px;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
+			
+			.mui-table-view-cell {
+				position: relative;
+				overflow: hidden;
+				padding: 11px 15px;
+				-webkit-touch-callout: none;
+				line-height: 30px;
+			}
+			
+			.iconfont2 {
+				font-family: "iconfont" !important;
+				font-size: 20px;
+				font-style: normal;
+				color: #bcbcbc;
+				margin-left: 10px;
+				margin-top: 5px;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
+			
+			.neirong {
+				color: #333333;
+				font-size: 15px;
+				float: left;
+			}
+			
+			.pingjia {
+				color: #333333;
+				font-size: 15px;
+				font-weight: bold;
+				float: left;
+			}
+			
+			.mui-content-padded {
+				margin-top: 30px;
+			}
+			
+			.mui-btn-warning {
+				background: #FCB565;
+				border-radius: 10px;
+				width: 100%;
+				font-size: 15px;
+				margin-top: 150px;
+			}
+			
+			.mui-icon-star {
+				border: 0;
+				color: #BBBBBB;
+			}
+			
+			.mui-icon-star-filled {
+				border: 0;
+				color: red;
+			}
+			
+			.mui-icon {
+				margin-left: 10px;
+				margin-top: 5px;
+			}
+			
+			.tu_pian img {
+				width: 90%;
+				margin-left: 6%;
+			}
+			
+			.mui-row {
+				background-color: #ffffff;
+				width: 100%;
+				height: 11rem;
+			}
+			
+			.mui-row #hulijilu {
+				font-size: 0.26rem;
+				padding: 3% 0 2%4%;
+				color: #333;
+				display: inline-block;
+			}
+			
+			.mui-row p {
+				padding: 0 4%;
+			}
+			
+			.mui-btn-primary {
+				border: 1px solid #31569d;
+				background: #31569d;
+				border-radius: 10px;
+				width: 100%;
+				height: 0.9rem;
+				font-size: 15px;
+			}
+			
+			.btn-primary {
+				border: 1px solid #afafaf;
+				background: #afafaf;
+				border-radius: 10px;
+				width: 94%;
+				height: 0.9rem;
+				color: #ffffff;
+				font-size: 15px;
+				margin-left: 3%;
+			}
+			
+			.serviceitem {
+				font-size: 14px;
+				margin-top: 0;
+				margin-bottom: 10px;
+				color: #8F8F94 !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">订单详情</h1>
+		</header>
+		<div class="mui-content " id="content">
+			<div id="contentsub">
+				<div id="ordera"></div>
+				<div id="orderb"></div>
+			</div>
+			<div class="mui-content-padded" style="margin-bottom: 30px;">
+				<button id='goreg' class="mui-btn mui-btn-block mui-btn-primary " style="display: none;"><span>确认</span></button>
+			</div>
+			<div class="gry_wait" style="margin-bottom: 30px;">
+				<button id='waitone' class="btn-primary " style="display: none;"><span>等待患者确认/付款</span></button>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.zoom.js"></script>
+	<script type="text/javascript" src="../js/mui.previewimage.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+	<script type="text/javascript" src="../plugs/md5/md5.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.img.lazyload.js"></script>
+	<script>
+		var dataFormat = function(data){
+			var _data = data;
+			var diseaseArr = [];
+			for (var i=0;i<_data["disease"].length;i++) {
+				var department = _data["disease"][i];
+				for (var m = 0; m < department["diseases"].length; m++) {
+					var disease = department["diseases"][i];
+					diseaseArr.push(disease);
+				}
+			}
+			_data["disease"]=diseaseArr.toString();
+			return _data;
+		}
+		mui.init({
+			swipeBack: true, //启用右滑关闭功能
+			beforeback: function() {
+				//获得列表界面的webview
+				var i = plus.webview.getWebviewById("subpages/tab-webview-subpage-service.html");
+				if(i) {
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+					i.evalJS("refConfimService()");
+				}
+				return true;
+			}
+		});
+		mui('.mui-scroll-wrapper').scroll({
+			indicators: true //是否显示滚动条
+		});
+
+		var orderUrl;
+		var order = null;
+		var orderSub = null;
+		var orderId = null;
+		var sparesfrom = "";
+		var init = function() {
+			var ordersussess = function(data) {
+				console.log("待服务详情：" + JSON.stringify(data.obj))
+				order = dataFormat(data.obj);
+				if (data.obj.allowThird==true) {
+					sparesfrom="jl"
+				} else{
+					sparesfrom="dc"
+				}
+				
+				if(data.result == "success") {
+					order = data.obj;
+					orderSub = data.sub;
+
+					$("#ordera").html("")
+					$("#orderb").html("")
+					//					$("#orderDrugSpare").html("")
+
+					$("#ordera").processTL(templateRegister.ordera, data.obj, "append", function() {
+						$("#orderback").show()
+
+					})
+					$("#orderb").processTL(templateRegister.orderb, data.obj, "append", function() {
+						$(".qs-img-lazyload").each(function(i, v) {
+							$$.lazyload(v)
+							
+						})
+					})
+					//					$("#orderDrugSpare").processTL(templateRegister.orderDrugSpare, data.obj, "append", function() {
+					//						$(".qs-img-lazyload").each(function(i, v) {
+					//							$$.lazyload(v)
+					//						})
+					//					})
+
+					if(!order.doctorisconfirm) {
+						$('#waitone').hide();
+						$('#goreg').show();
+					} else {
+						$('#goreg').hide();
+						//if(order.sparesconfirm || order.drugisconfirm){
+						$('#waitone').show();
+						//}
+					}
+					if(order.timeisconfirm) {
+						$('#waitone').hide();
+					}
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+			commonHttpUtils(orderUrl, "get", {}, ordersussess, error);
+			mui.previewImage();
+		}
+
+		mui.plusReady(function() {
+			var currentView = plus.webview.currentWebview();
+			currentView.setStyle({
+				softinputMode: "adjustResize"
+			});
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+
+			var self = plus.webview.currentWebview();
+			orderId = self.orderId;
+			var userId = localStorage.getItem("USERID");
+			orderUrl = getorderdetailallUrl + orderId;
+
+			init();
+
+			mui(".mui-content").on("tap", "#orderback", function(event) {
+				mui.openWindow({
+					url: 'single_back.html',
+					id: 'single_back',
+					extras: {
+						orderId: orderId
+					},
+					show: {
+						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true //自动显示等待框，默认为true
+					}
+				});
+			});
+			
+			
+			mui(".mui-content").on("click", ".occupation", function() {
+				sparesfrom = $(this).attr("data-type");
+//				alert(sparesfrom)
+				
+			});
+			mui(".mui-content").on("tap", "#goreg", function(event) {
+//				alert("2:"+sparesfrom)
+				var sussess = function(data) {
+					//服务器返回响应，根据响应结果，分析是否登录成功；
+					if(data.result == "success") {
+						mui.toast("服务已确认");
+						var wobj = plus.webview.getWebviewById("subpages/tab-webview-subpage-service.html");
+						wobj.reload(true);
+						//						plus.webview.currentWebview().opener().close(true);
+						plus.webview.currentWebview().close(true)
+					} else {
+						mui.toast(data.msg);
+					}
+				};
+
+				commonHttpUtils(setorderconfirmUrl, "get", {
+					orderId: orderId,
+					sparesfrom: sparesfrom
+				}, sussess, error);
+
+			});
+
+			//			$("#goreg").click(function(event) {
+			//				var imgs = JSON.stringify(order.orderImgs);
+			//				if(!imgs) {
+			//					imgs = "{}"
+			//				}
+			//				if(!order.timeinterval.specifieddate) {
+			//					order.timeinterval.specifieddate = ""
+			//				}
+			//				mui.openWindow({
+			//					url: 'confim_service_order_con.html',
+			//					id: 'confim_service_order_con',
+			//					extras: {
+			//						orderImgs: imgs,
+			//						orderId: orderId,
+			//						timeisconfirm: order.timeisconfirm,
+			//						drugisconfirm: order.drugisconfirm,
+			//						sparesconfirm: order.sparesconfirm,
+			//						customertel: order.customer.tel,
+			//						specifieddate: order.timeinterval.specifieddate,
+			//						phoneNo: order.customer.tel,
+			//						isprovidedrugs: order.isprovidedrugs,
+			//						isprovidespares: order.isprovidespares,
+			//						recipedate: order.recipedate
+			//					},
+			//					show: {
+			//						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+			//						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+			//					},
+			//					waiting: {
+			//						autoShow: true //自动显示等待框，默认为true
+			//					}
+			//				});
+			//			});
+		});
+	</script>
+
+</html>

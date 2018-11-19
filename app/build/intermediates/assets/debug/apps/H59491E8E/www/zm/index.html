@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script src="../js/jquery-3.1.1.min.js"></script>
+		<script src="../js/sharemethods.js"></script>
+		<script src="../js/constants.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			var hr = '/api/ZMRZ_certify'
+			var timeid;
+
+			function plusReady() {
+				commonHttpUtils(hr, 'get', {}, function(resData) {
+					var encodedUrl = resData.data
+					embed = plus.webview.create(encodedUrl, "test", {
+						top: "46px",
+						bottom: "0px"
+					});
+					plus.webview.currentWebview().append(embed);
+				}, function(xhr, type, errorThrown) {
+					alert(errorThrown)
+					console.log("e:" + type)
+					if(errorThrown) {
+						console.log(errorThrown)
+					}
+				})
+
+				function checkRes() {
+					//					mui.ajax(hr, {
+					//						data: {},
+					//						crossDomain: true,
+					//						dataType: 'json', //服务器返回json格式数据
+					//						type: 'get', //HTTP请求类型
+					//						timeout: 180000, //超时时间设置为180秒
+					//						beforeSend: function() {
+					//							//plus.nativeUI.showWaiting();
+					//						},
+					//						headers: {
+					//							"Access-Control-Allow-Headers": "X-Requested-With",
+					//						},
+					//						complete: function() {
+					//							//plus.nativeUI.closeWaiting()
+					//						},
+					//						success: function(resData) {
+					//                          window.clearInterval(timeid);
+					//						},
+					//						error: function(xhr, type, errorThrown) {
+					//							console.log("e:" + type)
+					//							if(errorThrown) {
+					//								console.log(errorThrown)
+					//							}
+					//						}
+					//					});
+
+					console.log(2)
+				}
+				//ios
+				document.addEventListener('plusready', function() {
+					console.log(1)
+					checkArguments();
+				}, false);
+				// 判断启动方式
+				function checkArguments() {
+					console.log("plus.runtime.launcher: " + plus.runtime.launcher);
+					var args = plus.runtime.arguments;
+					if(args) {
+						var str = decodeURIComponent(args)
+						var obj = parseUrl(str)
+						alert(JSON.stringify(obj))
+						// 处理args参数，如打开新页面等
+						alert(str)
+					}
+				}
+
+				function parseUrl(url) {
+					var obj = {};
+					var query = url.split("?")[1];
+					var queryArr = query.split("&");
+					queryArr.forEach(function(item) {
+						var value = item.split("=")[1];
+						var key = item.split("=")[0];
+						if(key === "biz_content") {
+							obj[key] = JSON.parse(value);
+						} else {
+							obj[key] = value;
+						}
+					});
+					return obj;
+				}
+				// 处理从后台恢复
+				document.addEventListener('newintent', function() {
+					console.log("addEventListener: newintent");
+					checkArguments();
+				}, false);
+				//              android
+				//				document.addEventListener('plusready', function() {
+				//					checkArguments();
+				//				}, false);
+				//				// 判断启动方式
+				//				function checkArguments() {
+				//					console.log("plus.runtime.launcher: " + plus.runtime.launcher);
+				//					var args = plus.runtime.arguments;
+				//					if(args) {
+				//						// 处理args参数，如打开新页面等
+				//					}
+				//				}
+				//				// 处理从后台恢复
+				//				document.addEventListener('newintent', function() {
+				//					console.log("addEventListener: newintent");
+				//					checkArguments();
+				//				}, false);
+			}
+
+			if(window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener("plusready", plusReady, false);
+			}
+		</script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">实名认证</h1>
+		</header>
+		<div class="mui-content">
+		</div>
+	</body>
+
+</html>

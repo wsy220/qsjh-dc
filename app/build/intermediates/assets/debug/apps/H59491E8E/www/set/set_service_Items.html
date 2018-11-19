@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>服务项目</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+
+		<style>
+			.top {
+				background-color: #ffffff;
+				width: 100%;
+				#height: 8.5rem;
+			}
+			
+			.mui-btn {
+				background-color: #169bd5;
+			}
+			
+			.top-one {
+				padding-top: 5%;
+				padding-left: 4%;
+				font-size: 0.24rem;
+				height: 1.1rem;
+				border-bottom: 1px solid #d7d7d7;
+			}
+			
+			.top-over {
+				padding-top: 5%;
+				padding-left: 4%;
+				font-size: 0.24rem;
+				height: 1.1rem;
+				border-bottom: 1px solid #d7d7d7;
+				border-top: 1px solid #d7d7d7;
+			}
+			
+			.top-two,
+			.top-three,
+			.top-four {
+				display: inline-block;
+			}
+			
+			.tip_one {
+				margin-left: 9%;
+			}
+			
+			.mui-btn,
+			button,
+			input[type=button],
+			input[type=reset],
+			input[type=submit] {
+				height: 0.9rem;
+				width: 2rem;
+				font-size: 14px;
+				font-weight: 400;
+				line-height: 1.42;
+				position: relative;
+				display: inline-block;
+				margin-bottom: 0;
+				padding: 6px 2px;
+				cursor: pointer;
+				-webkit-transition: all;
+				transition: all;
+				-webkit-transition-timing-function: linear;
+				transition-timing-function: linear;
+				-webkit-transition-duration: .2s;
+				transition-duration: .2s;
+				text-align: center;
+				vertical-align: top;
+				white-space: nowrap;
+				color: #333;
+				border: 1px solid #ccc;
+				border-radius: 3px;
+				border-top-left-radius: 3px;
+				border-top-right-radius: 3px;
+				border-bottom-right-radius: 3px;
+				border-bottom-left-radius: 3px;
+				background-color: #fff;
+				background-clip: padding-box;
+				margin: 5% 0;
+			}
+			
+			#re_set {
+				width: 98%;
+				height: 0.8rem;
+				background-color: #c9c7c7;
+			}
+			
+			#re_baocun {
+				width: 98%;
+				height: 0.8rem;
+				background-color: #eaac68;
+				color: #ffffff;
+			}
+			
+			.mui-content-padded {
+				margin-top: 5%;
+			}
+			
+			.sb_sb {
+				background: #CCD7E8;
+				border-color: #6888ba;
+				text-align: center;
+				font-size: 0.24rem;
+				color: #004974;
+				text-decoration: none;
+			}
+			
+			.sel_btn {
+				min-height: 58px;
+				width: 90%;
+				text-align: center;
+				margin-top: 10px;
+				margin-bottom: 5px;
+				padding: 5px 5px;
+				border: 1px #e4e4e4 solid;
+				border-radius: 3px;
+				color: #696868;
+				display: inline-block;
+				text-decoration: none;
+				font-size: 12px;
+				outline: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">服务项目</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<div class="top">
+				<div class="top-one">
+					<strong>综合服务项目</strong>
+				</div>
+				<div class="mui-row" id="Comprehensive" style="padding-right: 10px;">
+
+				</div>
+				<div class="top-over">
+					<strong>护理康复服务项目</strong>
+				</div>
+				<div class="mui-row" id="Nursing" style="padding-right: 10px;">
+					
+				</div>
+			</div>
+
+		</div>
+
+		<div class="mui-content-padded">
+			<div class="mui-row">
+				<div class=" mui-col-sm-6 mui-col-xs-6">
+					<button id='re_set' class="mui-btn mui-btn-block mui-btn-primary mui-btn-res"><span>重置</span></button>
+				</div>
+				<div class=" mui-col-sm-6 mui-col-xs-6">
+					<button id='re_baocun' class="mui-btn mui-btn-block mui-btn-primary mui-btn-cfr"><span>保存</span></button>
+				</div>
+
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+
+	<script>
+		mui.init({
+			keyEventBind: {
+				backbutton: true //打开back按键监听
+			},
+			beforeback: function() {
+				//返回true，继续页面关闭逻辑  
+				mui.back;
+				return true;
+			}
+		});
+
+		mui.plusReady(function() {
+//			var topoffset = '45px';
+//			if(plus.navigator.isImmersedStatusbar()) { // 兼容immersed状态栏模式
+//				// 获取状态栏高度并根据业务需求处理，这里重新计算了子窗口的偏移位置
+//				topoffset = (Math.round(plus.navigator.getStatusbarHeight()) + 45) + 'px';
+//				document.querySelector("header").style.height = topoffset;
+//				document.querySelector("header").style.paddingTop = "20px";
+//				document.getElementById('content').style.paddingTop = (Math.round(plus.navigator.getStatusbarHeight()) + 45) + "px";
+//			}
+			var currentView = plus.webview.currentWebview();
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+
+			var user = JSON.parse(localStorage.getItem("USER"));
+
+			function init() {
+				$("#Comprehensive").html("")
+				$("#Nursing").html("")
+				var sussessone = function(data) {
+					data.obj.forEach(function(ele, index) {
+						ele.project.forEach(function(pro, i) {
+							$.processTLE(templateRegister.serviceList, pro.item, function(html) {
+								if(pro.item.fatherid == "Comprehensive") {
+									$("#Comprehensive").append(html);
+								} else {
+									$("#Nursing").append(html);
+								}
+								user.project.forEach(function(v) {
+									$("#" + v).addClass("sb_sb");
+								})
+							})
+						});
+					});
+				}
+				commonHttpUtils(appitemdetailsUrl, "put", {}, sussessone, error);
+			}
+
+			init();
+
+			mui(".mui-content").on("tap", ".button", function() {
+				if($(this).hasClass("sb_sb")) {        
+					$(this).removeClass("sb_sb");  
+				} else {        
+					$(this).addClass("sb_sb");    
+				}  
+			})
+
+			mui(".mui-content-padded").on("tap", ".mui-btn-res", function() {
+				init();
+			})
+
+			mui(".mui-content-padded").on("tap", ".mui-btn-cfr", function() {
+				var items = [];
+
+				$(".sb_sb").each(function(v) {
+					items.push(this.id)
+				})
+
+				var suss = function(data) {
+					if(data.result == "success") {
+						user.project = items;
+						localStorage.setItem('USER', JSON.stringify(user));
+						mui.toast("操作成功");
+						mui.back();
+					} else {
+						mui.toast(data.msg);
+					}
+				}
+				commonHttpUtils(addServiceItemsUrl, "put", {
+					serviceItems: items
+				}, suss, error);
+			})
+		});
+	</script>
+
+</html>

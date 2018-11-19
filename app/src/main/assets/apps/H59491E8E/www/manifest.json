@@ -1,0 +1,1525 @@
+{
+  "@platforms": [
+    "android",
+    "iPhone",
+    "iPad"
+  ],
+  "id": "H59491E8E",
+  /*应用的标识，创建应用时自动生成，勿手动修改*/
+  "name": "70佳护(医护)",
+  /*应用名称，程序桌面图标名称*/
+  "version": {
+    "name": "1.2.004",
+    /*应用版本名称*/
+    "code": "12004"
+  },
+  "description": "柒拾佳护健康管理有限公司",
+  /*应用描述信息*/
+  "icons": {
+    "72": "icon.png"
+  },
+  "launch_path": "index.html",
+  /*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+  "developer": {
+    "name": "70jiahu",
+    /*开发者名称*/
+    "email": "",
+    /*开发者邮箱地址*/
+    "url": "http://www.70jiahu.com"
+  },
+  "permissions": {
+    "Accelerometer": {
+      "description": "访问加速度感应器"
+    },
+    "Audio": {
+      "description": "访问麦克风"
+    },
+    "Cache": {
+      "description": "管理应用缓存"
+    },
+    "Camera": {
+      "description": "访问摄像头"
+    },
+    "Console": {
+      "description": "跟踪调试输出日志"
+    },
+    "Contacts": {
+      "description": "访问系统联系人信息"
+    },
+    "Device": {
+      "description": "访问设备信息"
+    },
+    "Downloader": {
+      "description": "文件下载管理"
+    },
+    "Events": {
+      "description": "应用扩展事件"
+    },
+    "File": {
+      "description": "访问本地文件系统"
+    },
+    "Gallery": {
+      "description": "访问系统相册"
+    },
+    "Geolocation": {
+      "description": "访问位置信息"
+    },
+    "Invocation": {
+      "description": "使用Native.js能力"
+    },
+    "Orientation": {
+      "description": "访问方向感应器"
+    },
+    "Proximity": {
+      "description": "访问距离感应器"
+    },
+    "Storage": {
+      "description": "管理应用本地数据"
+    },
+    "Uploader": {
+      "description": "管理文件上传任务"
+    },
+    "Runtime": {
+      "description": "访问运行期环境"
+    },
+    "XMLHttpRequest": {
+      "description": "跨域网络访问"
+    },
+    "Zip": {
+      "description": "文件压缩与解压缩"
+    },
+    "Barcode": {
+      "description": "管理二维码扫描插件"
+    },
+    "Maps": {
+      "description": "管理地图插件"
+    },
+    "Webview": {
+      "description": "窗口管理"
+    },
+    "NativeUI": {
+      "description": "原生UI控件"
+    },
+    "Navigator": {
+      "description": "浏览器信息"
+    },
+    "NativeObj": {
+      "description": "原生对象"
+    },
+    "qsPlugin": {
+      "description": "柒拾佳护"
+    },
+    "Push": {},
+    "Payment": {},
+    "OAuth": {},
+    "Share": {}
+  },
+  "plus": {
+    "splashscreen": {
+      "autoclose": false,
+      /*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+      "waiting": false,
+      "delay": "0"
+    },
+    "statusbar": {
+      "immersed": true,
+      "background": "#D74B28"
+    },
+    "runmode": "liberate",
+    /*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+    "signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",
+    /*可选，保留给应用签名，暂不使用*/
+    "distribute": {
+      "google": {
+        "packagename": "com.qsjh.dc",
+        /*Android应用包名，如io.dcloud.HelloH5*/
+        "keystore": "",
+        /*Android应用打包使用的密钥库文件*/
+        "password": "",
+        /*Android应用打包使用密钥库中证书的密码*/
+        "aliasname": "",
+        /*Android应用打包使用密钥库中证书的别名*/
+        "permissions": [
+          "<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
+          "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+          "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+          "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+          "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+          "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+          "<uses-permission android:name=\"android.permission.SYSTEM_ALERT_WINDOW\"/>",
+          "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
+          "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+          "<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>",
+          "<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>",
+          "<uses-permission android:name=\"android.permission.CAMERA\"/>",
+          "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+          "<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
+          "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+          "<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>",
+          "<uses-permission android:name=\"android.permission.INTERNET\"/>",
+          "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+          "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+          "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+          "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+          "<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
+          "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+          "<uses-feature android:name=\"android.hardware.camera\"/>",
+          "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
+          "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
+          "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>",
+          "<uses-permission android:name=\"android.permission.INJECT_EVENTS\"/>"
+        ]
+      },
+      "orientation": [
+        "portrait-primary",
+        "portrait-secondary"
+      ],
+      /*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+      "icons": {
+        "android": {
+          "mdpi": "unpackage/res/icons/48x48.png",
+          /*普通屏程序图标，分辨率：48x48*/
+          "ldpi": "unpackage/res/icons/48x48.png",
+          /*大屏程序图标，分辨率：48x48*/
+          "hdpi": "unpackage/res/icons/72x72.png",
+          /*高分屏程序图标，分辨率：72x72*/
+          "xhdpi": "unpackage/res/icons/96x96.png",
+          /*720P高分屏程序图标，分辨率：96x96*/
+          "xxhdpi": "unpackage/res/icons/144x144.png",
+          "xxxhdpi": "unpackage/res/icons/192x192.png"
+        }
+      },
+      "splashscreen": {
+        "android": {
+          "mdpi": "",
+          /*普通屏启动图片，分辨率：240x282*/
+          "ldpi": "",
+          /*大屏启动图片，分辨率：320x442*/
+          "hdpi": "images/app/480_762.png",
+          /*高分屏启动图片，分辨率：480x762*/
+          "xhdpi": "images/app/720_1242.png",
+          /*720P高分屏启动图片，分辨率：720x1242*/
+          "xxhdpi": "images/app/1080_1882.png"
+        }
+      }
+    },
+    "ads": {
+      "rp": "false",
+      "splash": "false",
+      "push": "false",
+      "spot": "false"
+    },
+    "adid": ""
+  },
+  "dependencies": {
+    "pages": {
+      "login/new_login.html": {
+        "resources": [
+          "js/mui.picker.js",
+          "js/app.js",
+          "js/xiangyingshi.js",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/mui.min.js",
+          "js/mui.poppicker.js",
+          "fonts/mui.ttf",
+          "images/yhm.png",
+          "css/mui.min.css",
+          "css/mui.poppicker.css",
+          "css/mui.picker.css",
+          "js/json_time.js",
+          "images/mm.png",
+          "home/home_page.html"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "subpages/tab-webview-subpage-my.html": {
+        "resources": [
+          "fonts/mui.ttf",
+          "images/001.png",
+          "js/xiangyingshi.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/mui.min.js",
+          "css/mui.min.css",
+          "images/wode/wdzh.png",
+          "images/wode/yyfk.png",
+          "images/wode/sfgl.png",
+          "images/wode/sz.png",
+          "images/qrz.png",
+          "images/wode/yrz.png",
+          "images/wode/tx.png",
+          "images/wode/hzgl.png",
+          "images/mine/aixinzhi2-01.png",
+          "js/jquery-3.1.1.js",
+          "js/scroll.js",
+          "fonti/iconfont.js",
+          "js/exif.js",
+          "js/mui.picker.js",
+          "js/mobileBUGFix.mini.js",
+          "js/base64.js",
+          "js/jquery-3.1.1.min.js",
+          "js/mui.poppicker.js",
+          "js/sharemethods.js",
+          "js/json_time.js",
+          "js/feedbackMUI.js",
+          "js/qs.feedback.js",
+          "images/wode/jd.png",
+          "plugs/qs/qs.feedback.js",
+          "images/wode/wz.png",
+          "images/wode/wrz.png",
+          "plugs/md5/md5.min.js",
+          "images/txmrt.png"
+        ],
+        "refer": [
+          "set/service_position.html",
+          "set/set_detail.html",
+          "set/account_setting.html",
+          "set/set_real_name.html",
+          "set/follow_manage.html",
+          "set/head_touxiang.html",
+          "set/my_patients.html",
+          "set/suggest_one.html",
+          "order/1.html",
+          "order/confim_service_order_con.html",
+          "order/11.html",
+          "set/set_patients_list.html",
+          "set/map.html",
+          "login/login.html"
+        ],
+        "priority": 0
+      },
+      "subpages/tab-webview-subpage-home.html": {
+        "resources": [
+          "images/006.jpg",
+          "images/index_img/main_button6.png",
+          "js/jquery-3.1.1.js",
+          "images/index_img/main_button1.png",
+          "images/009.jpg",
+          "images/index_img/main_button2.png",
+          "css/scroll_style.css",
+          "images/shuijiao.jpg",
+          "images/008.jpg",
+          "images/main_bg.png",
+          "js/scroll.js",
+          "css/bootstrap.min.css",
+          "images/index_img/main_button3.png",
+          "images/index_img/main_button4.png",
+          "js/jquery-3.1.1.min.js",
+          "images/yuantiao.jpg",
+          "css/app.css",
+          "images/007.jpg",
+          "images/index_img/main_button5.png",
+          "js/bootstrap.min.js",
+          "fonts/mui.ttf",
+          "fonti/iconfont.js",
+          "js/xiangyingshi.js",
+          "css/icons-extra.css",
+          "js/mui.min.js",
+          "css/iconfont.css",
+          "css/main.css",
+          "css/mui.min.css",
+          "subpages/tab-webview-subpage-order.html",
+          "fonts/iconfont.js",
+          "images/home/main_bg.png",
+          "images/advert/008.jpg",
+          "images/advert/007.jpg",
+          "images/advert/banner.jpg",
+          "images/index_img/jtys.png",
+          "images/advert/009.jpg",
+          "images/advert/yuantiao.jpg",
+          "images/advert/banner2.png",
+          "images/advert/banner4.png",
+          "images/advert/banner3.png",
+          "images/advert/banner5.png"
+        ],
+        "refer": [
+          "home/catch_order.html",
+          "order/catch_order.html",
+          "login/login.html",
+          "familydoctor/fdt_index.html",
+          "familydoctor/no_fdt.html"
+        ],
+        "priority": 0
+      },
+      "subpages/tab-webview-subpage-service.html": {
+        "resources": [
+          "js/mui.pullToRefresh.js",
+          "js/constants.js",
+          "js/mui.pullToRefresh.material.js",
+          "images/no_data/1-01.png",
+          "js/arttmpl.js",
+          "js/app.js",
+          "images/order/wycf.png",
+          "images/order/ksly.png",
+          "images/order/td.png",
+          "images/order/qxdd.png",
+          "images/order/qryp.png",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "css/app.css",
+          "css/scroll_style.css",
+          "css/iconfont.css",
+          "css/mui.min.css",
+          "css/icons-extra.css",
+          "js/mui.min.js",
+          "js/xiangyingshi.js",
+          "js/sharemethods.js",
+          "js/constants.map.js",
+          "images/no_data/1-02.png",
+          "js/art/template-web.js",
+          "js/constants.temp.js",
+          "template/order/order_list_confim.tl",
+          "js/moment.min.js",
+          "js/qs.template.js",
+          "js/qs.art.extend.js",
+          "template/order/order_list_wait.tl",
+          "template/order/order_list_end.tl",
+          "plugs/art/template-web.js",
+          "js/exif.js",
+          "js/mui.picker.js",
+          "js/mobileBUGFix.mini.js",
+          "plugs/iscroll/iscroll-probe.js",
+          "js/jquery-labelauty.js",
+          "js/mui.zoom.js",
+          "js/mui.poppicker.js",
+          "plugs/qs/qs.img.lazyload.js",
+          "plugs/qs/qs.template.js",
+          "js/mui.previewimage.js",
+          "plugs/qs/qs.iscroll.js",
+          "plugs/qs/qs.common.css",
+          "plugs/qs/qs.art.extend.js",
+          "plugs/moment/moment.min.js",
+          "plugs/qs/qs.feedback.js",
+          "fonts/iconfont.css",
+          "plugs/md5/md5.min.js"
+        ],
+        "refer": [
+          "order/end_service_order_detail.html",
+          "order/confim_service_order_detail.html",
+          "order/wait_service_order_detail.html",
+          "chat/im-chat.html",
+          "order/wait_report_detail.html",
+          "order/end_report.html"
+        ],
+        "priority": 0
+      },
+      "home/home_page.html": {
+        "resources": [
+          "images/006.jpg",
+          "js/jquery-3.1.1.js",
+          "images/index_img/main_button1.png",
+          "images/009.jpg",
+          "css/scroll_style.css",
+          "images/shuijiao.jpg",
+          "images/008.jpg",
+          "css/icons-extra.css",
+          "images/main_bg.png",
+          "js/scroll.js",
+          "css/bootstrap.min.css",
+          "images/index_img/main_button3.png",
+          "images/index_img/main_button4.png",
+          "fonti/iconfont.js",
+          "images/yuantiao.jpg",
+          "css/app.css",
+          "css/iconfont.css",
+          "images/007.jpg",
+          "images/index_img/main_button5.png",
+          "js/bootstrap.min.js",
+          "js/xiangyingshi.js",
+          "js/jquery-3.1.1.min.js",
+          "js/mui.min.js",
+          "css/main.css",
+          "fonts/mui.ttf",
+          "css/mui.min.css"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "index.html": {
+        "resources": [
+          "js/xiangyingshi.js",
+          "js/app.js",
+          "css/main.css",
+          "js/mui.min.js",
+          "css/iconfont.css",
+          "images/exit/zuobiao.png",
+          "css/mui.min.css",
+          "css/icons-extra.css",
+          "subpages/tab-webview-subpage-home.html",
+          "fonts/mui.ttf",
+          "subpages/tab-webview-subpage-my.html",
+          "subpages/tab-webview-subpage-service.html",
+          "js/jquery-3.1.1.min.js",
+          "js/constants.js",
+          "js/sharemethods.js",
+          "js/sdk/webim/login.js",
+          "plugs/qs/qs.update.js",
+          "plugs/moment/moment.min.js",
+          "js/sdk/webim.js",
+          "fonts/iconfont.css",
+          "js/sdk/webim/index_receive_new_msg.js"
+        ],
+        "refer": [
+          "subpages/tab-webview-subpage-order.html",
+          "subpages/tab-webview-subpage-talk.html",
+          "login/login.html",
+          "login/clause.html",
+          "circle/publish-article.html",
+          "chat/message_list.html",
+          "set/service_position.html",
+          "guide.html",
+          "subpages/tab-webview-subpage-order-new.html",
+          "set/set_real_name_web.html",
+          "set/set_real_name.html"
+        ],
+        "priority": 0
+      },
+      "subpages/tab-webview-subpage-talk.html": {
+        "resources": [
+          "images/muwu.jpg",
+          "images/shuijiao.jpg",
+          "js/mui.min.js",
+          "images/no_data/1-04.png",
+          "plugs/art/template-web.js",
+          "js/app.js",
+          "js/xiangyingshi.js",
+          "plugs/iscroll/iscroll-probe.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/constants.map.js",
+          "plugs/moment/moment.min.js",
+          "js/jquery-3.1.1.min.js",
+          "plugs/qs/qs.feedback.js",
+          "css/mui.min.css",
+          "plugs/qs/qs.img.lazyload.js",
+          "plugs/qs/qs.template.js",
+          "plugs/qs/qs.iscroll.js",
+          "js/sharemethods.js",
+          "plugs/md5/md5.min.js",
+          "plugs/qs/qs.art.extend.js",
+          "plugs/qs/qs.common.css",
+          "images/circle/fx.png",
+          "template/article/article_list.tl"
+        ],
+        "refer": [
+          "circle/publish-article-dtl.html",
+          "circle/web_article_dtl.html"
+        ],
+        "priority": 0
+      },
+      "login/login.html": {
+        "resources": [
+          "js/mui.picker.js",
+          "js/mui.poppicker.js",
+          "images/yhm.png",
+          "css/mui.poppicker.css",
+          "css/mui.picker.css",
+          "js/json_time.js",
+          "images/mm.png",
+          "js/exif.js",
+          "css/feedback.css",
+          "js/constants.js",
+          "fonts/mui.ttf",
+          "images/wz.png",
+          "js/app.js",
+          "js/xiangyingshi.js",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "js/mui.min.js",
+          "css/mui.min.css",
+          "js/sharemethods.js",
+          "plugs/qs/qs.immersed.js"
+        ],
+        "refer": [
+          "login/register.html",
+          "login/forget_password.html",
+          "login/real_name.html"
+        ],
+        "priority": 0
+      },
+      "set/service_position.html": {
+        "resources": [
+          "js/exif.js",
+          "js/mui.picker.js",
+          "css/feedback.css",
+          "js/mui.poppicker.js",
+          "images/wz.png",
+          "css/mui.poppicker.css",
+          "css/mui.picker.css",
+          "set/setting.html",
+          "js/xiangyingshi.js",
+          "css/main.css",
+          "js/constants.js",
+          "fonts/mui.ttf",
+          "js/jquery-3.1.1.min.js",
+          "js/mui.min.js",
+          "css/mui.min.css",
+          "js/sharemethods.js",
+          "images/mine/yiyuanhui.png",
+          "images/mine/jiahui.png"
+        ],
+        "refer": [
+          "set/set_home_address.html",
+          "set/set_hospital_address.html",
+          "set/set_address.html"
+        ],
+        "priority": 0
+      },
+      "set/setting.html": {
+        "resources": [
+          "set/service_position.html",
+          "js/xiangyingshi.js",
+          "css/feedback.css",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/mui.min.js",
+          "fonts/mui.ttf",
+          "css/mui.min.css",
+          "css/mui.poppicker.css",
+          "css/mui.picker.css"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "subpages/tab-webview-subpage-order.html": {
+        "resources": [
+          "css/mui.minn.css",
+          "order/detail.html",
+          "images/order/qiangdan.png",
+          "js/xiangyingshi.js",
+          "js/app.js",
+          "css/main.css",
+          "css/scroll_style.css",
+          "css/icons-extra.css",
+          "css/bootstrap.min.css",
+          "js/jquery-3.1.1.min.js",
+          "css/app.css",
+          "js/mui.min.js",
+          "css/iconfont.css",
+          "css/mui.min.css",
+          "js/bootstrap.min.js",
+          "js/constants.js",
+          "js/sharemethods.js",
+          "js/art/template-web.js",
+          "template/notification/common.tl",
+          "js/constants.temp.js",
+          "images/no_data/1-03.png",
+          "images/ddxx.png",
+          "js/moment.min.js",
+          "js/qs.template.js",
+          "js/qs.art.extend.js",
+          "css/feedback.css",
+          "css/mui.poppicker.css",
+          "css/mui.picker.css",
+          "fonts/iconfont.css"
+        ],
+        "refer": [
+          "chat/message_list.html",
+          "order/end_service_order_detail.html",
+          "order/end_report.html"
+        ],
+        "priority": 0
+      },
+      "order/detail.html": {
+        "resources": [
+          "css/feedback.css",
+          "css/mui.poppicker.css",
+          "css/mui.picker.css",
+          "js/xiangyingshi.js",
+          "js/app.js",
+          "css/main.css",
+          "js/mui.min.js",
+          "fonts/mui.ttf",
+          "css/mui.min.css",
+          "css/icons-extra.css"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "set/set_home_address.html": {
+        "resources": [
+          "css/feedback.css",
+          "css/main.css",
+          "css/mui.min.css",
+          "css/mui.poppicker.css",
+          "css/mui.picker.css",
+          "js/xiangyingshi.js",
+          "js/jquery-3.1.1.min.js",
+          "js/constants.js",
+          "js/mui.min.js",
+          "fonts/mui.ttf",
+          "js/sharemethods.js"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "set/set_hospital_address.html": {
+        "resources": [
+          "js/xiangyingshi.js",
+          "css/feedback.css",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/mui.min.js",
+          "fonts/mui.ttf",
+          "css/mui.min.css",
+          "css/mui.poppicker.css",
+          "css/mui.picker.css",
+          "js/sharemethods.js"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "set/set_detail.html": {
+        "resources": [
+          "js/app.js",
+          "js/xiangyingshi.js",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/mui.min.js",
+          "fonts/mui.ttf",
+          "css/mui.min.css",
+          "js/sharemethods.js"
+        ],
+        "refer": [
+          "set/service_position.html",
+          "set/set_service_Items.html",
+          "set/account_working_schedule.html",
+          "set/change_phone.html",
+          "set/change_password.html",
+          "login/clause.html",
+          "login/clause_bak.html"
+        ],
+        "priority": 0
+      },
+      "set/account_setting.html": {
+        "resources": [
+          "css/feedback.css",
+          "images/mine/ye.png",
+          "css/mui.poppicker.css",
+          "css/mui.picker.css",
+          "js/app.js",
+          "css/icons-extra.css",
+          "js/xiangyingshi.js",
+          "css/main.css",
+          "js/constants.js",
+          "fonts/mui.ttf",
+          "js/jquery-3.1.1.min.js",
+          "js/mui.min.js",
+          "css/mui.min.css",
+          "js/sharemethods.js"
+        ],
+        "refer": [
+          "set/account_bank_card.html",
+          "set/account_details.html"
+        ],
+        "priority": 0
+      },
+      "set/set_real_name.html": {
+        "resources": [
+          "js/exif.js",
+          "css/feedback.css",
+          "js/xiangyingshi.js",
+          "js/mui.picker.js",
+          "js/mobileBUGFix.mini.js",
+          "css/main.css",
+          "js/constants.js",
+          "fonts/mui.ttf",
+          "css/mui.picker.css",
+          "js/base64.js",
+          "js/jquery-3.1.1.min.js",
+          "js/mui.min.js",
+          "js/mui.poppicker.js",
+          "css/mui.min.css",
+          "images/001.png",
+          "css/mui.poppicker.css",
+          "js/feedbackMUI.js",
+          "images/exit/xz.png",
+          "js/sharemethods.js",
+          "js/json_time.js",
+          "js/app.js",
+          "js/qs.feedback.js",
+          "images/wode/sfzz.png",
+          "images/wode/sfzf.png"
+        ],
+        "refer": [
+          "index.html"
+        ],
+        "priority": 0
+      },
+      "set/follow_manage.html": {
+        "resources": [
+          "js/xiangyingshi.js",
+          "js/app.js",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "js/mui.min.js",
+          "css/app.css",
+          "css/scroll_style.css",
+          "css/iconfont.css",
+          "css/mui.min.css",
+          "js/bootstrap.min.js",
+          "css/icons-extra.css",
+          "css/bootstrap.min.css"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "set/set_service_Items.html": {
+        "resources": [
+          "css/feedback.css",
+          "css/mui.poppicker.css",
+          "css/mui.picker.css",
+          "css/icons-extra.css",
+          "images/mine/xuanzhong.png",
+          "js/xiangyingshi.js",
+          "js/app.js",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/mui.min.js",
+          "fonts/mui.ttf",
+          "css/mui.min.css",
+          "js/sharemethods.js"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "order/end_service_order_detail.html": {
+        "resources": [
+          "css/feedback.css",
+          "css/mui.poppicker.css",
+          "css/mui.picker.css",
+          "js/app.js",
+          "js/xiangyingshi.js",
+          "css/main.css",
+          "js/constants.js",
+          "fonts/mui.ttf",
+          "css/icons-extra.css",
+          "js/jquery-3.1.1.min.js",
+          "js/mui.min.js",
+          "css/iconfont.css",
+          "css/mui.min.css",
+          "js/sharemethods.js",
+          "template/order/order_detail_d.tl",
+          "js/art/template-web.js",
+          "template/order/order_detail_b.tl",
+          "js/moment.min.js",
+          "template/order/order_detail_a.tl",
+          "template/order/order_detail_c.tl",
+          "js/mui.zoom.js",
+          "js/mui.previewimage.js",
+          "js/qs.template.js",
+          "css/mui.imageviewer.css",
+          "js/qs.art.extend.js"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "login/register.html": {
+        "resources": [
+          "images/exit/sj.png",
+          "images/exit/yzm.png",
+          "js/jquery-3.1.1.js",
+          "fonts/mui.ttf",
+          "js/xiangyingshi.js",
+          "js/app.js",
+          "js/mui.picker.js",
+          "css/main.css",
+          "js/constants.js",
+          "css/mui.picker.css",
+          "images/mm.png",
+          "js/mui.min.js",
+          "js/mui.poppicker.js",
+          "css/mui.min.css",
+          "css/mui.poppicker.css",
+          "js/json_time.js",
+          "js/sharemethods.js",
+          "js/base64.js",
+          "js/exif.js",
+          "css/feedback.css",
+          "js/mobileBUGFix.mini.js",
+          "js/feedbackMUI.js"
+        ],
+        "refer": [
+          "login/real_name.html",
+          "set/set_real_name.html",
+          "set/service_position.html"
+        ],
+        "priority": 0
+      },
+      "login/forget_password.html": {
+        "resources": [
+          "images/exit/yzm.png",
+          "images/exit/sj.png",
+          "fonts/mui.ttf",
+          "js/xiangyingshi.js",
+          "js/app.js",
+          "js/mui.picker.js",
+          "css/main.css",
+          "js/constants.js",
+          "css/mui.picker.css",
+          "js/mui.min.js",
+          "js/mui.poppicker.js",
+          "css/mui.min.css",
+          "css/mui.poppicker.css",
+          "js/json_time.js",
+          "js/jquery-3.1.1.min.js",
+          "js/sharemethods.js",
+          "js/jquery-3.1.1.js",
+          "css/feedback.css",
+          "css/icons-extra.css"
+        ],
+        "refer": [
+          "login/set_newpws.html",
+          "login/login.html"
+        ],
+        "priority": 0
+      },
+      "login/real_name.html": {
+        "resources": [
+          "js/base64.js",
+          "js/exif.js",
+          "css/feedback.css",
+          "js/mobileBUGFix.mini.js",
+          "images/001.png",
+          "js/feedbackMUI.js",
+          "css/app.css",
+          "js/mui.picker.js",
+          "js/jquery-3.1.1.min.js",
+          "js/constants.js",
+          "js/mui.poppicker.js",
+          "fonts/mui.ttf",
+          "css/mui.poppicker.css",
+          "css/mui.picker.css"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "order/grab_order_detail.html": {
+        "resources": [
+          "css/feedback.css",
+          "css/mui.picker.css",
+          "css/icons-extra.css",
+          "js/xiangyingshi.js",
+          "js/app.js",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/mui.min.js",
+          "fonts/mui.ttf",
+          "css/mui.min.css",
+          "images/order/qiangdan.png",
+          "css/mui.poppicker.css",
+          "js/sharemethods.js",
+          "js/art/template-web.js",
+          "template/order/order_detail_b.tl",
+          "template/order/order_detail_a.tl",
+          "js/constants.temp.js",
+          "js/mui.zoom.js",
+          "js/mui.previewimage.js",
+          "css/mui.imageviewer.css",
+          "js/moment.min.js",
+          "js/qs.template.js",
+          "js/qs.art.extend.js"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "home/catch_order.html": {
+        "resources": [
+          "js/xiangyingshi.js",
+          "js/app.js",
+          "css/main.css",
+          "js/constants.js",
+          "fonts/mui.ttf",
+          "images/order/qiangdan.png",
+          "js/jquery-3.1.1.min.js",
+          "js/mui.min.js",
+          "css/iconfont.css",
+          "css/mui.min.css",
+          "css/mui.poppicker.css",
+          "js/sharemethods.js",
+          "images/no_data/1-02.png",
+          "js/art/template-web.js",
+          "js/moment.min.js",
+          "js/qs.template.js",
+          "js/qs.art.extend.js",
+          "template/order/order_grab.tl"
+        ],
+        "refer": [
+          "order/grab_order_detail.html"
+        ],
+        "priority": 0
+      },
+      "order/confim_service_order_detail.html": {
+        "resources": [
+          "css/feedback.css",
+          "fonts/mui.ttf",
+          "css/mui.poppicker.css",
+          "css/mui.picker.css",
+          "js/app.js",
+          "js/jquery-3.1.1.min.js",
+          "js/art/template-web.js",
+          "css/iconfont.css",
+          "template/order/order_detail_b.tl",
+          "js/sharemethods.js",
+          "css/icons-extra.css",
+          "template/order/order_detail_a.tl",
+          "js/constants.temp.js",
+          "template/order/order_drug_spare.tl",
+          "js/xiangyingshi.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/mui.min.js",
+          "css/mui.min.css",
+          "js/moment.min.js",
+          "js/mui.zoom.js",
+          "js/mui.previewimage.js",
+          "js/qs.template.js",
+          "css/mui.imageviewer.css",
+          "js/qs.art.extend.js"
+        ],
+        "refer": [
+          "order/confim_service_order_con.html",
+          "order/single_back.html"
+        ],
+        "priority": 0
+      },
+      "order/confim_service_order_con.html": {
+        "resources": [
+          "images/order/dh.png",
+          "images/order/yao0ne.png",
+          "js/app.js",
+          "css/feedback.css",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/mui.min.js",
+          "css/app.css",
+          "css/mui.min.css",
+          "css/mui.poppicker.css",
+          "js/sharemethods.js",
+          "css/mui.picker.css",
+          "images/mine/sc.png",
+          "js/mui.zoom.js",
+          "js/mui.previewimage.js",
+          "css/mui.imageviewer.css",
+          "fonts/mui.ttf",
+          "js/art/template-web.js",
+          "js/moment.min.js",
+          "js/qs.template.js",
+          "js/qs.art.extend.js",
+          "js/mui.picker.min.js",
+          "css/mui.picker.min.css",
+          "template/order/order_add_drug.tl",
+          "template/order/order_add_spare.tl"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "set/head_touxiang.html": {
+        "resources": [
+          "js/exif.js",
+          "css/feedback.css",
+          "js/xiangyingshi.js",
+          "js/mui.picker.js",
+          "js/mobileBUGFix.mini.js",
+          "css/main.css",
+          "js/constants.js",
+          "fonts/mui.ttf",
+          "css/mui.picker.css",
+          "js/jquery-3.1.1.min.js",
+          "js/mui.min.js",
+          "js/mui.poppicker.js",
+          "css/mui.min.css",
+          "images/001.png",
+          "css/mui.poppicker.css",
+          "js/base64.js",
+          "js/qs.feedback.js",
+          "js/sharemethods.js"
+        ],
+        "refer": [
+          "set/head_img.html"
+        ],
+        "priority": 0
+      },
+      "set/my_patients.html": {
+        "resources": [
+          "js/xiangyingshi.js",
+          "js/app.js",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "js/mui.min.js",
+          "css/app.css",
+          "css/scroll_style.css",
+          "css/iconfont.css",
+          "css/mui.min.css",
+          "js/bootstrap.min.js",
+          "css/icons-extra.css",
+          "css/bootstrap.min.css",
+          "css/feedback.css",
+          "js/mui.picker.min.js",
+          "js/constants.js",
+          "js/art/template-web.js",
+          "js/moment.min.js",
+          "css/mui.picker.css",
+          "js/mui.zoom.js",
+          "js/mui.previewimage.js",
+          "js/qs.template.js",
+          "css/mui.poppicker.css",
+          "css/mui.imageviewer.css",
+          "css/mui.picker.min.css",
+          "images/order/dh.png",
+          "js/sharemethods.js",
+          "js/qs.art.extend.js"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "set/suggest_one.html": {
+        "resources": [
+          "js/xiangyingshi.js",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/mui.min.js",
+          "fonts/mui.ttf",
+          "css/mui.min.css",
+          "js/sharemethods.js"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "set/account_working_schedule.html": {
+        "resources": [
+          "js/mui.picker.js",
+          "js/mui.poppicker.js",
+          "css/mui.poppicker.css",
+          "css/mui.picker.css",
+          "js/json_time.js"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "set/change_phone.html": {
+        "resources": [
+          "js/app.js",
+          "js/xiangyingshi.js",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/mui.min.js",
+          "fonts/mui.ttf",
+          "css/mui.min.css",
+          "css/mui.poppicker.css",
+          "js/sharemethods.js",
+          "css/mui.picker.css",
+          "js/json_time.js"
+        ],
+        "refer": [
+          "set/change_phone_two.html"
+        ],
+        "priority": 0
+      },
+      "set/set_address.html": {
+        "resources": [
+          "js/xiangyingshi.js",
+          "css/feedback.css",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/mui.min.js",
+          "fonts/mui.ttf",
+          "css/mui.min.css",
+          "css/mui.poppicker.css",
+          "js/sharemethods.js",
+          "css/mui.picker.css"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "login/set_newpws.html": {
+        "resources": [
+          "js/jquery.validate.js",
+          "js/mui.enterfocus.js",
+          "images/mm.png",
+          "js/xiangyingshi.js",
+          "js/app.js",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/mui.min.js",
+          "css/mui.min.css",
+          "js/sharemethods.js",
+          "js/json_time.js",
+          "login/set_newpws.html"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "order/1.html": {
+        "resources": [
+          "js/exif.js",
+          "js/base64.js",
+          "css/feedback.css",
+          "js/mobileBUGFix.mini.js",
+          "js/mui.picker.min.js",
+          "js/getDate.js",
+          "css/mui.picker.min.css",
+          "js/json_time.js",
+          "js/feedbackMUI.js",
+          "js/mui.min.js",
+          "css/app.css",
+          "css/mui.min.css",
+          "fonts/mui.ttf"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "order/11.html": {
+        "resources": [
+          "js/exif.js",
+          "css/feedback.css",
+          "js/xiangyingshi.js",
+          "js/mobileBUGFix.mini.js",
+          "css/main.css",
+          "js/mui.picker.min.js",
+          "js/constants.js",
+          "fonts/mui.ttf",
+          "js/base64.js",
+          "js/jquery-3.1.1.min.js",
+          "js/mui.min.js",
+          "js/getDate.js",
+          "css/iconfont.css",
+          "css/mui.min.css",
+          "css/mui.picker.min.css",
+          "js/json_time.js",
+          "js/feedbackMUI.js"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "order/wait_service_order_detail.html": {
+        "resources": [
+          "js/xiangyingshi.js",
+          "css/feedback.css",
+          "js/app.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/art/template-web.js",
+          "js/moment.min.js",
+          "css/mui.picker.css",
+          "css/icons-extra.css",
+          "images/order/td.png",
+          "js/jquery-3.1.1.min.js",
+          "images/order/wycf.png",
+          "js/mui.min.js",
+          "images/order/kslybky.png",
+          "css/mui.min.css",
+          "css/mui.poppicker.css",
+          "js/sharemethods.js",
+          "js/qs.art.extend.js",
+          "fonts/mui.ttf",
+          "template/order/order_detail_b.tl",
+          "js/qs.template.js",
+          "template/order/order_detail_a.tl",
+          "images/order/wycfbky.png",
+          "images/order/wylk.png",
+          "images/order/wydd.png",
+          "images/order/ksly.png",
+          "js/mui.zoom.js",
+          "js/mui.previewimage.js",
+          "css/mui.imageviewer.css"
+        ],
+        "refer": [
+          "order/wait_service_order_log.html",
+          "order/wait_service_order_record.html",
+          "order/single_back.html"
+        ],
+        "priority": 0
+      },
+      "order/wait_service_order_log.html": {
+        "resources": [
+          "js/qs.feedback.js"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "set/set_patients_list.html": {
+        "resources": [
+          "css/feedback.css",
+          "template/set/set_patients_list.tl",
+          "css/mui.poppicker.css",
+          "css/mui.picker.css",
+          "js/app.js",
+          "js/xiangyingshi.js",
+          "css/main.css",
+          "js/constants.js",
+          "fonts/mui.ttf",
+          "js/art/template-web.js",
+          "js/moment.min.js",
+          "images/no_data/1-03.png",
+          "css/icons-extra.css",
+          "js/jquery-3.1.1.min.js",
+          "js/mui.min.js",
+          "css/mui.min.css",
+          "js/qs.template.js",
+          "js/sharemethods.js",
+          "js/qs.art.extend.js"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "set/change_password.html": {
+        "resources": [
+          "js/app.js",
+          "js/xiangyingshi.js",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/mui.min.js",
+          "fonts/mui.ttf",
+          "css/mui.min.css",
+          "css/mui.poppicker.css",
+          "js/sharemethods.js",
+          "css/mui.picker.css"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "set/change_phone_two.html": {
+        "resources": [
+          "js/app.js",
+          "js/xiangyingshi.js",
+          "js/jquery-3.1.1.min.js",
+          "css/main.css",
+          "js/constants.js",
+          "js/mui.min.js",
+          "fonts/mui.ttf",
+          "css/mui.min.css",
+          "css/mui.poppicker.css",
+          "js/sharemethods.js",
+          "css/mui.picker.css",
+          "js/json_time.js"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "order/catch_order.html": {
+        "resources": [
+          "images/order/筛选.png",
+          "images/order/排序.png"
+        ],
+        "refer": [
+          "order/grab_order_detail.html",
+          "order/report_order_detail.html"
+        ],
+        "priority": 0
+      },
+      "circle/publish-article.html": {
+        "resources": [
+          "js/mui.picker.js",
+          "css/feedback.css",
+          "js/xiangyingshi.js",
+          "plugs/qs/qs.immersed.js",
+          "css/main.css",
+          "js/constants.js",
+          "fonts/mui.ttf",
+          "css/mui.picker.css",
+          "css/icons-extra.css",
+          "js/jquery-3.1.1.min.js",
+          "plugs/qs/qs.feedback.js",
+          "js/mui.min.js",
+          "js/mui.poppicker.js",
+          "css/mui.min.css",
+          "css/mui.poppicker.css",
+          "js/sharemethods.js"
+        ],
+        "refer": [
+          "circle/my-publish-list.html"
+        ],
+        "priority": 0
+      },
+      "circle/my-publish-list.html": {
+        "resources": [],
+        "refer": [
+          "circle/publish-article-dtl.html"
+        ],
+        "priority": 0
+      },
+      "set/account_details.html": {
+        "resources": [],
+        "refer": [
+          "set/deductions_detail.html"
+        ],
+        "priority": 0
+      },
+      "circle/publish-article-dtl.html": {
+        "resources": [
+          "images/circle/zan.png",
+          "images/circle/hf.png",
+          "css/mui.imageviewer.css",
+          "template/article/article_dtl_body.tl",
+          "template/article/article_dtl_header.tl",
+          "template/article/article_dtl_footer.tl"
+        ],
+        "refer": [],
+        "priority": 0
+      },
+      "order/choiceL.html": {
+        "resources": [],
+        "refer": [
+          "order/grab_order_detail.html"
+        ],
+        "priority": 0
+      },
+      "familydoctor/fdt_detail.html": {
+        "resources": [],
+        "refer": [
+          "familydoctor/fdt_member_info_detail.html"
+        ],
+        "priority": 0
+      },
+      "familydoctor/fdt_index.html": {
+        "resources": [],
+        "refer": [
+          "familydoctor/fdt_detail.html",
+          "familydoctor/fdt_patient_detail.html"
+        ],
+        "priority": 0
+      },
+      "familydoctor/fdt_member_info_detail.html": {
+        "resources": [],
+        "refer": [
+          "circle/publish-article-dtl.html"
+        ],
+        "priority": 0
+      },
+      "familydoctor/fdt_patient_detail.html": {
+        "resources": [],
+        "refer": [
+          "familydoctor/echarts.html",
+          "familydoctor/patient_agreement.html",
+          "familydoctor/service_package.html",
+          "familydoctor/doctor_reminding.html",
+          "familydoctor/doctor_comments.html"
+        ],
+        "priority": 0
+      },
+      "order/wait_report_detail.html": {
+        "resources": [],
+        "refer": [
+          "order/single_back.html",
+          "order/report_back.html"
+        ],
+        "priority": 0
+      },
+      "familydoctor/doctor_reminding.html": {
+        "resources": [],
+        "refer": [
+          "familydoctor/doctor_reminding_history.html"
+        ],
+        "priority": 0
+      }
+    },
+    "idle": {
+      "resources": [
+        "images/kefu_03.png",
+        "images/cbd.jpg",
+        "js/zhiwei.data.js",
+        "images/kefu_04.png",
+        "images/exit/mm.png",
+        "fonti/demo_symbol.html",
+        "images/011.jpg",
+        "fonti/iconfont.woff",
+        "images/010.jpg",
+        "js/common.js",
+        "images/input-unchecked.png",
+        "project/new_baby.html",
+        "css/bootstrap-datetimepicker.min.css",
+        "js/mui.js",
+        "js/template.js",
+        "js/city.data.js",
+        "README.md",
+        "js/mui.view.js",
+        "message/new_message.html",
+        "project/new_courseone.html",
+        "js/city.data-3.js",
+        "images/kefu_01dj.png",
+        "images/exit/yy.png",
+        "images/70jiahu.png",
+        "images/input-checked.png",
+        "css/jquery-labelauty.css",
+        "js/feedback.js",
+        "js/mui.imageViewer.js",
+        "js/chatMsg.js",
+        "images/weixin.png",
+        "images/kefu_02dj.png",
+        "images/exit/dl.png",
+        "images/baby.png",
+        "images/iconfont-tianjia.png",
+        "images/002.png",
+        "project/new_nurse.html",
+        "images/kefu_03dj.png",
+        "images/logo.png",
+        "images/sinaweibo.png",
+        "js/mui.indexedlist.js",
+        "fonti/iconfont.svg",
+        "js/bootstrap-datetimepicker.min.js",
+        "js/jquery.validate.min.js",
+        "css/mui.indexedlist.css",
+        "fonti/demo.css",
+        "js/strophe-1.2.8.min.js",
+        "images/jiantou2.png",
+        "fonti/demo_fontclass.html",
+        "images/kefu_02.png",
+        "js/mui.locker.js",
+        "fonti/iconfont.css",
+        "images/kefu_04dj.png",
+        "order/new_order1.html",
+        "css/iconfont.eot",
+        "set/setting_two.html",
+        "fonti/iconfont.ttf",
+        "images/qihoo.png",
+        "css/iconfont.woff",
+        "images/icon_date.png",
+        "images/px.png",
+        "css/chat-msg.css",
+        "images/003.png",
+        "css/mui.css",
+        "js/immersed.js",
+        "order/new_order.html",
+        "js/websdk-1.4.11.js",
+        "images/qrcode.png",
+        "css/iconfont.ttf",
+        "css/feedback-page.css",
+        "js/easemob.im.config.js",
+        "images/user-photo.png",
+        "images/kefu_01.png",
+        "images/page.png",
+        "images/exit/tjzp.png",
+        "fonti/demo_unicode.html",
+        "images/qq.png",
+        "css/bootstrap-datetimepicker.css",
+        "mine/working_schedule.html",
+        "js/feedback-page.js",
+        "images/calendar_all.png",
+        "js/webim.config.js",
+        "js/bootstrap-datetimepicker.zh-CN.js",
+        "exam/new_exam.html",
+        "css/style.css",
+        "fonti/iconfont.eot",
+        "images/70jh.png"
+      ]
+    }
+  },
+  "unpackage": [
+    "README.md"
+  ]
+}

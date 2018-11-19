@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>修改手机号</title>
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<style>
+			.mui-input-group:first-child {
+				margin-top: 20px;
+			}
+			
+			.mui-input-group label {
+				width: 22%;
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 78%;
+				height: 0.9rem;
+				font-size: 14px;
+			}
+			
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			
+			#reg {
+				padding: 10px;
+				border-radius: 20px;
+				width: 100%;
+				margin: 0 auto;
+				height: 0.9rem;
+			}
+			
+			#reg span {
+				font-size: 18px;
+			}
+			
+			.mui-input-group {
+				background: none;
+			}
+			
+			.mui-input-group:before,
+			.mui-input-group:after {
+				height: 0;
+			}
+			
+			.mui-input-group input {
+				background-color: #FFFFFF !important;
+				width: 95% !important;
+				border-radius: 25px !important;
+				margin: 10px 0 10px 0 !important;
+				padding-left: 55px !important;
+				float: inherit !important;
+			}
+			
+			.mui-input-group .mui-input-row:after {
+				height: 0;
+			}
+			
+			.mui-input-group .mui-input-row {
+				text-align: center;
+			}
+			
+			.mui-input-group .mui-input-row {
+				height: inherit;
+			}
+			
+			p {
+				font-size: 14px;
+				margin-top: 20px;
+				margin-bottom: 10px;
+				color: #8f8f94;
+			}
+			
+			p a {
+				color: #000000;
+				padding: 0 20px;
+			}
+			
+			.mui-content {
+				background: none;
+			}
+			
+			#showUserPicker {
+				float: inherit;
+				width: 87%;
+				padding: 10px 15px;
+			}
+			
+			#yanzhengBtn {
+				position: absolute;
+				top: 20px;
+				right: 35px;
+				background: #ffcc99;
+				border: 0;
+				border-radius: 20px;
+			}
+			
+			.mui-input-group .labelL {
+				position: absolute;
+				top: 6px;
+				left: -5px;
+				z-index: 99;
+			}
+			
+			.mui-input-group .labelL img {
+				width: 0.4rem;
+				vertical-align: -webkit-baseline-middle;
+			}
+			
+			.mui-input-group .labelR {
+				position: absolute;
+				top: 10px;
+				right: 0px;
+				z-index: 99;
+			}
+			
+			.mui-input-group .labelR img {
+				width: 0.2rem;
+				vertical-align: -webkit-baseline-middle;
+			}
+			
+			.mui-content-padded .mui-btn {
+				background-color: #718fbd !important;
+			}
+			
+			.mui-input-row p {
+				color: #000 !important;
+			}
+			
+			.mui-input-row span {
+				color: #FCA94E;
+			}
+			
+			.mui-content-padded {
+				margin-top: 66px !important;
+			}
+			
+			.tips {
+				position: fixed;
+				top: 0;
+				width: 100%;
+				height: 40px;
+				text-align: center;
+			}
+			
+			.tips p {
+				min-width: 300px;
+				max-width: 400px;
+				line-height: 40px;
+				margin: 0 auto;
+				color: #FFF;
+				display: none;
+				background-color: #C91623;
+			}
+			
+			.mui-btn-primary {
+				border: 1px solid #718fbd;
+				background: #718fbd;
+			}
+			
+			#yanzhengBtn {
+				position: absolute;
+				top: 15px;
+				right: 35px;
+				background: #ffcc99;
+				border: 0;
+				border-radius: 7px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">修改手机号</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<form class="mui-input-group">
+
+				<div class="mui-input-row">
+					<input id='phoneNo' name='phoneNo' type="number" class="mui-input" placeholder="请输入新手机号" value=""></input>
+				</div>
+				<div class="mui-input-row">
+					<!--<label class="labelL"><img src="../images/mm.png" /></label>-->
+					<input id='checkcode' name='checkcode' type="number" class="mui-input" placeholder="请输入验证码" value=""><button type="button" class="verification size12 yanzhengma_ok" id="yanzhengBtn">获取验证码</button></input>
+				</div>
+
+			</form>
+			<div class="mui-content-padded">
+				<button id='reg' class="mui-btn mui-btn-block mui-btn-primary "><span>确定</span></button>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+		<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+		<script type="text/javascript" src="../js/constants.js"></script>
+		<script type="text/javascript" src="../js/sharemethods.js"></script>
+		<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="../js/json_time.js"></script>
+
+		<script>
+			var user = localStorage.getItem("USER");
+			var user = JSON.parse(user);
+			mui.plusReady(function() {
+				//				var topoffset = '45px';
+				//				if(plus.navigator.isImmersedStatusbar()) { // 兼容immersed状态栏模式
+				//					// 获取状态栏高度并根据业务需求处理，这里重新计算了子窗口的偏移位置
+				//					topoffset = (Math.round(plus.navigator.getStatusbarHeight()) + 45) + 'px';
+				//					document.querySelector("header").style.height = topoffset;
+				//					document.querySelector("header").style.paddingTop = "20px";
+				//					document.getElementById('content').style.paddingTop = (Math.round(plus.navigator.getStatusbarHeight()) + 45) + "px";
+				//				}
+				// 加载完毕后关闭等待框，并展示页面
+				var currentView = plus.webview.currentWebview();
+				currentView.show('slide-in-right', 200);
+				plus.nativeUI.closeWaiting();
+			});
+			document.getElementById("yanzhengBtn").addEventListener('tap', function() {
+				mui.toast("验证码已发送");
+			});
+
+			document.getElementById("reg").addEventListener('tap', function() {
+				var checkcode = $('#checkcode').val()
+				//					var phoneNo = $('#phoneNo').val()
+				var phone = $('#userPhone').val();
+				var data = {
+					checkCode: checkcode,
+					//						cardUserPhone: phoneNo
+					cardUserPhone: user.phone
+				};
+				var sussess = function(data) {
+					//服务器返回响应，根据响应结果，分析是否登录成功；
+					if(data.result == "success") {
+						localStorage.clear();
+						plus.runtime.restart();
+					} else {
+						mui.toast("验证码错误,请重新输入");
+					}
+				};
+				commonHttpUtils(chengephonenoUrl, "put", data, sussess, error);
+			});
+
+			//倒计时
+			var past_time = 0,
+				begin_time = localStorage.getItem("begin_time"),
+				daojishi_current = localStorage.getItem("miao");
+			var daojishi2 = 60;
+			$("#yanzhengBtn").on("click", function() {
+				document.activeElement.blur();
+				var phone = $("phoneNo").val();
+				var phone_validate = /1[3|5|7|8|]\d{9}/; //验证手机号码是否正确
+				time_current = date_All_format();
+				localStorage.setItem("begin_time", date_All_format());
+				if(phone == "") {
+					mui.toast('请填写手机号')
+					return false;
+				}
+				document.querySelector('#yanzhengBtn').setAttribute("class", "verification size12 mui-disabled");
+				var pn = $("#phoneNo").val();
+				var uid = plus.push.getClientInfo().clientid
+				var url = appsendBackVerCodeTwoUrl + '?uid=' + uid + '&pn=' + pn;
+				var sussess = function(data) {
+					//服务器返回响应，根据响应结果，分析是否登录成功；
+					if(data.result == "sendfailed") {
+						mui.toast("发送失败");
+						document.querySelector('#yanzhengBtn').setAttribute("class", "verification size12");
+						return false;
+					}
+					if(data.result == "non-existent") {
+						mui.toast("该手机号不存在");
+						return false;
+					}
+					if(data.result == "success") {
+						mui.toast("验证码发送成功");
+						var daojishi_interval = setInterval(function() {
+							if(daojishi2 > 0) {
+								document.querySelector('#yanzhengBtn').innerHTML = daojishi2 + "秒";
+								document.querySelector('#yanzhengBtn').setAttribute("class", "verification size12 mui-disabled");
+								daojishi2--;
+								localStorage.setItem("miao", date_All_format());
+
+							} else {
+								document.querySelector('#yanzhengBtn').innerHTML = "获取验证码";
+								document.querySelector('#yanzhengBtn').setAttribute("class", "verification size12");
+								localStorage.clear();
+								clearInterval(daojishi_interval);
+								past_time = 0;
+								daojishi2 = 60;
+							}
+						}, 1000);
+
+					}
+				};
+				commonHttpUtils(url, "get", {}, sussess, error);
+			});
+		</script>
+	</body>
+
+</html>

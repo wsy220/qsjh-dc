@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>订单</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../plugs/qs/qs.common.new.css" />
+
+		<style>
+			html {
+				background-color: #FFF;
+			}
+			
+			.mui-slider-indicator.mui-segmented-control {
+				background-color: #fff;
+				height: 55px;
+				text-align: center;
+				padding-top: 10px;
+			}
+			
+			.mui-bar.mui-content .mui-fullscreen {
+				top: 44px;
+				height: auto;
+			}
+			
+			.mui-pull-top-tips {
+				position: absolute;
+				top: -20px;
+				left: 50%;
+				margin-left: -25px;
+				width: 40px;
+				height: 40px;
+				border-radius: 100%;
+				z-index: 1;
+			}
+			
+			.mui-bar.mui-pull-top-tips {
+				top: 24px;
+			}
+			
+			.mui-pull-top-wrapper {
+				width: 42px;
+				height: 42px;
+				display: block;
+				text-align: center;
+				background-color: #efeff4;
+				border: 1px solid #ddd;
+				border-radius: 25px;
+				background-clip: padding-box;
+				box-shadow: 0 4px 10px #bbb;
+				overflow: hidden;
+			}
+			
+			.mui-pull-top-tips.mui-transitioning {
+				-webkit-transition-duration: 200ms;
+				transition-duration: 200ms;
+			}
+			
+			.mui-pull-top-tips .mui-pull-loading {
+				/*-webkit-backface-visibility: hidden;
+				-webkit-transition-duration: 400ms;
+				transition-duration: 400ms;*/
+				margin: 0;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon,
+			.mui-pull-top-wrapper .mui-spinner {
+				margin-top: 7px;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon.mui-reverse {
+				/*-webkit-transform: rotate(180deg) translateZ(0);*/
+			}
+			
+			.mui-pull-bottom-tips {
+				text-align: center;
+				background-color: #efeff4;
+				font-size: 15px;
+				line-height: 40px;
+				color: #777;
+			}
+			
+			.mui-pull-top-canvas {
+				overflow: hidden;
+				background-color: #fafafa;
+				border-radius: 40px;
+				box-shadow: 0 4px 10px #bbb;
+				width: 40px;
+				height: 40px;
+				margin: 0 auto;
+			}
+			
+			.mui-pull-top-canvas canvas {
+				width: 40px;
+			}
+			
+			.mui-segmented-control.mui-scroll-wrapper .mui-scroll {
+				width: 100%;
+			}
+			
+			.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+				border: 0;
+				margin-top: 18px;
+			}
+			
+			.mui-table-view .mui-media-object {
+				line-height: 42px;
+				max-width: 130px;
+				height: 100px;
+			}
+			
+			.mui-col-xs-4 {
+				width: 33%;
+			}
+			
+			.mui-fullscreen .mui-segmented-control~.mui-slider-group {
+				top: 40px;
+			}
+			
+			.mui-segmented-control.mui-segmented-control-inverted~.mui-slider-progress-bar {
+				background-color: #5171ac;
+			}
+			
+			.mui-segmented-control {
+				font-size: 0.28rem;
+				font-weight: 400;
+				position: relative;
+				display: table;
+				overflow: hidden;
+				width: 100%;
+				table-layout: fixed;
+				border: 1px solid #007aff;
+				border-radius: 3px;
+				background-color: transparent;
+				-webkit-touch-callout: none;
+			}
+			
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				color: #40ccd2;
+				font-weight: bold;
+				font-size: 0.28rem;
+			}
+			
+			.mui-segmented-control.mui-segmented-control-inverted .mui-active {
+				color: #31569d !important;
+				font-weight: bold;
+				font-size: 0.28rem;
+			}
+			
+			.cus-img-enpty {
+				max-width: 45%;
+				margin: 0 auto;
+				display: block;
+				padding-top: 15%;
+			}
+			
+			.imgmsg {
+				max-width: 45%;
+				margin: 0 auto;
+				display: table;
+				padding-top: 50px;
+			}
+			
+			.mui-table-view:after {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				height: 0px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}
+			
+			.mui-table-view-chevron .mui-table-view-cell {
+				padding-right: 15px;
+			}
+			/*.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
+				margin-right: -70px;
+			}*/
+			
+			.mui-table-view-cell>a:not(.mui-btn) {
+				padding: 12px 20px;
+				background-color: #fff;
+			}
+			
+			.cus-badge-box {
+				position: relative;
+			}
+			
+			.mui-badge {
+				min-height: 10px;
+				position: absolute;
+				right: -4px;
+				font-size: 10px;
+				line-height: 1.4;
+				top: -3px;
+				margin-left: -10px;
+				padding: 1px 5px;
+				color: #fff;
+				background: #f52626;
+			}
+			
+			.cus-wd {
+				margin-right: 0px;
+				font-size: 14px;
+				float: right;
+				color: #8f8f94;
+			}
+			
+			.cus-time {
+				margin-bottom: -5px;
+				margin-top: 0px;
+				margin-right: 0px;
+				font-size: 12px;
+				color: #8f8f94;
+			}
+			
+			.cus-title {
+				color: #353535;
+				font-size: 17px;
+				line-height: 24px;
+			}
+			
+			.mui-table-view .mui-media-object {
+				line-height: 85px;
+				max-width: 110px;
+				height: 85px;
+			}
+			
+			.cus-title-img {
+				width: 14px!important;
+				height: 14px;
+				margin-right: 2px;
+			}
+			
+			.cus-time-img {
+				width: 10px!important;
+				height: 10px;
+				margin-right: 2px;
+			}
+			
+			.banner {
+				width: 110px;
+				height: 85px;
+				overflow: hidden;
+				position: relative;
+			}
+			
+			.banner>a {
+				position: absolute;
+				/*top: 100%;*/
+				/*bottom: -0%;*/
+				left: 0;
+				#right: -100%;
+				text-align: center;
+			}
+			
+			.banner>a:before {
+				content: "";
+				display: inline-block;
+				vertical-align: middle;
+				height: 100%;
+			}
+			
+			.banner>a>img {
+				vertical-align: middle;
+			}
+			
+			.mui-table-view-cell {
+				overflow: initial;
+			}
+			
+			.mui-table-view {
+				background-color: #eee;
+			}
+			
+			.mui-table-view-cell {
+				min-height: 106px;
+				margin-top: 5px;
+				background-color: #fff;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="refreshContainer" class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedOrderControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item mui-active" href="#item2order" id="mainItem2">
+						热门
+					</a>
+					<a class="mui-control-item" href="#item3order" id="mainItem3">
+						心情
+					</a>
+					<a class="mui-control-item" href="#item4order" id="mainItem4">
+						问答
+					</a>
+					<a class="mui-control-item" href="#item5order" id="mainItem5">
+						分享
+					</a>
+				</div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-3"></div>
+				<div class="mui-slider-group">
+					<div id="item2order" class="mui-slider-item mui-control-content">
+						<div id="item2wrapper" class="mui-scroll-wrapper">
+							<div id="wrapper01" class="wrapper">
+								<div id="scroller" class="scroller">
+									<ul id="waitConfimBillDiv" class="mui-table-view"></ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item3order" class="mui-slider-item mui-control-content">
+						<div id="item3wrapper" class="mui-scroll-wrapper">
+							<div id="wrapper02" class="wrapper">
+								<div id="scroller" class="scroller">
+									<ul id="waitServiceBillDiv" class="mui-table-view"></ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item4order" class="mui-slider-item mui-control-content">
+						<div id="item4wrapper" class="mui-scroll-wrapper">
+							<div id="wrapper03" class="wrapper">
+								<div id="scroller" class="scroller">
+									<ul id="endBillDiv" class="mui-table-view"></ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item5order" class="mui-slider-item mui-control-content">
+						<div id="item5wrapper" class="mui-scroll-wrapper">
+							<div id="wrapper04" class="wrapper">
+								<div id="scroller" class="scroller">
+									<ul id="shareBillDiv" class="mui-table-view"></ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/constants.map.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/iscroll/iscroll-probe.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.iscroll.new.js"></script>
+
+	<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+	<script type="text/javascript" src="../plugs/md5/md5.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.img.lazyload.js"></script>
+
+	<script>
+		var wrapper01;
+		var wrapper02;
+		var wrapper03;
+		var wrapper04;
+
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+
+		var refWaitService = function() {
+			$("#waitServiceBillDiv").html('<p><img class="cus-img-enpty" src="../images/no_data/1-04.png" data-preview-src="" data-preview-group="1"></p>')
+			wrapper02.page = 1;
+			processServiceAction(wrapper02)
+		}
+
+		var refConfimService = function() {
+			$("#waitConfimBillDiv").html('<p><img class="cus-img-enpty" src="../images/no_data/1-04.png" data-preview-src="" data-preview-group="1"></p>')
+			wrapper01.page = 1;
+			processConfimAction(wrapper01)
+		}
+
+		mui.plusReady(function() {
+			wrapper01 = $.initIscroll({
+				id: "wrapper01",
+				pullUpAction: processConfimAction,
+				pullDownAction: processConfimAction
+			});
+			wrapper02 = $.initIscroll({
+				id: "wrapper02",
+				pullUpAction: processServiceAction,
+				pullDownAction: processServiceAction
+			});
+			wrapper03 = $.initIscroll({
+				id: "wrapper03",
+				pullUpAction: processEndAction,
+				pullDownAction: processEndAction
+			});
+			wrapper04 = $.initIscroll({
+				id: "wrapper04",
+				pullUpAction: processShareAction,
+				pullDownAction: processShareAction
+			});
+			initFunction();
+			$('.mui-content').on('tap', '#dcappDel', function(event) {
+				var id = $(this).attr("data-id")
+				mui.openWindow({
+					url: '../circle/publish-article-dtl.html',
+					id: '../circle/publish-article-dtl.html',
+					show: {
+						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true, //自动显示等待框，默认为true
+						title: '正在加载...', //等待对话框上显示的提示内容
+					},
+					extras: {
+						eid: id
+					},
+				});
+			});
+			$('.mui-content').on('tap', '#webDel', function(event) {
+				var id = $(this).attr("data-id")
+				mui.openWindow({
+					url: '../circle/web_article_dtl.html',
+					id: '../circle/web_article_dtl.html',
+					show: {
+						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true, //自动显示等待框，默认为true
+						title: '正在加载...', //等待对话框上显示的提示内容
+					},
+					extras: {
+						eid: id
+					},
+				});
+			})
+
+			document.querySelector('.mui-slider').addEventListener('slide', function(event) {
+				var nm = mui("#slider").slider().getSlideNumber()
+				if(nm == '0') {
+					wrapper01.refresh();
+				} else if(nm == '1') {
+					wrapper02.refresh();
+				} else if(nm == '2') {
+					wrapper03.refresh();
+				} else if(nm == '3') {
+					wrapper04.refresh();
+				}
+			});
+		});
+
+		function processConfimAction(myScroll) {
+			var homeurl = articlesrmlistUrl + "?page=" + myScroll.page + "&limit=" + myScroll.limit;
+			if(myScroll.page == 1) {
+				$("#waitConfimBillDiv").html('<p><img class="cus-img-enpty" src="../images/no_data/1-04.png" data-preview-src="" data-preview-group="1"></p>');
+			}
+			var sussess = function(data) {
+				if(data.result == "success") {
+					console.log("热门------------->" + JSON.stringify(data.obj));
+					if(data.obj.length != 0) {
+						if(myScroll.page == 1) {
+							$("#waitConfimBillDiv").html('')
+						}
+						if(data.obj.length == myScroll.limit) {
+							myScroll.page = myScroll.page + 1;
+							myScroll.upFlag = true
+						} else {
+							myScroll.upFlag = false
+						}
+						$("#waitConfimBillDiv").processTL(templateRegister.articleAllList, {
+							sub: data.obj
+						}, 'append', function() {
+							myScroll.refresh();
+							$(".qs-img-lazyload").each(function(i, v) {
+								$$.lazyload(v)
+							})
+						})
+					} else {
+						myScroll.upFlag = false
+					}
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+
+			commonHttpUtils(homeurl, "get", "", sussess, error);
+		}
+
+		function processServiceAction(myScroll, flag) {
+			var homeurl = articlessublistUrl + "?wzfl=wdxq&page=" + myScroll.page + "&limit=" + myScroll.limit;
+			if(myScroll.page == 1) {
+				$("#waitServiceBillDiv").html('<p><img class="cus-img-enpty" src="../images/no_data/1-04.png" data-preview-src="" data-preview-group="1"></p>');
+			}
+			var sussess = function(data) {
+				//服务器返回响应，根据响应结果，分析是否登录成功；
+				if(data.result == "success") {
+					console.log("心情------------->" + JSON.stringify(data.obj));
+					if(data.obj.length != 0) {
+						if(myScroll.page == 1) {
+							$("#waitServiceBillDiv").html('')
+						}
+						if(data.obj.length == myScroll.limit) {
+							myScroll.page = myScroll.page + 1;
+							myScroll.upFlag = true
+						} else {
+							myScroll.upFlag = false
+						}
+						$("#waitServiceBillDiv").processTL(templateRegister.articleAllList, {
+							sub: data.obj
+						}, 'append', function() {
+							myScroll.refresh();
+							$(".qs-img-lazyload").each(function(i, v) {
+								$$.lazyload(v)
+							})
+						})
+					} else {
+						myScroll.upFlag = false
+					}
+				}
+			};
+			commonHttpUtils(homeurl, "get", "", sussess, error);
+		}
+
+		function processEndAction(myScroll, flag) {
+			var homeurl = articlessublistUrl + "?wzfl=wtjl&page=" + myScroll.page + "&limit=" + myScroll.limit;
+			if(myScroll.page == 1) {
+				$("#endBillDiv").html('<p><img class="cus-img-enpty" src="../images/no_data/1-04.png" data-preview-src="" data-preview-group="1"></p>');
+			}
+			var sussess = function(data) {
+				//服务器返回响应，根据响应结果，分析是否登录成功；
+				if(data.result == "success") {
+					console.log("问答------------->" + JSON.stringify(data.obj));
+					if(data.obj.length != 0) {
+						if(myScroll.page == 1) {
+							$("#endBillDiv").html('')
+						}
+						if(data.obj.length == myScroll.limit) {
+							myScroll.page = myScroll.page + 1;
+							myScroll.upFlag = true
+						} else {
+							myScroll.upFlag = false
+						}
+						$("#endBillDiv").processTL(templateRegister.articleAllList, {
+							sub: data.obj
+						}, 'append', function() {
+							myScroll.refresh();
+							$(".qs-img-lazyload").each(function(i, v) {
+								$$.lazyload(v)
+							})
+						})
+					} else {
+						myScroll.upFlag = false
+					}
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+			commonHttpUtils(homeurl, "get", "", sussess, error);
+		}
+
+		function processShareAction(myScroll, flag) {
+			var homeurl = articlessublistUrl + "?wzfl=jyfx&page=" + myScroll.page + "&limit=" + myScroll.limit;
+			if(myScroll.page == 1) {
+				$("#shareBillDiv").html('<p><img class="cus-img-enpty" src="../images/no_data/1-04.png" data-preview-src="" data-preview-group="1"></p>');
+			}
+			var sussess = function(data) {
+				//服务器返回响应，根据响应结果，分析是否登录成功；
+				if(data.result == "success") {
+					console.log("分享------------->" + JSON.stringify(data.obj));
+					if(data.obj.length != 0) {
+						if(myScroll.page == 1) {
+							$("#shareBillDiv").html('')
+						}
+						if(data.obj.length == myScroll.limit) {
+							myScroll.page = myScroll.page + 1;
+							myScroll.upFlag = true
+						} else {
+							myScroll.upFlag = false
+						}
+						$("#shareBillDiv").processTL(templateRegister.articleAllList, {
+							sub: data.obj
+						}, 'append', function() {
+							myScroll.refresh();
+							$(".qs-img-lazyload").each(function(i, v) {
+								$$.lazyload(v)
+							})
+						})
+					} else {
+						myScroll.upFlag = false
+					}
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+			commonHttpUtils(homeurl, "get", "", sussess, error);
+		}
+
+		var onload = function() {
+
+		}
+
+		//		function loaded() {
+		//			onload();
+		//			initFunction();
+		//		}
+
+		var initFunction = function() {
+			$('#item2order').addClass('mui-active')
+			processConfimAction(wrapper01);
+			processServiceAction(wrapper02);
+			processEndAction(wrapper03);
+			processShareAction(wrapper04);
+		};
+		
+		document.addEventListener('touchmove', function(e) {
+			e.preventDefault();
+		}, isPassive() ? {
+			capture: false,
+			passive: false
+		} : false);
+
+		function isPassive() {
+			var supportsPassiveOption = false;
+			try {
+				addEventListener("test", null, Object.defineProperty({}, 'passive', {
+					get: function() {
+						supportsPassiveOption = true;
+					}
+				}));
+			} catch(e) {}
+			return supportsPassiveOption;
+		}
+	</script>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>现金提现</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+
+		<style>
+			.top {
+				background-color: #ffffff;
+				margin: 10px;
+				padding: 20px;
+			}
+			
+			.top-img {
+				width: 40px;
+				height: 40px;
+				border-radius: 20px;
+			}
+			
+			.head-text {
+				line-height: 42px;
+				float: left;
+				font-size: 14px;
+				color: #8f8f94;
+			}
+			
+			input[type=number],
+			input[type=text],
+			select,
+			textarea {
+				line-height: 21px;
+				width: 70%;
+				height: 2rem;
+				margin-bottom: 15px;
+				padding: 10px 15px;
+				-webkit-user-select: text;
+				border: none;
+				border-radius: 3px;
+				background-color: #fff;
+				-webkit-appearance: none;
+			}
+			
+			.mui-btn {
+				background-color: #169bd5;
+			}
+			
+			.footer {
+				margin: 10px;
+				padding: 5px;
+			}
+			
+			.orange-one {
+				color: #cc3300;
+				font-size: 0.24rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">现金提现</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<div class="top">
+				<div class="head">
+					<div class="head-text" style="margin-right: 15px;">提现到微信</div>
+					<div style="float: left;margin-right: 5px;">
+						<img class="top-img mui-action-preview qs-image-item" id="head_image" src="../images/txmrt.png" />
+					</div>
+					<div class="head-text" id="wxname"></div>
+				</div>
+				<div style="clear:both;">
+					<p class="top_three">提现金额</p>
+					<img src="../images/mine/qian.png" style="width: 7%;margin-left: 5%;padding-bottom: 5px;" alt="" /><input id="amount" type="number" class="money_No" style="font-size: 1.2rem;" />
+					<p class="top_four">可提现金额：<span id="keamount">0</span></p>
+					<div class="mui-content-padded">
+						<button id='commBtn' class="mui-btn mui-btn-block mui-btn-primary "><span>提现</span></button>
+					</div>
+				</div>
+
+			</div>
+			<div class="footer">
+				<p class="orange-one">温馨提示：</p>
+				<p class="orange-one">您在17：00前申请提现的金额，自本日起1-2个工作日内提至指定账户；您在17：00后申请提现的金额，自第二日起1-2个工作日内提至指定账户。您的可提现额度为您在30天前正常完成的所有订单总金额。</p>
+				<p class="orange-one">声明：</p>
+				<p class="orange-one">您通过上门服务获取的工时费，请自行到有关部门报税。</p>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script>
+		mui.init({
+			keyEventBind: {
+				backbutton: true //打开back按键监听
+			},
+			beforeback: function() {
+				//返回true，继续页面关闭逻辑  
+				mui.back;
+				return true;
+			}
+		});
+		var accountnum = null;
+		mui.plusReady(function() {
+			//setPagePos();
+			var currentView = plus.webview.currentWebview();
+			currentView.setStyle({ softinputMode: "adjustResize" });
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+			$('#keamount').html(currentView.txa)
+			var auths = {};
+			plus.oauth.getServices(function(services) {
+				for(var i in services) {
+					var service = services[i];
+					auths[service.id] = service;
+				}
+				var auth = auths["weixin"];
+				auth.login(function() {
+					auth.getUserInfo(function() {
+						userInfo = auth.userInfo;
+						console.log(JSON.stringify(userInfo))
+						$("#head_image").attr("src", userInfo.headimgurl);
+						$("#wxname").html(userInfo.nickname)
+					}, function(e) {
+						plus.nativeUI.toast("用户绑定信息失败：" + e.message);
+					});
+				}, function(e) {
+					plus.nativeUI.toast("用户绑定信息失败：" + e.message);
+				});
+			}, function(e) {
+				plus.nativeUI.toast("获取登录认证失败：" + e.message);
+			});
+
+			document.getElementById("commBtn").addEventListener("tap", function() {
+
+				var amount = $("#amount").val();
+				if(!amount || amount == '' || amount == 0) {
+					mui.toast("请输入提现金额");
+					return false;
+				}
+				
+				if(amount < 100) {
+					mui.toast("提现金额不能小于100元");
+					return false;
+				}
+
+				if(amount > currentView.txa) {
+					mui.toast("提现金额不能大于可提现金额");
+					return false;
+				}
+				var sussess = function(data) {
+					//服务器返回响应，根据响应结果，分析是否登录成功；
+					if(data.result == "success") {
+						mui.toast("申请提现成功");
+						var index = plus.webview.getWebviewById('set/account_setting.html');
+						index.reload(true);
+						plus.webview.currentWebview().close(true);
+					} else {
+						mui.toast(data.msg);
+					}
+				};
+
+				var data = {
+					channel: "wx",
+					amount: amount,
+				};
+				commonHttpUtils(withdrawalsUrl, "put", data, sussess, error);
+			})
+		});
+	</script>
+
+</html>

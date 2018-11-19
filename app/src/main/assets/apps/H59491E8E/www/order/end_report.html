@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>订单详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<link rel="stylesheet" href="../fonts/iconfont.css" />
+		<link rel="stylesheet" href="../css/mui.imageviewer.css" />
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+
+		<style>
+			html {
+				font-size: 100%;
+			}
+			
+			h5 {
+				margin: 5px 7px;
+			}
+			
+			.mui-card .mui-control-content {
+				padding: 10px;
+			}
+			
+			ul {
+				font-size: 14px;
+				color: #333333;
+			}
+			
+			.mui-btn {
+				padding: 10px;
+			}
+			
+			#kefu {
+				font-size: 0.5rem;
+				line-height: 30px;
+			}
+			
+			header button img {
+				width: 0.3rem;
+			}
+			
+			.mui-bar {
+				box-shadow: 0 0 1px rgba(255, 255, 255, 1);
+			}
+			
+			.mui-content {
+				#background-color: #fff;
+			}
+			
+			.mui-segmented-control {
+				border-bottom: 3px solid #eeeeee!important;
+			}
+			
+			.mui-content .mui-segmented-control {
+				border: none;
+			}
+			
+			.right {
+				float: right;
+			}
+			
+			.mui-control-content {
+				min-height: 540px;
+			}
+			
+			.liangzi {
+				text-align: center
+			}
+			
+			.liangzi a img {
+				width: 80%;
+				margin: 10px 0px;
+			}
+			
+			.peixun_one {
+				height: 0.7rem;
+				width: 1.4rem;
+				line-height: 0.7rem;
+				background-color: #fba94f;
+				color: #fff;
+				text-align: center;
+				border-radius: 5px 5px;
+				margin-left: 10px;
+				margin-top: 10% !important;
+			}
+			
+			.mui-btn-primary {
+				/*border: 1px solid #33C3CB;*/
+				background: #3ccad0;
+				border-radius: 10px;
+				width: 100%;
+				height: 0.9rem;
+				font-size: 15px;
+			}
+			
+			.mui-table-view-cell:after {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0px;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}
+			
+			.mui-ios .mui-table-view-cell {
+				-webkit-transform-style: preserve-3d;
+				transform-style: preserve-3d;
+				font-size: 15px;
+				color: #333333;
+				line-height: 0.6rem;
+			}
+			
+			.iconfont {
+				font-family: "iconfont" !important;
+				font-size: 20px;
+				font-style: normal;
+				color: #ff3300;
+				margin-left: 10px;
+				margin-top: 5px;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
+			
+			.mui-table-view-cell {
+				position: relative;
+				overflow: hidden;
+				padding: 11px 15px;
+				-webkit-touch-callout: none;
+				line-height: 30px;
+			}
+			
+			.iconfont2 {
+				font-family: "iconfont" !important;
+				font-size: 20px;
+				font-style: normal;
+				color: #bcbcbc;
+				margin-left: 10px;
+				margin-top: 5px;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
+			
+			.neirong {
+				color: #333333;
+				font-size: 15px;
+				float: left;
+			}
+			
+			.pingjia {
+				color: #333333;
+				font-size: 15px;
+				font-weight: bold;
+				float: left;
+			}
+			
+			.pingjiadtl {
+				font-size: 14px;
+				margin-top: 0;
+				margin-bottom: 10px;
+				color: #8f8f94;
+			}
+			
+			.serviceitem {
+				font-size: 14px;
+				margin-top: 0;
+				margin-bottom: 10px;
+				color: #8f8f94 !important;
+			}
+			
+			.mui-content-padded {
+				margin-top: 30px;
+			}
+			
+			.mui-btn-warning {
+				background: #FCB565;
+				border-radius: 10px;
+				width: 100%;
+				font-size: 15px;
+				margin-top: 150px;
+			}
+			
+			.mui-icon-star {
+				border: 0;
+				color: #BBBBBB;
+			}
+			
+			.mui-icon-star-filled {
+				border: 0;
+				color: red;
+			}
+			
+			.mui-icon {
+				margin-left: 10px;
+			}
+			
+			.tu_pian img {
+				width: 90%;
+				margin-left: 6%;
+			}
+			
+			.mui-row {
+				width: 100%;
+				height: 11rem;
+			}
+			
+			.mui-row #hulijilu {
+				font-size: 0.26rem;
+				padding: 3% 0 2%4%;
+				color: #333;
+				display: inline-block;
+			}
+			
+			.mui-row p {
+				padding: 0 4%;
+			}
+			
+			.red_start {
+				margin-bottom: 1%;
+				padding-left: 3%;
+			}
+			
+			.top_hello {
+				padding: 2% 3%;
+			}
+			
+			#attitude {
+				padding-bottom: 5%;
+			}
+			
+			.fudong {
+				overflow: hidden;
+			}
+			
+			.fudong img {
+				float: left;
+				/*margin:8% 0 8% 14%;*/
+			}
+			
+			.guohe_one {
+				width: 65px;
+				height: 65px;
+				overflow: hidden;
+				float: left;
+				margin: 3px;
+			}
+			
+			.mui-table-view-cell.mui-active {
+				background-color: #fff
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">订单详情</h1>
+		</header>
+		<div class="mui-content " id="content">
+			<div id="ordera"></div>
+			<div id="orderb"></div>
+			<div id="orderc"></div>
+			<div id="orderd"></div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.zoom.js"></script>
+	<script type="text/javascript" src="../js/mui.previewimage.js"></script>
+
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+	<script type="text/javascript" src="../plugs/md5/md5.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.img.lazyload.js"></script>
+	<script>
+		mui.plusReady(function() {
+			setPagePos();
+			mui.init({
+				swipeBack: true, //启用右滑关闭功能
+				beforeback: function() {
+					//获得列表界面的webview
+					var i = plus.webview.getWebviewById("subpages/tab-webview-subpage-service.html");
+					if(i) {
+						//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+						i.evalJS("refWaitService()");
+					}
+					return true;
+				}
+			});
+			mui('.mui-scroll-wrapper').scroll({
+				indicators: true //是否显示滚动条
+			});
+
+			var self = plus.webview.currentWebview();
+			var orderId = self.orderId;
+			if(!orderId){
+				orderId = self.sid;
+			}
+			var userId = localStorage.getItem("USERID");
+			var orderUrl = getorderdetailallUrl + orderId;
+			var order = null;
+			var orderSub = null;
+
+			var ordersussess = function(data) {
+				console.log(JSON.stringify(data.obj));
+				if(data.result == "success") {
+					$("#ordera").processTL(templateRegister.reporta, data.obj)
+					$("#orderb").processTL(templateRegister.reportb, data.obj)
+					$("#orderc").processTL(templateRegister.reportc, data.obj);
+					$("#orderd").processTL(templateRegister.reportd, data.obj, "append" ,function(){
+						$(".qs-img-lazyload").each(function(i,v){
+							$$.lazyload(v)
+						})
+					});
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+
+			commonHttpUtils(orderUrl, "get", {
+				id: orderId
+			}, ordersussess, error);
+
+			mui.previewImage();
+		});
+	</script>
+
+</html>

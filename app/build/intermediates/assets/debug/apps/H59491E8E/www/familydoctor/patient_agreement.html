@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>合同协议</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="../css/jquery-labelauty.css" />
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+
+		<style>
+			@-webkit-keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			
+			@keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			
+			@-webkit-keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			
+			@keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			
+			.mui-table {
+				width: 300px;
+				height: 420px !important;
+				padding-top: 20px;
+				margin: auto;
+			}
+			
+			.mui-media-object {
+				width: 100%;
+				height: 100%;
+			}
+			.mui-pull-right{
+				padding-top: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<!--<span style="float: right;"><button type="button" class="mui-btn" id="btn_patient_agreement_modify">修改</button></span>-->
+			<h1 class="mui-title" id="ptitle">合同协议</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<div class="mui-table" id="push-pic">
+			</div>
+			<p class="mui-pull-right">上传人:<span class="up-name"></span> <span class="sign-time"></span></p>
+
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.zoom.js"></script>
+	<script type="text/javascript" src="../js/mui.previewimage.js"></script>
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+	<script type="text/javascript" src="../plugs/md5/md5.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.img.lazyload.js"></script>
+	<script type="text/javascript" src="../js/jquery-labelauty.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+	<script type="text/javascript" src="../js/exif.js"></script>
+	<script type="text/javascript" src="../js/mobileBUGFix.mini.js"></script>
+
+	<script>
+		mui.previewImage();
+		mui.init({
+			keyEventBind: {
+				backbutton: true //打开back按键监听
+			},
+			beforeback: function() {
+				//返回true，继续页面关闭逻辑  
+				mui.back;
+				return true;
+			}
+		});
+
+		mui.plusReady(function() {
+
+			// 加载完毕后关闭等待框，并展示页面
+			var currentView = plus.webview.currentWebview();
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+
+			var fdtPatient_id = currentView.patientId;
+			var fdtPatientUrl = getFdtPatientDetailUrl + fdtPatient_id;
+			var fdtpatientsussess = function(data) {
+				console.log("test" + JSON.stringify(data));
+				console.log("根據id[" + fdtPatient_id + "]查询社区病患详细信息:" + JSON.stringify(data));
+				if(data.result == "success") {
+					var fdtPatient = data.date;
+					if(fdtPatient && fdtPatient.protocol) {
+						console.log("jiance：" + JSON.stringify(fdtPatient.protocol));
+						var html='',tep='';
+						
+						fdtPatient.protocol.forEach(function(v, i) {
+							console.log(i)
+							console.log(v)
+							tep =serverAddress + "/" + v.replace('client', '').replace(/\\/g, "/");
+							html+='<img src='+tep+' id='+i+' style="width:300px;height:420px">';
+							console.log(html);
+							$("#push-pic").html(html);
+						})
+						$(".up-name").html(fdtPatient.uploader.name);
+						
+						
+						var datetime = moment(fdtPatient.signDate).format('YYYY-MM-DD HH:mm');
+						$(".sign-time").html(datetime);
+						
+
+					}
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+			commonHttpUtils(fdtPatientUrl, "get", {
+				fdtPatient_id: fdtPatient_id
+			}, fdtpatientsussess, error);
+
+			//			$("#btn_patient_agreement_modify").click(function(event) {
+			//				console.log("家庭医生患者协议修改：" + currentView.patientId)
+			//				mui.openWindow({
+			//					url: 'sign_up_picture.html',
+			//					id: 'sign_up_picture',
+			//					extras: {
+			//						patientId: currentView.patientId
+			//					},
+			//					show: {
+			//						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+			//						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+			//					},
+			//					waiting: {
+			//						autoShow: true //自动显示等待框，默认为true
+			//					}
+			//				});
+			//			});
+		});
+	</script>
+
+</html>

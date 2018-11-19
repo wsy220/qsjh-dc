@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>退单</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<link rel="stylesheet" href="../fonts/iconfont.css" />
+		<link rel="stylesheet" href="../css/mui.imageviewer.css" />
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+		<style>
+			.mui-btn {
+				width: 90%;
+				margin-top: 1.5%;
+				padding: 9px 0;
+				font-size: 12px;
+				border-color: #E4E4E4;
+			}
+			
+			.mui-table {
+				text-align: center;
+				background: #FFFFFF;
+				padding: 3% 0;
+			}
+			
+			.red-text {
+				color: red;
+				text-align: left;
+				padding: 0 5%;
+				font-size: 14px;
+			}
+			
+			.half-btn {
+				width: 44%;
+				margin-top: 5%;
+				color: #FFFFFF;
+			}
+			
+			.orderbackDo {
+				margin-right: 2%;
+				background: #bdbdbd;
+			}
+			
+			.wait-thing {
+				background: #6a8fcf;
+			}
+			
+			p {
+				font-size: 12px;
+				margin-bottom: 5px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">退单</h1>
+		</header>
+		<div class="mui-content " id="content">
+			<div class="mui-table">
+				<p id="back_remind" class="red-text"></p>
+				<button class="mui-btn orderReason" value="rb1" form="抢错单了">抢错单了</button>
+				<button class="mui-btn orderReason" value="rb2" form="报告图片、描述不清晰无法回答">报告图片、描述不清晰无法回答</button>
+				<button class="mui-btn orderReason" value="rb3" form="其他">其他</button>
+				<button class="mui-btn half-btn orderbackDo">退单</button>
+				<button class="mui-btn half-btn wait-thing">我再想想</button>
+			</div>
+			<div style="padding:2% 5%;">
+				<p style="font-weight: bold;">退款须知?</p>
+				<p>1.自您接单开始计算，半小时内可无责退单。</p>
+				<p>2.从您接单开始计算，半小时后没有进行解答，将从您的个人账户中扣除本单金额的20%。</p>
+				<!--<p>(3)从您接单开始至服务时间，您没有做出任何行为（即未点击【我已出发】、【我已到达】、【开始服务】等时间节点标记），导致订单违约，将从您的账户中扣除该订单金额的30%，如果您账户内没有收入时，则在您账户内计为负数，当您的账户有进账时，自动补齐。</p>
+				<p>(4) 您在点击【我已出发】后发现药品与病情等不符合、药品备品准备不充分等情况可无责退单，同时扣除患者订单金额30%给您作为补偿。</p>-->
+			</div>
+
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.zoom.js"></script>
+	<script type="text/javascript" src="../js/mui.previewimage.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+	<script type="text/javascript" src="../plugs/md5/md5.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.img.lazyload.js"></script>
+	<script>
+		mui.init({
+			swipeBack: true, //启用右滑关闭功能
+			beforeback: function() {
+				//获得列表界面的webview
+				//				var i = plus.webview.getWebviewById("subpages/tab-webview-subpage-service.html");
+				//				if(i) {
+				//					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+				//					i.evalJS("refConfimService()");
+				//				}
+				return true;
+			}
+		});
+		mui('.mui-scroll-wrapper').scroll({
+			indicators: true //是否显示滚动条
+		});
+
+		mui.plusReady(function() {
+			var currentView = plus.webview.currentWebview();
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+			$("#back_remind").hide();
+			var orderId = currentView.orderId;
+			var serviceNumber = currentView.serviceNumber;
+			var reason = null;
+			var reasonText = null;
+			mui(".mui-content").on("tap", ".orderReason", function(event) {
+				reason = this.value;
+				
+				$(".orderReason").css("background-color","#fff")
+				
+				$(this).css("background-color","#bbcbea");
+				reasonText = $(this).html();
+				if(reason != null) {
+					//					alert(reason + orderId)
+					var sussess = function(data) {
+						console.log(JSON.stringify(data));
+						var array = data.obj;
+						if(array.type == "Y") {
+							$("#back_remind").show();
+							$("#back_remind").html("亲爱的用户，您此时取消订单将会扣除本次订单金额的" + array.bs + "%，您确认取消吗？")
+						} else{
+							$("#back_remind").show();
+							$("#back_remind").html("亲爱的用户，您已确认患者不具备服务条件，经工作人员审核后将为您无责退单，您确认取消吗？")
+						}
+
+					};
+					commonHttpUtils(backreportcauseUrl, "put", {
+						backReason: {
+							value: reason
+						},
+						id: orderId
+					}, sussess, error);
+				};
+			})
+			
+			mui(".mui-content").on("tap", ".wait-thing", function(event) {
+				mui.back()
+			})
+
+			var btnArray = ['确认', '取消'];
+			mui(".mui-content").on("tap", ".orderbackDo", function(event) {
+				if(reason == null) {
+					mui.toast("请选择退单原因");
+					return false
+				}
+				if(reasonText == null) {
+					mui.toast("请选择退单原因");
+					return false
+				}
+				mui.confirm('是否确认取消该订单？', '取消订单', btnArray, function(e) {
+
+					if(e.index == 0) {
+						var sussess = function(data) {
+							//服务器返回响应，根据响应结果，分析是否登录成功；
+							if(data.result == "success") {
+								if(serviceNumber) {
+									var index = plus.webview.getLaunchWebview();
+									if(index) {
+										index.evalJS("clearLInterval('" + orderId + "')");
+									}
+								}
+								mui.toast("退单成功");
+								var wobj = plus.webview.getWebviewById("subpages/tab-webview-subpage-service.html");
+								wobj.reload(true);
+								plus.webview.currentWebview().opener().close(true);
+								plus.webview.currentWebview().close(true)
+							} else {
+								mui.toast(data.msg);
+							}
+						};
+						commonHttpUtils(backreportUrl, "put", {
+							backReason: {
+								value: reason,
+								text: reasonText
+							},
+							id: orderId
+						}, sussess, error);
+					}
+				});
+			})
+
+		});
+	</script>
+
+</html>

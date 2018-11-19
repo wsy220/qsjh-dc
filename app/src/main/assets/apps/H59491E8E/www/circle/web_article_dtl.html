@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>模版页面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/mui.imageviewer.css" />
+		<style>
+			html {
+				background-color: #ffffff;
+			}
+			
+			.mui-content>.mui-card:first-child {
+				margin-top: 0px;
+			}
+			
+			.mui-card {
+				margin: 0px;
+			}
+			
+			.title-div {
+				padding-top: 15px;
+				width: 100%;
+			}
+			
+			.title-text {
+				width: 100%;
+				text-align: center;
+			}
+			
+			.title-others {
+				padding-top: 5px;
+				text-align: center;
+				color: #999999;
+				font-size: 12px;
+			}
+			
+			.title-user,
+			.title-zy {
+				margin-right: 5px;
+			}
+			
+			.content-info {
+				padding-bottom: 10px;
+				color: #797979;
+			}
+			/*.content-info pre{
+				width: 400px;
+			}*/
+			
+			.cus-time-img {
+				height: 14px;
+				margin-right: 2px;
+			}
+			
+			.other-time {
+				margin-left: 10px;
+				font-size: 12px;
+				color: #797979;
+			}
+			
+			.other-info {
+				color: #000000;
+			}
+			
+			.mui-media-sub-body {
+				margin-left: 15px;
+			}
+			
+			.content-info-img {
+				padding-bottom: 20px;
+			}
+			
+			.fudong {
+				overflow: hidden;
+				width: 100%;
+			}
+			
+			.fudong img {
+				width: 100%;
+			}
+			
+			.guohe_one {
+				width: 65px;
+				height: 65px;
+				overflow: hidden;
+				float: left;
+				margin: 3px;
+			}
+			
+			.message {
+				background-color: #fff;
+				z-index: 99;
+				box-shadow: 0px -5px 5px 0px rgba(150, 150, 150, .2);
+			}
+			
+			.message.bottom {
+				position: fixed;
+				padding: 15px;
+				bottom: 0;
+				left: 0px;
+				right: 0px;
+			}
+			
+			.message .icon {
+				width: 42px;
+				height: 42px;
+				float: left;
+				text-align: center;
+			}
+			
+			.message .content {
+				padding-left: 55px;
+				font-size: 13px;
+			}
+			
+			.icon .mui-icon {
+				font-weight: 28px;
+				font-weight: 700;
+				line-height: 42px;
+				color: #007AFF;
+			}
+			
+			.action {
+				text-align: right;
+				padding-right: 2px;
+				#margin-top: 18px;
+			}
+			
+			.mui-progressbar {
+				width: 110%;
+				margin-right: -10px;
+				margin-left: -10px;
+			}
+			
+			.mui-card {
+				box-shadow: 0 0px 0px rgba(0, 0, 0, .3);
+			}
+			
+			.mui-modal {
+				z-index: 1;
+			}
+			
+			.mui-btn {
+				padding: 5px 10px !important;
+			}
+			
+			.btn-style {
+				padding: 5px 5px !important;
+			}
+			
+			.mui-pull-right {
+				color: #FFFFFF;
+				font-size: 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" id="header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">文章详情</h1>
+			<span id="share" class="mui-pull-right" onclick="shareHref()"><i class="mui-icon mui-icon-redo"></i>转发</span>
+		</header>
+		<div class="mui-content" id="content">
+			<div class="mui-card">
+				<div class="mui-card-header" id="mui-card-header"></div>
+				<div class="mui-card-content" id="mui-card-content"></div>
+				<div class="mui-card-footer">
+					<ul class="mui-table-view" id="mui-card-footer" style="width: 100%;">
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="message bottom" id="message-bottom" style="display: none;">
+			<textarea id="plInput" rows="3" placeholder="请输入内容"></textarea>
+			<div class="action">
+				<button id="uninstall" type="button" class="mui-btn mui-btn-blue mui-btn-link">取消</button>
+				<button id="install" type="button" class="mui-btn mui-btn-blue">发送</button>
+			</div>
+		</div>
+
+		<div id="cus-modal" class="mui-modal mui-active"></div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.zoom.js"></script>
+	<script type="text/javascript" src="../js/mui.previewimage.js"></script>
+
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/iscroll/iscroll-probe.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<!--<script type="text/javascript" src="../plugs/qs/qs.iscroll.new.js"></script>-->
+	<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+	<script type="text/javascript" src="../plugs/md5/md5.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.img.lazyload.js"></script>
+
+	<script>
+		var wzfl = null;
+		var plType = null;
+		var plUserId = null;
+		var plName = null;
+		var plArtName = null;
+		var userId = localStorage.getItem("USERID");
+		var user = JSON.parse(localStorage.getItem("USER"));
+		var username = null;
+		var nmself = null;
+		var tittleId = null;
+		var tittleName = null;
+		var articleContent = null;
+		var str=null;
+		var articlePic;
+		mui.init({
+			keyEventBind: {
+				backbutton: true //打开back按键监听
+			},
+			beforeback: function() {
+				mui.back;
+				return true;
+			}
+		});
+
+		mui.previewImage();
+
+		mui.plusReady(function() {
+			//			updateSerivces(); 
+			if(plus.os.name == "Android") {
+				Intent = plus.android.importClass("android.content.Intent");
+				File = plus.android.importClass("java.io.File");
+				Uri = plus.android.importClass("android.net.Uri");
+				main = plus.android.runtimeMainActivity();
+			}
+
+			//			plus.webview.currentWebview().setStyle({
+			//				softinputMode: "adjustResize" // 弹出软键盘时自动改变webview的高度
+			//			});
+			mui('header').progressbar({
+				progress: undefined
+			}).show();
+			var currentView = plus.webview.currentWebview();
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+			var id = currentView.eid;
+
+			//			initNativeObjects();
+
+			$("#message-bottom").hide();
+			mui('.mui-content').on('tap', '#zanBtn', function(e) {
+				if(localStorage.getItem("ACCESSTOKEN") == null) { //未登录
+					mui.openWindow({
+						url: "../login/login.html"
+					});
+					return false;
+				}
+				if($("#zanImg").attr("src") == "../images/circle/zans.png") {
+					mui.toast("你已经点过赞了");
+					return false
+				}
+				var sus = function(data) {
+					if(data.result == "success") {
+						var zan = parseInt($("#zannum").text());
+						$("#zanImg").attr("src", "../images/circle/zans.png")
+						$("#zannum").html(zan + 1)
+					} else {
+						mui.toast(data.msg);
+					}
+				}
+				commonHttpUtils(appzanarticlesUrl + id, "put", {}, sus, error);
+			})
+
+			mui('.mui-content').on('tap', '#hfBtn', function(e) {
+				if(user.idapprove != 2) {
+					mui.toast("您暂时还没有通过审核");
+					return false
+				}
+				$("#message-bottom").show()
+				plType = "1" //回复
+				plAnswerSid = this.getAttribute("data-sid");
+				plName = this.getAttribute("data-name");
+				plArtName = this.getAttribute("data-artName");
+				plUserId = userId;
+				$("#plInput").val("")
+				showSoftInput();
+			});
+
+			mui('.mui-content').on('tap', '#plBtn', function(e) {
+				if(localStorage.getItem("ACCESSTOKEN") == null) { //未登录
+					mui.openWindow({
+						url: "../login/login.html"
+					});
+					return false;
+				}
+				if(user.idapprove != 2) {
+					mui.toast("您暂时还没有通过审核");
+					return false
+				}
+				$("#message-bottom").show()
+				plType = "0" //评论
+				plUserId = userId;
+				$("#plInput").val("")
+				showSoftInput();
+			});
+
+			mui('#message-bottom').on('tap', '#uninstall', function(e) {
+				$("#message-bottom").hide()
+			})
+
+			var ordersussess = function(data) {
+				console.log(JSON.stringify(data.obj))
+				data.obj.userId = localStorage.getItem("USERID");
+				tittleName = data.obj.articletitle;
+				tittleId = data.obj._id;
+				articleContent = data.obj.articlecontent;
+				 var dd=articleContent.replace(/<\/?.+?>/g,"");
+ 				var dds=dd.replace(/ /g,"");//dds为得到后的内容
+
+				LimitNumber(dds, 'qfr');
+				/*用js限制字数，超出部分以省略号...显示*/
+				function LimitNumber(dds, idName) {
+					str = dds;
+					str = str.substr(0, 30) + '...';
+					console.log(str)
+				}
+
+				if(data.obj.publishType == "web") {
+					var img = data.obj.cover;
+					articlePic = img.replace('client', '').replace(/\\/g, "/")
+				} else {
+					var img = data.obj.imgList[0];
+					articlePic = img.replace('client', '').replace(/\\/g, "/")
+				}
+
+				if(data.result == "success") {
+					//					console.log(JSON.stringify(data.obj))
+					//					if(data.obj.realNameFlag) {
+					//						data.obj.articledc.nickname = data.obj.articledc.name
+					//					}
+					//					nmself = data.obj.articledc.nickname
+					$("#mui-card-header").processTL(templateRegister.articleDtlHeader, data.obj)
+					$("#mui-card-content").processTL(templateRegister.articleDtlBody, data.obj, "append", function() {
+						data.obj.zanmap.forEach(function(v) {
+							if(data.obj.userId == v.dcuserId) {
+								$("#zanImg").attr("src", "../images/circle/zans.png")
+							}
+						})
+						//						if(data.obj.userId == data.obj.articledc._id) {
+						//							$("#plBtn").hide();
+						//						}
+
+						$("#zannum").html(data.obj.zanmap.length);
+						$("#readNum").html(data.obj.readcount)
+
+						$(".qs-img-lazyload").each(function(i, v) {
+							$$.lazyload(v)
+						})
+
+						$("#cus-modal").removeClass("mui-active")
+						mui('header').progressbar().hide();
+					})
+					if(data.obj.answer.length < 1) {
+						$(".mui-card-footer").hide()
+					} else {
+						$("#mui-card-footer").processTL(templateRegister.articleDtlFooter, data.obj)
+					}
+				} else {
+					mui.back();
+					mui.toast(data.msg);
+				}
+			};
+			commonHttpUtils(articlesappUrl + id, "get", {}, ordersussess, error);
+
+			//评论
+			mui('#message-bottom').on('tap', '#install', function(e) {
+				if($("#plInput").val() == "" || $("#plInput").val() == null) {
+					mui.toast("请输入内容");
+					return false
+				}
+				if(plType == "0") {
+					var suss = function(data) {
+						if(data.result == "success") {
+							mui.toast("评论成功");
+							$("#message-bottom").hide()
+							var nm = user.nickname;
+							var pic_icon = serverAddress + "/" + user.userfaceimage.replace('client', '').replace(/\\/g, "/");
+
+							$(".mui-card-footer").show()
+							$("#mui-card-footer").prepend('<li class="mui-table-view-cell mui-media"><div class="mui-media-body mui-row">' +
+								'<div class="mui-col-xs-2">' + '<img src="' + pic_icon + '" style="width: 30px;height: 30px;border-radius: 50%;" /></div>' +
+								'<div class="other-info mui-col-xs-8"><span class="other-name">' + nm +
+								'</span> <span class="other-time">' + moment().format('YYYY-MM-DD HH:mm') +
+								'</span><p class="mui-ellipsis-10">' + $("#plInput").val() + '</p></div></div></li>')
+						} else {
+							mui.toast(data.msg);
+						}
+					}
+					commonHttpUtils(appplarticlesUrl + id, "put", {
+						plType: plType,
+						plUserId: plUserId,
+						plInput: $("#plInput").val()
+					}, suss, error);
+				}
+
+			});
+			updateSerivces();
+			initNativeObjects();
+
+		});
+		var nativeWebview, imm, InputMethodManager;
+		var initNativeObjects = function() {
+			if(mui.os.android) {
+				var main = plus.android.runtimeMainActivity();
+				var Context = plus.android.importClass("android.content.Context");
+				InputMethodManager = plus.android.importClass("android.view.inputmethod.InputMethodManager");
+				imm = main.getSystemService(Context.INPUT_METHOD_SERVICE);
+			} else {
+				nativeWebview = plus.webview.currentWebview().nativeInstanceObject();
+			}
+		};
+		var showSoftInput = function() {
+			if(mui.os.android) {
+				imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
+			} else {
+				nativeWebview.plusCallMethod({
+					"setKeyboardDisplayRequiresUserAction": false
+				});
+			}
+			setTimeout(function() {
+				var inputElem = document.querySelector('#plInput');
+				inputElem.focus();
+			}, 200);
+		};
+
+		/** 
+		 * 更新分享服务 
+		 */
+		function updateSerivces() {
+			plus.share.getServices(function(s) {
+				shares = {};
+				for(var i in s) {
+					var t = s[i];
+					shares[t.id] = t;
+				}
+				outSet("获取分享服务列表成功");
+			}, function(e) {
+				outSet("获取分享服务列表失败：" + e.message);
+			});
+		}
+		/** 
+		 * 分享操作 
+		 */
+		function shareAction(id, ex) {
+			var s = null;
+			if(!id || !(s = shares[id])) {
+				outLine("无效的分享服务！");
+				return;
+			}
+			if(s.authenticated) {
+				outSet("---已授权---");
+				shareMessage(s, ex);
+			} else {
+				outSet("---未授权---");
+				s.authorize(function() {
+					shareMessage(s, ex);
+				}, function(e) {
+					outLine("认证授权失败");
+				});
+			}
+		}
+		/** 
+		 * 发送分享消息 
+		 */
+		function shareMessage(s, ex) {
+			var msg = {
+				href: serverAddress + "/wxs/" + tittleId,
+				title: tittleName,
+				content: str + serverAddress + "/wxs/" + tittleId,
+				thumbs: ["../images/256x256.png"],
+				pictures: ["../images/256x256.png"],
+				//				thumbs: [serverAddress+articlePic],
+				//				pictures: [serverAddress+articlePic],
+				extra: {
+					scene: ex
+				}
+			};
+			s.send(msg, function() {
+				outLine("分享成功!");
+			}, function(e) {
+				console.log(JSON.stringify(e))
+				outLine("分享失败!");
+			});
+		}
+		/** 
+		 * 分享按钮点击事件 
+		 */
+		function shareHref() {
+			var ids = [{
+					id: "weixin",
+					ex: "WXSceneSession" /*微信好友*/
+				}, {
+					id: "weixin",
+					ex: "WXSceneTimeline" /*微信朋友圈*/
+				}, {
+					id: "sinaweibo" /*新浪微博*/
+				}, {
+					id: "qq" /*QQ好友*/
+				}],
+				bts = [{
+					title: "发送给微信好友"
+				}, {
+					title: "分享到微信朋友圈"
+				}, {
+					title: "分享到微博"
+				}];
+			plus.nativeUI.actionSheet({
+					cancel: "取消",
+					buttons: bts
+				},
+				function(e) {
+					var i = e.index;
+					if(i > 0) {
+						shareAction(ids[i - 1].id, ids[i - 1].ex);
+					}
+				}
+			);
+		}
+		// 控制台输出日志 
+		function outSet(msg) {
+			console.log(msg);
+		}
+		// 界面弹出吐司提示 
+		function outLine(msg) {
+			mui.toast(msg);
+		}
+	</script>
+
+</html>

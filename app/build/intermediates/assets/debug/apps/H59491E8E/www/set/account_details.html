@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>账户明细</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+		<link rel="stylesheet" href="../fonts/iconfont.css" />
+		<link rel="stylesheet" href="../plugs/qs/qs.common.new.css" />
+		<link href="../css/hover.css" rel="stylesheet" />
+
+		<style>
+			.imgmsg {
+				max-width: 45%;
+				margin: 0 auto;
+				display: table;
+				padding-top: 50px;
+			}
+			
+			.mui-table-view:after {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				height: 0px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}
+			
+			.mui-table-view-chevron .mui-table-view-cell {
+				padding-right: 15px;
+			}
+			/*.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
+				margin-right: -70px;
+			}*/
+			
+			.mui-table-view-cell>a:not(.mui-btn) {
+				padding: 12px 20px;
+				background-color: #fff;
+			}
+			
+			.cus-badge-box {
+				position: relative;
+			}
+			
+			.mui-badge {
+				min-height: 10px;
+				position: absolute;
+				right: -4px;
+				font-size: 10px;
+				line-height: 1.4;
+				top: -3px;
+				margin-left: -10px;
+				padding: 1px 5px;
+				color: #fff;
+				background: #f52626;
+			}
+			
+			.cus-wd {
+				margin-right: 0px;
+				font-size: 14px;
+				float: right;
+				color: #8f8f94;
+			}
+			
+			.cus-time {
+				margin-right: 0px;
+				font-size: 12px;
+				float: right;
+				color: #8f8f94;
+			}
+			
+			.cus-title {
+				color: #353535;
+				font-size: 17px;
+				line-height: 24px;
+			}
+			
+			.mui-table-view .mui-media-object {
+				line-height: 85px;
+				max-width: 85px;
+				height: 85px;
+			}
+			
+			.cus-title-img {
+				height: 14px;
+				margin-right: 2px;
+			}
+			
+			.cus-time-img {
+				height: 10px;
+				margin-right: 2px;
+			}
+			
+			.banner {
+				width: 85px;
+				height: 85px;
+				overflow: hidden;
+				position: relative;
+			}
+			
+			.banner>a {
+				position: absolute;
+				/*top: -100%;
+				bottom: -100%;*/
+				left: 0;
+				#right: -100%;
+				text-align: center;
+			}
+			
+			.banner>a:before {
+				content: "";
+				display: inline-block;
+				vertical-align: middle;
+				height: 100%;
+			}
+			
+			.banner>a>img {
+				vertical-align: middle;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">账户明细</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<div id="cus-wrapper" class="wrapper" style="bottom: 0px;">
+				<ul id="scroller" class="scroller" style="margin: 0; padding: 0;padding-bottom: 2px;">
+					<div id="accountDtl">
+					</div>
+				</ul>
+
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/iscroll/iscroll-probe.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.iscroll.new.js"></script>
+	<script>
+		mui.init({
+			swipeBack: true, //启用右滑关闭功能
+		});
+		var wrapper01;
+
+		function initAccountDtl(myScroll) {
+
+			if(myScroll.page == 1) {
+				$("#accountDtl").html('<p><img class="imgmsg" src="../images/no_data/1-03.png" data-preview-src="" data-preview-group="1"></p>');
+			}
+
+			var sussessd = function(data) {
+				console.log(JSON.stringify(data))
+				if(data.result == "success") {
+					if(data.obj.length != 0) {
+						if(myScroll.page == 1) {
+							$("#accountDtl").html('')
+						}
+						if(data.obj.length == myScroll.limit) {
+							myScroll.page = myScroll.page + 1;
+							myScroll.upFlag = true
+						} else {
+							myScroll.upFlag = false
+						}
+
+						var accountData = {
+							sub: data.obj
+						}
+
+						$("#accountDtl").processTL(templateRegister.accountDetail, accountData, 'append', function() {
+							myScroll.refresh()
+						})
+
+					} else {
+						myScroll.upFlag = false
+					}
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+			commonHttpUtils(getdoctoraccountdetailUrl + "?page=" + myScroll.page + "&limit=" + myScroll.limit, "get", {}, sussessd, error);
+		}
+
+		function loaded() {
+			wrapper01 = $.initIscroll({
+				id: "cus-wrapper",
+				pullUpAction: initAccountDtl,
+				pullDownAction: initAccountDtl,
+				limit: 10
+			});
+
+		};
+
+		function initFunction() {
+			wrapper01.page = 1;
+			initAccountDtl(wrapper01);
+		};
+
+		mui.plusReady(function() {
+
+			var currentView = plus.webview.currentWebview();
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+
+			loaded()
+			initFunction()
+			mui(".mui-content").on("tap", ".get-id", function() {
+				var orderBackId = $(this).attr("data-id");
+				var money = $(this).attr("data-money");
+				console.log("退款ID：" + orderBackId + money)
+				mui.openWindow({
+					url: 'deductions_detail.html',
+					id: 'deductions_detail',
+					extras: {
+						orderBackId: orderBackId,
+						money: money
+					},
+					show: {
+						autoShow: true, //页面loaded事件发生后自动显示，默认为true
+					},
+					waiting: {
+						autoShow: true, //自动显示等待框，默认为true
+						title: '正在加载...', //等待对话框上显示的提示内容
+
+					}
+				});
+			});
+
+		});
+		document.addEventListener('touchmove', function(e) {
+			e.preventDefault();
+		}, isPassive() ? {
+			capture: false,
+			passive: false
+		} : false);
+
+		function isPassive() {
+			var supportsPassiveOption = false;
+			try {
+				addEventListener("test", null, Object.defineProperty({}, 'passive', {
+					get: function() {
+						supportsPassiveOption = true;
+					}
+				}));
+			} catch(e) {}
+			return supportsPassiveOption;
+		}
+	</script>
+
+</html>

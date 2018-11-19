@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>实名认证</title>
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<style>
+			.mui-content {
+				margin-top: 0.08rem;
+				font-size: 0.2916rem;
+			}
+			
+			#zhaoxiang {
+				height: 2rem;
+			}
+			
+			#zhaoxiang.mui-table-view-cell {
+				padding-top: 0.5rem;
+				height: 130px;
+			}
+			
+			#zhaoxiang a span:after {
+				top: 40%;
+			}
+			
+			#head_image {
+				width: 90px;
+				height: 90px;
+				border-radius: 50px;
+				margin-top: 10px;
+			}
+			
+			.head {
+				margin-top: -0.6rem;
+				margin-right: 15px;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-bottom: 0.08rem;
+			}
+			
+			#libiao li {
+				height: 1.0rem;
+				padding-top: 0.25rem;
+			}
+			
+			#libiao li span {
+				margin-right: 20px;
+				font-size: 14px;
+			}
+			
+			.qianming {
+				width: 50%;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				text-align: right;
+			}
+			
+			.mui-table-view-cell:after {
+				left: 0;
+			}
+			
+			.mui-navigate-right:after {
+				font-size: 25px;
+				right: 5px;
+			}
+			
+			.mui-table-view-cell a {
+				color: #424242;
+				font-size: 15px;
+			}
+			
+			.mui-table-view-cell span {
+				color: #999999;
+			}
+			
+			#forward {
+				font-size: 0.3124rem;
+				font-weight: 400;
+			}
+			
+			#male {
+				color: #00c0ff;
+				height: 1.1rem;
+			}
+			
+			#female {
+				color: #ff0072;
+				height: 1.1rem;
+			}
+			
+			#male div,
+			#female div {
+				background: url(../../../images/tubiao2.png) no-repeat;
+			}
+			
+			.redword {
+				color: #FF3300 !important;
+			}
+			
+			.shengfen_upload {
+				max-width: 100%;
+				background: #FFFFFF;
+				height: 200px;
+				padding-top: 70px;
+			}
+			
+			.mui-content-padded a {
+				margin: 3px;
+				width: 50px;
+				height: 50px;
+				display: block;
+				text-align: center;
+				background-color: #fff;
+				border: 1px solid #ddd;
+				border-radius: 25px;
+				background-clip: padding-box;
+				margin: 0 auto;
+			}
+			
+			.mui-content-padded a .mui-icon {
+				margin-top: 12px;
+				color: #000000;
+				margin-top: -7px;
+				margin-left: -6px;
+			}
+			
+			.mui-icon {
+				font-size: 60px;
+			}
+			
+			.upload_word {
+				margin: 10px auto;
+				display: block;
+				text-align: center;
+			}
+			
+			.shenfen_card,
+			.sign_name {
+				width: 70% !important;
+				height: 20px !important;
+				font-size: 14px;
+			}
+			
+			.error_shenfen_card {
+				border: 1px dotted rgba(0, 0, 0, 0) !important;
+			}
+			
+			.right_shenfen_card {
+				border: 1px solid rgba(0, 0, 0, 0) !important;
+			}
+			
+			.tishi {
+				width: 93%;
+				font-size: 13px;
+				color: #999999;
+				margin: auto;
+				/*input[type="number"] {
+				border: 1px solid rgba(0, 0, 0, 0) !important;
+				/*line-height: 30px;*/
+			}
+			
+			html,
+			body {
+				height: 100%;
+				margin: 0px;
+				padding: 0px;
+				/*overflow: hidden;*/
+				/*-webkit-touch-callout: none;*/
+				/*-webkit-user-select: none;*/
+			}
+			
+			.mui-content {
+				height: 100%;
+				overflow: auto;
+			}
+			
+			#showUserPicker {
+				float: inherit;
+				width: 87%;
+				padding: 10px 15px;
+				background-color: #FFF !important;
+				color: #424242;
+			}
+			
+			input[type=color],
+			input[type=date],
+			input[type=datetime-local],
+			input[type=datetime],
+			input[type=email],
+			input[type=month],
+			input[type=number],
+			input[type=password],
+			input[type=search],
+			input[type=tel],
+			input[type=text],
+			input[type=time],
+			input[type=url],
+			input[type=week],
+			select,
+			textarea {
+				line-height: 21px;
+				width: 100%;
+				height: 40px;
+				margin-bottom: 15px;
+				padding: 10px 15px;
+				-webkit-user-select: text;
+				border: none;
+				border-radius: 3px;
+				outline: 0;
+				background-color: #fff;
+				-webkit-appearance: none;
+			}
+			
+			.doctor_one {
+				background-color: #ffffff;
+				border-bottom: 1px solid #eeeeee;
+			}
+			
+			.content {
+				background-color: #ffffff;
+			}
+			
+			.qs-image-div {
+				padding: 10px;
+				width: 100%;
+				text-align: center;
+			}
+			
+			.qs-image-item {
+				display: block;
+				height: 100px;
+			}
+			
+			#userPhone {
+				width: 50%;
+				padding-bottom: 8%;
+				float: right;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">实名认证</h1>
+		</header>
+		<div class="mui-content content" id="content">
+			<form action="">
+				<ul class="mui-table-view" id="libiao">
+					<li class="mui-table-view-cell doctor_one">
+						<a id="zgno_a">执业资格证号：<input type="text" class="sign_name error_shenfen_card mui-input" placeholder="请输入您的执业资格证号" id="zgno"><span class="mui-icon mui-icon-checkmarkempty duihao" style="font-size: 24px; display: none;"></span> </a>
+					</li>
+				</ul>
+			</form>
+			<div class="mui-table-view-cell ">
+				<a id="signatureLi">执业资格证照片上传<span class="redword">&nbsp;&nbsp;</span></a>
+			</div>
+			<div class="mui-content-padded doctor_one">
+				<div class="mui-row">
+					<div class="mui-col-sm-6 mui-col-xs-6" style="text-align:center">
+						<div class="qs-image-div">
+							<img class="qs-image-item" id="zgnoimg" src="../images/zhengjian.png">
+							<input id='zgnoimgPath' type="hidden" class="mui-input">
+						</div>
+					</div>
+				</div>
+
+				<div id="feedback" class="mui-page feedback">
+					<div class="mui-page-content">
+						<div class="tishi">
+							本人承诺以上信息的真实性，如若不填或填写虚假信息引发的结果 由本人自负。未实名认证者，不能使用系统的订单功能。
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mui-table-view-cell ">
+				<a id="signatureLi">医护资质照片上传<span class="redword">&nbsp;&nbsp;</span></a>
+			</div>
+			<div class="mui-content-padded doctor_one">
+				<div id="feedback" class="mui-page feedback">
+					<div class="mui-page-content">
+						<div id='image-list' class="row image-list"></div>
+						<div class="tishi">
+							本人承诺以上信息的真实性，如若不填或填写虚假信息引发的结果 由本人自负。未实名认证者，不能使用系统的订单功能。
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="mui-content-padded">
+				<button id='send_ok' class="mui-btn mui-btn-block mui-btn-warning ">确定</button>
+				<!--<button id='enter_main' class="mui-btn mui-btn-block mui-btn-warning">进入首页</button>-->
+			</div>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+		<script src="../js/xiangyingshi.js"></script>
+		<script type="text/javascript" src="../js/constants.js"></script>
+		<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="../js/mui.picker.js"></script>
+		<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+		<script type="text/javascript" src="../js/exif.js"></script>
+		<script type="text/javascript" src="../js/mobileBUGFix.mini.js"></script>
+		<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+		<script type="text/javascript" src="../js/sharemethods.js"></script>
+		<script>
+			var user = JSON.parse(localStorage.getItem("USER"));
+			var idImgPath = "";
+			var imgurl = serverAddress + uploadImgFileUrl;
+			mui.plusReady(function() {
+
+				qs.initImageList({
+					id: 'image-list'
+				});
+				mui(".mui-content").on("click", ".qs-image-item", function() {
+					var id = this.id
+					uploadImg(imgurl, function(imgPath, data) {
+						if(data.result == 'success') {
+							document.getElementById(id).src = imgPath;
+							document.getElementById(id + 'Path').value = data.obj.path;
+						} else {
+							mui.toast("文件上传失败");
+						}
+					});
+				});
+			});
+
+			var hospital, username, leixing, nameinput, shenfen_cardinput, shenfen_img = [];
+			mui.plusReady(function() {
+
+//				mui.back = function(event) {
+//					backButtonPress++;
+//					if(backButtonPress > 1) {
+//						plus.runtime.quit();
+//					} else {
+//						plus.storage.removeItem("roster");
+//						plus.nativeUI.toast('再按一次退出应用');
+//					}
+//					setTimeout(function() {
+//						backButtonPress = 0;
+//					}, 1000);
+//					return false;
+//				};
+				plus.webview.currentWebview().setStyle({
+					softinputMode: "adjustResize" // 弹出软键盘时自动改变webview的高度
+				});
+				//				if(plus.navigator.isImmersedStatusbar()) { // 兼容immersed状态栏模式
+				//					// 获取状态栏高度并根据业务需求处理，这里重新计算了子窗口的偏移位置
+				//					topoffset = (Math.round(plus.navigator.getStatusbarHeight()) + 45) + 'px';
+				//					document.querySelector("header").style.height = topoffset;
+				//					document.querySelector("header").style.paddingTop = "20px";
+				//					document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = topoffset;
+				//				}
+				//				document.getElementById("slider").style.top = (44+immersed)+"px";
+
+				// 加载完毕后关闭等待框，并展示页面
+				var currentView = plus.webview.currentWebview();
+				currentView.show('slide-in-right', 200);
+				plus.nativeUI.closeWaiting();
+
+				$("#send_ok").click(function(e) {
+					var zgno = $("#zgno").val().trim();
+					//判断姓名
+					if(zgno == null || zgno == '') {
+						mui.toast("请填写执业资格证号");
+						return false;
+					}
+					if(zgno.length < 15 || zgno.length > 27) {
+						mui.toast("请填写正确的执业资格证号");
+						return false;
+					}
+					//判断是否上传身份证照片
+					if(!$("#zgnoimgPath").val()) {
+						mui.toast("请上传执业资格证");
+						return false;
+					}
+
+					//判断图片上传 是否成功
+					if($$.getImageFilesPath("image-list").length == 0) {
+						mui.toast("请上传医护资质图片");
+						return false;
+					}
+
+					function success(data) {
+						//服务器返回响应，根据响应结果，分析是否登录成功；
+						//						console.log("111" + JSON.stringify(data));
+						if(data.result == "success") {
+							//							var index = plus.webview.getLaunchWebview();
+							//							index.reload(true);
+							//							plus.webview.currentWebview().close("none");
+							plus.runtime.restart();
+						} else {
+							mui.toast(data.msg);
+						}
+					}
+
+					var data = {
+						zgnoimg: $('#zgnoimgPath').val(), // 身份证上传的2个图片的验证的值
+						imgzz: $$.getImageFilesPath("image-list"), // 医护资质的上传路径的 验证的数据
+						zgno: zgno,
+					};
+					commonHttpUtils(zgauthenticationUrl, 'PUT', data, success, error);
+				});
+			});
+		</script>
+	</body>
+
+</html>

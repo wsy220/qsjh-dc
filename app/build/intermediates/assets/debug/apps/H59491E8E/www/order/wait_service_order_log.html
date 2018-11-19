@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>添加工作记录</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+		<!--App自定义的css-->
+		<!-- <link rel="stylesheet" type="text/css" href="../css/app.css" /> -->
+		<style>
+			html {
+				font-size: 100%;
+				#background-color: #fff;
+			}
+			
+			h5 {
+				margin: 5px 7px;
+			}
+			
+			.cus-table-view-cell {
+				position: relative;
+				overflow: hidden;
+				padding: 11px 15px;
+				-webkit-touch-callout: none;
+			}
+			
+			.mui-table-view-cell.mui-active {
+				background-color: #fff
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">添加工作记录</h1>
+		</header>
+		<div class="mui-content" id="content">
+
+			<ul class="mui-table-view" style="margin-top: 5px;">
+				<li class="mui-table-view-cell">
+					第<span id="contentTitle">1</span>次工作记录
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-row" id="orderBtn" style="background-color: #FFF;margin-top: 5px;margin-bottom: 5px;">
+						<div class="mui-col-sm-12 mui-col-xs-12" style="margin-bottom: 10px;">
+							<span>内容 <span style="color: red;">*</span>：</span>
+						</div>
+						<div class="mui-col-sm-12 mui-col-xs-12">
+							<textarea id="logContent" rows="5" cols="20" placeholder="请输入护理记录"></textarea>
+						</div>
+						<div id="drug-div" class="mui-row">
+							<div class="mui-col-sm-12 mui-col-xs-12" style="margin-bottom: 10px;">
+								<span>药品图片 <span style="color: red;">*</span>：</span>
+							</div>
+							<div id="feedback" class="mui-page feedback">
+								<div class="mui-page-content">
+									<div id='image-list-drug' class="row"></div>
+								</div>
+							</div>
+						</div>
+						<div class="mui-col-sm-12 mui-col-xs-12" style="margin-bottom: 10px;">
+							<span>其他图片：</span>
+						</div>
+						<div id="feedback" class="mui-page feedback">
+							<div class="mui-page-content">
+								<div id='image-list' class="row"></div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+
+			<div class="mui-row" style="margin-top: 5px;margin-bottom: 5px;">
+				<div class="mui-col-sm-12 mui-col-xs-12" id="contentCfr">
+					<div class="mui-content-padded"><button class="mui-btn mui-btn-block mui-btn-warning mui-confirm-button"><span>保存</span></button></div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+	<script>
+		mui.plusReady(function() {
+			var currentView = plus.webview.currentWebview();
+			currentView.setStyle({ softinputMode: "adjustResize" });
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+
+			var orderId = currentView.orderId;
+			var orderSubCount = currentView.orderSubCount
+			var isneeddrugs = currentView.isneeddrugs
+
+			if(isneeddrugs == "1") {
+				$("#drug-div").hide()
+			} else {
+				$("#drug-div").show()
+			}
+
+			$("#contentTitle").html(orderSubCount)
+
+			var geturl = getorderserviceUrl + orderId + "/" + orderSubCount;
+			var getsussess = function(data) {
+				console.log(JSON.stringify(data))
+				if(data.result == "success") {
+					if(data.obj && data.obj.serviceLog && data.obj.serviceLog.logContent) {
+						$("#logContent").val(data.obj.serviceLog.logContent);
+						$$.initImageList({
+							id: 'image-list-drug',
+							num: 20
+						}, data.obj.serviceLog.logImgDrug);
+						$$.initImageList({
+							id: 'image-list',
+							num: 20
+						}, data.obj.serviceLog.logImg);
+					} else {
+						$$.initImageList({
+							id: 'image-list-drug',
+							num: 20
+						});
+						$$.initImageList({
+							id: 'image-list',
+							num: 20
+						});
+					}
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+
+			commonHttpUtils(geturl, "get", {}, getsussess, error);
+
+			mui(".mui-content").on("click", ".mui-confirm-button", function() {
+				$this = $(this);
+				var content = $("#logContent").val();
+				var url = addorderserviceUrl + orderId;
+				var sussess = function(data) {
+					//服务器返回响应，根据响应结果，分析是否登录成功；
+					if(data.result == "success") {
+						mui.back();
+						//currentView.close(true)
+						mui.toast("保存成功");
+					} else {
+						mui.toast(data.msg);
+					}
+					
+				};
+				
+				if(!content){
+					mui.alert("请填写护理内容")
+					return;
+				}
+				var data = {
+					serviceNumber: orderSubCount,
+					logContent: content,
+					logImg: $$.getImageFilesPath('image-list'),
+					logImgDrug: $$.getImageFilesPath('image-list-drug')
+				};
+
+				if(isneeddrugs == "0" && $$.getImageFilesPath('image-list-drug') < 1) {
+					mui.alert("请上传药品照片")
+					return;
+				}
+
+				commonHttpUtils(url, "put", data, sussess, error);
+			});
+		});
+	</script>
+
+</html>

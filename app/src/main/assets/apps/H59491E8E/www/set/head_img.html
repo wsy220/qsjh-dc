@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>模版页面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+		<link rel="stylesheet" href="../plugs/cropperjs/cropper.min.css" />
+
+		<style>
+			html {
+				background: black!important;
+			}
+			
+			.mui-content {
+				background-color: black;
+			}
+			
+			.cropper-canvas,
+			.cropper-wrap-box {
+				background-color: black;
+			}
+			.img {
+				max-width: 100%;
+			}
+			
+			.cropper-view-box,
+			.cropper-face {
+				border-radius: 50%;
+			}
+			.mui-btn {
+				padding: 10px;
+				font-size: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">编辑头像</h1>
+			<a id="save" style="font-size: 14px;vertical-align: middle;color:#fff;line-height:3.2em;" class="mui-pull-right"><span>保存</span></a>
+		</header>
+		<div class="mui-content" id="content">
+			<img class="img" style="width: 100%;height: 100%;height: -webkit-fill-available;" id="image" src="">
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../plugs/cropperjs/cropper.min.js"></script>
+
+	<script>
+		var image = document.getElementById('image');
+		//$("#image").height(window.screen.height - 137)
+		var cropper = null;
+		var resImg = null;
+
+		mui.init({
+			keyEventBind: {
+				backbutton: true //打开back按键监听
+			},
+			beforeback: function() {
+				//获得列表界面的webview
+				var i = plus.webview.getWebviewById("head_touxiang.html");
+				if(i) {
+					i.reload(true)
+				}
+				return true;
+			}
+		});
+
+		mui.plusReady(function() {
+			var currentView = plus.webview.currentWebview();
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+			if(plus.os.name == "iOS"){
+				$("#image").height(window.screen.height - 137)
+			}
+			image.src = currentView.imgPath;
+			initCropper();
+			mui(".mui-bar-nav").on("click", "#save", function() {
+				getImg(true)
+			})
+		});
+
+		function initCropper() {
+			cropper = new Cropper(image, {
+				aspectRatio: 1 / 1,
+				viewMode: 1,
+				dragMode: 'move',
+				rotatable: true,
+				minCropBoxWidth: 200,
+				minCropBoxHeight: 200,
+				minContainerWidth: 200,
+				minContainerHeight: 200,
+			});
+		}
+
+		/**
+		 * 获取图片的方法
+		 * @param {Boolean} flag
+		 */
+		function getImg(flag) {
+			//如果flag传入true,生成base64资源   
+			resImg = cropper.getCroppedCanvas({
+				width: 400,
+				height: 400
+			}).toDataURL();
+
+			var b = new plus.nativeObj.Bitmap();
+			b.loadBase64Data(resImg, function() {
+				b.save('../doc/headImg.jpg', {
+					overwrite: true
+				}, function(e) {
+					console.log(e.target)
+					console.log("保存成功");
+					var imgurl = serverAddress + uploadImgFileUrl;
+					uploadHead(imgurl, e.target, function(datas) {
+						var sussess = function(data) {
+							//服务器返回响应，根据响应结果，分析是否登录成功；
+							if(data.result == "success") {
+								var user = JSON.parse(localStorage.getItem("USER"))
+								user.userfaceimage = datas.obj.path;
+								localStorage.setItem('USER', JSON.stringify(user));
+								mui.toast("头像修改成功");
+							} else {
+								mui.toast("头像修改失败");
+							}
+						};
+						commonHttpUtils(changeimgeUrl, "post", {
+							path: datas.obj.path
+						}, sussess, error);
+						mui.back()
+					});
+				}, function() {
+					console.log("保存失败");
+				});
+			}, function() {
+				console.log("创建失败");
+			});
+		}
+	</script>
+
+</html>

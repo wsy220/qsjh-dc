@@ -1,0 +1,206 @@
+/*
+ *这是单独为hello mui准备的个性化css，可以覆盖标准mui的css定义；
+ * 在实际项目开发时，建议为App单独写一个css文件，从而实现项目的自定义皮肤功能；
+ * 
+ * */
+
+.mui-plus header.mui-bar {
+	display: none;
+}
+
+.mui-plus .mui-bar-nav~.mui-content {
+	padding: 0;
+}
+
+
+/*hm开头的表示仅为 Hello MUI示例定义*/
+
+.hm-description {
+	margin: .5em 0;
+}
+
+.hm-description>li {
+	font-size: 14px;
+	color: #8f8f94;
+}
+
+body {
+	font-family: "微软雅黑";
+	font-weight: normal;
+}
+
+
+/*main.html*/
+
+.t_height {
+	width: 100%;
+	height: 42px;
+	margin: 10px auto;
+}
+
+.t_height i {
+	margin: 0 15px 0 5px;
+	color: #439AFA;
+}
+
+.t_height p {
+	margin: -10px 0 0 0;
+	font-size: 16px;
+}
+
+table {
+	border-collapse: collapse;
+	/* 关键属性：合并表格内外边框(其实表格边框有2px，外面1px，里面还有1px哦) */
+	border: solid #E6E6E6;
+	/* 设置边框属性；样式(solid=实线)、颜色(#999=灰) */
+	border-width: 1px 0 0 1px;
+	/* 设置边框状粗细：上 右 下 左 = 对应：1px 0 0 1px */
+	background: #FFF
+}
+
+table th,
+table td {
+	border: solid #E6E6E6;
+	border-width: 0 1px 1px 0;
+	padding: 2px;
+}
+
+tfoot td {
+	text-align: center;
+}
+
+table td,
+th {
+	color: #439AFA;
+	font-size: 14px;
+}
+
+.hssm {
+	width: 100%;
+	min-height: 230px;
+	border-bottom: solid 1px #dadbdb;
+	margin: 15px auto;
+	background: #FFFFFF;
+}
+
+.hssm h3 {
+	width: 100%;
+	height: 36px;
+	padding-top: 13px;
+	border-bottom: solid 1px #e6e6e6;
+}
+
+.hssm h3 span {
+	font-size: 14px;
+	color: #333333;
+	display: block;
+	margin: 0px 0 0 15px;
+	float: left;
+}
+
+.hssm h3 a {
+	font-size: 12px;
+	color: #515252;
+	font-weight: normal;
+	float: right;
+	margin: 0 20px 0 0;
+}
+
+.hssm h3 a:hover {
+	color: #439afa;
+}
+
+.hssm ul {
+	list-style-type: none;
+	margin: 10px auto;
+	padding: 0;
+	text-align: center;
+}
+
+.hssm ul li {
+	width: 33.3%;
+	float: left;
+	padding: 10px 15px;
+	box-sizing: border-box;
+	margin: 0;
+}
+
+.hssm ul li img {
+	width: 90%;
+	border-radius: 70px;
+}
+
+.hssm ul li h4,
+h5 {
+	font-size: 14px;
+	color: #515252;
+}
+
+.hssm ul li h6 {
+	font-size: 12px;
+	color: #abacac;
+}
+
+
+/*.conbox{ width: 90%; border-radius: 30px; margin: 0 auto; text-align: center;}*/
+
+.pink {
+	background-image: url(../images/main_img/u17_03.gif);
+}
+
+.blue {
+	background-image: url(../images/main_img/u17_05.gif);
+}
+
+.orange {
+	background-image: url(../images/main_img/u17_08.gif);
+}
+
+.yellow {
+	background-image: url(../images/main_img/u17_09.gif);
+}
+
+.green {
+	background-image: url(../images/main_img/u17_11.gif);
+}
+
+.purple {
+	background-image: url(../images/main_img/u17_18.gif);
+}
+
+.caramel {
+	background-image: url(../images/main_img/u17_19.gif);
+}
+.red{
+	background-image: url(../images/main_img/u17_20.gif);
+}
+.oyster{
+	background-image: url(../images/main_img/u17_21.gif);
+}
+.mauve{
+	background-image: url(../images/main_img/u17_22.gif);
+}
+.conbox {
+	width: 47px;
+	height: 46px;
+	border-radius: 20px;
+	
+}
+
+.mui-top {
+	margin: 20px auto 0;
+	color: #FFFFFF;
+	font-size: 14px
+}
+
+.mui-icon {
+	font-size: 1.6em !important;
+}
+
+.mui-media-body {
+	font-size: 12px !important;
+}
+
+.mui-col-sm-2 {
+	width: 20%;
+}

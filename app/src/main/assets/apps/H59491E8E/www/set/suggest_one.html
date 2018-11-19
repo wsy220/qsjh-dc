@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>意见反馈</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<style>
+			html {
+				background-color: #FFFFFF;
+			}
+			
+			.mui-content {
+				background-color: #FFFFFF;
+			}
+			
+			textarea {
+				line-height: 25px;
+			}
+			
+			.h5-class {
+				margin-left: 8px;
+				margin-bottom: 20px;
+				margin-top: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">意见反馈</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<div class="mui-content-padded">
+				<h5 class="h5-class">请输入你的反馈意见</h5>
+				<div class="mui-input-row" style="margin: 10px 5px;">
+					<textarea id="textUpload" rows="5" placeholder=""></textarea>
+				</div>
+				<div id="feedback" class="mui-page feedback">
+					<div class="mui-page-content">
+						<div id='image-list' class="row image-list"></div>
+					</div>
+				</div>
+				<button id="suggestbut" class="mui-btn mui-btn-block mui-btn-warning">提交</button>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+		<script type="text/javascript" src="../js/constants.js"></script>
+		<script type="text/javascript" src="../js/sharemethods.js"></script>
+		<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+		<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+		<script>
+			mui.init({
+				keyEventBind: {
+					backbutton: true //打开back按键监听
+				},
+				beforeback: function() {
+					return true;
+				}
+			});
+			mui.plusReady(function() {
+				//				if(plus.navigator.isImmersedStatusbar()) { // 兼容immersed状态栏模式
+				//					// 获取状态栏高度并根据业务需求处理，这里重新计算了子窗口的偏移位置
+				//					topoffset = (Math.round(plus.navigator.getStatusbarHeight()) + 45) + 'px';
+				//					document.querySelector("header").style.height = topoffset;
+				//					document.querySelector("header").style.paddingTop = "20px";
+				//					document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = topoffset;
+				//				}
+				// 加载完毕后关闭等待框，并展示页面
+				var currentView = plus.webview.currentWebview();
+				currentView.show('slide-in-right', 200);
+				plus.nativeUI.closeWaiting();
+
+				qs.initImageList({
+					id: 'image-list'
+				});
+
+				document.getElementById("suggestbut").addEventListener("tap", function() {
+					var textUpload = $("#textUpload").val();
+					if(!textUpload || textUpload == '') {
+						mui.toast("请输入意见");
+						return false;
+					}
+					var sussess = function(data) {
+						//服务器返回响应，根据响应结果，分析是否登录成功；
+						if(data.result == "success") {
+							mui.toast("感谢您的反馈!您的意见将成为我们改进产品，提升服务的重要依据,欢迎您继续关注支持我们。");
+							mui.back();
+						} else {
+							mui.toast(data.msg);
+						}
+					};
+
+					var data = {
+						content: textUpload,
+						imgList: $$.getImageFilesPath("image-list")
+					};
+					commonHttpUtils(addopinionUrl, "post", data, sussess, error);
+
+				});
+
+			});
+		</script>
+	</body>
+
+</html>

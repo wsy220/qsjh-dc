@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>订单详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<link rel="stylesheet" href="../css/mui.imageviewer.css" />
+
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+		<style>
+			html {
+				font-size: 100%;
+				#background-color: #fff;
+			}
+			
+			h5 {
+				margin: 5px 7px;
+			}
+			
+			.mui-card .mui-control-content {
+				padding: 10px;
+			}
+			/*.mui-control-content {
+				height: 550px;
+			}*/
+			
+			ul {
+				font-size: 14px;
+				color: #333333;
+			}
+			
+			.mui-btn {
+				padding: 10px;
+			}
+			
+			#kefu {
+				font-size: 0.5rem;
+				line-height: 30px;
+			}
+			
+			header button img {
+				width: 0.3rem;
+			}
+			
+			.mui-bar {
+				box-shadow: 0 0 1px rgba(255, 255, 255, 1);
+			}
+			
+			.mui-content {
+				#background-color: #fff;
+			}
+			
+			.mui-segmented-control {
+				border-bottom: 3px solid #eeeeee!important;
+			}
+			
+			.mui-content .mui-segmented-control {
+				border: none;
+			}
+			
+			.mui-progressbar span {
+				background-color: #4b78cd !important;
+			}
+			
+			.right {
+				float: right;
+			}
+			
+			.mui-control-content {
+				min-height: 540px;
+			}
+			
+			.liangzi {
+				text-align: center
+			}
+			
+			.liangzi a img {
+				height: 80px;
+				#width: 80%;
+				margin: 10px 0px;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 10px !important;
+			}
+			
+			.peixun_one {
+				height: 0.7rem;
+				width: 1.4rem;
+				line-height: 0.7rem;
+				background-color: #fba94f;
+				color: #fff;
+				text-align: center;
+				border-radius: 5px 5px;
+				margin-left: 10px;
+				margin-top: 10% !important;
+			}
+			
+			.mui-btn-primary {
+				border: 1px solid #33C3CB;
+				background: #3ccad0;
+				border-radius: 10px;
+				width: 100%;
+				height: 0.9rem;
+				font-size: 15px;
+			}
+			
+			.serviceitem {
+				font-size: 14px;
+				margin-top: 0;
+				margin-bottom: 10px;
+				color: #8f8f94 !important;
+			}
+			
+			.mui-table-view-cell {
+				position: relative;
+				overflow: hidden;
+				padding: 11px 15px;
+				-webkit-touch-callout: none;
+				line-height: 30px;
+			}
+			
+			h5 {
+				margin-bottom: 10px;
+				text-align: left;
+			}
+			
+			.mui-demo-container {
+				background-color: #fff;
+				padding: 10px 15px;
+			}
+			
+			.mui-btn-block {
+				padding: 5px 0;
+			}
+			
+			#demo5 .mui-progressbar {
+				margin: 15px 10px;
+			}
+			
+			.mui-progressbar-success span {
+				background-color: #4cd964;
+			}
+			
+			.mui-progressbar-warning span {
+				background-color: #f0ad4e;
+			}
+			
+			.mui-progressbar-danger span {
+				background-color: #dd524d;
+			}
+			
+			.mui-progressbar-royal span {
+				background-color: #8a6de9;
+			}
+			/*Android平台使用父子webview，因此需要修改顶部进度条的显示位置*/
+			
+			.mui-plus.mui-android>.mui-progressbar {
+				top: 0
+			}
+			
+			.mui-progressbar-in {
+				height: 5px;
+				margin-top: 20px;
+				margin-bottom: 20px;
+			}
+			
+			.mui-pagination {
+				font-size: 12px;
+			}
+			
+			.position-top {
+				position: absolute;
+			}
+			
+			.pic-position {
+				position: absolute;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">订单详情</h1>
+		</header>
+		<div class="mui-content " id="content">
+			<div class="mui-row" id="orderBtn" style="background-color: #FFF;margin-top: 5px;margin-bottom: 5px;padding: 5px 15px;">
+
+				<div id="demo1" class="mui-text-center" style="margin: 0 10px">
+					<p class="mui-progressbar mui-progressbar-in" data-progress="0"><span></span></p>
+					<ul id="progressbarBtn1" class="mui-pagination">
+						<div class="pic-position" data-status="1" id="go-home-position" style="left: 4px;">
+							<img data-progress="25" id="go-home" class="cus-img-li" data-id="1" src="../images/order/cf.png" style="width: 40px;" />
+							<div>出发</div>
+						</div>
+						<div class="position-top" data-status="2" id="arrive-position" style="left: 25%;">
+							<img data-progress="50" id="arrive" class="cus-img-li" data-id="2" src="../images/order/u2404.png" style="width: 20px;" />
+							<div class="text-appear" id="text-2">到达</div>
+						</div>
+						<div class="position-top" data-status="3" id="service-position" style="left: 47%;">
+							<img data-progress="75" id="service" class="cus-img-li" data-id="3" src="../images/order/u2404.png" style="width: 20px;" />
+							<div class="text-appear" id="text-3">开始服务</div>
+						</div>
+						<div class="pic-position" data-status="4" id="record-position" style="left: 43%;">
+							<img data-progress="75" id="record" class="cus-img-li" data-id="4" src="../images/order/ly.png" style="width: 40px;" />
+							<div class="text-appear" id="text-4">录音</div>
+						</div>
+						<div class="position-top" data-status="5" id="leave-position" style="left:68%;">
+							<img data-progress="100" id="leave" class="cus-img-li" data-id="5" src="../images/order/u2404.png" style="width: 20px;" />
+							<div class="text-appear" id="text-5">离开</div>
+						</div>
+						<div class="position-top" data-status="6" id="note-position" style="right: 5%;">
+							<img data-progress="100" id="note" class="cus-img-li" data-id="6" src="../images/order/u2404.png" style="width: 20px;" />
+							<div class="text-appear" id="text-6">护理记录</div>
+						</div>
+					</ul>
+				</div>
+
+			</div>
+			<div id="dtl">
+				<div id="ordera"></div>
+				<div id="orderb"></div>
+			</div>
+			<div class="mui-row" style="background-color: #FFF;margin-top: 5px;margin-bottom: 5px;">
+				<div class="mui-col-sm-12 mui-col-xs-12" id="contentBtn">
+				</div>
+				<div class="mui-col-sm-12 mui-col-xs-12" id="contentCfr" style="display:none">
+					<div class="mui-content-padded"><button class="mui-btn mui-btn-block mui-btn-primary"><span>确认订单已完成</span></button></div>
+				</div>
+				<div class="mui-col-sm-12 mui-col-xs-12" id="footer">
+					<div class="mui-content-padded">
+						<p style="color: #AA0000;"><span>温馨提示：</span></p>
+						<p style="color: #AA0000;"><span>请您确认完成服务后，点击【添加护理记录】，代表您已经完成本次服务。</span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.zoom.js"></script>
+	<script type="text/javascript" src="../js/mui.previewimage.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+	<script type="text/javascript" src="../plugs/md5/md5.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.img.lazyload.js"></script>
+	<script>
+		var dataFormat = function(data){
+			var _data = data;
+			var diseaseArr = [];
+			for (var i=0;i<_data["disease"].length;i++) {
+				var department = _data["disease"][i];
+				for (var m = 0; m < department["diseases"].length; m++) {
+					var disease = department["diseases"][i];
+					diseaseArr.push(disease);
+				}
+			}
+			_data["disease"]=diseaseArr.toString();
+			return _data;
+		}
+		//		console.log(immersed)
+		$(".pic-position").css("top", (immersed + 57))
+		$(".position-top").css("top", (immersed + 67))
+		$(".text-appear").hide();
+		$("#record-position").hide();
+		$("#orderstop").hide();
+		var isStopOrder = null;
+		var progressbar1 = mui('#demo1');
+		mui(progressbar1).progressbar().setProgress(0);
+
+		function simulateLoading(container, progress) {
+			if(typeof container === 'number') {
+				progress = container;
+				container = 'body';
+			}
+			setTimeout(function() {
+				progress += Math.random() * 20;
+				mui(container).progressbar().setProgress(progress);
+				if(progress < 100) {
+					simulateLoading(container, progress);
+				} else {
+					mui(container).progressbar().hide();
+				}
+			}, Math.random() * 200 + 200);
+		}
+
+		mui.init({
+			swipeBack: true, //启用右滑关闭功能
+			beforeback: function() {
+				var i = plus.webview.getWebviewById("subpages/tab-webview-subpage-service.html");
+				if(i) {
+					i.evalJS("refWaitService()");
+				}
+				return true;
+			}
+		});
+		var order = null;
+		var statusOrder = 0;
+		var clickGoHome = 0;
+
+		mui.plusReady(function() {
+			mui.previewImage();
+			var self = plus.webview.currentWebview();
+			var orderId = self.orderId;
+			console.log("orderId___________>"+orderId);
+			var userId = localStorage.getItem("USERID");
+			var orderUrl = getorderdetailallUrl + orderId;
+			var orderSub = null;
+
+			var isneeddrugs = "1"; //是否需要药品 0需要 1不需要
+			var ordersussess = function(data) {
+				if(data.result == "success") {
+					console.log("待服务订单详情" + JSON.stringify(data.obj));
+					
+					order = dataFormat(data.obj);
+					isneeddrugs = data.obj.isneeddrugs;
+					orderSub = data.sub;
+					data.obj.spanCuTimes = true;
+					if(data.obj.abnormal == 3) {
+						isStopOrder = true;
+					}
+
+					$("#ordera").processTL(templateRegister.ordera, data.obj, "append", function() {
+						$("#orderback").show();
+
+						orderSub.forEach(function(value, index, array) {
+							if(value.serviceNumber == order.serviceNumber) { //当前次数状态信息
+								statusOrder = value.status;
+								console.log(statusOrder);
+								if(statusOrder == 1) {
+									//已出发
+									clickGoHome = 1;
+									clickFun()
+									$("#go-home,#leave,#note,#service").addClass("mui-disabled")
+									mui(progressbar1).progressbar().setProgress(25);
+									$("#go-home").attr({
+										style: "width:20px",
+										src: "../images/order/u2437.png"
+									});
+									$("#go-home-position").css("top", (immersed + 67));
+									$("#arrive").attr({
+										style: "width:40px",
+										src: "../images/order/wydd.png"
+									});
+									$("#arrive-position").css({
+										'top': (immersed + 57),
+										'left': '21%'
+									});
+									$("#text-2").show();
+									var index = plus.webview.getLaunchWebview();
+									if(index) {
+										index.evalJS("setLInterval('" + order._id + "','" + order.serviceNumber + "')");
+									}
+
+								} else if(statusOrder == 2) {
+									//到达
+									clickGoHome = 1
+									clickFun()
+									$("#go-home,#note,#arrive,#leave").addClass("mui-disabled")
+									mui(progressbar1).progressbar().setProgress(50)
+									$("#arrive,#go-home").attr({
+										style: "width:20px",
+										src: "../images/order/u2437.png"
+									});
+									$("#go-home-position").css("top", (immersed + 67));
+									$("#arrive-position").css({
+										'top': (immersed + 67),
+										'left': '23%'
+									});
+									$("#service").attr({
+										style: "width:40px",
+										src: "../images/order/ksfw.png"
+									});
+									$("#service-position").css({
+										'top': (immersed + 57),
+										'left': '43%'
+									});
+									$("#text-3,#text-2").show();
+
+									var url = addorderarrivetimeUrl + order._id;
+									var sussess = function(data) {
+										if(data.result == "success") {
+											var index = plus.webview.getLaunchWebview();
+											if(index) {
+												index.evalJS("clearLInterval('" + order._id + "')");
+
+											}
+										} else {
+											mui.toast(data.msg);
+										}
+									};
+
+								} else if(statusOrder == 3) {
+									//离开
+									clickGoHome = 1
+									clickFun()
+									$("#orderback").hide();
+									$("#orderstop").show();
+									
+									$("#go-home,#arrive,#service,#note").addClass("mui-disabled")
+									mui(progressbar1).progressbar().setProgress(75);
+									$("#arrive,#go-home").attr({
+										style: "width:20px",
+										src: "../images/order/u2437.png"
+									});
+									$("#go-home-position").css("top", (immersed + 67));
+									$("#service-position").hide();
+									$("#leave").attr({
+										style: "width:40px",
+										src: "../images/order/wylk.png"
+									});
+									$("#arrive-position").css({
+										'top': (immersed + 67),
+										'left': '23%'
+									});
+									$("#leave-position").css({
+										'top': (immersed + 57),
+										'left': '66%'
+									});
+									$("#text-5,#text-2,#record-position,#text-4").show();
+									if(isStopOrder == true) {
+										$("#record").addClass("mui-disabled");
+										$("#leave").addClass("mui-disabled");
+										$("#orderback").hide();
+										$("#orderstop").hide();
+									}
+								}
+							}
+							if(order.orderSericedCount == order.price.time) {
+								$("#orderback").hide();
+								$("#orderstop").hide();
+							}
+						});
+
+					})
+
+					$.processTLE(templateRegister.orderb, data.obj, function(html) {
+						$("#orderb").append(html);
+						if(order.orderSericedCount == order.price.time) { //已完成订单
+							clickGoHome = 1
+							clickFun()
+							$("#spanCuTimes").html("已完成");
+							$("#contentCfr").show();
+							$("#go-home,#record,#arrive,#leave").addClass("mui-disabled")
+							mui(progressbar1).progressbar().setProgress(100);
+							$("#go-home-position").css("top", (immersed + 67));
+							$("#service-position").hide();
+							$("#leave").attr({
+								style: "width:40px",
+								src: "../images/order/wylk.png"
+							});
+							$("#arrive-position").css({
+								'top': (immersed + 67),
+								'left': '23%'
+							});
+							$("#leave-position").css({
+								'top': (immersed + 57),
+								'left': '66%'
+							});
+
+							$("#record,#arrive,#go-home").attr({
+								style: "width:20px",
+								src: "../images/order/u2437.png"
+							});
+							$("#record-position").css({
+								'top': (immersed + 67),
+								'left': '45%'
+							});
+							$("#leave").attr({
+								style: "width:20px",
+								src: "../images/order/u2437.png"
+							});
+							$("#leave-position").css({
+								'top': (immersed + 67),
+								'left': '66%'
+							});
+							$("#note").attr({
+								style: "width:40px",
+								src: "../images/order/txjl.png"
+							});
+							$("#note-position").css({
+								'top': (immersed + 57),
+								'right': '1%'
+							});
+							$("#text-6,#text-5,#text-2,#record-position,#text-4").show();
+						} else {
+							$("#contentCfr").hide()
+						}
+						$(".qs-img-lazyload").each(function(i, v) {
+							$$.lazyload(v)
+						})
+					});
+
+					for(var i = 0; i < order.orderSericedCount; i++) {
+						var str = '<div class="mui-content-padded"><button class="mui-btn mui-btn-block mui-btn-warning" data-count="' + (i + 1) + '"><span>添加第' + (i + 1) + '次服务工作记录</span></button></div>'
+						$("#contentBtn").append(str);
+					}
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+
+			commonHttpUtils(orderUrl, "get", {
+				id: orderId
+			}, ordersussess, error);
+
+			mui(".mui-content").on("tap", "#orderback", function(event) {
+				mui.openWindow({
+					url: 'single_back.html',
+					id: 'single_back',
+					extras: {
+						orderId: orderId,
+						serviceNumber: order.serviceNumber
+					},
+					show: {
+						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true //自动显示等待框，默认为true
+					}
+				});
+			});
+			mui(".mui-content").on("tap", "#orderstop", function(event) {
+				var btnArray = ['确定', '取消'];
+				mui.confirm('请确认  您已通知患者将取消本次服务，本订单一经取消，不能再进行任何操作行为。', '提示', btnArray, function(e) {
+					if(e.index == 0) {
+						var sussess = function(data) {
+							if(data.result == "success") {
+								mui.toast("终止服务成功");
+								var wobj = plus.webview.getWebviewById("subpages/tab-webview-subpage-service.html");
+								wobj.reload(true);
+								plus.webview.currentWebview().close(true)
+							} else {
+								mui.toast(data.msg);
+							}
+							
+							
+						};
+						commonHttpUtils(stoporderUrl, "get", {
+							id: orderId
+						}, sussess, error);
+					}
+				})
+			});
+
+			clickFun();
+			var progressbar1 = mui('#demo1');
+			mui(progressbar1).progressbar().setProgress(0);
+			progressbar1.on('tap', '.cus-img-li', function() {
+				id = $(this).attr("data-id")
+				console.log($(this).attr("data-id"));
+				console.log(this.getAttribute('data-progress'));
+				mui(progressbar1).progressbar().setProgress(this.getAttribute('data-progress'));
+				if(id == 1) {
+					//我已出发
+					clickGoHome = 1
+					clickFun()
+					var url = addorderstarttimeUrl + order._id;
+					var sussess = function(data) {
+						console.log(JSON.stringify(data))
+						//服务器返回响应，根据响应结果，分析是否登录成功；
+						if(data.result == "success") {
+							$("#service,#leave,#note,#go-home").addClass("mui-disabled")
+							$("#go-home").attr({
+								style: "width:20px",
+								src: "../images/order/u2437.png"
+							});
+							$("#go-home-position").css("top", (immersed + 67));
+							$("#arrive").attr({
+								style: "width:40px",
+								src: "../images/order/wydd.png"
+							});
+							$("#arrive-position").css({
+								'top': (immersed + 57),
+								'left': '21%'
+							});
+							$("#text-2").show();
+							var index = plus.webview.getLaunchWebview();
+							console.log("测试：" + JSON.stringify(plus.webview.getLaunchWebview()))
+							if(index) {
+								//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+								index.evalJS("setLInterval('" + order._id + "','" + order.serviceNumber + "')");
+							}
+						} else {
+							mui.toast(data.msg);
+						}
+					};
+
+					statusOrder = 1;
+					commonHttpUtils(url, "put", {
+						serviceNumber: order.serviceNumber
+					}, sussess, error);
+
+				} else if(id == 2) {
+					//我已到达
+					//					statusOrder = 2
+					var url = addorderarrivetimeUrl + order._id;
+					var sussess = function(data) {
+						//console.log(JSON.stringify(data))
+						//服务器返回响应，根据响应结果，分析是否登录成功；
+						if(data.result == "success") {
+							$("#go-home,#arrive,#leave,#note").addClass("mui-disabled")
+							$("#arrive").attr({
+								style: "width:20px",
+								src: "../images/order/u2437.png"
+							});
+							$("#arrive-position").css({
+								'top': (immersed + 67),
+								'left': '23%'
+							});
+							$("#service").attr({
+								style: "width:40px;z-index:10",
+								src: "../images/order/ksfw.png",
+
+							});
+							$("#service-position").css({
+								'top': (immersed + 57),
+								'left': '43%'
+							});
+							$("#text-3").show();
+							$("#service").removeClass("mui-disabled")
+							var index = plus.webview.getLaunchWebview();
+							if(index) {
+								//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+								index.evalJS("clearLInterval('" + order._id + "')");
+
+							}
+						} else {
+							mui.toast(data.msg);
+						}
+					};
+					commonHttpUtils(url, "put", {
+						serviceNumber: order.serviceNumber
+					}, sussess, error);
+
+				} else if(id == 3) {
+					//开始服务
+					var url = addservicestarttimeUrl + order._id;
+					console.log(order._id)
+					var sussess = function(data) {
+						//console.log(JSON.stringify(data))
+						//服务器返回响应，根据响应结果，分析是否登录成功；
+						if(data.result == "success") {
+							$("#orderback").hide();
+							$("#orderstop").show();
+							$("#go-home,#arrive,#note").addClass("mui-disabled")
+							$("#record-position,#text-4").show();
+							$("#service-position").hide();
+							$("#leave").attr({
+								style: "width:40px;z-index:10",
+								src: "../images/order/wylk.png",
+
+							});
+							$("#leave-position").css({
+								'top': (immersed + 57),
+								'left': '66%'
+							});
+							$("#leave").removeClass("mui-disabled")
+							$("#text-5").show();
+							mui.openWindow({
+								url: 'wait_service_order_record.html',
+								id: 'wait_service_order_record.html',
+								extras: {
+									orderId: orderId,
+									serviceNumber: order.serviceNumber
+								},
+								show: {
+									autoShow: true, //页面loaded事件发生后自动显示，默认为true
+									event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+								},
+								waiting: {
+									autoShow: true //自动显示等待框，默认为true
+								}
+							});
+						} else {
+							mui.toast(data.msg);
+						}
+					};
+					commonHttpUtils(url, "put", {
+						serviceNumber: order.serviceNumber
+					}, sussess, error);
+
+				} else if(id == 4) {
+					//录音
+					$("#orderback").hide();
+					$("#orderstop").show();
+					$("#go-home,#arrive,#service,#note").addClass("mui-disabled")
+					var index = plus.webview.getLaunchWebview();
+
+					mui.openWindow({
+						url: 'wait_service_order_record.html',
+						id: 'wait_service_order_record.html',
+						extras: {
+							orderId: orderId,
+							serviceNumber: order.serviceNumber
+						},
+						show: {
+							autoShow: true, //页面loaded事件发生后自动显示，默认为true
+							event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+						},
+						waiting: {
+							autoShow: true //自动显示等待框，默认为true
+						}
+					});
+
+				} else if(id == 5) {
+					//离开
+					var url = addorderleavetimeUrl + order._id;
+					var sussess = function(data) {
+						console.log(JSON.stringify(data))
+						//服务器返回响应，根据响应结果，分析是否登录成功；
+						if(data.result == "success") {
+							$("#orderback").hide();
+							$("#orderstop").hide();
+							$("#note").removeClass("mui-disabled")
+							$("#go-home,#service,#arrive,#record,#leave").addClass("mui-disabled")
+							$("#record").attr({
+								style: "width:20px",
+								src: "../images/order/u2437.png"
+							});
+							$("#record-position").css({
+								'top': (immersed + 67),
+								'left': '45%'
+							});
+							$("#leave").attr({
+								style: "width:20px",
+								src: "../images/order/u2437.png"
+							});
+							$("#leave-position").css({
+								'top': (immersed + 67),
+								'left': '68%'
+							});
+							$("#note").attr({
+								style: "width:40px",
+								src: "../images/order/txjl.png"
+							});
+							$("#note-position").css({
+								'top': (immersed + 57),
+								'right': '1%'
+							});
+							$("#text-6").show();
+							var str = '<div class="mui-content-padded"><button class="mui-btn mui-btn-block mui-btn-warning" data-count="' + order.serviceNumber + '"><span>添加第' + order.serviceNumber + '次服务工作记录</span></button></div>'
+							$("#contentBtn").append(str);
+							if(order.serviceNumber == order.price.time) {
+								$("#contentCfr").show()
+							}
+							mui.alert("在您离开之前，请编写护理记录，并点击【完成服务】按钮，完成订单");
+						} else {
+							mui.toast(data.msg);
+						}
+					};
+					commonHttpUtils(url, "put", {
+						serviceNumber: order.serviceNumber
+					}, sussess, error);
+				} else if(id = 6) {
+					$("#orderback").hide()
+					$("#go-home,#service,#arrive,#leave").addClass("mui-disabled");
+					$('html,body').animate({
+						scrollTop: $('#footer').offset().top
+					}, 1000);
+				}
+			});
+
+			function clickFun() {
+				if(clickGoHome == 1) {
+					$("#arrive,#leave,#note,#service").removeClass("mui-disabled")
+				} else {
+					$("#arrive,#leave,#note,#service").addClass("mui-disabled")
+
+				}
+			}
+
+			mui("#contentBtn").on("click", ".mui-btn", function() {
+				$this = $(this);
+				var orderSubCount = $(this).attr("data-count");
+				var orderId = order._id;
+				mui.openWindow({
+					url: '../order/wait_service_order_log.html',
+					id: 'wait_service_order_log',
+					extras: {
+						orderId: orderId,
+						isneeddrugs: isneeddrugs,
+						orderSubCount: orderSubCount
+					},
+					show: {
+						autoShow: true, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true, //自动显示等待框，默认为true
+						title: '正在加载...', //等待对话框上显示的提示内容
+					}
+				});
+			});
+
+			mui("#contentCfr").on("click", ".mui-btn", function() {
+				var btnArray = ['确认', '取消'];
+				mui.confirm('点击确认后，不能修改护理记录！', '确认完成订单', btnArray, function(e) {
+					if(e.index == 0) {
+						//向后台发送数据 本次订单已经完成
+						var url = confirmserviceUrl + order._id;
+						var sussess = function(data) {
+							//服务器返回响应，根据响应结果，分析是否登录成功；
+							if(data.result == "success") {
+								mui.back();
+								self.close(true)
+								mui.toast("订单完成");
+							} else {
+								mui.toast(data.msg);
+							}
+						};
+						commonHttpUtils(url, "put", {}, sussess, error);
+					}
+				});
+			});
+		});
+	</script>
+</html>

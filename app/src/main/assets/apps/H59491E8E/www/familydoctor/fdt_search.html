@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>团队信息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+		<link rel="stylesheet" href="../plugs/qs/qs.common.new.css" />
+		<style>
+			.mui-input-row .mui-input-clear~.mui-icon-clear,
+			.mui-input-row .mui-input-password~.mui-icon-eye,
+			.mui-input-row .mui-input-speech~.mui-icon-speech {
+				top: 23px;
+				right: 15px;
+			}
+			
+			.mui-input-group:first-child {
+				margin-top: 0px;
+			}
+			
+			.mui-input-group label {
+				width: 22%;
+			}
+			
+			.mui-input-row label~input {
+				width: 78%;
+				height: 0.8rem;
+				font-size: 14px;
+			}
+			
+			.mui-input-group {
+				background: none;
+			}
+			
+			.mui-input-group:before,
+			.mui-input-group:after {
+				height: 0;
+			}
+			
+			.mui-input-group input {
+				background-color: #FFFFFF !important;
+				width: 98% !important;
+				border-radius: 3px !important;
+				margin: 5px 0px 5px 0 !important;
+				padding-left: 55px !important;
+				float: inherit !important;
+			}
+			
+			.mui-input-group .mui-input-row:after {
+				height: 0;
+			}
+			
+			.mui-input-group .mui-input-row {
+				text-align: center;
+			}
+			
+			.mui-input-group .mui-input-row {
+				height: inherit;
+			}
+			
+			.mui-input-group .labelL {
+				padding: 12px 15px;
+				position: absolute;
+				left: -12px;
+				z-index: 99;
+			}
+			
+			.mui-input-group .labelL span {
+				width: 0.4rem;
+				vertical-align: -webkit-baseline-middle;
+			}
+			
+			.mui-input-group .labelR {
+				position: absolute;
+				top: 10px;
+				right: 0px;
+				z-index: 99;
+			}
+			
+			.mui-input-group .labelR span {
+				width: 0.2rem;
+				vertical-align: -webkit-baseline-middle;
+			}
+			
+			.mui-content-padded .mui-btn {
+				background-color: #718fbd !important;
+			}
+			
+			.mui-input-row p {
+				color: #000 !important;
+			}
+			
+			.mui-input-row span {
+				color: #FCA94E;
+			}
+			
+			.cus-ul-a-text {
+				font-size: 13px;
+				text-align: center;
+			}
+			
+			.mui-table-view-cell.mui-active {
+				background-color: #fff;
+				color: #FF0072;
+			}
+			
+			.cus-mui-active {
+				background-color: #fff;
+				color: #FF0072;
+			}
+			
+			.cus-content {
+				z-index: 10;
+				position: absolute;
+				width: 100%;
+				height: 1000px;
+				background-color: rgba(0, 0, 0, 0.4);
+			}
+			
+			.cus-content .mui-table-view-cell {
+				font-size: 12px;
+			}
+			
+			.cus-right {
+				float: right;
+			}
+			
+			.cus-hide {
+				display: none;
+			}
+			
+			.cus-parent-content {
+				position: relative;
+			}
+			
+			.imgmsg {
+				max-width: 45%;
+				margin: 0 auto;
+				display: table;
+				padding-top: 50px;
+			}
+			
+			#messageUL {
+				background-color: #eee;
+			}
+			
+			.mui-table-view:after {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				height: 0px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}
+			
+			.scroller .mui-table-view {
+				font-size: 14px;
+			}
+			
+			.cus-img-list {
+				margin-top: 10px;
+				height: 80px;
+				width: 80px;
+			}
+			
+			.cus-text-color-one {
+				color: #797979;
+			}
+			
+			.empty-img {
+				width: 50% !important;
+				margin: 0 auto;
+				display: table;
+				padding-top: 50px;
+			}
+			
+			.mui-popover {
+				height: 100px;
+				width: 120px;
+			}
+			
+			.mui-media-body {
+				padding: 3% 0 0 3%;
+			}
+			
+			.make-round {
+				border-radius: 50%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" id="header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">搜索</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<div class="mui-input-group">
+				<div class="mui-input-row">
+					<label class="labelL"><span class="mui-icon mui-icon-search"></span></label>
+					<input id='info' name='info' type="text" class="mui-input-clear" placeholder="请输入患者信息" value=""></input>
+				</div>
+			</div>
+			<div class="mui-row">
+				<div class="mui-col-sm-4 mui-col-xs-4" style="border-right:1px solid #d5d5d9;border-bottom:1px solid #d5d5d9 ;">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell mui-collapse cus-li" id="age-li">
+							<a class="mui-navigate-right cus-ul-a-text" href="#">年龄</a>
+						</li>
+					</ul>
+				</div>
+				<div class="mui-col-sm-4 mui-col-xs-4" style="border-right:1px solid #d5d5d9;border-bottom:1px solid #d5d5d9 ;">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell mui-collapse cus-li" id="sex-li">
+							<a class="mui-navigate-right cus-ul-a-text" href="#">性别</a>
+						</li>
+					</ul>
+				</div>
+				<div class="mui-col-sm-4 mui-col-xs-4" style="border-bottom:1px solid #d5d5d9 ;">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell mui-collapse cus-li" id="sta-li">
+							<a class="mui-navigate-right cus-ul-a-text" href="#">签约状态</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="cus-parent-content">
+				<div id="age-li-content" class="mui-collapse-content cus-content" style="display: none;">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell age-li cus-active" data-id="all">不限 <span class="mui-icon mui-icon-checkmarkempty cus-right age-span"></span></li>
+						<li class="mui-table-view-cell age-li" data-id="0">&nbsp;&nbsp;0 ~ 20岁 <span class="mui-icon mui-icon-checkmarkempty cus-right age-span" style="display: none;"></span></li>
+						<li class="mui-table-view-cell age-li" data-id="2">20 ~ 40岁 <span class="mui-icon mui-icon-checkmarkempty cus-right age-span" style="display: none;"></span></li>
+						<li class="mui-table-view-cell age-li" data-id="4">40 ~ 60岁 <span class="mui-icon mui-icon-checkmarkempty cus-right age-span" style="display: none;"></span></li>
+						<li class="mui-table-view-cell age-li" data-id="6">60 ~ 80岁 <span class="mui-icon mui-icon-checkmarkempty cus-right age-span" style="display: none;"></span></li>
+						<li class="mui-table-view-cell age-li" data-id="8">80岁以上 <span class="mui-icon mui-icon-checkmarkempty cus-right age-span" style="display: none;"></span></li>
+					</ul>
+				</div>
+				<div id="sex-li-content" class="mui-collapse-content cus-content" style="display: none;">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell sex-li cus-active" data-id="all">不限 <span class="mui-icon mui-icon-checkmarkempty cus-right sex-span"></span></li>
+						<li class="mui-table-view-cell sex-li" data-id="0">男 <span class="mui-icon mui-icon-checkmarkempty cus-right sex-span" style="display: none;"></span></li>
+						<li class="mui-table-view-cell sex-li" data-id="1">女 <span class="mui-icon mui-icon-checkmarkempty cus-right sex-span" style="display: none;"></span></li>
+					</ul>
+				</div>
+				<div id="sta-li-content" class="mui-collapse-content cus-content" style="display: none;">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell sta-li cus-active" data-id="all">不限 <span class="mui-icon mui-icon-checkmarkempty cus-right sta-span "></span></li>
+						<li class="mui-table-view-cell sta-li" data-id="YQ">已签约 <span class="mui-icon mui-icon-checkmarkempty cus-right sta-span" style="display: none;"></span></li>
+						<li class="mui-table-view-cell sta-li" data-id="YFP">未签约 <span class="mui-icon mui-icon-checkmarkempty cus-right sta-span" style="display: none;"></span></li>
+					</ul>
+				</div>
+
+			</div>
+			<div id="wrapper01" class="wrapper" style="z-index: -10;bottom: 1px;">
+				<ul id="scroller" class="scroller" style=" padding: 0;">
+					<div class="" id="messageUL"></div>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/iscroll/iscroll-probe.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.iscroll.new.js"></script>
+	<script>
+		mui.init({
+			keyEventBind: {
+				backbutton: true //打开back按键监听
+			},
+		});
+		var wrapper01;
+		var fdtId;
+		var cinfo = "";
+		var cage = "all";
+		var csex = "all";
+		var csta = "all";
+
+		mui.plusReady(function() {
+			var currentView = plus.webview.currentWebview();
+			currentView.show('slide-in-right', 200);
+			fdtId = currentView.fdtId
+			plus.nativeUI.closeWaiting();
+			processConfimAction(wrapper01);
+			var height = $("#header").height();
+			$("#wrapper01").css('marginTop',height + immersed + 102);
+			
+			mui(".mui-content").on("tap", ".to-sign", function() {
+				var patientId = $(this).attr("data-id");
+				console.log("调用显示患者详情页面：" + patientId);
+				mui.openWindow({
+					url: 'fdt_patient_detail.html',
+					id: 'fdt_patient_detail',
+					extras: {
+						fdtPatient_id: patientId
+					},
+					show: {
+						//autoShow: true, //页面loaded事件发生后自动显示，默认为true
+						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true, //自动显示等待框，默认为true
+						title: '正在加载...', //等待对话框上显示的提示内容
+
+					}
+				});
+			});
+		});
+
+		var init = function() {
+			wrapper01 = $.initIscroll({
+				id: "wrapper01",
+				pullUpAction: processConfimAction,
+				pullDownAction: processConfimAction,
+				limit: 15
+			});
+		}
+		init();
+
+		function processConfimAction(myScroll) {
+			if(myScroll.page == 1) {
+				$("#messageUL").html('<p><img class="imgmsg" src="../images/no_data/1-01.png" data-preview-src="" data-preview-group="1"></p>');
+			}
+
+			var sussess = function(data) {
+				console.log(JSON.stringify(data))
+				if(data.result == "success") {
+					if(data.obj.length != 0) {
+						if(myScroll.page == 1) {
+							$("#messageUL").html('')
+						}
+						if(data.obj.length == myScroll.limit) {
+							myScroll.page = myScroll.page + 1;
+							myScroll.upFlag = true
+						} else {
+							myScroll.upFlag = false
+						}
+						var tlData = {
+							sub: data.obj
+						}
+						$("#messageUL").processTL(templateRegister.fdtpatientList, tlData, 'append', function() {
+							myScroll.refresh()
+						})
+					} else {
+						myScroll.upFlag = false
+					}
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+			var url = getfdtpatientUrl + "?page=" + myScroll.page + "&limit=" + myScroll.limit + "&fdt_id=" + fdtId + "&cinfo=" + cinfo + "&cage=" + cage + "&csex=" + csex + "&node=" + csta;
+			console.log("------------->：" + url)
+			commonHttpUtils(url, "get", "", sussess, error);
+		}
+
+		mui(".mui-content").on("tap", ".cus-li", function() {
+			$this = $(this)
+			var id = $(this).attr("id");
+			$(".cus-content").hide()
+			if(!$this.hasClass("mui-active")) {
+				$("#" + id + "-content").show()
+				$(".cus-li").removeClass("mui-active")
+			} else {
+				$this.addClass("mui-active")
+			}
+		});
+
+		function processSearch() {
+			wrapper01.page = 1;
+			cinfo = $("#info").val();
+			cage = $(".age-li.cus-active").attr("data-id");
+			csex = $(".sex-li.cus-active").attr("data-id");
+			csta = $(".sta-li.cus-active").attr("data-id");
+			console.log(cinfo,cage,csex,csta)
+			processConfimAction(wrapper01);
+		}
+		$("#info").change(function() {
+			processSearch();
+		});
+
+		$(".mui-icon-clear").click(function(event) {
+			processSearch();
+		})
+
+		mui(".mui-content").on("tap", ".age-li", function() {
+			$this = $(this)
+			
+			console.log($this.attr("data-id"))
+			var id = $(this).attr("id");
+			$(".age-span").hide()
+			$(".age-li").removeClass("cus-active")
+			$this.addClass("cus-active")
+			$this.find(".age-span").show()
+			$(".cus-content").hide()
+			$(".cus-li").removeClass("mui-active")
+			processSearch();
+		});
+
+		mui(".mui-content").on("tap", ".sex-li", function() {
+			$this = $(this)
+			var id = $(this).attr("id");
+			$(".sex-span").hide()
+			$(".sex-li").removeClass("cus-active")
+			$this.addClass("cus-active")
+			$this.find(".sex-span").show()
+			$(".cus-content").hide()
+			$(".cus-li").removeClass("mui-active")
+			processSearch();
+		});
+
+		mui(".mui-content").on("tap", ".sta-li", function() {
+			$this = $(this)
+			var id = $(this).attr("id");
+			$(".sta-span").hide()
+			$(".sta-li").removeClass("cus-active")
+			$this.addClass("cus-active")
+			$this.find(".sta-span").show()
+			$(".cus-content").hide()
+			$(".cus-li").removeClass("mui-active")
+			processSearch();
+		});
+
+		document.addEventListener('touchmove', function(e) {
+			e.preventDefault();
+		}, isPassive() ? {
+			capture: false,
+			passive: false
+		} : false);
+
+		function isPassive() {
+			var supportsPassiveOption = false;
+			try {
+				addEventListener("test", null, Object.defineProperty({}, 'passive', {
+					get: function() {
+						supportsPassiveOption = true;
+					}
+				}));
+			} catch(e) {}
+			return supportsPassiveOption;
+		}
+	</script>
+
+</html>

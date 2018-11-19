@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>订单详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<link rel="stylesheet" href="../css/mui.imageviewer.css" />
+
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+		<style>
+			html {
+				font-size: 100%;
+				#background-color: #fff;
+			}
+			
+			h5 {
+				margin: 5px 7px;
+			}
+			
+			.mui-card .mui-control-content {
+				padding: 10px;
+			}
+			/*.mui-control-content {
+				height: 550px;
+			}*/
+			
+			ul {
+				font-size: 14px;
+				color: #333333;
+			}
+			
+			.mui-btn {
+				padding: 10px;
+			}
+			
+			#kefu {
+				font-size: 0.5rem;
+				line-height: 30px;
+			}
+			
+			header button img {
+				width: 0.3rem;
+			}
+			
+			.mui-bar {
+				box-shadow: 0 0 1px rgba(255, 255, 255, 1);
+			}
+			
+			.mui-content {
+				#background-color: #fff;
+			}
+			
+			.mui-segmented-control {
+				border-bottom: 3px solid #eeeeee!important;
+			}
+			
+			.mui-content .mui-segmented-control {
+				border: none;
+			}
+			
+			.mui-progressbar span {
+				background-color: #4b78cd !important;
+			}
+			
+			.right {
+				float: right;
+			}
+			
+			.mui-control-content {
+				min-height: 540px;
+			}
+			
+			.liangzi {
+				text-align: center
+			}
+			
+			.liangzi a img {
+				height: 80px;
+				#width: 80%;
+				margin: 10px 0px;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 10px !important;
+			}
+			
+			.peixun_one {
+				height: 0.7rem;
+				width: 1.4rem;
+				line-height: 0.7rem;
+				background-color: #fba94f;
+				color: #fff;
+				text-align: center;
+				border-radius: 5px 5px;
+				margin-left: 10px;
+				margin-top: 10% !important;
+			}
+			
+			.mui-btn-primary {
+				border: 1px solid #FFFFFF;
+				background: #3ccad0;
+				border-radius: 10px;
+				width: 100%;
+				height: 0.9rem;
+				font-size: 15px;
+			}
+			
+			.serviceitem {
+				font-size: 14px;
+				margin-top: 0;
+				margin-bottom: 10px;
+				color: #8f8f94 !important;
+			}
+			
+			.mui-table-view-cell {
+				position: relative;
+				overflow: hidden;
+				padding: 11px 15px;
+				-webkit-touch-callout: none;
+				line-height: 30px;
+			}
+			
+			h5 {
+				margin-bottom: 10px;
+				text-align: left;
+			}
+			
+			.mui-demo-container {
+				background-color: #fff;
+				padding: 10px 15px;
+			}
+			
+			.mui-btn-block {
+				padding: 5px 0;
+			}
+			
+			#demo5 .mui-progressbar {
+				margin: 15px 10px;
+			}
+			
+			.mui-progressbar-success span {
+				background-color: #4cd964;
+			}
+			
+			.mui-progressbar-warning span {
+				background-color: #f0ad4e;
+			}
+			
+			.mui-progressbar-danger span {
+				background-color: #dd524d;
+			}
+			
+			.mui-progressbar-royal span {
+				background-color: #8a6de9;
+			}
+			/*Android平台使用父子webview，因此需要修改顶部进度条的显示位置*/
+			
+			.mui-plus.mui-android>.mui-progressbar {
+				top: 0
+			}
+			
+			.mui-progressbar-in {
+				height: 5px;
+				margin-top: 20px;
+				margin-bottom: 20px;
+			}
+			
+			.mui-pagination {
+				font-size: 12px;
+			}
+			
+			.position-top {
+				position: absolute;
+			}
+			
+			.pic-position {
+				position: absolute;
+			}
+			
+			.background-color-blue {
+				background-color: rgb(163, 171, 225);
+				border-top-left-radius: 10px;
+				border-top-right-radius: 10px;
+				color: #FFFFFF;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">订单详情</h1>
+		</header>
+		<div class="mui-content " id="content">
+			<div class="mui-row" id="orderBtn" style="background-color: rgb(255, 227, 185);margin-bottom: 3px;padding: 10px 15px 8px;">
+				<div style="font-size: 12px;color: #CC0033;;">提示：8小时内要回复哦！超时，将扣除服务费的20%作为惩罚</div>
+			</div>
+			<div id="dtl">
+				<div id="ordera"></div>
+				<div id="orderb"></div>
+			</div>
+
+			<ul class="mui-table-view" style="margin-top: 5px;">
+				<div class="mui-col-sm-12 mui-col-xs-12 background-color-blue" id="">
+					<div class="mui-content-padded">
+						<div style="padding: 10px 0;">解读回答</div>
+					</div>
+				</div>
+				<li class="mui-table-view-cell">
+
+					<div class="mui-col-sm-12 mui-col-xs-12">
+						<textarea id="textUpload" rows="5" cols="20" placeholder="请输入具体回答"></textarea>
+					</div>
+					<div class="mui-col-sm-12 mui-col-xs-12">
+						<span>化验图片：</span>
+					</div>
+					<div id="feedback" class="mui-page feedback">
+						<div class="mui-page-content">
+							<div id='image-list' class="row image-list"></div>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="mui-row" style="background-color: #FFF;margin-top: 5px;margin-bottom: 5px;">
+				<div class="mui-col-sm-12 mui-col-xs-12" id="contentCfr">
+					<div class="mui-content-padded">
+						<button class="mui-btn mui-btn-block mui-btn-primary" style="background-color: rgb(104, 110, 201);">
+							<span>提交内容</span></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.zoom.js"></script>
+	<script type="text/javascript" src="../js/mui.previewimage.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+	<script type="text/javascript" src="../plugs/md5/md5.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.img.lazyload.js"></script>
+	<script>
+		//		console.log(immersed)
+		$(".pic-position").css("top", (immersed + 57))
+		$(".position-top").css("top", (immersed + 67))
+
+		function simulateLoading(container, progress) {
+			if(typeof container === 'number') {
+				progress = container;
+				container = 'body';
+			}
+			setTimeout(function() {
+				progress += Math.random() * 20;
+				mui(container).progressbar().setProgress(progress);
+				if(progress < 100) {
+					simulateLoading(container, progress);
+				} else {
+					mui(container).progressbar().hide();
+				}
+			}, Math.random() * 200 + 200);
+		}
+
+		mui.init({
+			swipeBack: true, //启用右滑关闭功能
+			beforeback: function() {
+				var i = plus.webview.getWebviewById("subpages/tab-webview-subpage-service.html");
+				if(i) {
+					i.evalJS("refWaitService()");
+				}
+				return true;
+			}
+		});
+		var order = null;
+
+		mui.plusReady(function() {
+			mui.previewImage();
+			var self = plus.webview.currentWebview();
+			var orderId = self.orderId;
+			qs.initImageList({
+				id: 'image-list'
+			});
+			var userId = localStorage.getItem("USERID");
+			var user = JSON.parse(localStorage.getItem("USER"));
+			console.log("登录人信息：--------》" + JSON.stringify(user.classType));
+			var orderUrl = getorderdetailallUrl + orderId;
+
+			var ordersussess = function(data) {
+				console.log(JSON.stringify(data.obj));
+				if(data.result == "success") {
+					order = data.obj;
+					isneeddrugs = data.obj.isneeddrugs;
+					if(user.classType == "F") {
+						data.obj.serviceid.lcyh = data.obj.serviceid.fzyh;
+					} else {
+						data.obj.serviceid.lcyh = data.obj.serviceid.lcyh;
+					}
+
+					$("#ordera").processTL(templateRegister.reporta, data.obj, "append", function() {
+						$("#orderback").show();
+					})
+
+					$.processTLE(templateRegister.reportb, data.obj, function(html) {
+						$("#orderb").append(html);
+						$(".qs-img-lazyload").each(function(i, v) {
+							$$.lazyload(v)
+						})
+					});
+
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+
+			commonHttpUtils(orderUrl, "get", {
+				id: orderId
+			}, ordersussess, error);
+
+			mui(".mui-content").on("tap", "#orderback", function(event) {
+				mui.openWindow({
+					url: 'report_back.html',
+					id: 'report_back',
+					extras: {
+						orderId: orderId,
+						serviceNumber: order.serviceNumber
+					},
+					show: {
+						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true //自动显示等待框，默认为true
+					}
+				});
+			})
+
+			mui("#contentCfr").on("click", ".mui-btn", function() {
+				var textUpload = $("#textUpload").val();
+				if(!textUpload || textUpload == '') {
+					mui.toast("请输入意见");
+					return false;
+				}
+				var btnArray = ['确认', '取消'];
+				mui.confirm('点击确认后，不能修改！', '确认完成订单', btnArray, function(e) {
+					if(e.index == 0) {
+						//向后台发送数据 本次订单已经完成
+						var url = confirmserviceUrl + order._id;
+						var sussess = function(data) {
+							//服务器返回响应，根据响应结果，分析是否登录成功；
+							if(data.result == "success") {
+								mui.back();
+								self.close(true);
+								mui.toast("订单完成");
+							} else {
+								mui.toast(data.msg);
+							}
+						};
+						var data = {
+							description: textUpload,
+							pictures: $$.getImageFilesPath("image-list")
+						};
+						commonHttpUtils(url, "put", data, sussess, error);
+					}
+				});
+			});
+		});
+	</script>
+
+</html>

@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>实名认证</title>
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<link rel="stylesheet" href="../css/jquery-ui.min.css">
+		<style>
+		.mui-content {
+				margin-top: 0.08rem;
+				font-size: 0.2916rem;
+			}
+			
+			#zhaoxiang {
+				height: 2rem;
+			}
+			
+			#zhaoxiang.mui-table-view-cell {
+				padding-top: 0.5rem;
+				height: 130px;
+			}
+			
+			#zhaoxiang a span:after {
+				top: 40%;
+			}
+			
+			#head_image {
+				width: 90px;
+				height: 90px;
+				border-radius: 50px;
+				margin-top: 10px;
+			}
+			
+			.head {
+				margin-top: -0.6rem;
+				margin-right: 15px;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-bottom: 0.08rem;
+			}
+			
+			#libiao li {
+				height: 1.0rem;
+				padding-top: 0.25rem;
+			}
+			
+			#libiao li span {
+				font-size: 14px;
+			}
+			
+			#libiao2 li {
+				padding-top: 0.25rem;
+			}
+			
+			font-size: 14px;
+		}
+		.qianming {
+			width: 50%;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			text-align: right;
+		}
+		.mui-table-view-cell:after {
+			left: 0;
+		}
+		.mui-navigate-right:after {
+			font-size: 25px;
+			right: 5px;
+		}
+		.mui-table-view-cell a {
+			color: #424242;
+			font-size: 15px;
+		}
+		.mui-table-view-cell span {
+			color: #999999;
+		}
+		#forward {
+			font-size: 0.3124rem;
+			font-weight: 400;
+		}
+		#male {
+			color: #00c0ff;
+			height: 1.1rem;
+		}
+		#female {
+			color: #ff0072;
+			height: 1.1rem;
+		}
+		#male div,
+		#female div {
+			background: url(../../../images/tubiao2.png) no-repeat;
+		}
+		.redword {
+			color: #FF3300 !important;
+		}
+		.shengfen_upload {
+			max-width: 100%;
+			background: #FFFFFF;
+			height: 200px;
+			padding-top: 70px;
+		}
+		.mui-content-padded a {
+			margin: 3px;
+			width: 50px;
+			height: 50px;
+			display: block;
+			text-align: center;
+			background-color: #fff;
+			border: 1px solid #ddd;
+			border-radius: 25px;
+			background-clip: padding-box;
+			margin: 0 auto;
+		}
+		.mui-content-padded a .mui-icon {
+			margin-top: 12px;
+			color: #000000;
+			margin-top: -7px;
+			margin-left: -6px;
+		}
+		.mui-icon {
+			font-size: 60px;
+		}
+		.upload_word {
+			margin: 10px auto;
+			display: block;
+			text-align: center;
+		}
+		.shenfen_card,
+		.sign_name {
+			width: 70% !important;
+			height: 20px !important;
+			font-size: 14px;
+		}
+		.error_shenfen_card {
+			border: 1px dotted rgba(0, 0, 0, 0) !important;
+		}
+		.right_shenfen_card {
+			border: 1px solid rgba(0, 0, 0, 0) !important;
+		}
+		.tishi {
+			width: 93%;
+			font-size: 13px;
+			color: #999999;
+			margin: auto;
+			/*input[type="number"] {
+				border: 1px solid rgba(0, 0, 0, 0) !important;
+				/*line-height: 30px;*/
+		}
+		html,
+		body {
+			height: 100%;
+			margin: 0px;
+			padding: 0px;
+			/*overflow: hidden;*/
+			/*-webkit-touch-callout: none;*/
+			/*-webkit-user-select: none;*/
+		}
+		.mui-content {
+			height: 100%;
+			overflow: auto;
+		}
+		#showUserPicker {
+			float: inherit;
+			width: 87%;
+			padding: 10px 15px;
+			background-color: #FFF !important;
+			color: #424242;
+		}
+		input[type=color],
+		input[type=date],
+		input[type=datetime-local],
+		input[type=datetime],
+		input[type=email],
+		input[type=month],
+		input[type=number],
+		input[type=password],
+		input[type=search],
+		input[type=tel],
+		input[type=text],
+		input[type=time],
+		input[type=url],
+		input[type=week],
+		select,
+		textarea {
+			line-height: 21px;
+			width: 100%;
+			height: 40px;
+			margin-bottom: 4px;
+			padding: 10px 15px 10px;
+			-webkit-user-select: text;
+			border: none;
+			border-radius: 3px;
+			outline: 0;
+			background-color: #fff;
+			-webkit-appearance: none;
+		}
+		.doctor_one {
+			background-color: #ffffff;
+			border-bottom: 1px solid #eeeeee;
+		}
+		.content {
+			background-color: #ffffff;
+		}
+		.qs-image-div {
+			padding: 10px;
+			width: 100%;
+			text-align: center;
+		}
+		.qs-image-item {
+			display: block;
+			height: 100px;
+		}
+		#userPhone {
+			width: 50%;
+			padding-bottom: 8%;
+			float: right;
+		}
+		.text-center {
+			text-align: center;
+			font-size: 14px;
+		}
+		.padding-5 {
+			padding: 4% 0;
+		}
+		.change-color {
+			color: #718FBD;
+			border-bottom: 2px solid #718FBD;
+		}
+		.mui-btn-color {
+			background: rgba(113, 143, 189, 1);
+			border-radius: 7px;
+			color: #FFFFFF;
+			height: 0.9rem;
+			font-size: 14px;
+			width: 99%;
+		}
+		.mui-btn-last {
+			background: rgba(228, 228, 228, 1);
+			border-radius: 7px;
+			height: 0.9rem;
+			font-size: 14px;
+			width: 99%;
+		}
+		.mui-table-view-cell.mui-active {
+			background-color: #FFFFFF;
+		}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">实名认证</h1>
+		</header>
+		<div class="mui-content content" id="content">
+			<div class="mui-row text-center">
+				<div class="mui-col-xs-6 padding-5 change-color" id="base">基础信息</div>
+				<div class="mui-col-xs-6 padding-5" id="paperwork">证件照片</div>
+			</div>
+			<div class="basic-information" id="baseMain">
+				<form>
+					<ul class="mui-table-view" id="libiao">
+						<li class="mui-table-view-cell " style="">
+							<a id="showUserPicker" style="">医&nbsp;&nbsp;&nbsp;&nbsp;院：
+								<input id="hospital" name="hospital" type="text" class="sign_name error_shenfen_card mui-input" placeholder="请输入医院">
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a id="signatureLi">性&nbsp;&nbsp;&nbsp;&nbsp;别：
+								<span class="mui-pull-right">
+								<input id="women" name="gender" class="gender" type="radio" value="1"></input>
+								<label>女</label>
+								<input id="men" name="gender" class="gender" type="radio" value="0"></input>
+								<label>男</label>
+							</span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a id="signatureLi">职&nbsp;&nbsp;&nbsp;&nbsp;业：
+								<span class="mui-pull-right">
+								<input id="nurse" name="occupation" class="occupation" type="radio" value="nurse"></input>
+								<label>护士</label>
+								<input id="doctor" name="occupation" class="occupation" type="radio" value="doctor"></input>
+								<label>医生</label>
+							</span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a id="signatureLi">科&nbsp;&nbsp;&nbsp;&nbsp;室：
+								<span class="mui-pull-right">
+								<input id="LC" name="section" class="section" type="radio" value="L"></input>
+								<label>临床</label>
+								<input id="FZ" name="section" class="section" type="radio" value="F"></input>
+								<label>辅助</label>
+							</span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" id="nurseType">
+							<a id="signatureLi">医护级别：
+								<span class="mui-pull-right">
+								<input id="h1" name="nurselevel" class="nurselevel" type="radio" value="h1"></input>
+								<label>护士</label>
+								<input id="h2" name="nurselevel" class="nurselevel" type="radio" value="h2"></input>
+								<label>护师</label>
+								<input id="h3" name="nurselevel" class="nurselevel" type="radio" value="h3"></input>
+								<label>主任、副主任护师</label>
+							</span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" id="doctorType">
+							<a id="signatureLi">医护级别：
+								<span class="mui-pull-right">
+								<input id="y1" name="doctorlevel" class="nurselevel" type="radio" value="y1"></input>
+								<label>医生</label>
+								<input id="y2" name="doctorlevel" class="nurselevel" type="radio" value="y2"></input>
+								<label>主治医师</label>
+								<input id="y3" name="doctorlevel" class="nurselevel" type="radio" value="y3"></input>
+								<label>主任、副主任医师</label>
+							</span>
+							</a>
+						</li>
+
+					</ul>
+				</form>
+				<div class="mui-content-padded">
+					<button id="nextPage" class="mui-btn mui-btn-color" style="width: 100%;">下一步</button>
+				</div>
+			</div>
+
+			<div class="paperwork-main" id="paperworkMain">
+				<form>
+					<ul class="mui-table-view" id="libiao2">
+						<li class="mui-table-view-cell">
+							<a id="signatureLi">真实姓名：
+								<input id="name" name="name" type="text" class="sign_name error_shenfen_card mui-input" placeholder="请输入您的姓名">
+								<span class="mui-icon mui-icon-checkmarkempty duihao" style="font-size: 24px; display: none;"></span> </a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a id="signatureLi">身份证号：
+								<input id="idnumber" name="idnumber" type="text" class="shenfen_card error_shenfen_card" placeholder="请输入您的身份证号"></a>
+						</li>
+						<li class="mui-table-view-cell ">
+							<a id="signatureLi">身份证正反面照片上传<span class="redword">&nbsp;&nbsp;(3个工作日内通知审核结果)</span></a>
+						</li>
+						<li class="mui-table-view-cell">
+							<div class="mui-row">
+								<div class="mui-col-sm-6 mui-col-xs-6" style="text-align:center">
+									<div class="qs-image-div">
+										<img class="qs-image-item" id="idimg" src="../images/wode/sfzz.png">
+										<input id='idimgPath' type="hidden" class="mui-input">
+									</div>
+
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-6" style="text-align:center">
+									<div class="qs-image-div">
+										<img class="qs-image-item" id="idimgback" src="../images/wode/sfzf.png">
+										<input id='idimgbackPath' type="hidden" class="mui-input">
+									</div>
+								</div>
+							</div>
+
+							<div id="feedback" class="mui-page feedback">
+								<div class="mui-page-content">
+									<div class="tishi">
+										本人承诺以上信息的真实性，如若不填或填写虚假信息引发的结果 由本人自负。未实名认证者，不能使用系统的订单功能。
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="mui-table-view-cell">
+							<a id="signatureLi">执业资格证号：
+								<input id="zgno" name="zgno" type="text" class="sign_name error_shenfen_card mui-input" placeholder="请输入您的执业资格证号"></a>
+						</li>
+
+						<li class="mui-table-view-cell ">
+							<a id="signatureLi">执业资格证照片上传<span class="redword">&nbsp;&nbsp;</span></a>
+						</li>
+						<li class="mui-content-padded doctor_one">
+							<div class="mui-row">
+								<div class="mui-col-sm-6 mui-col-xs-6" style="text-align:center">
+									<div class="qs-image-div">
+										<img class="qs-image-item" id="zgnoimg" src="../images/wode/sfzz.png">
+										<input id='zgnoimgPath' type="hidden" class="mui-input">
+									</div>
+								</div>
+							</div>
+
+							<div id="feedback" class="mui-page feedback">
+								<div class="mui-page-content">
+									<div class="tishi">
+										本人承诺以上信息的真实性，如若不填或填写虚假信息引发的结果 由本人自负。未实名认证者，不能使用系统的订单功能。
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</form>
+				<div class="mui-content-padded mui-row">
+					<div class="mui-col-xs-6">
+						<button id="lastPage" class=" mui-btn mui-btn-last">上一步</button>
+					</div>
+					<div class="mui-col-xs-6">
+						<button id="endBase" class="mui-col-xs-6 mui-btn mui-btn-color">完成</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/xiangyingshi.js"></script>
+		<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+		<script type="text/javascript" src="../js/constants.js"></script>
+		<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="../js/mui.picker.js"></script>
+		<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+		<script type="text/javascript" src="../js/exif.js"></script>
+		<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="../js/mobileBUGFix.mini.js"></script>
+		<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+		<script type="text/javascript" src="../js/sharemethods.js"></script>
+		<script>
+			var sex = null;
+			var dtype = null;
+			var hidnewname = null;
+			var hospitalValue = null;
+			var classType = null;
+			var level = null;
+			var hospitalList = [];
+			var hospitalMap = {};
+			var shenfen_img = [];
+			var idcardface, idcardback, zgnopic = null;
+			$("#doctorType").hide();
+			var user = JSON.parse(localStorage.getItem("USER"));
+			var idImgPath = "";
+			var imgurl = serverAddress + uploadImgFileUrl;
+
+			$("#paperworkMain").hide();
+			$("#paperwork , #nextPage").click(function() {
+				$("#base").removeClass("change-color");
+				$("#paperwork").addClass("change-color");
+				$("#paperworkMain").show();
+				$("#baseMain").hide();
+			})
+			$("#base,#lastPage").click(function() {
+				$("#paperwork").removeClass("change-color");
+				$("#base").addClass("change-color");
+				$("#paperworkMain").hide();
+				$("#baseMain").show();
+			})
+
+			mui.plusReady(function() {
+
+				mui.init({
+					keyEventBind: {
+						backbutton: true //打开back按键监听
+					},
+					beforeback: function() {
+						//返回true，继续页面关闭逻辑  
+						mui.back;
+						//获得列表界面的webview
+						var list = plus.webview.getWebviewById("subpages/tab-webview-subpage-my.html");
+						//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+						mui.fire(list, 'refresh');
+						//返回true，继续页面关闭逻辑
+						return true;
+					}
+				});
+				plus.webview.currentWebview().setStyle({
+					softinputMode: "adjustResize" // 弹出软键盘时自动改变webview的高度
+				});
+				//				if(plus.navigator.isImmersedStatusbar()) { // 兼容immersed状态栏模式
+				//					// 获取状态栏高度并根据业务需求处理，这里重新计算了子窗口的偏移位置
+				//					topoffset = (Math.round(plus.navigator.getStatusbarHeight()) + 45) + 'px';
+				//					document.querySelector("header").style.height = topoffset;
+				//					document.querySelector("header").style.paddingTop = "20px";
+				//					document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = topoffset;
+				//				}
+
+				// 加载完毕后关闭等待框，并展示页面
+				var currentView = plus.webview.currentWebview();
+				currentView.show('slide-in-right', 200);
+				plus.nativeUI.closeWaiting();
+
+				//获取医护详细信息
+				console.log("医护详细信息-----》" + JSON.stringify(user));
+				if(user.hid) {
+					$("#hospital").val(user.hid.name);
+				}
+
+				sex = user.sex;
+				if(sex == "1") {
+					$("#women").click();
+				} else {
+					$("#men").click();
+				}
+
+				dtype = user.dtype;
+				if(dtype == "nurse") {
+					$("#nurse").click();
+					$("#doctorType").hide();
+					$("#nurseType").show();
+				} else {
+					$("#doctor").click();
+					$("#doctorType").show();
+					$("#nurseType").hide();
+				}
+
+				if(user.classType) {
+					classType = user.classType;
+					if(classType == "L") {
+						$("#LC").click();
+					} else {
+						$("#FZ").click();
+					}
+				}
+
+				if(user.level) {
+					level = user.level;
+					if(level == "h1") {
+						$("#h1").click()
+					} else if(level == "h2") {
+						$("#h2").click()
+					} else if(level == "h3") {
+						$("#h3").click()
+					} else if(level == "y1") {
+						$("#y1").click()
+					} else if(level == "y2") {
+						$("#y2").click()
+					} else if(level == "y3") {
+						$("#y3").click()
+					}
+				}
+				if(user.name) {
+					$("#name").val(user.name);
+				}
+
+				if(user.idnumber) {
+					$("#idnumber").val(user.idnumber);
+				}
+
+				if(user.idfaceavatar) {
+					var path = serverAddress + $$.processImagePath(user.idfaceavatar)
+					$('#idimg').attr('src', path);
+				}
+				if(user.idfaceavatar != null && user.idfaceavatar != '' && (user.idfaceavatar.indexOf("client\\") == 0)) {
+					$("#idimg").attr("src", serverAddress + '/' + user.idfaceavatar.replace('client', '').replace(/\\/g, "\\"));
+				}
+				if(user.idfaceavatar != null && user.idfaceavatar != '' && (user.idfaceavatar.indexOf("client/") == 0)) {
+					$("#idimg").attr("src", serverAddress + "/" + user.idfaceavatar.replace('client', '').replace(/\\/g, "/"));
+				}
+
+				if(user.idbackavatar) {
+					var path = serverAddress + $$.processImagePath(user.idbackavatar)
+					$('#idimgback').attr('src', path);
+				}
+				if(user.idbackavatar != null && user.idbackavatar != '' && (user.idbackavatar.indexOf("client\\") == 0)) {
+					$("#idimgback").attr("src", serverAddress + '/' + user.idbackavatar.replace('client', '').replace(/\\/g, "\\"));
+				}
+				if(user.idbackavatar != null && user.idbackavatar != '' && (user.idbackavatar.indexOf("client/") == 0)) {
+					$("#idimgback").attr("src", serverAddress + "/" + user.idbackavatar.replace('client', '').replace(/\\/g, "/"));
+				}
+
+				if(user.zgno) {
+					$("#zgno").val(user.zgno);
+				}
+
+				if(user.zgnoimg) {
+					var path = serverAddress + $$.processImagePath(user.zgnoimg)
+					$('#zgnoimg').attr('src', path);
+				}
+				if(user.zgnoimg != null && user.zgnoimg != '' && (user.zgnoimg.indexOf("client\\") == 0)) {
+					$("#zgnoimg").attr("src", serverAddress + '/' + user.zgnoimg.replace('client', '').replace(/\\/g, "\\"));
+				}
+				if(user.zgnoimg != null && user.zgnoimg != '' && (user.zgnoimg.indexOf("client/") == 0)) {
+					$("#zgnoimg").attr("src", serverAddress + "/" + user.zgnoimg.replace('client', '').replace(/\\/g, "/"));
+				}
+
+				//				alert("后台取数据：" + sex + dtype + classType + level);
+
+				//				qs.initImageList({
+				//					id: 'image-list'
+				//				});
+				mui(".mui-content").on("click", ".qs-image-item", function() {
+					var id = this.id
+					uploadImg(imgurl, function(imgPath, data) {
+						if(data.result == 'success') {
+							document.getElementById(id).src = imgPath;
+							document.getElementById(id + 'Path').value = data.obj.path;
+						} else {
+							mui.toast("文件上传失败");
+						}
+					});
+				});
+
+				//选择男女
+				$(".gender").click(function() {
+					sex = $(this).val();
+				});
+
+				//选择职业
+				$(".occupation").click(function() {
+					dtype = $(this).val();
+					if(dtype == "nurse") {
+						$("#doctorType").hide();
+						$("#nurseType").show();
+					} else {
+						$("#doctorType").show();
+						$("#nurseType").hide();
+					}
+				});
+
+				//选择科室
+				$(".section").click(function() {
+					classType = $(this).val();
+				})
+
+				//选择医护级别
+				$(".nurselevel").click(function() {
+					level = $(this).val();
+				})
+
+				//				var self = plus.webview.currentWebview();
+				//
+				//				var id = localStorage.getItem("TOKENID");
+				//				if(id == null) {
+				//					var self = plus.webview.currentWebview();
+				//					id = self.USER_ID;
+				//				}
+
+				//				$("#endBase").click(function(e) {
+				mui(".mui-content").on("click", "#endBase", function() {
+					var btnArray = ['确定', '取消'];
+					var data = {}
+					mui.confirm('请确认 填写信息正确，一经确定不可更改', '提示', btnArray, function(e) {
+						if(e.index == 0) {
+							var name = document.getElementById("name").value.trim();
+							var idnumber = document.getElementById("idnumber").value.trim();
+							var zgno = $("#zgno").val().trim();
+							var hospitalValue = $("#hospital").val();
+							//							alert(hidnewname)
+							//							alert(hospitalValue)
+							//							shenfen_cardinput = $(".shenfen_card").val().trim();
+							var zgno = $("#zgno").val().trim();
+							//判断是否输入医院
+							if(!hospitalValue) {
+								mui.toast("请输入医院");
+								return false;
+							}
+							if(classType == null) {
+								mui.toast('请选择科室')
+								return false;
+							}
+							if(level == null) {
+								mui.toast('请选择医护级别')
+								return false;
+							}
+
+							if(!name) {
+								mui.toast('请填写姓名')
+								return false;
+							}
+							//判断身份证号码
+							if(idnumber == null || isCardID(idnumber) != true) {
+								mui.toast("身份证号码错误");
+								return false;
+							}
+
+							//判断是否上传身份证照片
+							if(!user.idfaceavatar) {
+								idcardface = $("#idimgPath").val();
+								if(!$("#idimgPath").val()) {
+									mui.toast("请上传身份证正面图片");
+									return false;
+								}
+							} else {
+								idcardface = user.idfaceavatar
+							}
+							if(!user.idbackavatar) {
+								idcardback = $("#idimgbackPath").val();
+								if(!$("#idimgbackPath").val()) {
+									mui.toast("请上传身份证反面图片");
+									return false;
+								}
+							} else {
+								idcardback = user.idbackavatar
+							}
+
+							//判断资质图片上传 是否成功
+							//							if($$.getImageFilesPath("image-list").length == 0) {
+							//								mui.toast("请上传图片");
+							//								return false;
+							//							}
+
+							//判断是否上传身份证照片
+							if(!user.zgnoimg) {
+								zgnopic = $("#zgnoimgPath").val();
+								if(!$("#zgnoimgPath").val()) {
+									mui.toast("请上传执业资格证");
+									return false;
+								}
+							} else {
+								zgnopic = user.zgnoimg;
+							}
+
+							if(zgno == null || zgno == '') {
+								mui.toast("请填写执业资格证号");
+								return false;
+							}
+							if(zgno.length < 12 || zgno.length > 27) {
+								mui.toast("请填写正确的执业资格证号");
+								return false;
+							}
+
+							data = {
+								idfaceavatar: idcardface, // 身份证上传的2个图片的验证的值
+								idbackavatar: idcardback, // 身份证上传的2个图片的验证的值
+								idnumber: idnumber,
+								//								hid: hospital,
+								sex: sex,
+								dtype: dtype,
+								level: level,
+								name: name,
+								classtype: classType,
+								zgno: zgno,
+								zgnoimg: zgnopic
+
+							};
+							if(hospitalMap[hospitalValue]) {
+								data.hid = hospitalMap[hospitalValue]
+							} else {
+								data.hidnewname = hospitalValue;
+							}
+							console.log("上传数据：" + data);
+							//							console.log(JSON.stringify(data));
+							var sussess = function(data) {
+								//服务器返回响应，根据响应结果，分析是否登录成功；
+								console.log("666---------->" + JSON.stringify(data));
+								if(data.result == "success") {
+									mui.toast("您已经提交实名认证，请等待审核！");
+									localStorage.setItem("lauchFlag", "1");
+									plus.runtime.restart();
+
+									////									localStorage.clear();
+									//									
+									//									// 获取所有Webview窗口
+									//									var curr = plus.webview.currentWebview();
+									//									var wvs = plus.webview.all();
+									//									
+									//
+									//									for(var i = 0, len = wvs.length; i < len; i++) {
+									//										//关闭除setting页面外的其他页面
+									//										if(wvs[i].getURL() == curr.getURL())
+									//											continue;
+									//										plus.webview.close(wvs[i]);
+									//									}
+									//									//打开login页面后再关闭setting页面
+									//									plus.webview.open("../index.html", "slide-in-right", 300);
+									//									plus.nativeUI.showWaiting();
+									//									curr.close();
+								} else {
+									mui.toast(data.msg);
+								}
+							}
+							commonHttpUtils(authenticationUrl, 'post', data, sussess, error);
+
+							//							// 刷新父页面
+							//							var list = plus.webview.currentWebview().opener();
+							//							//触发列表界面的自定义事件（refresh）,从而进行数据刷新  
+							//							mui.fire(list, 'refresh');
+						}
+					})
+
+				});
+				//				$("#enter_main").click(function() {
+				//					//var main = plus.webview.getLaunchWebview();
+				//					//if(mui.os.ios || mui.os.ipad || mui.os.iphone) {
+				//					// 获取所有Webview窗口
+				//					var curr = plus.webview.currentWebview();
+				//					var wvs = plus.webview.all();
+				//					for(var i = 0, len = wvs.length; i < len; i++) {
+				//						//关闭除setting页面外的其他页面
+				//						if(wvs[i].getURL() == curr.getURL())
+				//							continue;
+				//						plus.webview.close(wvs[i]);
+				//					}
+				//					//打开login页面后再关闭setting页面
+				//					plus.webview.open("../index.html");
+				//					curr.close();
+				//				});
+			});
+
+			function isCardID(sId) {
+				var iSum = 0;
+				var info = "";
+				if(!/^\d{17}(\d|x)$/i.test(sId)) return "你输入的身份证长度或格式错误";
+				sId = sId.replace(/x$/i, "a");
+				if(aCity[parseInt(sId.substr(0, 2))] == null) return "你的身份证地区非法";
+				sBirthday = sId.substr(6, 4) + "-" + Number(sId.substr(10, 2)) + "-" + Number(sId.substr(12, 2));
+				var d = new Date(sBirthday.replace(/-/g, "/"));
+				if(sBirthday != (d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate())) return "身份证上的出生日期非法";
+				for(var i = 17; i >= 0; i--) iSum += (Math.pow(2, i) % 11) * parseInt(sId.charAt(17 - i), 11);
+				if(iSum % 11 != 1) return "你输入的身份证号非法";
+				//aCity[parseInt(sId.substr(0,2))]+","+sBirthday+","+(sId.substr(16,1)%2?"男":"女");//此次还可以判断出输入的身份证号的人性别
+				return true;
+			};
+
+			//获取医院列表
+			var url = serverAddress + "/api/patient/gethosnames";
+			mui.ajax(url, {
+				data: {},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 180000, //超时时间设置为30秒；
+				success: function(data) {
+					//服务器返回响应，根据响应结果，分析是否登录成功；
+					console.log(JSON.stringify(data));
+
+					data.forEach(function(value) {
+						hospitalList.push(value.text)
+						hospitalMap[value.text] = value.value
+					})
+
+					$("#hospital").autocomplete({
+						source: hospitalList
+					});
+
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					mui.toast('获取医院网络超时，请稍后再试！');
+					plus.nativeUI.closeWaiting();
+				}
+			});
+
+			//			var showUserPicker = document.getElementById("showUserPicker");
+			//			var showUserPickerButton = document.getElementById('showUserPicker_img');
+			//			var userResult = document.getElementById('userResult');
+			//			showUserPickerButton.addEventListener("tap", function(event) {
+			//				userPicker.show(function(items) {
+			//					console.log(items[0].text)
+			//					showUserPicker.value = items[0].text;
+			//					$('#hospitalText').val(items[0].text);
+			//					hospital = items[0].value;
+			//				});
+			//			}, false);
+
+			function commonHttpUtils2(url, dataType, data, success, error, async) {
+				var reqUrl = url;
+				console.log(url);
+				access_token = localStorage.getItem("ACCESSTOKEN");
+				mui.ajax(reqUrl, {
+					data: data,
+					dataType: 'json', //服务器返回json格式数据
+					type: dataType, //HTTP请求类型
+					timeout: 180000, //超时时间设置为30秒；
+					beforeSend: function() {
+						plus.nativeUI.showWaiting();
+					},
+					complete: function() {
+						plus.nativeUI.closeWaiting();
+					},
+					async: async,
+					headers: {
+						"Access-Control-Allow-Headers": "X-Requested-With",
+						"x-access-token": access_token
+					},
+					beforeSend: function() {
+						plus.nativeUI.showWaiting();
+					},
+					complete: function() {
+						plus.nativeUI.closeWaiting();
+					},
+					success: success,
+					error: error,
+				});
+			}
+		</script>
+	</body>
+
+</html>

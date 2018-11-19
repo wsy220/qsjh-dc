@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>上传签约图片</title>
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<style>
+			.feedback .image-list {
+				height: auto;
+			}
+			
+			.service-time {
+				line-height: inherit !important;
+				float: none !important;
+				text-align: left;
+				font-size: 15px;
+				width: 60% !important;
+				border: none;
+				color: #15B5E9;
+			}
+			
+			.mui-btn {
+				padding: 11px 0 !important;
+			}
+			
+			.mui-dtpicker-header button {
+				padding: 5px 10px !important;
+			}
+			
+			label {
+				width: 38% !important;
+			}
+			
+			.mui-input-clear {
+				width: 62% !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">签约</h1>
+		</header>
+		<div class="mui-content " id="content">
+			<ul>
+				<li class="mui-table-view">
+					<div class="mui-navigate-right">
+						<div class="mui-input-row">
+							<label>服务生效时间:</label>
+							<button id="shangmenTime_button" data-options="{}" class="btn mui-btn service-time">请选择 </button>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view">
+					<div class="mui-input-row">
+						<div class="mui-input-row">
+							<label>填写疾病:</label>
+							<input type="text" class="mui-input-clear" placeholder="请填写疾病名称,用逗号隔开" id="ill-name">
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view">
+					<div class="mui-input-row">
+						<label>上传协议:</label>
+
+					</div>
+				</li>
+				<li class="mui-table-view">
+					<div class="mui-input-row">
+						<div class="mui-content-padded">
+							<div id="feedback" class="mui-page feedback">
+								<div class="mui-page-content">
+									<div id='image-list' class="row image-list"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+
+			<div class="mui-content-padded">
+				<button id='send_ok' class="mui-btn mui-btn-block mui-btn-warning ">确定</button>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+		<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+		<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="../js/jquery-labelauty.js"></script>
+		<script type="text/javascript" src="../js/constants.js"></script>
+		<script type="text/javascript" src="../js/mui.picker.min.js"></script>
+		<script type="text/javascript" src="../js/base64.js"></script>
+		<script type="text/javascript" src="../js/mobileBUGFix.mini.js"></script>
+
+		<script type="text/javascript" src="../js/mui.picker.js"></script>
+		<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+		<script type="text/javascript" src="../js/mobileBUGFix.mini.js"></script>
+		<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+		<script type="text/javascript" src="../js/sharemethods.js"></script>
+		<script>
+			mui.init({
+				keyEventBind: {
+					backbutton: true //打开back按键监听
+				},
+				beforeback: function() {
+					//返回true，继续页面关闭逻辑
+					return true;
+				}
+			});
+			var user = JSON.parse(localStorage.getItem("USER"));
+			var idImgPath = "";
+			var imgurl = serverAddress + uploadImgFileUrl;
+
+			//var hospital, username, leixing, nameinput, shenfen_cardinput, shenfen_img = [];
+			mui.plusReady(function() {
+				//				var shenfen_img = [];
+				var stime = null;
+				qs.initImageList({
+					id: 'image-list'
+				});
+				var service_item = {};
+				/*下拉选择框*/
+				function DropDown(el) {
+					this.dd = el;
+					this.placeholder = this.dd.find('span');
+					this.opts = this.dd.find('ul.dropdown > li');
+					this.val = '';
+					this.index = -1;
+					this.initEvents();
+					this.opts2 = this.dd.find('ul.dropdown>li>a');
+				}
+				DropDown.prototype = {
+					initEvents: function() {
+						var obj = this;
+
+						obj.dd.on('click', function(event) {
+							$(this).toggleClass('active');
+							return false;
+						});
+
+						obj.opts.on('click', function() {
+							var selectItem = '';
+							var opt = $(this);
+							obj.val = opt.text(); //获取value值
+							obj.index = opt.index();
+							obj.id = opt.attr("id"); //获取ID值
+							obj.placeholder.text(obj.val);
+							var item = obj.val.trim();
+						});
+
+					},
+					getValue: function() {
+						return this.val;
+					},
+					getIndex: function() {
+						return this.index;
+					}
+				}
+
+				$(function() {
+					var dd = new DropDown($('#dd1'));
+					$(document).click(function() {
+						// all dropdowns
+						$('.wrapper-dropdown-3').removeClass('active');
+					});
+					var dd = new DropDown($('#dd2'));
+					$(document).click(function() {
+						// all dropdowns
+						$('.wrapper-dropdown-3').removeClass('active');
+					});
+					var dd = new DropDown($('#dd3'));
+					$(document).click(function() {
+						// all dropdowns
+						$('.wrapper-dropdown-3').removeClass('active');
+					});
+					var dd = new DropDown($('#dd4'));
+					$(document).click(function() {
+						// all dropdowns
+						$('.wrapper-dropdown-3').removeClass('active');
+					});
+				});
+
+				$("#shangmenTime_button").click(function(e) {
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+					/*
+					 * 首次显示时实例化组件
+					 * 示例为了简洁，将 options 放在了按钮的 dom 上
+					 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+					 */
+
+					var picker = new mui.DtPicker(options);
+					picker.show(function(rs) {
+						/*
+						 * rs.value 拼合后的 value
+						 * rs.text 拼合后的 text
+						 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+						 * rs.m 月，用法同年
+						 * rs.d 日，用法同年
+						 * rs.h 时，用法同年
+						 * rs.i 分（minutes 的第二个字母），用法同年
+						 */
+						stime = rs.text
+						$("#shangmenTime_button").text(rs.text);
+						/* 
+						 * 返回 false 可以阻止选择框的关闭
+						 * return false;
+						 */
+						/*
+						 * 释放组件资源，释放后将将不能再操作组件
+						 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+						 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+						 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+						 */
+						picker.dispose();
+					});
+				});
+				mui(".mui-content").on("click", ".qs-image-item", function() {
+					var id = this.id //this.id = protocol
+					uploadImg(imgurl, function(imgPath, data) {
+						if(data.result == 'success') {
+							document.getElementById(id).src = imgPath;
+							document.getElementById(id + 'Path').value = data.obj.path;
+
+						} else {
+							mui.toast("文件上传失败");
+						}
+					});
+				});
+				/*
+								mui.back = function(event) {
+									backButtonPress++;
+									if(backButtonPress > 1) {
+										plus.runtime.quit();
+									} else {
+										plus.storage.removeItem("roster");
+										plus.nativeUI.toast('再按一次退出应用');
+									}
+									setTimeout(function() {
+										backButtonPress = 0;
+									}, 1000);
+									return false;
+								};*/
+				// 加载完毕后关闭等待框，并展示页面
+				var currentView = plus.webview.currentWebview();
+				currentView.show('slide-in-right', 200);
+				plus.nativeUI.closeWaiting();
+				plus.webview.currentWebview().setStyle({
+					softinputMode: "adjustResize" // 弹出软键盘时自动改变webview的高度
+				});
+				var fdtPatient_id = currentView.patientId;
+				var fdtPatientUrl = getFdtPatientDetailUrl + fdtPatient_id;
+				//				var fdtpatientsussess = function(data) {
+				//					console.log("根據id[" + fdtPatient_id + "]查询社区病患详细信息:" + JSON.stringify(data))
+				//					if(data.result == "success") {
+				//						var fdtPatient = data.date;
+				//						if(fdtPatient && fdtPatient.protocol) {
+				//							$("#protocol").attr("src", serverAddress + fdtPatient.protocol.replace('client', '').replace(/\\/g, "/"));
+				//						}
+				//					} else {
+				//						mui.toast(data.msg);
+				//					}
+				//
+				//				};
+				//				commonHttpUtils(fdtPatientUrl, "get", {
+				//					fdtPatient_id: fdtPatient_id
+				//				}, fdtpatientsussess, error);
+
+				/*if(plus.navigator.isImmersedStatusbar()) { // 兼容immersed状态栏模式
+					// 获取状态栏高度并根据业务需求处理，这里重新计算了子窗口的偏移位置
+					topoffset = (Math.round(plus.navigator.getStatusbarHeight()) + 45) + 'px';
+					document.querySelector("header").style.height = topoffset;
+					document.querySelector("header").style.paddingTop = "20px";
+					document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = topoffset;
+				}*/
+
+				$("#send_ok").click(function(e) {
+					/*var zgno = $("#zgno").val().trim();
+					//判断姓名
+					if(zgno == null || zgno == '') {
+						mui.toast("请填写执业资格证号");
+						return false;
+					}*/
+
+					//判断是否上传签约协议照片
+					//					if(!$("#protocolPath").val()) {
+					//						
+					//						
+					//						$$.getImageFilesPath("image-list").length
+					//						mui.toast("请上传签约协议照片");
+					//						return false;
+					//					}
+					//
+					//					if($$.getImageFilesPath("image-list").length >0) {
+					//						
+					//						
+					//						
+					//						mui.toast("请上传签约协议照片");
+					//						return false;
+					//					}
+
+					if(!stime) {
+						mui.toast("请选择服务生效时间");
+						return false;
+					}
+
+					//判断图片上传 是否成功
+					if($$.getImageFilesPath("image-list").length == 0) {
+						mui.toast("请至少上传一张医护签约图片");
+						return false;
+					}
+
+					function success(data) {
+						console.log("asgadsfha-------------->:" + JSON.stringify(data));
+						//服务器返回响应，根据响应结果，分析是否登录成功；
+						//						console.log("111" + JSON.stringify(data));
+						if(data.result == "success") {
+							var wobj = plus.webview.getWebviewById("familydoctor/fdt_index.html");
+							wobj.reload(true);
+							plus.webview.currentWebview().opener().close(true);
+							plus.webview.currentWebview().close(true)
+							//plus.runtime.restart();
+						} else {
+							mui.toast(data.msg);
+						}
+					}
+
+					var data = {
+						//						path: $('#protocolPath').val(), // 身份证上传的2个图片的验证的值
+						illness: $("#ill-name").val(),
+						signDate: stime,
+						fdtPatient_id: fdtPatient_id,
+						protocol: $$.getImageFilesPath("image-list"),
+
+					};
+					console.log("asgadsfha-------------->:" + JSON.stringify(data));
+					commonHttpUtils(uploadFdtPatientProtocolFile + currentView.patientId, 'POST', data, success, error);
+				});
+			});
+		</script>
+	</body>
+
+</html>

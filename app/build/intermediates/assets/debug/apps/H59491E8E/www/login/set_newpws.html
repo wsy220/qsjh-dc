@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>设置密码</title>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<style>
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			
+			.mui-input-group:first-child {
+				margin-top: 35px;
+			}
+			
+			.mui-input-group label {
+				width: 22%;
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 78%;
+				height: 0.9rem;
+				font-size: 14px;
+			}
+			
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			
+			.mui-content-padded {
+				margin-top: 33px;
+				text-align: center;
+			}
+			
+			.mui-btn {
+				padding: 10px;
+				border-radius: 20px;
+				width: 100%;
+				height: 0.9rem;
+				margin: 0 auto;
+			}
+			
+			.link-area {
+				display: block;
+				margin-top: 25px;
+				text-align: center;
+			}
+			
+			.spliter {
+				color: #bbb;
+				padding: 0px 19px;
+			}
+			
+			.oauth-area {
+				position: absolute;
+				bottom: 20px;
+				left: 0px;
+				text-align: center;
+				width: 100%;
+				padding: 0px;
+				margin: 0px;
+			}
+			
+			.oauth-area .oauth-btn {
+				display: inline-block;
+				width: 50px;
+				height: 50px;
+				background-size: 30px 30px;
+				background-position: center center;
+				background-repeat: no-repeat;
+				margin: 0px 20px;
+				/*-webkit-filter: grayscale(100%); */
+				border: solid 1px #ddd;
+				border-radius: 25px;
+			}
+			
+			.oauth-area .oauth-btn:active {
+				border: solid 1px #aaa;
+			}
+			
+			.oauth-area .oauth-btn.disabled {
+				background-color: #ddd;
+			}
+			
+			input[type=text] {
+				width: 60%;
+			}
+			
+			button:enabled:active {
+				background-color: #FFFFFF;
+				color: #000000;
+			}
+			
+			.mui-input-group {
+				background: none;
+			}
+			
+			.mui-input-group:before,
+			.mui-input-group:after {
+				height: 0;
+			}
+			
+			.mui-input-group input {
+				background-color: #FFFFFF !important;
+				width: 95% !important;
+				border-radius: 25px !important;
+				margin: 10px 0px 10px 0px!important;
+				margin-top: 10px;
+				padding-left: 55px !important;
+				float: inherit !important;
+			}
+			
+			.mui-input-group .mui-input-row:after {
+				height: 0;
+			}
+			
+			.mui-input-group .mui-input-row {
+				text-align: center;
+			}
+			
+			.mui-input-group .mui-input-row {
+				height: inherit;
+			}
+			
+			p {
+				font-size: 14px;
+				margin-top: 20px;
+				margin-bottom: 10px;
+				color: #8f8f94;
+			}
+			
+			p a {
+				color: #7b7b7b;
+				padding: 0 20px;
+			}
+			
+			.mui-content {
+				background: none;
+			}
+			
+			.mui-input-group label {
+				position: absolute;
+				top: 5px;
+				left: -5px;
+			}
+			
+			.mui-input-group img {
+				width: 0.4rem;
+				vertical-align: -webkit-baseline-middle;
+				padding-top: 10px;
+			}
+			
+			#yanzhengBtn {
+				position: absolute;
+				top: 20px;
+				right: 35px;
+				background: #ffcc99;
+				border: 0;
+				border-radius: 20px;
+			}
+			
+			.mui-btn,
+			button,
+			input[type=button],
+			input[type=reset],
+			input[type=submit] {
+				font-size: 18px;
+				line-height: 1.42;
+				padding: 6px 12px;
+			}
+			
+			#login-bth {
+				padding: 10px;
+				border-radius: 20px;
+				width: 100%;
+				margin: 0 auto;
+				background-color: #718fbd;
+				border: 1px solid #718fbd;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">设置密码</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<form id='login-form' class="mui-input-group">
+				<div class="mui-input-row">
+					<label><img src="../images/mm.png" /></label>
+					<input id='newPassword' name='password' type="password" class="password " placeholder="请输入新密码"></input>
+				</div>
+				<div class="mui-input-row">
+					<label><img src="../images/mm.png" /></label>
+					<input id='cnewPassword' name='re_password' type="password" class="re_password" placeholder="重复密码"></input>
+				</div>
+				<div style="padding:5% 5% 0;">
+					<span style="font-size: 12px;"><span style="color: red;">*</span>请输入6~16位密码，至少包含一个字母或一个特殊字符</span>
+				</div>
+				<div class="mui-content-padded">
+					<button id='login-bth' class="mui-btn mui-btn-block mui-btn-primary">确 认</button>
+				</div>
+			</form>
+
+		</div>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/constants.js"></script>
+		<script type="text/javascript" src="../js/sharemethods.js"></script>
+		<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+		<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+		<script>
+			mui.init({
+				keyEventBind: {
+					backbutton: true //打开back按键监听
+				},
+			});
+
+			mui.plusReady(function() {
+				var currentView = plus.webview.currentWebview();
+				currentView.show('slide-in-right', 200);
+				plus.nativeUI.closeWaiting();
+
+				var self = plus.webview.currentWebview();
+				var vc = self.vc;
+				var phone = self.phone;
+
+				mui(".mui-content").on("tap", "#login-bth", function() {
+					var newPassword = $("#newPassword").val();
+					var cnnewPassword = $("#cnewPassword").val();
+					if(!newPassword || newPassword == '') {
+						mui.toast("请输新密码");
+						return false;
+					}
+					var password = newPassword;
+					if(!password.match(/^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)[0-9A-Za-z`~!@#$%^&*()_+<>?:"{},.\/;'[\]]{6,16}$/)) {
+						mui.toast("请输入6~16位密码，至少包含一个字母或者包含一个特殊字符");
+						return false;
+					}
+
+					if(newPassword != cnnewPassword) {
+						mui.toast("两次输入密码不一致");
+						return false;
+					}
+					var sussess = function(data) {
+						//服务器返回响应，根据响应结果，分析是否登录成功；
+						if(data.result == "success") {
+							mui.toast("密码设置成功");
+						} else {
+							mui.toast(data.msg);
+						}
+						currentView.close(true)
+					};
+
+					var data = {
+						newpassword: newPassword,
+						vc: vc,
+						phone: phone
+					};
+
+					commonHttpUtils(setnewpasswordUrl, "post", data, sussess, error);
+				});
+			})
+		</script>
+	</body>
+
+</html>

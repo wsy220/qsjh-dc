@@ -1,0 +1,185 @@
+/*!
+* by wangshuyu(.com) 2017-?
+* under MIT license
+* 针对当前项目的实际样式库，
+* 包括文字链接颜色，文字链接经过的样式，一些常用的背景色样式，常用的边框样式等，
+* 1：网站常见颜色，链接色
+* 2：网站常见背景色
+* 3：网站常见边框色
+* 4：网站遗留的margin属性，例如，某一个DIV留白较大，有个单独的marging-top:35px的属性，这个属性放在CSS样式库中，以.mtd5{margin-top:35px}保留，以供
+* 以后类似布局或需要的地方使用
+* 5：网站遗留的单padding属性
+* 6：网站遗留的width属性
+* 7：网站常用的一些height属性
+*/
+
+
+/*加载icon字体*/
+
+@font-face {
+	/*font-family: "iconfont";
+	src: url('../fonts/iconfont.ttf') format('truetype');*/
+	/* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+}
+
+.iconfont {
+	/*font-family: "iconfont" !important;
+	font-size: 16px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-stroke-width: 0.2px;*/
+}
+
+html {
+	font-size: 100%;
+	background-color: #eeeeee;
+}
+
+body {
+	background-color: #eeeeee;
+}
+
+img,
+button {
+	max-width: 100%;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	/*height: 45px !important;*/
+	/*padding-top: 8%;*/
+	background: -webkit-linear-gradient(left, #31569d , #4d7acf);
+	/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(right, #31569d , #4d7acf);
+	/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(right, #31569d , #4d7acf);
+	/* Firefox 3.6 - 15 */
+	background: linear-gradient(to right, #31569d , #4d7acf
+);
+	/* 标准的语法（必须放在最后） */
+	/*background:url(../../image/headerBG.png);
+   background-size: cover;
+   background-repeat: no-repeat;*/
+}
+
+a {
+	color: #FFFFFF;
+}
+
+.mui-title {
+	#font-size: 0.3rem;
+	font-weight: 500;
+	line-height: 44px;
+	position: absolute;
+	display: block;
+	width: 100%;
+	margin: 0 -10px;
+	padding: 0;
+	text-align: center;
+	white-space: nowrap;
+	color: #FFFFFF !important;
+}
+
+.mui-bar .mui-btn-link {
+	font-size: 0.25rem;
+	line-height: 44px;
+	top: 0;
+	padding: 0;
+	color: #FFFFFF;
+	border: 0;
+}
+
+.mui-bar-tab .mui-tab-item.mui-active {
+	color: #31569d;
+}
+
+.mui-bar-tab .mui-tab-item {
+	display: table-cell;
+	overflow: hidden;
+	width: 1%;
+	height: 50px;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #cacaca;
+}
+
+.mui-bar-tab .mui-tab-item .mui-icon~.mui-tab-label {}
+
+.mui-content>.mui-table-view:first-child {
+	margin-top: 0.08rem !important;
+}
+
+.mui-btn-blue:enabled:active {
+	border: 0;
+}
+
+.mui-bar .mui-btn-link {}
+
+.mui-btn-warning {
+	background: #FCB565;
+    border-radius: 10px;
+    width: 100%;
+    height: 0.9rem;
+    font-size: 15px;
+}
+
+.mui-btn-primary {
+	border: 1px solid #33C3CB;
+	background: #3ccad0;
+}
+
+
+/*margin值*/
+
+.m-rem2 {
+	margin-top: 0.2rem;
+}
+
+.m-rem3 {
+	margin-top: 0.3rem;
+}
+
+.m-rem4 {
+	margin-top: 0.4rem;
+}
+
+.m-rem5 {
+	margin-top: 0.5rem;
+}
+
+.m-rem50 {
+	margin-top: 5rem;
+}
+
+.m-rem23 {
+	margin-top: 23%;
+}
+
+.m-rem40 {
+	margin-top: 40%;
+}
+
+.m-rem2-b {
+	margin-bottom: 0.2rem;
+}
+
+.mui-btn-blue.mui-active:enabled,
+.mui-btn-blue:enabled:active,
+.mui-btn-primary.mui-active:enabled,
+.mui-btn-primary:enabled:active,
+input[type=submit].mui-active:enabled,
+input[type=submit]:enabled:active{
+	color: #fff;
+    border: 0;
+    background-color: #278f93;
+}
+}
+input, select, textarea {
+    font-size: 14px;
+}

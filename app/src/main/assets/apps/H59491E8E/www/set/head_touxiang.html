@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>个人信息</title>
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<style>
+			#zhaoxiang.mui-table-view-cell {
+				/*padding-top: 0.5rem;*/
+				height: 150px;
+			}
+			
+			#zhaoxiang a span:after {
+				top: 40%;
+			}
+			
+			#head_image {
+				width: 90px;
+				height: 90px;
+				border-radius: 50px;
+				margin-top: 10px;
+			}
+			
+			.head {
+				margin-top: -0.6rem;
+				margin-right: 15px;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-bottom: 0.08rem;
+			}
+			
+			#libiao li {
+				height: 1.0rem;
+				padding-top: 0.25rem;
+			}
+			
+			#libiao li span {
+				margin-right: 20px;
+				font-size: 14px;
+			}
+			
+			.qianming {
+				width: 50%;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				text-align: right;
+			}
+			
+			.mui-table-view-cell a {
+				color: #424242;
+				font-size: 15px;
+			}
+			
+			.mui-content-padded a {
+				margin: 3px;
+				width: 50px;
+				height: 50px;
+				display: block;
+				text-align: center;
+				background-color: #fff;
+				border: 1px solid #ddd;
+				border-radius: 25px;
+				background-clip: padding-box;
+				margin: 0 auto;
+			}
+			
+			.mui-content-padded a .mui-icon {
+				margin-top: 12px;
+				color: #000000;
+				margin-top: -7px;
+				margin-left: -6px;
+			}
+			
+			input[type=text] {
+				line-height: 21px;
+				width: 50%;
+				height: 1rem;
+				padding-bottom: 15%;
+				/*padding: 10px 15px;*/
+				-webkit-user-select: text;
+				border: none;
+				border-radius: 3px;
+				outline: 0;
+				background-color: #fff;
+				-webkit-appearance: none;
+				float: right;
+				text-align: right;
+				font-size: 0.28rem;
+			}
+			
+			.sel_btn {
+				height: 21px;
+				line-height: 21px;
+				padding: 0 11px;
+				background: #4667a7;
+				border: 1px #4667a7 solid;
+				border-radius: 3px;
+				color: #fff;
+				display: inline-block;
+				text-decoration: none;
+				font-size: 12px;
+				outline: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">个人信息</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" id="zhaoxiang">
+					<a id="head_photo">
+						<div style="text-align: center;">
+							<img class="head-img mui-action-preview qs-image-item" id="head_image" src="../images/txmrt.png" />
+						</div>
+						<div style="font-size: 12px;text-align: center;color: #c3c3c3;">点击修改头像</div>
+					</a>
+				</li>
+			</ul>
+			<form action="">
+				<ul class="mui-table-view" id="libiao">
+					<li class="mui-table-view-cell">
+						<a id="geren_name">昵称：
+							<button class="mui-pull-right sel_btn" id="updateNikeName">修改</button>
+							<input class="mui-pull-right" id="nicheng" type="text" readonly>
+						</a>
+
+					</li>
+					<li class="mui-table-view-cell">
+						<a id="geren_name">手机号：<input class="mui-pull-right" id="phone" type="text" readonly>
+						</a>
+					</li>
+					<li class="mui-table-view-cell no-approve">
+						<a>性&nbsp;&nbsp;&nbsp;&nbsp;别：<input class="mui-pull-right" id="sex" type="text" readonly>
+						</a>
+					</li>
+					<li class="mui-table-view-cell no-approve">
+						<a id="signatureLi">职&nbsp;&nbsp;&nbsp;&nbsp;位：<input type="text" class="shenfen_card error_shenfen_card" placeholder="" id="dtype" readonly></a>
+					</li>
+					<li class="mui-table-view-cell no-approve">
+						<a id="signatureLi">科&nbsp;&nbsp;&nbsp;&nbsp;室：<input type="text" class="shenfen_card error_shenfen_card" placeholder="" id="classType" readonly></a>
+					</li>
+					<li class="mui-table-view-cell no-approve">
+						<a id="signatureLi">医护级别：<input type="text" class="shenfen_card error_shenfen_card" placeholder="" id="level" readonly></a>
+					</li>
+
+					<li class="mui-table-view-cell no-approve">
+						<a id="signatureLi">真实姓名：<input type="text" class="sign_name error_shenfen_card mui-input" placeholder="" id="sign_name" readonly></a>
+					</li>
+					<li class="mui-table-view-cell no-approve">
+						<a id="signatureLi">所属医院：<input type="text" class="shenfen_card error_shenfen_card" placeholder="" id="danwei_card" readonly></a>
+					</li>
+				</ul>
+			</form>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/xiangyingshi.js"></script>
+		<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+		<script type="text/javascript" src="../js/constants.js"></script>
+		<script type="text/javascript" src="../js/exif.js"></script>
+		<script type="text/javascript" src="../js/mobileBUGFix.mini.js"></script>
+		<script type="text/javascript" src="../js/sharemethods.js"></script>
+		<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+
+		<script>
+			mui.init({
+				keyEventBind: {
+					backbutton: true //打开back按键监听
+				},
+				beforeback: function() {
+					//获得列表界面的webview
+					var i = plus.webview.getWebviewById("subpages/tab-webview-subpage-my.html");
+					if(i) {
+						i.evalJS("loaded()");
+					}
+					return true;
+				}
+			});
+			var user = JSON.parse(localStorage.getItem("USER"));
+			var imgurl = serverAddress + uploadImgFileUrl;
+			mui.plusReady(function() {
+				mui(".mui-content").on("click", "#zhaoxiang", function() {
+					var id = "head_image"
+					headImg(function(imgPath) {
+						mui.openWindow({
+							url: './head_img.html',
+							id: 'head_img.html',
+							show: {
+								autoShow: false, //页面loaded事件发生后自动显示，默认为true
+								event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+							},
+							waiting: {
+								autoShow: true //自动显示等待框，默认为true
+							},
+							extras: {
+								imgPath: imgPath //扩展参数    传值电话号向实名认证里
+							}
+						});
+					});
+				});
+
+				var reaload = function() {
+					var user = JSON.parse(localStorage.getItem("USER"));
+					console.log(JSON.stringify(user))
+					if(user.userfaceimage) {
+						var path = serverAddress + $$.processImagePath(user.userfaceimage)
+						$('#head_image').attr('src', path);
+					}
+					if(user.userfaceimage != null && user.userfaceimage != '' && (user.userfaceimage.indexOf("client\\") == 0)) {
+						$("#head-img").attr("src", serverAddress + '/' + user.userfaceimage.replace('client', '').replace(/\\/g, "\\"));
+					}
+					if(user.userfaceimage != null && user.userfaceimage != '' && (user.userfaceimage.indexOf("client/") == 0)) {
+						$("#head-img").attr("src", serverAddress + "/" + user.userfaceimage.replace('client', '').replace(/\\/g, "/"));
+					}
+				}
+
+				reaload();
+
+				document.getElementById("updateNikeName").addEventListener('tap', function(e) {
+					e.detail.gesture.preventDefault(); //修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
+					var btnArray = ['取消', '确定'];
+					mui.prompt('请输入昵称：', '', '修改昵称', btnArray, function(e) {
+						if(e.index == 1) {
+//							alert(e.value);
+							if(!e.value && e.value.trim()=='') {
+								mui.toast('请填写昵称')
+								return false;
+							}
+							var sussess = function(data) {
+								//服务器返回响应，根据响应结果，分析是否登录成功；
+								if(data.result == "success") {
+									$("#nicheng").val(e.value)
+									user.nickname = e.value;
+									localStorage.setItem('USER', JSON.stringify(user));
+									mui.toast("昵称修改成功");
+								} else {
+									mui.toast("昵称修改失败");
+								}
+							};
+							commonHttpUtils(setnicknameUrl, "put", {
+								nickname: e.value
+							}, sussess, error);
+						} else {
+							//info.innerText = '你点了取消按钮';
+						}
+					})
+				});
+
+			});
+
+			var user_img, username, leixing, nameinput, shenfen_cardinput, touxiang_img = [];
+			// 旧头像
+			var imgData_old = "";
+			// 新头像
+			var imgData_new = "";
+
+			mui.plusReady(function() {
+				plus.webview.currentWebview().setStyle({
+					softinputMode: "adjustResize" // 弹出软键盘时自动改变webview的高度
+				});
+				//				if(plus.navigator.isImmersedStatusbar()) { // 兼容immersed状态栏模式
+				//					// 获取状态栏高度并根据业务需求处理，这里重新计算了子窗口的偏移位置
+				//					topoffset = (Math.round(plus.navigator.getStatusbarHeight()) + 45) + 'px';
+				//					document.querySelector("header").style.height = topoffset;
+				//					document.querySelector("header").style.paddingTop = "20px";
+				//					document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = topoffset;
+				//				}
+
+				// 加载完毕后关闭等待框，并展示页面
+				var currentView = plus.webview.currentWebview();
+				currentView.show('slide-in-right', 200);
+				plus.nativeUI.closeWaiting();
+				if(user.idapprove == 0) {
+					$(".no-approve").hide()
+				} else {
+					$(".no-approve").show()
+				}
+
+				$('#nicheng').val(user.nickname)
+				$('#sign_name').val(user.name)
+				if(user.sex == '0') {
+					$('#sex').val('男')
+				} else {
+					$('#sex').val('女')
+				}
+				$('#phone').val(user.phone);
+				if(user.hid && user.hid.name) {
+					$("#danwei_card").val(user.hid.name);
+				} else {
+					$("#danwei_card").val(user.hidnewname);
+				}
+				if(user.dtype == "nurse") {
+					$("#dtype").val("护士")
+				} else {
+					$("#dtype").val("医生")
+				}
+				if(user.classType == "L") {
+					$("#classType").val("临床")
+				} else {
+					$("#classType").val("辅助")
+				}
+				if(user.level == "h1") {
+					$("#level").val("护士")
+				} else if(user.level == "h2") {
+					$("#level").val("护师")
+				} else if(user.level == "h3") {
+					$("#level").val("主任、副主任护师")
+				} else if(user.level == "y1") {
+					$("#level").val("医生")
+				} else if(user.level == "y2") {
+					$("#level").val("主治医师")
+				} else {
+					$("#level").val("主任、副主任医师")
+				}
+
+			});
+		</script>
+	</body>
+
+</html>

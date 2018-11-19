@@ -1,0 +1,117 @@
+{
+    "logs": [
+        {
+            "outputFile": "F:\\svn\\jhWeb\\trunk\\doctorApp\\qsjh-dc\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "map": [
+                {
+                    "source": "F:\\svn\\jhWeb\\trunk\\doctorApp\\qsjh-dc\\app\\src\\main\\res\\values\\dcloud_gallery_strings.xml",
+                    "from": {
+                        "startLines": "1",
+                        "startColumns": "4",
+                        "startOffsets": "17",
+                        "endColumns": "68",
+                        "endOffsets": "81"
+                    },
+                    "to": {
+                        "startLines": "29",
+                        "startColumns": "4",
+                        "startOffsets": "1684",
+                        "endColumns": "68",
+                        "endOffsets": "1748"
+                    }
+                },
+                {
+                    "source": "F:\\svn\\jhWeb\\trunk\\doctorApp\\qsjh-dc\\app\\src\\main\\res\\values\\dcloud_styles.xml",
+                    "from": {
+                        "startLines": "40,39,41,30,35,3,8,16,24",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "1938,1874,2003,1486,1702,59,345,734,1151",
+                        "endLines": "40,39,41,33,37,6,14,21,28",
+                        "endColumns": "63,62,48,12,12,12,12,12,12",
+                        "endOffsets": "1997,1932,2047,1694,1866,337,726,1097,1460"
+                    },
+                    "to": {
+                        "startLines": "5,6,7,74,78,92,96,103,109",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "178,242,305,4553,4763,5509,5789,6169,6532",
+                        "endLines": "5,6,7,77,80,95,102,108,113",
+                        "endColumns": "63,62,48,12,12,12,12,12,12",
+                        "endOffsets": "237,300,349,4758,4925,5784,6164,6527,6837"
+                    }
+                },
+                {
+                    "source": "F:\\svn\\jhWeb\\trunk\\doctorApp\\qsjh-dc\\app\\src\\main\\res\\values\\dcloud_colors.xml",
+                    "from": {
+                        "startLines": "2,4,3",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,137,96",
+                        "endColumns": "40,40,40",
+                        "endOffsets": "91,173,132"
+                    },
+                    "to": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,96,137",
+                        "endColumns": "40,40,40",
+                        "endOffsets": "91,132,173"
+                    }
+                },
+                {
+                    "source": "F:\\svn\\jhWeb\\trunk\\doctorApp\\qsjh-dc\\app\\src\\main\\res\\values\\dcloud_activity_styles.xml",
+                    "from": {
+                        "startLines": "2,12,7,24,18",
+                        "startColumns": "5,5,5,4,4",
+                        "startOffsets": "58,524,279,1096,815",
+                        "endLines": "5,16,10,29,22",
+                        "endColumns": "13,12,12,12,12",
+                        "endOffsets": "266,803,511,1401,1088"
+                    },
+                    "to": {
+                        "startLines": "61,65,70,81,87",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "3832,4041,4320,4930,5235",
+                        "endLines": "64,69,73,86,91",
+                        "endColumns": "13,12,12,12,12",
+                        "endOffsets": "4036,4315,4548,5230,5504"
+                    }
+                },
+                {
+                    "source": "F:\\svn\\jhWeb\\trunk\\doctorApp\\qsjh-dc\\app\\src\\main\\res\\values\\dcloud_nativeui_styles.xml",
+                    "from": {
+                        "startLines": "39,36,3,18",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "2305,2173,59,991",
+                        "endLines": "55,38,16,34",
+                        "endColumns": "24,24,12,12",
+                        "endOffsets": "3487,2299,983,2165"
+                    },
+                    "to": {
+                        "startLines": "8,25,30,44",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "354,1510,1753,2669",
+                        "endLines": "24,27,43,60",
+                        "endColumns": "24,24,12,12",
+                        "endOffsets": "1505,1633,2664,3827"
+                    }
+                },
+                {
+                    "source": "F:\\svn\\jhWeb\\trunk\\doctorApp\\qsjh-dc\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "1",
+                        "startColumns": "4",
+                        "startOffsets": "17",
+                        "endColumns": "45",
+                        "endOffsets": "58"
+                    },
+                    "to": {
+                        "startLines": "28",
+                        "startColumns": "4",
+                        "startOffsets": "1638",
+                        "endColumns": "45",
+                        "endOffsets": "1679"
+                    }
+                }
+            ]
+        }
+    ]
+}

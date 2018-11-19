@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>随访管理</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/icons-extra.css" type="text/css" />
+		<link rel="stylesheet" href="../fonts/iconfont.css" />
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/main.css" />
+		<style>
+			.mui-table-view-cell.mui-active {
+				background-color: #fff
+			}
+			
+			.mui-checkbox input[type=checkbox]:before {
+				content: '\e413';
+			}
+			
+			.mui-checkbox input[type=checkbox]:checked:before {
+				content: '\e443';
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">随访管理</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<div class="mui-content-padded" style="margin: 5px;">
+				<ul class="mui-table-view" id="inputForm">
+					<!--<li class="mui-table-view-cell">
+						<h5>密码框：</h5>
+						<div class="mui-input-row mui-input">
+							<input type="text" class="mui-input-clear">
+						</div>
+						<div class="mui-input-row mui-input">
+							<input type="text" class="mui-input-clear">
+						</div>
+						<div class="mui-input-row mui-input">
+							<input type="text" class="mui-input-clear">
+						</div>
+						<div class="mui-input-row mui-input">
+							<input type="text" class="mui-input-clear">
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<h5>密码框：</h5>
+						<div class="mui-input-row mui-input">
+							<input type="text" class="mui-input-clear">
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<h5>密码框：</h5>
+						<div class="mui-input-row mui-radio">
+							<label>radio</label>
+							<input name="radio1" type="radio">
+						</div>
+						<div class="mui-input-row mui-radio">
+							<label>radio</label>
+							<input name="radio1" type="radio">
+						</div>
+						<div class="mui-input-row mui-radio">
+							<label>radio</label>
+							<input name="radio1" type="radio">
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<h5>密码框：</h5>
+						<div class="mui-input-row mui-checkbox">
+							<label>checkbox示例</label>
+							<input name="checkbox1" value="Item 1" type="checkbox">
+						</div>
+						<div class="mui-input-row mui-checkbox">
+							<label>checkbox示例</label>
+							<input name="checkbox1" value="Item 2" type="checkbox" checked>
+						</div>
+					</li>-->
+				</ul>
+			</div>
+			<div class="mui-content-padded">
+				<button id='send_ok' class="mui-btn mui-btn-block mui-btn-warning ">确 定</button>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/app.js"></script>
+		<script type="text/javascript" src="../js/constants.js"></script>
+		<script type="text/javascript" src="../js/sharemethods.js"></script>
+		<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+		<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+
+		<!--<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+		<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+		<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+		<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+		<script type="text/javascript" src="../plugs/iscroll/iscroll-probe.js"></script>
+		<script type="text/javascript" src="../plugs/qs/qs.iscroll.new.js"></script>-->
+		<script>
+			mui.init({
+				keyEventBind: {
+					backbutton: true //打开back按键监听
+				},
+				beforeback: function() {
+					//返回true，继续页面关闭逻辑  
+					mui.back;
+					return true;
+				}
+			});
+
+			mui.plusReady(function() {
+				var currentView = plus.webview.currentWebview();
+				currentView.show('slide-in-right', 200);
+				plus.nativeUI.closeWaiting();
+				plus.webview.currentWebview().setStyle({
+					softinputMode: "adjustResize" // 弹出软键盘时自动改变webview的高度
+				});
+
+			});
+
+			var date = {
+				title: "测试标题",
+				action: "/api/......",
+				inputs: [{
+					id: "text1",
+					label: "测试1",
+					type: "text",
+					required: true,
+					placeholder: "测试"
+				}, {
+					id: "text2",
+					label: "测试2",
+					type: "textgroup",
+					sub: [{
+						id: "text2sub1"
+					}, {
+						id: "text2sub1"
+					}, {
+						id: "text2sub1"
+					}]
+				}, {
+					id: "text3",
+					label: "测试3",
+					type: "checkbox",
+					sub: [{
+						id: "checkbox1",
+						value: "checkbox1",
+						label: "测试复选框1"
+					}, {
+						id: "checkbox2",
+						label: "测试复选框2",
+						value: "checkbox2"
+					}]
+				}, {
+					id: "text4",
+					label: "测试4",
+					type: "radio",
+					sub: [{
+						value: "radio1",
+						label: "测试单选框1"
+					}, {
+						label: "测试单选框2",
+						value: "radio2"
+					}]
+				}, ]
+			}
+
+			var getLiElement = function(title) {
+				return $('<li class="mui-table-view-cell"></li>').append(getLabelElement(title));
+			}
+			var getLabelElement = function(title) {
+				return $('<h5>' + title + '：</h5>')
+			}
+			var getInputDivElement = function(config) {
+				return $('<div class="mui-input-row mui-input"></div>').append(getInputElement(config))
+			}
+			var getCheckboxDivElement = function(config) {
+				return $('<div class="mui-input-row mui-checkbox"><label>' + config.label + '</label></div>').append(getCheckElement(config))
+			}
+			var getRadioDivElement = function(pconfig,config) {
+				return $('<div class="mui-input-row mui-radio"><label>' + config.label + '</label></div>').append(getRadioElement(pconfig,config))
+			}
+			var getInputElement = function(config) {
+				return('<input id="' + config.id + '" name="' + config.id + '" type="text" class="mui-input-clear">')
+			}
+			var getCheckElement = function(config) {
+				return('<input id="' + config.id + '" name="' + config.id + '" value="' + config.value + '" type="checkbox">')
+			}
+			var getRadioElement = function(pconfig,config) {
+				return('<input id="' + config.id + '" name="' + config.id + '" value="' + config.value + '" type="radio">')
+			}
+
+			date.inputs.forEach(function(v) {
+				console.log(JSON.stringify(v))
+				var element = null;
+				if(v.type == "text") {
+					element = getLiElement(v.label).append(getInputDivElement(v))
+					$("#inputForm").append(element)
+				} else if(v.type == "textgroup") {
+					element = getLiElement(v.label)
+					v.sub.forEach(function(sv) {
+						element.append(getInputDivElement(v))
+					})
+					$("#inputForm").append(element)
+				} else if(v.type == "checkbox") {
+					element = getLiElement(v.label)
+					v.sub.forEach(function(sv) {
+						element.append(getCheckboxDivElement(sv))
+					})
+					$("#inputForm").append(element)
+				} else if(v.type == "radio") {
+					element = getLiElement(v.label)
+					v.sub.forEach(function(sv) {
+						element.append(getRadioDivElement(v,sv))
+					})
+					$("#inputForm").append(element)
+				}
+			})
+
+			document.getElementById("send_ok").addEventListener("tap", function() {
+//				alert(date);
+				date.inputs.forEach(function(v) {
+					
+				})
+			});
+		</script>
+	</body>
+
+</html>

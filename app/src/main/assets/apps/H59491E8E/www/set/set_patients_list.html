@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>患者列表</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../fonts/iconfont.css" />
+		<link rel="stylesheet" href="../plugs/qs/qs.common.new.css" />
+		<style>
+			.mui-slider-indicator.mui-segmented-control {
+				background-color: #FFFFFF;
+				/*height: 55px;
+				text-align: center;*/
+				padding-top: 25px;
+			}
+			
+			.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+				top: 25px;
+				border: 0;
+			}
+			
+			.mui-slider-group {
+				top: 25px !important;
+			}
+			
+			.mui-table-view {
+				margin-top: 4px;
+			}
+			
+			.mui-table-view-cell {
+				padding-left: 7%;
+			}
+			
+			.mui-pull-left {
+				border-radius: 50%;
+			}
+			
+			.mui-media-body {
+				padding-left: 7%;
+				padding-top: 2%;
+			}
+			
+			.cus-img {
+				width: 50% !important;
+				margin: 0 auto;
+				display: table;
+				padding-top: 50px;
+			}
+			
+			.call-phone {
+				padding-top: 5%;
+			}
+			
+			.padding-top {
+				padding-top: 3%;
+			}
+			
+			.mui-col-xs-4 {
+				border-right: 1px solid #cccccc;
+				height: 37px;
+			}
+			.mui-col-xs-8{
+				padding-left: 10%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">患者列表</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<!--<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">-->
+				<!--<a class="mui-control-item mui-active" href="#item2order" id="homeItem">
+						患者
+					</a>-->
+				<!--<a class="mui-control-item" href="#item3order" id="workItem">
+						黑名单
+					</a>-->
+				<!--</div>-->
+				<!--<div id="sliderProgressBar" class="mui-slider-progress-bar" style="width: 50%;"></div>-->
+				<div class="mui-slider-group">
+					<div id="item2order" class="mui-slider-item mui-control-content">
+						<div id="item2wrapper" class="mui-scroll-wrapper">
+							<div id="wrapper01" class="wrapper">
+								<div id="scroller" class="scroller">
+									<div id="pstienListDiv">
+										<!--<ul class="mui-table-view">
+											<li class="mui-table-view-cell mui-media">
+												<div class="mui-row">
+													<div class="mui-col-xs-10 nui-patient-detail" data-id="{{value._id.userid}}">
+														<img class="mui-pull-left" id="head-img" src="../images/order/ksfw.png" style="width: 45px;margin-top: 2%;">
+
+														<div class="mui-media-body mui-row">
+															<div class="mui-col-xs-5 padding-top" style="">你猜我是谁</div>
+															<div class="mui-col-xs-7 padding-top">发单数：100单</div>
+														</div>
+													</div>
+												</div>
+											</li>
+										</ul>-->
+
+										<p><img class="cus-img " src="../images/no_data/1-04.png" data-preview-src="" data-preview-group="1"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--<div id="item3order" class="mui-slider-item mui-control-content">
+						<div id="item3wrapper" class="mui-scroll-wrapper">
+							<div id="wrapper02" class="wrapper">
+								<div id="scroller" class="scroller">
+									<div id="blackListDiv">
+										<p><img class="cus-img" src="../images/no_data/1-02.png" data-preview-src="" data-preview-group="1"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>-->
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/iscroll/iscroll-probe.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.iscroll.new.js"></script>
+	<script>
+		mui.init({
+			swipeBack: true, //启用右滑关闭功能
+		});
+		//注掉的为黑名单部分，不删。
+		var getUserInfo = function() {
+			divId = $(".mui-slider-group .mui-active").attr("id");
+			if(divId == "item2order") {
+				wrapper01.page = 1;
+				pullDownHomeAction(wrapper01)
+			}
+			//			else if(divId == "item3order") {
+			//				wrapper02.page = 1;
+			//				pullDownWorkAction(wrapper02)
+			//			}
+		}
+
+		var userId = null;
+		var wrapper01;
+		var wrapper02;
+
+		mui.plusReady(function() {
+			var currentView = plus.webview.currentWebview();
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+			userId = localStorage.getItem("USERID");
+
+			loaded();
+
+			//			document.querySelector('.mui-slider').addEventListener('slide', function(event) {
+			//				var nm = mui("#slider").slider().getSlideNumber()
+			//				if(nm == '0') {
+			//					wrapper01.refresh();
+			//				} else if(nm == '1') {
+			//					wrapper02.refresh();
+			//				}
+			//			});
+
+			//			mui(".mui-content").on("tap", ".nui-patient-detail", function() {
+			//				var orderId = $(this).attr("data-id"); //往下个页面传参的东西
+			//				mui.openWindow({
+			//					url: '../set/patient_detail.html',
+			//					id: 'patient_detail',
+			//					extras: {
+			//						orderId: orderId
+			//					}, //往url的页面传参
+			//					show: {
+			//						autoShow: true, //页面loaded事件发生后自动显示，默认为true
+			//						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+			//					},
+			//					waiting: {
+			//						autoShow: true, //自动显示等待框，默认为true
+			//						title: '正在加载...', //等待对话框上显示的提示内容
+			//					}
+			//				});
+			//			});
+			mui(".mui-content").on("tap", ".call-phone", function() {
+				var btnArray = ['拨打', '取消'];
+				var Phone = $(this).attr("phone-number");
+				mui.confirm('是否拨打 ' + Phone + ' ？', '提示', btnArray, function(e) {
+					if(e.index == 0) {
+						plus.device.dial(Phone, false);
+					}
+				})
+
+			});
+
+		});
+
+		function processConfimAction(myScroll) {
+			setTimeout(function() {
+				var patienturl = getpatientsUrl + "?page=" + myScroll.page + "&limit=" + myScroll.limit;
+				if(myScroll.page == 1) {
+					$("#pstienListDiv").html('<p><img class="cus-img" src="../images/no_data/1-04.png" data-preview-src="" data-preview-group="1"></p>');
+				}
+				var sussess = function(data) {
+					console.log("新接口:" + JSON.stringify(data.obj));
+					if(data.result == "success") {
+						if(data.obj.length != 0) {
+							if(myScroll.page == 1) {
+								$("#pstienListDiv").html('')
+							}
+							if(data.obj.length == myScroll.limit) {
+								myScroll.page = myScroll.page + 1;
+							}
+							$("#pstienListDiv").processTL(templateRegister.patientsList, {
+								sub: data.obj
+							}, 'append', function() {
+								myScroll.refresh()
+							})
+						}
+					} else {
+						mui.toast(data.msg);
+					}
+				};
+
+				commonHttpUtils(patienturl, "get", "", sussess, error);
+			}, 1000); //1秒  
+		}
+
+		//注掉部分为黑名单时候改参数，现在没有黑名单接口
+		//		function processServiceAction(myScroll) {
+		//			var patienturl = showworknothavelistUrl + "?page=" + myScroll.page + "&limit=" + myScroll.limit;
+		//			if(myScroll.page == 1) {
+		//				$("#blackListDiv").html('<p><img class="cus-img" src="../images/no_data/1-02.png" data-preview-src="" data-preview-group="1"></p>');
+		//			}
+		//			var sussess = function(data) {
+		//				//服务器返回响应，根据响应结果，分析是否登录成功；
+		//
+		//				if(data.result == "success") {
+		//					if(data.obj.workorders.length != 0) {
+		//						if(myScroll.page == 1) {
+		//							$("#blackListDiv").html('')
+		//						}
+		//						if(data.obj.workorders.length == myScroll.limit) {
+		//							myScroll.page = myScroll.page + 1;
+		//						}
+		//						$("#blackListDiv").processTL(templateRegister.orderGrab, {
+		//							sub: data.obj.workorders
+		//						}, 'append', function() {
+		//							myScroll.refresh()
+		//						})
+		//					}
+		//				} else {
+		//					mui.toast(data.msg);
+		//				}
+		//			};
+		//			commonHttpUtils(patienturl, "get", "", sussess, error);
+		//		}
+
+		function loaded() {
+			wrapper01 = $.initIscroll({
+				id: "wrapper01",
+				pullUpAction: processConfimAction,
+				pullDownAction: processConfimAction,
+				limit: 10
+			});
+			//			wrapper02 = $.initIscroll({
+			//				id: "wrapper02",
+			//				pullUpAction: processServiceAction,
+			//				pullDownAction: processServiceAction
+			//			});
+			initFunction();
+		}
+
+		var initFunction = function() {
+			$('#item2order').addClass('mui-active')
+			processConfimAction(wrapper01);
+			//			processServiceAction(wrapper02);
+		}
+
+		document.addEventListener('touchmove', function(e) {
+			e.preventDefault();
+		}, isPassive() ? {
+			capture: false,
+			passive: false
+		} : false);
+
+		function isPassive() {
+			var supportsPassiveOption = false;
+			try {
+				addEventListener("test", null, Object.defineProperty({}, 'passive', {
+					get: function() {
+						supportsPassiveOption = true;
+					}
+				}));
+			} catch(e) {}
+			return supportsPassiveOption;
+		}
+	</script>
+
+</html>

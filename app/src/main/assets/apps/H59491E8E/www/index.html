@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>柒拾佳护</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="fonts/iconfont.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			* {
+				touch-action: none;
+			}
+			
+			ul {
+				font-size: 14px;
+				color: #8f8f94;
+			}
+			
+			.mui-btn {
+				padding: 10px;
+			}
+			
+			#kefu {
+				font-size: 0.5rem;
+				line-height: 30px;
+			}
+			
+			header button img {
+				width: 0.3rem;
+			}
+			
+			.mui-bar {
+				box-shadow: 0 0 1px #E8E8E8;
+			}
+			
+			.mui-badge {
+				min-height: 10px;
+			}
+			
+			.mui-bar {
+				background-color: #F5F5F5;
+			}
+			
+			.mui-bar-tab .mui-tab-item {
+				color: #747474;
+			}
+			
+			.mui-bar-tab .mui-tab-item.mui-active {
+				color: #4c79cf;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 id="title" class="mui-title">柒拾佳护</h1>
+			<button id="loginBtn" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">登录</button>
+			<button id="ys" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">原生测试</button>
+			<button id="publish" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" style="display: none;">发表文章</button>
+			<button id="set_detail" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" style="display: none;"><i class="mui-icon mui-icon-gear"></i></button>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+			<a id="defaultTab" class="mui-tab-item mui-active" href="subpages/tab-webview-subpage-home.html">
+				<span class="mui-icon iconfont icon-sy"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+
+			<a id="dingdan" class="mui-tab-item dingdan" href="subpages/tab-webview-subpage-service.html">
+				<span class="mui-icon iconfont icon-hzdd"></span>
+				<span class="mui-tab-label">订单</span>
+			</a>
+			<a id="qiangdan" class="mui-tab-item qiangdan" href="subpages/tab-webview-subpage-order.html">
+				<span class="mui-icon iconfont icon-ly"><span id="muiBadge" class="mui-badge"></span></span>
+				<span class="mui-tab-label">消息</span>
+			</a>
+			<a id="yihuquan" class="mui-tab-item yihuquan" href="subpages/tab-webview-subpage-talk.html">
+				<span class="mui-icon iconfont icon-yhq"></span>
+				<span class="mui-tab-label">医护圈</span>
+			</a>
+
+			<a id="mysetting" class="mui-tab-item wode" href="subpages/tab-webview-subpage-my.html">
+				<span class="mui-icon iconfont icon-yhwd"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+
+		<script src="js/mui.min.js"></script>
+		<script src="js/app.js"></script>
+		<script type="text/javascript" src="js/xiangyingshi.js"></script>
+		<script type="text/javascript" src="js/constants.js"></script>
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="js/sharemethods.js"></script>
+		<script type="text/javascript" src="plugs/qs/qs.update.js"></script>
+		<script type="text/javascript" src="plugs/moment/moment.min.js"></script>
+		<script type="text/javascript" src="js/sdk/webim/common/webim.js"></script>
+		<script type="text/javascript" src="js/sdk/webim/private/index_receive_new_msg.js"></script>
+		<script type="text/javascript" src="js/sdk/webim/common/login.js"></script>
+		<!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Kw7ohrBpxoZxhVOHzWbIy1vDojNXujG5"></script>-->
+		<script>
+			mui.init();
+			var subpages = ['subpages/tab-webview-subpage-home.html',
+				'subpages/tab-webview-subpage-service.html',
+				'subpages/tab-webview-subpage-order.html',
+				'subpages/tab-webview-subpage-talk.html',
+				'subpages/tab-webview-subpage-my.html'
+			];
+			//当前激活选项
+			var activeTab = subpages[0];
+			var aniShow = {};
+			var idapprove = null; //用户审核状态
+			var title = document.getElementById("title");
+
+			//移除消息列表中的红点
+			//			function removeItemFlag() {
+			$("#muiBadge").hide()
+			//			}
+
+			function preload() {
+				var menu_style = {
+					left: "-70%",
+					width: '70%',
+					popGesture: "none",
+					render: "always"
+				};
+				if(mui.os.ios) {
+					menu_style.zindex = -1;
+				}
+			}
+
+			mui.plusReady(function() {
+				console.log(plus.webview.getLaunchWebview())
+				if(plus.webview.getWebviewById("guide.html")) {
+					plus.webview.getWebviewById("guide.html").close("true");
+				}
+
+				plus.navigator.setStatusBarStyle('light');
+				plus.screen.lockOrientation("portrait-primary"); //仅支持竖屏显示
+				//				removeItemFlag();
+				plus.runtime.setBadgeNumber(0);
+				//console.log("获得操作系统：" + plus.os.name)
+				//console.log("操作系统语言：" + window.navigator.language);
+
+				//读取本地存储，检查是否为首次启动
+				var showGuide = localStorage.getItem("lauchFlag");
+				if(showGuide == "1") {
+					//有值，说明已经显示过了，无需显示1是登陆页面过来的；
+					//关闭splash页面；
+					plus.navigator.closeSplashscreen();
+					plus.navigator.setFullscreen(false);
+					//预加载
+					preload();
+					localStorage.removeItem("lauchFlag");
+				} else {
+					console.log("进入启动页面--------------------》")
+
+					//显示启动导航
+					mui.openWindow({
+						id: 'guide',
+						url: 'guide.html',
+						styles: {
+							popGesture: "none"
+						},
+						show: {
+							aniShow: 'none'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+					//延迟的原因：优先打开启动导航页面，避免资源争夺
+					setTimeout(function() {
+						//预加载
+						preload();
+					}, 200);
+				}
+
+				//延迟的原因：优先打开启动导航页面，避免资源争夺
+				var topoffset = '45px';
+
+				if(plus.navigator.isImmersedStatusbar()) { // 兼容immersed状态栏模式
+					// 获取状态栏高度并根据业务需求处理，这里重新计算了子窗口的偏移位置
+					console.log("进入计算页面--1111111------------------》")
+					topoffset = (Math.round(plus.navigator.getStatusbarHeight()) + 45) + 'px';
+					document.querySelector("header").style.height = topoffset;
+					document.querySelector("header").style.paddingTop = Math.round(plus.navigator.getStatusbarHeight()) + "px";
+				}
+				var subpage_style = {
+					top: topoffset,
+					bottom: '51px'
+				};
+				var self = plus.webview.currentWebview();
+				for(var i = 0; i < 5; i++) {
+					console.log("进入计算页面-------------------》" + i);
+					var temp = {};
+					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+					if(i > 0) {
+						sub.hide();
+					} else {
+						temp[subpages[i]] = "true";
+						mui.extend(aniShow, temp);
+					}
+					self.append(sub);
+				}
+
+				setTimeout(function() {
+					plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+						var wgtVer = inf.version;
+						checkUpdateForIndex(wgtVer, function() {
+							//commonHttpUtils(showdetailUrl, "get", {}, sussess, error);
+						});
+					});
+				}, 3000);
+
+				mui.oldBack = mui.back;
+				var backButtonPress = 0;
+				mui.back = function(event) {
+					backButtonPress++;
+					localStorage.removeItem("lauchFlag");
+					if(backButtonPress > 1) {
+						plus.runtime.quit();
+					} else {
+						plus.storage.removeItem("roster");
+						plus.nativeUI.toast('再按一次退出应用');
+					}
+					setTimeout(function() {
+						backButtonPress = 0;
+					}, 1000);
+					return false;
+				};
+
+				var pause = false; //是否切换到后台   
+				document.addEventListener("pause", onAppPause, false);
+
+				function onAppPause() {
+					pause = true;
+				}
+				document.addEventListener("resume", onAppReume, false);
+
+				function onAppReume() {
+					pause = false;
+				}
+
+				mui('.mui-bar').on( 'tap', '#ys',
+					function(e) {
+						plus.qsPlugin.openActivityWithHtml5("io.dcloud.TestActivity","Plus","AsyncFunction","MultiArgument!",
+						function(result) {alert(result)},
+						function(result) {alert(result)}
+					);
+
+				});
+
+				plus.push.addEventListener("receive", function(msg) {
+					if(localStorage.getItem("ACCESSTOKEN") == null) { //未登录
+						mui.openWindow({
+							url: "login/login.html",
+							id: "login/login.html"
+						});
+					} else {
+						if(msg.content == "新消息") { //判断是聊天消息
+							//						plus.webview.getLaunchWebview().show()
+							//						setItemchatActive();
+							return;
+						} else {
+							if(plus.os.name == "Android") {
+								//							alert("receive" + JSON.stringify(msg));
+								//							alert("receive" + msg.payload);
+								//							alert("receive" + JSON.stringify(msg.payload));
+								//							alert("receive" + JSON.parse(msg.payload))
+								var data1 = JSON.parse(msg.payload);
+
+								if(data1._msgType && data1._msgType == "nf") {
+									//								alert("tc" + data1.tc)
+									if(data1.tc == "000003") {
+										if(activeTab == 'subpages/tab-webview-subpage-order.html') {
+											var template = plus.webview.getWebviewById("subpages/tab-webview-subpage-order.html");
+											template.reload();
+										} else if(activeTab !== 'subpages/tab-webview-subpage-order.html') {
+											$('#muiBadge').show();
+											var template = plus.webview.getWebviewById("subpages/tab-webview-subpage-order.html");
+											template.reload();
+										}
+									} else if(data1.tc == "000002" && data1.orderId) {
+										if(data1.servicetype == 0) {
+											mui.openWindow({
+												url: 'order/grab_order_detail.html',
+												id: 'order/grab_order_detail.html',
+												show: {
+													autoShow: false, //页面loaded事件发生后自动显示，默认为true
+													event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+												},
+												waiting: {
+													autoShow: true //自动显示等待框，默认为true
+												},
+												extras: {
+													orderId: data1.orderId //扩展参数
+												}
+											});
+										} else {
+											mui.openWindow({
+												url: 'order/report_order_detail.html',
+												id: 'order/report_order_detail.html',
+												show: {
+													autoShow: false, //页面loaded事件发生后自动显示，默认为true
+													event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+												},
+												waiting: {
+													autoShow: true //自动显示等待框，默认为true
+												},
+												extras: {
+													orderId: data.orderId //扩展参数
+												}
+											});
+										}
+
+									}
+									return;
+
+								}
+
+							} else if(plus.os.name == "iOS") {
+
+								if(typeof(msg.payload) === 'string') {
+									msg.payload = JSON.parse(msg.payload)
+								}
+								if(msg.payload && msg.payload.localflag && msg.payload.localflag == "LocalMsg") {
+									return;
+								}
+								//							alert("receive" + JSON.stringify(msg));
+								//							alert("receive" + msg);
+
+								var data1 = msg.payload;
+								data1.localflag = "LocalMsg"
+								//							alert(JSON.stringify(data1))
+
+								if(msg.payload._title) {
+									plus.push.createMessage(msg.payload._title, JSON.stringify(data1), null);
+								} else {
+									plus.push.createMessage("柒拾佳护健康管理", data1, null);
+								}
+							}
+						}
+					}
+				});
+
+				plus.push.addEventListener("click", function(msg) {
+					if(localStorage.getItem("ACCESSTOKEN") == null) { //未登录
+						mui.openWindow({
+							url: "login/login.html",
+							id: "login/login.html"
+						});
+					} else {
+						if(msg.content == "新消息") {
+							plus.webview.getLaunchWebview().show()
+							setItemchatActive();
+						} else {
+							if(plus.os.name == "iOS") {
+								var data1 = null;
+								//							alert(msg.content)
+								//								alert(msg.payload)
+								if(typeof(msg.payload) === 'string') {
+									msg.payload = JSON.parse(msg.payload)
+								}
+								data1 = msg.payload;
+								//								alert(data1.orderId);
+								if(data1.tc == "000003") {
+									if(activeTab == 'subpages/tab-webview-subpage-order.html') {
+										var template = plus.webview.getWebviewById("subpages/tab-webview-subpage-order.html");
+										template.reload();
+									} else if(activeTab !== 'subpages/tab-webview-subpage-order.html') {
+										$('#muiBadge').show();
+										var template = plus.webview.getWebviewById("subpages/tab-webview-subpage-order.html");
+										template.reload();
+									}
+								} else if(data1.tc == "000002" && data1.orderId) {
+									if(data1.servicetype == 0) {
+										mui.openWindow({
+											url: 'order/grab_order_detail.html',
+											id: 'order/grab_order_detail.html',
+											show: {
+												autoShow: false, //页面loaded事件发生后自动显示，默认为true
+												event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+											},
+											waiting: {
+												autoShow: true //自动显示等待框，默认为true
+											},
+											extras: {
+												orderId: data1.orderId //扩展参数
+											}
+										});
+									} else {
+										mui.openWindow({
+											url: 'order/report_order_detail.html',
+											id: 'order/report_order_detail.html',
+											show: {
+												autoShow: false, //页面loaded事件发生后自动显示，默认为true
+												event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+											},
+											waiting: {
+												autoShow: true //自动显示等待框，默认为true
+											},
+											extras: {
+												orderId: data1.orderId //扩展参数
+											}
+										});
+									}
+
+								}
+
+							} else if(plus.os.name == "Android") {
+								//							alert("click" + JSON.stringify(msg));
+								//							alert("click" + msg.payload);
+								//							alert("click" + JSON.stringify(msg.payload));
+								var data1 = msg.payload;
+								//							alert("click" + data1.tc);
+								//								alert(data1.orderId)
+								if(data1.tc == "000003") {
+									if(activeTab == 'subpages/tab-webview-subpage-order.html') {
+										var template = plus.webview.getWebviewById("subpages/tab-webview-subpage-order.html");
+										template.reload();
+									} else if(activeTab !== 'subpages/tab-webview-subpage-order.html') {
+										$('#muiBadge').show();
+										var template = plus.webview.getWebviewById("subpages/tab-webview-subpage-order.html");
+										template.reload();
+									}
+								} else if(data1.tc == "000002" && data1.orderId) {
+									if(data1.servicetype == 0) {
+										mui.openWindow({
+											url: 'order/grab_order_detail.html',
+											id: 'order/grab_order_detail.html',
+											show: {
+												autoShow: false, //页面loaded事件发生后自动显示，默认为true
+												event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+											},
+											waiting: {
+												autoShow: true //自动显示等待框，默认为true
+											},
+											extras: {
+												orderId: data1.orderId //扩展参数
+											}
+										});
+									} else {
+										mui.openWindow({
+											url: 'order/report_order_detail.html',
+											id: 'order/report_order_detail.html',
+											show: {
+												autoShow: false, //页面loaded事件发生后自动显示，默认为true
+												event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+											},
+											waiting: {
+												autoShow: true //自动显示等待框，默认为true
+											},
+											extras: {
+												orderId: data1.orderId //扩展参数
+											}
+										});
+									}
+
+								}
+							}
+						}
+					}
+				});
+
+				mui('.mui-bar').on('tap', '#publish', function(e) {
+					if(idapprove != 2) {
+						mui.toast("您暂时还没有通过审核")
+						return false
+					}
+					mui.openWindow({
+						url: 'circle/publish-article.html',
+						id: 'publish-article.html',
+						show: {
+							autoShow: false, //页面loaded事件发生后自动显示，默认为true
+							event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+						},
+						waiting: {
+							autoShow: true, //自动显示等待框，默认为true
+							title: '正在加载...', //等待对话框上显示的提示内容
+						}
+					});
+				});
+				mui('.mui-bar').on('tap', '#loginBtn', function(e) {
+					mui.openWindow({
+						url: "login/login.html",
+						id: "login/login.html"
+					});
+				});
+				console.log("hhhhhhhhhhhhhhhhhhhhhhhhh------->" + localStorage.getItem("ACCESSTOKEN"))
+				if(localStorage.getItem("ACCESSTOKEN") == null) { //未登录
+
+				} else { //已经登录
+					$("#loginBtn").hide()
+					var sussess = function(data) {
+						//服务器返回响应，根据响应结果，分析是否登录成功；
+						if(data.result == "success") {
+							localStorage.setItem('USER', JSON.stringify(data.obj));
+							idapprove = data.obj.idapprove;
+							if(data.obj.clause == '0') { //显示服务条款
+								mui.openWindow({
+									url: './login/clause.html',
+									id: 'login/clause.html',
+									show: {
+										autoShow: false, //页面loaded事件发生后自动显示，默认为true
+										event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+									},
+									waiting: {
+										autoShow: true //自动显示等待框，默认为true
+									}
+								});
+							} else {
+								if(data.obj.idapprove == '0') { //未认证
+									mui.openWindow({
+										url: './set/set_real_name.html',
+										id: 'set/set_real_name.html',
+										show: {
+											autoShow: false, //页面loaded事件发生后自动显示，默认为true
+											event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+										},
+										waiting: {
+											autoShow: true //自动显示等待框，默认为true
+										}
+									});
+								} else {
+									if(data.obj.homeaddress == null || data.obj.workaddress == null) {
+										var btnArray = ['去设置', '再等等'];
+										mui.confirm('请点击设置您的服务位置，设置后您可以使用抢单功能。', '设置服务位置', btnArray, function(e) {
+											if(e.index == 0) {
+												mui.openWindow({
+													url: './set/service_position.html',
+													id: 'set/service_position.html',
+													show: {
+														autoShow: true, //页面loaded事件发生后自动显示，默认为true
+														event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+													},
+													waiting: {
+														autoShow: true, //自动显示等待框，默认为true
+														title: '正在加载...', //等待对话框上显示的提示内容
+													}
+												});
+											}
+										});
+									}
+								}
+
+							}
+
+						} else {
+							mui.toast(data.msg);
+						}
+					};
+					commonHttpUtils(showdetailUrl, "get", {}, sussess, error);
+				}
+				if(plus.os.name == "Android") {
+					wakeLock();
+				}
+
+				upAppDetail(); //上传位置信息
+
+				//选项卡点击事件
+				mui('.mui-bar-tab').on('tap', 'a', function(e) {
+					var targetTab = this.getAttribute('href');
+					if(targetTab == activeTab) {
+						return;
+					}
+
+					if(this.id == "yihuquan" && localStorage.getItem("ACCESSTOKEN") != null) {
+						$("#publish").show()
+					} else {
+						$("#publish").hide()
+					}
+
+					if(this.id == "qiangdan") {
+						if(localStorage.getItem("ACCESSTOKEN") == null) { //未登录
+							mui.openWindow({
+								url: "login/login.html"
+							});
+							return false;
+						}
+						$('#muiBadge').hide();
+						var template = plus.webview.getWebviewById("subpages/tab-webview-subpage-order.html");
+						if(template) {
+							//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+							template.reload(true);
+						}
+					}
+					if(this.id == "mysetting") {
+						if(localStorage.getItem("ACCESSTOKEN") == null) { //未登录
+							mui.openWindow({
+								url: "login/login.html"
+							});
+							return false;
+						}
+						$("#set_detail").show();
+						document.getElementById("set_detail").addEventListener('tap', function(event) {
+							mui.openWindow({
+								url: './set/set_detail.html',
+								id: 'set/set_detail.html',
+								show: {
+									autoShow: false, //页面loaded事件发生后自动显示，默认为true
+									event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+								},
+								waiting: {
+									autoShow: true //自动显示等待框，默认为true
+								}
+							});
+						});
+
+						var template = plus.webview.getWebviewById("subpages/tab-webview-subpage-my.html");
+						if(template) {
+							//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+							template.evalJS("loaded()");
+						}
+					} else {
+						$("#set_detail").hide();
+					}
+
+					if(this.id == "dingdan") {
+						if(localStorage.getItem("ACCESSTOKEN") == null) { //未登录
+							mui.openWindow({
+								url: "login/login.html"
+							});
+							return false;
+						}
+					}
+
+					var tabSpan = this.querySelector('.mui-tab-label');
+					//更换标题
+					title.innerHTML = tabSpan.title ? tabSpan.title : tabSpan.innerHTML;
+					//显示目标选项卡
+					//若为iOS平台或非首次显示，则直接显示
+					if(mui.os.ios || aniShow[targetTab]) {
+						plus.webview.show(targetTab);
+					} else {
+						//否则，使用fade-in动画，且保存变量
+						var temp = {};
+						temp[targetTab] = "true";
+						mui.extend(aniShow, temp);
+						plus.webview.show(targetTab, "fade-in", 300);
+						plus.nativeUI.closeWaiting();
+					}
+					//隐藏当前;
+					plus.webview.hide(activeTab);
+					//更改当前活跃的选项卡
+					activeTab = targetTab;
+				});
+
+			});
+
+			//自定义事件，模拟点击“首页选项卡”
+			document.addEventListener('gohome', function() {
+				var defaultTab = document.getElementById("defaultTab");
+				//模拟首页点击
+				mui.trigger(defaultTab, 'tap');
+				//切换选项卡高亮
+				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+				if(defaultTab !== current) {
+					current.classList.remove('mui-active');
+					defaultTab.classList.add('mui-active');
+				}
+			});
+
+			//上传应用信息
+			function upAppDetail() {
+				// 百度地图获取当前gps
+				plus.geolocation.getCurrentPosition(function(p) {
+					var user = JSON.parse(localStorage.getItem("USER"));
+					var userid = (localStorage.getItem('USERID') == null ? "" : localStorage.getItem('USERID'));;
+					var username = (plus.storage.getItem('PHONE') == null ? "" : plus.storage.getItem('PHONE'));
+					var upArr = {
+						uuid: plus.device.uuid,
+						userid: userid,
+						username: username,
+						clienttype: "doctor",
+						ostype: plus.os.name,
+						otherinfo: {
+							gps: {
+								coordinates: [
+									p.coords.longitude,
+									p.coords.latitude
+								],
+								type: "Point"
+							}
+						}
+					}
+					commonHttpUtils(upappdetailUrl, "post", upArr, function(data) {}, error);
+				}, function(e) {
+					console.log('Geolocation error: ' + e.message);
+				});
+			}
+
+			//开始登录sdk并监听
+			var startListeners = function() {
+				webim.login(webimLoginInfo, listeners, {}, function(resp) {}, function(err) {});
+			}
+			//结束登录sdk并取消监听
+			var endListeners = function() {
+				webim.logout();
+			}
+			this.startListeners();
+
+			var setItemActive = function() {
+				var defaultTab = document.getElementById("dingdan");
+				//模拟首页点击
+				mui.trigger(defaultTab, 'tap');
+				//切换选项卡高亮
+				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+				if(defaultTab !== current) {
+					current.classList.remove('mui-active');
+					defaultTab.classList.add('mui-active');
+				}
+				activeTab = subpages[1]
+			};
+
+			var setItemYhActive = function() {
+				var defaultTab = document.getElementById("yihuquan");
+				//模拟首页点击
+				mui.trigger(defaultTab, 'tap');
+				//切换选项卡高亮
+				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+				if(defaultTab !== current) {
+					current.classList.remove('mui-active');
+					defaultTab.classList.add('mui-active');
+				}
+				activeTab = subpages[3]
+			};
+			var setItemchatActive = function() {
+				var defaultTab = document.getElementById("qiangdan");
+				//模拟首页点击
+				mui.trigger(defaultTab, 'tap');
+				//切换选项卡高亮
+				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+				if(defaultTab !== current) {
+					current.classList.remove('mui-active');
+					defaultTab.classList.add('mui-active');
+				}
+				activeTab = subpages[2];
+				localStorage.setItem("chatback", true);
+			};
+
+			//上送位置信息
+			var lInterval = {};
+			var lDate = {};
+
+			var setLInterval = function(id, num) {
+				if(lInterval[id]) {
+					return
+				}
+				lInterval[id] = listenner(id, num)
+			}
+
+			var clearLInterval = function(id) {
+				plus.geolocation.clearWatch(lInterval[id]);
+				lInterval[id] == undefined
+			}
+
+			//允许程序后台运行，以持续获取GPS位置
+			var g_wakelock = null;
+
+			function wakeLock() {
+				var main = plus.android.runtimeMainActivity();
+				var Context = plus.android.importClass("android.content.Context");
+				var PowerManager = plus.android.importClass("android.os.PowerManager");
+				var pm = main.getSystemService(Context.POWER_SERVICE);
+				g_wakelock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ANY_NAME");
+				g_wakelock.acquire();
+			}
+			//监听上传位置信息
+			function listenner(id, num) {
+				_watchId = plus.geolocation.watchPosition(function(p) {
+					var sussess = function(data) {};
+					var err = function() {}
+					var pd = {}
+					pd.coordsType = p.coordsType
+					pd.address = p.addresses
+					pd.latitude = p.coords.latitude
+					pd.longitude = p.coords.longitude
+
+					if(lDate[id]) {
+						var mint = Math.abs(moment(lDate[id]).diff(moment(), 'seconds'));
+						if(mint > 2) {
+							commonHttpUtilsNoWaiting(addordergpsUrl + id, "put", {
+								serviceNumber: num,
+								ingGps: pd
+							}, sussess, err);
+
+							lDate[id] = moment()
+						}
+					} else {
+						commonHttpUtilsNoWaiting(addordergpsUrl + id, "put", {
+							serviceNumber: num,
+							ingGps: pd
+						}, sussess, err);
+					}
+				}, function(e) {}, {
+					maximumAge: 0,
+					geocode: true,
+					enableHighAccuracy: true,
+					provider: 'baidu'
+				});
+				return _watchId
+			}
+		</script>
+	</body>
+
+</html>

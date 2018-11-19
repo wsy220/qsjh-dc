@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>服务确认</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<!--	<link rel="stylesheet" type="text/css" href="../css/app.css" />-->
+		<link rel="stylesheet" href="../css/mui.imageviewer.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<style>
+			.mui-table h4,
+			.mui-table h5,
+			.mui-table .mui-h5,
+			.mui-table .mui-h6,
+			.mui-table p {
+				margin-top: 0;
+			}
+			
+			.mui-table h4 {
+				line-height: 21px;
+				font-weight: 500;
+			}
+			
+			.mui-table .oa-icon {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+			}
+			
+			.mui-table .oa-icon-star-filled {
+				color: #f14e41;
+			}
+			
+			.img_one {
+				text-align: center;
+			}
+			
+			.img_one img {
+				width: 50% !important;
+				margin-top: 1rem;
+			}
+			
+			.img_one span {
+				color: #000000;
+				font-size: 0.9rem;
+			}
+			/*.mui-table-view {
+				border-bottom: 5px solid #eeeeee;
+			}*/
+			
+			.word_hi_one .hello_one {
+				font-size: 0.9rem !important;
+				font-weight: 700;
+			}
+			
+			.word_hi_one .hello_two,
+			.hello_three {
+				color: #bb002f;
+				font-size: 0.9rem;
+			}
+			
+			.add_medicine,
+			.add_medicine_ok {
+				display: inline-block;
+				margin-top: 8%;
+			}
+			
+			.add_medicine {
+				width: 45%;
+				height: 2.2rem;
+				background-color: #cacaca;
+				border-radius: 10px;
+				font-size: 0.9rem;
+				text-align: center;
+				padding-top: 2%;
+				/*color: #FFF;*/
+			}
+			
+			.add_medicine_ok {
+				width: 47%;
+				height: 2.2rem;
+				background-color: #fcb565;
+				border-radius: 10px;
+				font-size: 0.9rem;
+				text-align: center;
+				padding-top: 2%;
+				margin-left: 5%;
+				/*color: #FFF;*/
+			}
+			
+			.hello_two_oye {
+				margin-left: 20px;
+				font-size: 0.9rem;
+			}
+			
+			.word_hi_one img {
+				width: 16px !important;
+				/*margin-top:3px;*/
+				margin-right: 3px;
+				position: absolute;
+				#top: 62%;
+				left: 0;
+			}
+			
+			.you_yao {
+				color: #000;
+				font-size: 0.9rem;
+				font-weight: 700;
+			}
+			
+			input[type=color],
+			input[type=date],
+			input[type=datetime-local],
+			input[type=datetime],
+			input[type=email],
+			input[type=month],
+			input[type=number],
+			input[type=password],
+			input[type=search],
+			input[type=tel],
+			input[type=text],
+			input[type=time],
+			input[type=url],
+			input[type=week],
+			select,
+			textarea {
+				line-height: 21px;
+				width: 100%;
+				height: 3.5rem;
+				margin-bottom: 15px;
+				padding: 10px 15px;
+				border-radius: 0;
+				border: 1px solid #dcdcdc;
+				outline: 0;
+				background-color: #fff;
+				margin-top: 2px;
+				font-family: "微软雅黑";
+				font-size: 0.9rem;
+				text-align: left;
+			}
+			
+			.cancel_w {
+				height: 12rem;
+			}
+			
+			.cancel_ww {
+				height: 6rem;
+			}
+			
+			.go_out {
+				margin-right: 1%;
+			}
+			
+			.go_away {
+				font-size: 0.9rem;
+			}
+			
+			.mui-btn-warning {
+				background: #d7d7d7;
+				border-radius: 5px;
+				width: 100%;
+				height: 3.5rem !important;
+				font-size: 0.9rem;
+				border: none;
+				color: #000;
+			}
+			
+			.mui-btn-block {
+				font-size: 0.9rem;
+				display: block;
+				width: 100%;
+				/*margin-bottom: 10px;*/
+				padding: 17px 10px 17px 10px;
+			}
+			
+			.mui-btn-warn {
+				background: #FCB565;
+				border-radius: 5px;
+				width: 100%;
+				height: 2.9rem;
+				font-size: 0.9rem;
+				border: none;
+				padding: 17px 10px 17px 10px;
+			}
+			
+			.shuaigege {
+				padding-bottom: 6px;
+				display: inline-block;
+			}
+			
+			.sorry_one {
+				margin-top: 10%;
+			}
+			
+			.go_out img {
+				width: 80%;
+				margin-top: 100%;
+				margin-left: 64%;
+			}
+			
+			.top_header {
+				height: 9rem;
+				background: #ffffff;
+				border: 1px solid #dcdcdc;
+				margin: 1% 0 0 0;
+				padding-top: 3%;
+			}
+			
+			.top_header_one {
+				#height: 8rem;
+				background: #ffffff;
+				border: 1px solid #dcdcdc;
+				padding: 3% 4% 3% 4%;
+			}
+			
+			.top_header_two {
+				height: 9rem;
+				background: #ffffff;
+				border: 1px solid #dcdcdc;
+				margin: 1% 0;
+				padding: 3% 4% 3% 4%;
+			}
+			
+			.top_header_three {
+				height: 9rem;
+				background: #ffffff;
+				border: 1px solid #dcdcdc;
+				margin: 0 0 1% 0;
+				padding: 3% 4% 3% 4%;
+			}
+			
+			.top_header_four {
+				height: 9rem;
+				background: #ffffff;
+				border: 1px solid #dcdcdc;
+				/*margin: 0 0 1% 0 ;*/
+				padding: 3% 4% 3% 4%;
+			}
+			
+			.top_header_five {
+				height: 8rem;
+				background: #ffffff;
+				padding: 4% 4%;
+			}
+			
+			.chang_red {
+				border: 1px solid red!important;
+			}
+			
+			html,
+			body,
+			.mui-content {
+				height: 0px;
+				margin: 0px;
+				background-color: #efeff4;
+			}
+			
+			h5.mui-content-padded {
+				margin-left: 3px;
+				margin-top: 20px !important;
+			}
+			
+			h5.mui-content-padded:first-child {
+				margin-top: 12px !important;
+			}
+			
+			.mui-btn {
+				font-size: 16px;
+				padding: 8px;
+				margin: 3px;
+			}
+			
+			.ui-alert {
+				text-align: center;
+				padding: 20px 10px;
+				font-size: 16px;
+			}
+			
+			* {
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+			}
+			
+			.ui-alert {
+				width: 55%;
+				height: 0.8rem;
+				text-align: center;
+				float: left;
+				padding-top: 0.3rem;
+			}
+			
+			.begin_ok {
+				float: left;
+				font-size: 0.9rem;
+				#margin: 2% 8% 1%8%;
+			}
+			
+			.begin_ok_01 {
+				font-size: 0.9rem;
+				padding-right: 20px;
+				#margin: 2% 8% 1%8%;
+			}
+			
+			.end_ok {
+				float: left;
+				font-size: 0.9rem;
+				margin: 2% 8% 1%8%;
+			}
+			
+			.fudong {
+				overflow: hidden;
+			}
+			
+			.fudong img {
+				float: left;
+			}
+			
+			.guohe_one {
+				width: 65px;
+				height: 90px;
+				overflow: hidden;
+				float: left;
+				margin: 3px;
+			}
+			
+			.mui-table-view-cell.mui-active {
+				background-color: #fff
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">服务确认</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<div class="out_recipedate">
+				<div class="mui-table top_header_one">
+					<div class="mui-table-cell mui-col-xs-12 word_hi_one" style="position:relative">
+						<span class="hello_one">处方开据日期：</span><span id="recipedate" class="mui-h6 mui-ellipsis"></span>
+					</div>
+				</div>
+			</div>
+			<div class="out">
+				<div class="mui-table top_header_one fudong" id="abountImgs">
+					<!--<div class="mui-table-cell mui-col-xs-3 img_one" id="img_one">
+						<img id="idImgOne" src="" alt="" data-preview-src="" data-preview-group="1" /><br />
+						<span class="mui-h6 mui-ellipsis">处方</span>
+					</div>
+					<div class="mui-table-cell mui-col-xs-3  img_one" id="img_tw">
+						<img id="idImgtw" src="" alt="" data-preview-src="" data-preview-group="1" /><br />
+						<span class="mui-h6 mui-ellipsis">药品</span>
+					</div>
+					<div class="mui-table-cell mui-col-xs-3 img_one" id="img_th">
+						<img id="idImgth" src="" alt="" data-preview-src="" data-preview-group="1" /><br />
+						<span class="mui-h6 mui-ellipsis">病例</span>
+					</div>
+					<div class="mui-table-cell mui-col-xs-3 img_one" id="img_fo">
+						<img id="idImgfo" src="" alt="" data-preview-src="" data-preview-group="1" /><br />
+						<span class="mui-h6 mui-ellipsis">居住环境</span>
+					</div>-->
+				</div>
+			</div>
+			<div class="out_one">
+				<div class="mui-table top_header_one">
+					<div class="mui-table-cell mui-col-xs-12 word_hi_one" style="position:relative">
+						<span class="hello_one">如您无法根据患者提供的就医证明材料确认药品，可以点击下方按钮联系患者：</span><br /><br />
+						<p><img src="../images/order/dh.png" alt="" /><span class="hello_two_oye">匿名电话</span></p>
+					</div>
+
+				</div>
+
+				<div class="mui-table top_header_two">
+					<p class="you_yao">请根据患者上传的就医证明材料选择本服务<span style="color: red;">单次</span>所需的药品：</p>
+					<div class="mui-row">
+						<div class="mui-col-sm-5 mui-col-xs-5 go_out">
+							<span class="go_away">药品名称</span>
+						</div>
+						<div class="mui-col-sm-3 mui-col-xs-3 go_out">
+							<span class="go_away">规格</span>
+						</div>
+						<div class="mui-col-sm-2 mui-col-xs-2 go_out">
+							<span class="go_away">数量</span>
+						</div>
+					</div>
+					<div id="drug-input"></div>
+					<button id="drugbt" class="mui-btn mui-btn-block mui-btn-warning">+添加药品</button>
+				</div>
+			</div>
+
+			<!--<div class="out_two">
+				<div class="mui-table  top_header_three">
+					<p class="you_yao">添加备品：</p>
+
+					<div class="mui-row" style="margin-bottom: 10px;">
+						<div class="mui-col-sm-5 mui-col-xs-5 go_out">
+							<span class="go_away">备品名称</span>
+						</div>
+						<div class="mui-col-sm-3 mui-col-xs-3 go_out">
+							<span class="go_away">规格</span>
+						</div>
+						<div class="mui-col-sm-2 mui-col-xs-2 go_out">
+							<span class="go_away">数量</span>
+						</div>
+					</div>
+					<div id="spara-input"></div>
+					<button id="sparebt" class="mui-btn mui-btn-block mui-btn-warning">+添加备品</button>
+				</div>
+			</div>-->
+
+			<div class="out_three">
+				<div class="mui-table mui-row top_header_four">
+					<p class="you_yao">
+						选择服务时间：
+					</p>
+					<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed tableUL" id="shangmenTime">
+						<li class="mui-table-view-cell">
+							<a href="#" class="mui-navigate-right">
+								<div class="mui-table">
+									<div class="mui-table-cell ">
+										<span class="begin_ok">服务时间:</span><span id="time_message_pull_right" class="begin_ok_01 mui-pull-right mui-ellipsis"></span>
+									</div>
+								</div>
+							</a>
+						</li>
+					</ul>
+					<div style="display: none;">
+						<span class="begin_ok">起始时间</span><button id='startTime' data-options='{"value":"2015-10-10 10:10","beginYear":2010,"endYear":2020}' class="btn mui-btn mui-btn-block time_btn ui-alert"></button><br/>
+						<span class="end_ok">结束时间</span><button id='endTime' data-options='{"value":"2015-10-10 10:10","beginYear":2010,"endYear":2020}' class="btn mui-btn mui-btn-block time_btn ui-alert"></button>
+					</div>
+				</div>
+			</div>
+
+			<div class="mui-table mui-row top_header_five">
+				<button id="savaAll" class="mui-btn .mui-btn-block mui-btn-warn sorry_one">确认</button>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.min.js"></script>
+	<script type="text/javascript" src="../js/mui.zoom.js"></script>
+	<script type="text/javascript" src="../js/mui.previewimage.js"></script>
+	<script type="text/javascript" src="../js/json_time.js"></script>
+	<script type="text/javascript" src="../js/getDate.js"></script>
+
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+	<script type="text/javascript" src="../plugs/md5/md5.min.js"></script>
+
+	<script>
+		var sparenum = 0;
+
+		var drugnum = 0;
+		var startTime;
+		var endTime;
+		mui.init({
+			keyEventBind: {
+				backbutton: true //打开back按键监听
+			},
+			beforeback: function() {
+				//获得列表界面的webview
+				var i = plus.webview.getWebviewById("order/confim_service_order_detail.html");
+				if(i) {
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+					i.evalJS("init()");
+				}
+				return true;
+			}
+		});
+		var specifieddate;
+		mui.previewImage();
+		mui.plusReady(function() {
+			var currentView = plus.webview.currentWebview();
+			currentView.setStyle({ softinputMode: "adjustResize" });
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+			
+			var currentView = plus.webview.currentWebview();
+			var orderId = currentView.orderId;
+			var timeisconfirm = currentView.timeisconfirm;
+			var drugisconfirm = currentView.drugisconfirm;
+			var sparesconfirm = currentView.sparesconfirm;
+			var phoneNo = currentView.phoneNo;
+			var customertel = currentView.customertel;
+			var isprovidespares = currentView.isprovidespares;
+			var isprovidedrugs = currentView.isprovidedrugs;
+			var recipedate = currentView.recipedate;
+
+			var orderImgs = JSON.parse(currentView.orderImgs)
+
+			specifieddate = currentView.specifieddate; //父页面传递的数据，子页面接收。
+
+			//setPagePos();
+		
+
+			if(recipedate && recipedate != '' && recipedate != 'undefined') {
+				$(".out_recipedate").show()
+				$("#recipedate").html(recipedate)
+			} else {
+				$(".out_recipedate").hide()
+			}
+
+			function getImgDiv(path, name) {
+				path = serverAddress + "/" + path.replace('client', '').replace(/\\/g, "/")
+				return '<div class="guohe_one"><img class="qs-img-lazyload" src="../images/add.pn" data-lazyload="' + path + '" alt="" data-preview-src="" data-preview-group="1" /><br /><div style="text-align:center;font-size: 0.9rem;color:#8a8989;">' + name + '</div></div>'
+			}
+			if(orderImgs && orderImgs != '') {
+				if(orderImgs.recipeImgs) {
+					orderImgs.recipeImgs.forEach(function(v) {
+						$("#abountImgs").append(getImgDiv(v, '处方'))
+					})
+				}
+				if(orderImgs.drugImgs) {
+					orderImgs.drugImgs.forEach(function(v) {
+						$("#abountImgs").append(getImgDiv(v, '药品'))
+					})
+				}
+
+				if(orderImgs.sparesImgs) {
+					orderImgs.sparesImgs.forEach(function(v) {
+						$("#abountImgs").append(getImgDiv(v, '备品'))
+					})
+				}
+				if(orderImgs.caseImgs) {
+					orderImgs.caseImgs.forEach(function(v) {
+						$("#abountImgs").append(getImgDiv(v, '病例'))
+					})
+				}
+				if(orderImgs.environmenImgs) {
+					orderImgs.environmenImgs.forEach(function(v) {
+						$("#abountImgs").append(getImgDiv(v, '居住环境'))
+					})
+				}
+
+				$(".qs-img-lazyload").each(function(i, v) {
+					$$.lazyload(v)
+				})
+			}
+
+			if(!drugisconfirm && !isprovidedrugs) {
+				$(".out_one").show()
+			} else {
+				$(".out_one").hide()
+				$("#drug-input").html('')
+			}
+//			if(!sparesconfirm && !isprovidespares) {
+//				$(".out_two").show()
+//			} else {
+//				$(".out_two").hide()
+//				$("#spara-input").html('')
+//			}
+			if(!timeisconfirm) {
+				$(".out_three").show()
+			} else {
+				$(".out_three").hide()
+			}
+
+//			$("#sparebt").click(function(event) {
+//				sparenum = sparenum + 1;
+//				$("#spara-input").processTL(templateRegister.orderAddSpare, {
+//					num: sparenum
+//				})
+//			});
+			$("#drugbt").click(function(event) {
+				drugnum = drugnum + 1;
+				$("#drug-input").processTL(templateRegister.orderAddDrug, {
+					num: drugnum
+				})
+			});
+
+			mui(".mui-content").on("tap", ".hello_two_oye", function() {
+				plus.device.dial(phoneNo, false);
+			});
+
+//			mui(".mui-content").on("tap", ".spare-delete", function() {
+//				var rowId = $(this).attr("data-row")
+//				$("#" + rowId).remove()
+//			});
+
+			mui(".mui-content").on("tap", ".drug-delete", function() {
+				var rowId = $(this).attr("data-row")
+				$("#" + rowId).remove()
+			});
+
+			//var spareObj = [];
+			var drugObj = [];
+			mui(".mui-content").on("tap", "#savaAll", function() {
+				var btnArray = ['取消', '确定'];
+				mui.confirm('您已确认所填写的内容准确无误。点击【确认】按钮后将不能更改。', '确认提示', btnArray, function(e) {
+					if(e.index == 1) {
+						var flag = true;
+						//spareObj = [];
+						//spareSub = {};
+						drugObj = [];
+						drugSub = {};
+//						$(".spare-row").each(function() {
+//							var num = $(this).attr("data-num")
+//							var mc = $("#spara-mc-" + num).val();
+//							if(mc) {
+//								$("#spara-mc-" + num).removeClass('chang_red')
+//							} else {
+//								flag = false;
+//								$("#spara-mc-" + num).addClass('chang_red')
+//							}
+//							var gg = $("#spara-gg-" + num).val();
+//							if(gg) {
+//								$("#spara-gg-" + num).removeClass('chang_red')
+//							} else {
+//								flag = false;
+//								$("#spara-gg-" + num).addClass('chang_red')
+//							}
+//							var sl = $("#spara-sl-" + num).val();
+//							if(sl) {
+//								$("#spara-sl-" + num).removeClass('chang_red')
+//							} else {
+//								flag = false;
+//								$("#spara-sl-" + num).addClass('chang_red')
+//							}
+//							if(mc && gg && sl) {
+//								spareObj.push({
+//									drugsname: mc,
+//									standard: gg,
+//									numbers: sl
+//								})
+//							}
+//						});
+
+						$(".drug-row").each(function() {
+							var num = $(this).attr("data-num")
+							var mc = $("#drug-mc-" + num).val();
+							if(mc) {
+								$("#drug-mc-" + num).removeClass('chang_red')
+							} else {
+								flag = false;
+								$("#drug-mc-" + num).addClass('chang_red')
+							}
+							var gg = $("#drug-gg-" + num).val();
+							if(gg) {
+								$("#drug-gg-" + num).removeClass('chang_red')
+							} else {
+								flag = false;
+								$("#drug-gg-" + num).addClass('chang_red')
+							}
+							var sl = $("#drug-sl-" + num).val();
+							if(sl) {
+								$("#drug-sl-" + num).removeClass('chang_red')
+							} else {
+								flag = false;
+								$("#drug-sl-" + num).addClass('chang_red')
+							}
+							if(mc && gg && sl) {
+								drugObj.push({
+									drugsname: mc,
+									standard: gg,
+									numbers: sl
+								})
+							}
+						});
+
+						if(flag) {
+							if(!drugisconfirm && drugObj.length == 0 && !isprovidedrugs) {
+								mui.toast("请确认药品");
+								return false;
+							}
+//							if(!sparesconfirm && spareObj.length == 0 && !isprovidespares) {
+//								mui.toast("请确认备品");
+//								return false;
+//							}
+
+							var ordersussess = function(data) {
+								if(data.result == "success") {
+									mui.toast("服务已确认");
+									mui.back();
+								} else {
+									mui.toast(data.msg);
+								}
+							}
+
+							var url = setorderconfirmUrl + orderId
+							var data = {}
+							if(!timeisconfirm) {
+								data.intervalbegin = document.getElementById("startTime").innerText
+								data.intervalend = document.getElementById("endTime").innerText
+
+							}
+							//data.orderSpares = spareObj;
+							data.orderDrugs = drugObj;
+							commonHttpUtils(url, "put", data, ordersussess, error);
+
+						} else {
+							mui.toast("请完整录入信息");
+						}
+					}
+
+				});
+			});
+
+			function compareTime(startTime, endTime) {
+				var d1 = new Date(startTime.replace(/\-/g, "\/"));
+				var d2 = new Date(endTime.replace(/\-/g, "\/"));
+				if(startTime != "" && endTime != "" && d1 >= d2) {
+					alert("开始时间不能大于结束时间！");
+					return false;
+				}
+			}
+
+			var biaoshi1 = '';
+			document.getElementById("shangmenTime").addEventListener('tap', function(e) {
+				var now = new Date();
+				var num = 11 - (now.getHours() - 8);
+				var timeArray = [];
+				for(var i = 0; i < parseInt(num); i++) {
+					var options2 = {};
+					options2["text"] = (now.getHours() + 1 + i) + ":00-" + (now.getHours() + 2 + i);
+					options2["value"] = (now.getHours() + 1 + i) + ":00-" + (now.getHours() + 2 + i);
+					timeArray.push(options2);
+				}
+				console.log(specifieddate)
+				var td = moment(specifieddate);
+
+				console.log(td.format('DD'))
+				var picker = new mui.DtPicker({
+					"type": "date",
+					"beginYear": td.year(),
+					"endYear": td.year(),
+					"beginMonth": td.format('MM'),
+					"endMonth": td.format('MM'),
+					"beginDay": td.format('DD'),
+					"endDay": td.format('DD'),
+					"type": "hour",
+					"customData": {
+						"h": timeArray
+					},
+					"labels": ["年", "月", "日", "时段"]
+				});
+				picker.show(function(rs) {
+					$("#time_message_pull_right").html(rs.y.text + '-' + rs.m.text + '-' + rs.d.text + ' ' + rs.h.text + ":" + rs.i.text);
+					var h = rs.h.text + ":" + rs.i.text
+					var strs = h.split("-");
+					document.getElementById("startTime").innerText = rs.y.text + '-' + rs.m.text + '-' + rs.d.text + ' ' + strs[0]
+					document.getElementById("endTime").innerText = rs.y.text + '-' + rs.m.text + '-' + rs.d.text + ' ' + strs[1]
+					picker.dispose();
+				});
+			}, false);
+		});
+	</script>
+
+</html>

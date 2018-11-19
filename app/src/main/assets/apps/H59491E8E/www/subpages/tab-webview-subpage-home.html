@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>七十佳护首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />-->
+		<link rel="stylesheet" href="../fonts/iconfont.css" />
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/app.css" type="text/css">
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/scroll_style.css" />
+		<style>
+			.mui-grid-view.mui-grid-9 {
+				margin: 0;
+				padding-top: 50px;
+				border: 0;
+				background: none;
+			}
+			
+			html {
+				font-size: 100%;
+				background-color: #ffffff;
+			}
+			
+			body {
+				background-color: #ffffff;
+			}
+			
+			.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+				margin: 0;
+				/*padding: 0px 0.15rem;*/
+				/*vertical-align: top;*/
+				border: 0;
+			}
+			
+			.mui-table-view-cell {
+				padding: 0px 0px;
+			}
+			
+			.fuwucategory {
+				margin: 10px 20px !important;
+			}
+			
+			.mui-table-view-cell.mui-active,
+			.mui-table-view-cell>a:not(.mui-btn).mui-active {
+				background-color: #FFFFFF;
+			}
+			
+			.mui-table-view-cell:after {
+				left: 0;
+			}
+			
+			.mui-table-view-cell.mui-collapse .mui-collapse-content>.mui-input-group,
+			.mui-table-view-cell.mui-collapse .mui-collapse-content>.mui-slider {
+				margin: 0px -15px;
+			}
+			
+			.anniu {
+				background: url(../images/home/main_bg.png) no-repeat;
+				background-size: 100% auto;
+				#background-size: contain;
+				width: 100%;
+				height: 74vh;
+				z-index: 9999;
+				margin-top: -45px;
+				/* background-attachment: fixed;*/
+				position: absolute;
+				background-position: top;
+			}
+			
+			.anniusub {}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 20px;
+			}
+			
+			body {
+				background: none;
+			}
+			
+			.mui-slider {
+				z-index: 0;
+			}
+			
+			.mui-content {
+				background: none;
+			}
+			
+			.mui-slider-indicator {
+				position: absolute;
+				bottom: 45px;
+				left: 0px;
+				width: 100%;
+				text-align: center;
+				background: 0 0;
+			}
+			
+			.lefttop1 img,
+			.lefttop2 img,
+			.righttop1 img,
+			.righttop2 img,
+			.righttop3 img,
+			.center2 img {
+				max-width: 1.5rem;
+				text-align: center;
+			}
+			
+			.center1 img {
+				max-width: 2.95rem;
+				text-align: center;
+			}
+			
+			.lefttop1,
+			.lefttop2,
+			.righttop1,
+			.righttop2,
+			.righttop3,
+			.center2,
+			.center1 {
+				text-align: center;
+			}
+			
+			.lefttop1 {
+				position: absolute;
+				top: 1.2rem;
+				left: 0.1rem;
+			}
+			
+			.center1 {
+				position: absolute;
+				top: 1rem;
+				left: 2.4rem;
+			}
+			
+			.lefttop2 {
+				position: absolute;
+				top: 3rem;
+				left: 0.7rem
+			}
+			
+			.righttop1 {
+				position: absolute;
+				top: 1.2rem;
+				right: 0.1rem;
+			}
+			
+			.center2 {
+				position: absolute;
+				top: 3rem;
+				right: 0.7rem;
+			}
+			
+			.righttop2 {
+				position: absolute;
+				top: 3.8rem;
+				right: 0.6rem;
+			}
+			
+			.righttop3 {
+				position: absolute;
+				top: 4.3rem;
+				left: 3rem;
+			}
+			
+			#myCarousel {
+				z-index: -99;
+			}
+			
+			.mui-action-back {
+				color: #FFFFFF
+			}
+			
+			.mui-icon .mui-badge {
+				font-size: 10px;
+				line-height: 1.4;
+				position: absolute;
+				top: -2px;
+				left: 100%;
+				margin-left: -10px;
+				padding: 1px 5px;
+				color: #fff;
+			}
+			
+			.icon {
+				width: 1em;
+				height: 1em;
+				vertical-align: -0.15em;
+				fill: currentColor;
+				overflow: hidden;
+			}
+			
+			.ad-position {
+				position: absolute;
+				z-index: 999;
+				margin: 10px;
+				color: grey;
+				padding: 0px 10px;
+				font-size: 10px;
+				border: 1px gainsboro solid;
+				border-radius: 8px;
+				background: rgba(255, 255, 255, 0.4);
+			}
+			
+			.huadong {
+				width: 100%;
+				height: 1rem;
+				position: absolute;
+				bottom: 3px;
+				background-color: rgba(255, 241, 185, .65);
+			}
+			
+			.huadong .huabox {
+				margin: 0 auto;
+				width: 80%;
+				line-height: 4rem;
+			}
+			
+			.huadong .hdimg {
+				float: left;
+				line-height: 3.5rem;
+			}
+			
+			.huadong .gg_more {
+				float: left;
+			}
+			
+			.huadong .gg_more a {
+				font-size: 12px;
+				text-decoration: none;
+			}
+			
+			.huadong .notice_active {
+				width: 100%;
+				height: 1rem;
+				padding: 0;
+				overflow: hidden;
+				position: relative;
+			}
+			
+			.huadong .notice_active li {
+				list-style-type: none;
+				line-height: 0.4rem;
+				overflow: hidden;
+			}
+			/*.huadong .notice_active li.notice_active_ch {}*/
+			
+			.huadong .notice_active li.notice_active_ch span {
+				color: #d68a47;
+				font-size: 12px;
+				display: block;
+				overflow: hidden;
+				width: 80%;
+				float: left;
+				overflow: hidden;
+			}
+			
+			.huadong .gg_more .news_ck {
+				float: left;
+				margin: 0 1rem 0 1rem;
+				color: #888;
+				width: 5rem;
+				height: 2rem;
+				line-height: 2rem;
+				display: block;
+				border: 1px solid #656972;
+				text-align: center;
+				border-radius: 0.7rem;
+				font-size: 12px;
+				margin-top: 1rem;
+			}
+			
+			.huadong .gg_more .news_more {}
+			
+			.huadong .notice_active li.notice_active_ch em {
+				text-align: right;
+				float: right;
+				color: #d68a47;
+				font-size: 12px;
+				font-style: normal;
+			}
+			
+			.guanbi_ul {
+				margin-top: 0.25rem;
+				float: right;
+				margin-right: 10px;
+			}
+		</style>
+	</head>
+
+	<body style="overflow:scroll;overflow-x:hidden" id="body-height">
+		<div class="mui-content" id="content">
+			<div id="lunbo" style="min-height: 230px;">
+				<div id="slider" class="mui-slider">
+					<div class="mui-slider-group mui-slider-loop" id="lunbo">
+
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#">
+								<img style="height:230px" class="qs-img-lazyload" src="../images/advert/banner.jpg">
+							</a>
+						</div>
+					</div>
+					<!--<div class="mui-slider-indicator">
+						<div class="mui-indicator"></div>
+					</div>-->
+				</div>
+
+			</div>
+			<div class="anniu">
+				<div class="center1" id="center1">
+					<span class="mui-icon" id="grab_one"><a id="default_Tab"><img src="../images/index_img/main_button1.png"></a></span>
+					<div class="mui-media-body"></div>
+				</div>
+				<div class="lefttop2" id="item2_zonghe"><span class="mui-icon"><img src="../images/index_img/main_button4.png"></span>
+					<div class="mui-media-body" style="color:#32589f;">订单中心</div>
+				</div>
+				<div class="center2" id="center2"><span class="mui-icon"><img src="../images/index_img/main_button5.png"></span>
+					<div class="mui-media-body" style="color:#32589f;">医护圈</div>
+				</div>
+				<!--<div class="righttop2" id="righttop2"><span class="mui-icon"><img src="../images/index_img/main_button3.png"></span>
+						<div class="mui-media-body">随访管理</div>
+					</div>-->
+				<div class="righttop3" id="righttop3"><span class="mui-icon"><img src="../images/index_img/jtys.png"></span>
+					<div class="mui-media-body" style="color:#32589f;">家庭医生</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+	<script type="text/javascript" src="../js/index.js"></script>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="../js/scroll.js"></script>
+	<!--<script type="text/javascript" src="../fonts/iconfont.js"></script>-->
+	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+	<script type="text/javascript" src="../plugs/md5/md5.min.js"></script>
+	<script type="text/javascript" src="../plugs/iscroll/iscroll-probe.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.iscroll.new.js"></script>
+	<script>
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+		mui.ready(function() {
+
+		});
+		//首页轮播链接配置
+		var dataConfig_imglunbo = {
+			"MSG001": {
+				"name": "优惠券广告链接",
+				"code": "1",
+				"type": "sm",
+				"link": "",
+				"opentype": "1",
+				"introduction": "优惠券广告链接",
+			},
+			"MSG002": {
+				"name": "外部链接",
+				"code": "1",
+				"type": "sm",
+				"link": "/set/nodata.html",
+				"opentype": "2",
+				"introduction": "外部链接",
+			},
+			"MSG003": {
+				"name": "关于我们",
+				"code": "1",
+				"type": "sm",
+				"link": "/set/info.html",
+				"opentype": "-1",
+				"introduction": "关于我们",
+			}
+		}
+
+		$(".anniu").height(window.screen.availHeight - 280);
+		$(".center1 img").width(window.screen.availWidth / 3)
+		$(".lefttop2 img").width(window.screen.availWidth / 6)
+		$(".center2 img").width(window.screen.availWidth / 6)
+		$(".righttop3 img").width(window.screen.availWidth / 6)
+
+		$("#default_Tab").click(function(e) {
+			if(localStorage.getItem("ACCESSTOKEN") == null) { //未登录
+				mui.openWindow({
+					url: "../login/login.html"
+				});
+				return false;
+			}
+			var user = JSON.parse(localStorage.getItem("USER"));
+			console.log(JSON.stringify(user));
+			if(user.idapprove != 2) {
+				mui.toast("您暂时还没有通过审核");
+				return false
+			}
+			mui.openWindow({
+				url: '../order/catch_order.html',
+				id: 'catch_order.html',
+				show: {
+					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true //自动显示等待框，默认为true
+				}
+			});
+		});
+		$('#item2_zonghe').click(function(e) {
+			if(localStorage.getItem("ACCESSTOKEN") == null) { //未登录
+				mui.openWindow({
+					url: "../login/login.html"
+				});
+				return false;
+			}
+			var i = plus.webview.getLaunchWebview();
+			if(i) {
+				//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+				i.evalJS("setItemActive()");
+			}
+			return true;
+		});
+
+		$('#center2').click(function(e) {
+			var i = plus.webview.getLaunchWebview();
+			if(i) {
+				//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+				i.evalJS("setItemYhActive()");
+			}
+			return true;
+		});
+		//		$('#righttop2').click(function(e) {
+		//			mui.toast("正在建设中 ... ...")
+		//		});
+
+		$('#righttop3').click(function(e) {
+			if(localStorage.getItem("ACCESSTOKEN") == null) { //未登录
+				mui.openWindow({
+					url: "../login/login.html"
+				});
+				return false;
+			}
+			var sussess = function(data) {
+				console.log("获取当前登录用户所在的家庭医生团队:" + JSON.stringify(data));
+				if(data.result == "success") {
+					var user = JSON.parse(localStorage.getItem("USER"));
+					if(data.obj.length == 1) {
+						console.log("当前用户所在家庭医生团队信息,去信息展示页面：" + JSON.stringify(data.obj[0]));
+						localStorage.setItem("currentFDT", JSON.stringify(data.obj[0]));
+						mui.openWindow({
+							url: '../familydoctor/fdt_index.html',
+							id: 'familydoctor/fdt_index.html',
+							extras: {
+								fdt_id: data.obj[0]._id
+							},
+							show: {
+								autoShow: false, //页面loaded事件发生后自动显示，默认为true
+								event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+							},
+							waiting: {
+								autoShow: true //自动显示等待框，默认为true
+							}
+						});
+					} else if(data.obj) {
+						console.log("当前登录用户信息：" + JSON.stringify(user));
+						if(user.fdtcreater == 1) {
+							//console.log("具有创建家庭医生团队的权限，去创建页面");
+							console.log("不具有创建家庭医生团队的权限，去信息展示页面");
+							mui.openWindow({
+								url: '../familydoctor/no_fdt.html',
+								id: 'familydoctor/no_fdt.html',
+								show: {
+									autoShow: false, //页面loaded事件发生后自动显示，默认为true
+									event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+								},
+								waiting: {
+									autoShow: true //自动显示等待框，默认为true
+								}
+							});
+						} else {
+							console.log("不具有创建家庭医生团队的权限，去信息展示页面");
+							mui.openWindow({
+								url: '../familydoctor/no_fdt.html',
+								id: 'familydoctor/no_fdt',
+								show: {
+									autoShow: false, //页面loaded事件发生后自动显示，默认为true
+									event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+								},
+								waiting: {
+									autoShow: true //自动显示等待框，默认为true
+								}
+							});
+						}
+					} else {
+						console.log("出错了！");
+					}
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+			commonHttpUtils(fdtListUrl, "post", "{}", sussess, error);
+		});
+		mui.plusReady(function() {
+			//			var html = '<div id="slider" class="mui-slider"><div class="mui-slider-group mui-slider-loop"><!--额外增加的一个节点(循环轮播：第一个节点是最后一张轮播)--><div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img style="height:230px" src="../images/advert/banner.jpg"></a></div><!--第一张--><div class="mui-slider-item"><a href="#"><img style="height:230px" src="../images/advert/banner2.png"></a></div><!--第二张--><div class="mui-slider-item"><a href="#"><img style="height:230px" src="../images/advert/banner3.jpg"></a></div><!--第三张--><div class="mui-slider-item"><a href="#"><img style="height:230px" src="../images/advert/banner4.png"></a></div><!--第四张--><div class="mui-slider-item"><a href="#"><img style="height:230px" src="../images/advert/banner5.png"></a></div><div class="mui-slider-item"><a href="#"><img style="height:230px" src="../images/advert/banner5.png"></a></div><!--额外增加的一个节点(循环轮播：最后一个节点是第一张轮播)--><div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img style="height:230px" src="../images/advert/banner.jpg"></a></div></div><div class="mui-slider-indicator"></div></div>'
+			plus.nativeUI.showWaiting();
+			//			$("#lunbo").html(html);
+
+			var success = function(data) {
+				console.log("广告闪屏--------------------->" + JSON.stringify(data));
+				var value = data.data;
+
+				if(data.result == "success" && value.length != 0) {
+					$("#lunbo").html("");
+					plus.nativeUI.closeWaiting();
+					setTimeout(function() {
+						$("#lunbo").processTL(templateRegister.lunboMain, {
+							sub: value
+						}, 'prepend', function() {
+							var slider = mui("#slider");
+							slider.slider({
+								interval: 4000
+							});
+							$(".qs-img-lazyload").each(function(i, v) {
+								$$.lazyload(v)
+							})
+						});
+					}, 150);
+
+					mui("body").on("tap", ".mui-slider-item", function() {
+						var forwardtype = $(this).attr("data-forward");
+						var extras = $(this).attr("data-ext");
+						var dataurl = $(this).attr("data-url");
+						var dataname = $(this).attr("data-name");
+						var localUrl = $(this).attr("data-id");
+						//						alert(localUrl);
+						var def = {};
+						//1进优惠券，-1外链，2进入关于我们
+						//						if(forwardtype == "1") {
+						//							def = dataConfig_imglunbo["MSG001"];
+						//						} else 
+						if(forwardtype == "-1") {
+							def = dataConfig_imglunbo["MSG002"];
+							mui.openWindow({
+								url: def.link,
+								id: def.link,
+								extras: {
+									link: dataurl,
+									title: dataname
+								}
+							});
+
+						} else if(forwardtype == "2") {
+							def = dataConfig_imglunbo["MSG003"];
+							mui.openWindow({
+								url: def.link,
+								id: def.link,
+								extras: {
+									localUrl: localUrl
+								},
+							});
+						}
+
+						if(!$.isEmptyObject(def) || forwardtype == "1" || forwardtype == "2") {
+							mui.openWindow({
+								url: def.link,
+								id: def.link,
+								extras: {
+									TAB: extras
+								},
+								show: {
+									autoShow: true, //页面loaded事件发生后自动显示，默认为true
+									event: 'loaded'
+								},
+								waiting: {
+									autoShow: true, //自动显示等待框，默认为true
+								}
+							});
+						}
+					});
+				}
+				//				else {
+				//					mui.toast(data.msg);
+				//				}
+
+			}
+			commonHttpUtils(lunbUrl, "get", {}, success, error);
+		})
+	</script>
+
+</html>

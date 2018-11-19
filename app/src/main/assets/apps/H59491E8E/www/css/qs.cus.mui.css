@@ -1,0 +1,42 @@
+.pull-center {
+	text-align: center
+}
+
+.width-p-25 {
+	width: 25%;
+}
+
+.margin-top-p-10 {
+	margin-top: 10%;
+}
+
+.margin-bottom-p-10 {
+	margin-bottom: 10%;
+}
+
+
+/*------------------*/
+
+.mui-table-view-cell {
+	position: relative;
+	overflow: hidden;
+	padding: 10px 10px;
+	-webkit-touch-callout: none;
+	line-height: 25px;
+}
+
+.serviceitem {
+	font-size: 14px;
+	margin-top: 0;
+	margin-bottom: 10px;
+	color: #8f8f94;
+}
+
+.right {
+	float: right;
+}
+
+.serviceitem-content {
+	font-size: 14px;
+	color: #333333;
+}

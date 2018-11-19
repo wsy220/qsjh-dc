@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>模版页面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+
+		<style>
+			html {
+				font-size: 100%;
+				#background-color: #fff;
+			}
+			
+			h5 {
+				margin: 5px 7px;
+			}
+			
+			.mui-card .mui-control-content {
+				padding: 10px;
+			}
+			/*.mui-control-content {
+				height: 550px;
+			}*/
+			
+			.mui-btn {
+				#padding: 10px;
+			}
+			
+			#kefu {
+				font-size: 0.5rem;
+				line-height: 30px;
+			}
+			
+			header button img {
+				width: 0.3rem;
+			}
+			
+			.mui-bar {
+				box-shadow: 0 0 1px rgba(255, 255, 255, 1);
+			}
+			
+			.mui-content {
+				#background-color: #fff;
+			}
+			
+			.mui-segmented-control {
+				border-bottom: 3px solid #eeeeee!important;
+			}
+			
+			.mui-content .mui-segmented-control {
+				border: none;
+			}
+			
+			.right {
+				float: right;
+			}
+			
+			.mui-control-content {
+				min-height: 540px;
+			}
+			
+			.liangzi {
+				text-align: center;
+				border: 1px solid #d7d7d7;
+				height: 1rem;
+			}
+			
+			.liangzi p {
+				text-align: center;
+				margin-top: 8%;
+				color: #333333;
+			}
+			
+			.liangzi a img {
+				width: 80%;
+				margin: 10px 0px;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 10px !important;
+			}
+			
+			.peixun_one {
+				height: 0.7rem;
+				width: 1.4rem;
+				line-height: 0.7rem;
+				background-color: #fba94f;
+				color: #fff;
+				text-align: center;
+				border-radius: 5px 5px;
+				margin-left: 10px;
+				margin-top: 10% !important;
+			}
+			
+			.mui-btn-primary {
+				border: 1px solid #33C3CB;
+				background: #3ccad0;
+				border-radius: 10px;
+				width: 100%;
+				height: 0.9rem;
+				font-size: 15px;
+			}
+			
+			.top_img {
+				#height: 4.2rem;
+				background-color: #fff;
+				overflow: hidden;
+			}
+			
+			.top_img_one {
+				display: inline-block;
+				width: 1.0rem;
+				margin-top: 10%;
+				margin-left: 4%;
+				float: left;
+			}
+			
+			.top_img_one img {
+				width: 1.0rem;
+			}
+			
+			.top_img_two {
+				display: inline-block;
+				width: 4.0rem;
+				height: 1.0rem;
+				line-height: 1.0rem;
+				float: left;
+				margin-top: 11%;
+				margin-left: 4%;
+			}
+			
+			.account_detail_two {
+				height: 1rem;
+				border: 1px solid #d7d7d7;
+				color: #333;
+				background-color: #fff;
+				margin-top: 5px;
+				margin-bottom: 5px;
+				padding-top: 0.3rem;
+				padding-left: 0.2rem;
+			}
+			
+			.account_detail_ten {
+				height: 1rem;
+				border-top: 1px solid #d7d7d7;
+				background-color: #fff;
+				padding-top: 0.1rem;
+				padding-left: 0.2rem;
+				/*margin-bottom:3px;*/
+				/*border-bottom: 1px solid #d7d7d7;*/
+			}
+			
+			.account_detail_three {
+				height: 1rem;
+				border: 1px solid #d7d7d7;
+				background-color: #fff;
+				padding-top: 0.3rem;
+				padding-left: 0.2rem;
+			}
+			
+			.account_detail_four {
+				height: 1rem;
+				border-bottom: 1px solid #d7d7d7;
+				background-color: #fff;
+				padding-top: 0.3rem;
+				padding-left: 0.2rem;
+			}
+			
+			.liangzii {
+				text-align: center;
+				border-bottom: 1px solid #d7d7d7;
+				height: 1rem;
+			}
+			
+			.liangzii p {
+				text-align: center;
+				margin-top: 10%;
+				color: #333333;
+				font-size: 0.28rem;
+			}
+			
+			.mui-content-padded p {
+				color: #333;
+				font-size: 0.28rem;
+			}
+			
+			.mui-navigate-right {
+				top: 20px;
+			}
+			
+			.mui-content-padded {
+				margin-top: 66px !important;
+			}
+			
+			input {
+				padding-top: 4%;
+			}
+			
+			.mui-btn {
+				margin-left: 10%;
+			}
+			
+			input[type=color],
+			input[type=date],
+			input[type=datetime-local],
+			input[type=datetime],
+			input[type=email],
+			input[type=month],
+			input[type=number],
+			input[type=password],
+			input[type=search],
+			input[type=tel],
+			input[type=text],
+			input[type=time],
+			input[type=url],
+			input[type=week],
+			select,
+			textarea {
+				line-height: 21px;
+				width: 70%;
+				height: 40px;
+				margin-bottom: 15px;
+				padding: 10px 15px;
+				-webkit-user-select: text;
+				border-radius: 3px;
+				background-color: #fff;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">添加银行卡</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<div class="top_img">
+				<div class="account_detail_two" id="yinhang_ka">
+					<strong style="font-size:0.32rem">请绑定持卡人本人的银行卡</strong>
+				</div>
+
+				<!--<div class="account_detail_ten">
+					<select id="blankName" style='    float: left;
+    margin-left: 0%;
+    width: 40%;'>
+						<option value="">请选择银行</option>
+						<option value="中国银行">中国银行</option>
+						<option value="中国工商银行">中国工商银行</option>
+						<option value="中国建设银行">中国建设银行</option>
+					</select>
+				</div>-->
+
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label>开户银行</label>
+						<select id="blankName" style='float: left; margin-left: 0%;width: 40%;'>
+							<option value="">请选择银行</option>
+							<option value="中国银行">中国银行</option>
+							<option value="中国工商银行">中国工商银行</option>
+							<option value="中国建设银行">中国建设银行</option>
+						</select>
+					</div>
+
+					<div class="mui-input-row">
+						<label>持卡人姓名</label><input id='cardUserName' type="text" name='cardUserName' class="mui-input" placeholder="请输入持卡人姓名" style="border-top: 0px solid #d7d7d7;">
+					</div>
+
+					<div class="mui-input-row">
+						<label>卡号</label><input id='cardNo' type="number" name='cardNo' class="mui-input" placeholder="无需网银/免手续费">
+					</div>
+				</form>
+			</div>
+			<div class="mui-content-padded">
+				<button class="mui-btn mui-btn-block mui-btn-primary " style="background-color:#169bd5;width:80% "><span>下一步</span></button>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script>
+		mui.init({
+			keyEventBind: {
+				backbutton: true //打开back按键监听
+			},
+			beforeback: function() {
+				//返回true，继续页面关闭逻辑  
+				mui.back;
+				return true;
+			}
+		});
+
+		mui.plusReady(function() {
+			//setPagePos();
+//			var topoffset = '45px';
+//			if(plus.navigator.isImmersedStatusbar()) { // 兼容immersed状态栏模式
+//				// 获取状态栏高度并根据业务需求处理，这里重新计算了子窗口的偏移位置
+//				topoffset = (Math.round(plus.navigator.getStatusbarHeight()) + 45) + 'px';
+//				document.querySelector("header").style.height = topoffset;
+//				document.querySelector("header").style.paddingTop = "20px";
+//				document.getElementById('content').style.paddingTop = (Math.round(plus.navigator.getStatusbarHeight()) + 45) + "px";
+//			}
+			var currentView = plus.webview.currentWebview();
+			currentView.setStyle({ softinputMode: "adjustResize" });
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+		});
+
+		mui(".mui-content-padded").on("tap", ".mui-btn", function() {
+			$this = $(this);
+
+			var cardUserName = $("#cardUserName").val();
+			console.log(cardUserName);
+			var cardNo = $("#cardNo").val();
+			var cardBankName = $("#blankName").val()
+			if(!cardUserName || cardUserName == '') {
+				mui.toast("请输入持卡人姓名");
+				return false;
+			}
+
+			if(!cardNo || cardNo == '') {
+				mui.toast("请输入卡号");
+				return false;
+			}
+			if(!cardBankName || cardBankName == '') {
+				mui.toast("请选择银行");
+				return false;
+			}
+
+			mui.openWindow({
+				url: 'account_bank_phone.html',
+				id: 'account_bank_phone',
+				extras: {
+					cardBankName: cardBankName,
+					cardUserName: cardUserName,
+					cardNo: cardNo
+				},
+				show: {
+					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+		});
+	</script>
+
+</html>

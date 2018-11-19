@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>抢单</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../fonts/iconfont.css" />
+		<link rel="stylesheet" href="../plugs/qs/qs.common.new.css" />
+		<style>
+			.mui-off-canvas-right {
+				width: 50% !important;
+			}
+			
+			.mui-off-canvas-right {
+				background-color: #FFFFFF;
+			}
+			
+			.multi-select {
+				margin: 0;
+			}
+			
+			.mui-collapse-content {
+				padding: 0 !important;
+				border-collapse: collapse;
+			}
+			
+			.padding-10 {
+				padding: 10px 0;
+			}
+			
+			.padding-18 {
+				padding: 15px 0 !important;
+			}
+			
+			.mui-col-xs-4 {
+				border-right: 1px solid #CCCCCC;
+				border-left: 1px solid #CCCCCC;
+			}
+			
+			.choice-button {
+				border-bottom: 1px solid #CCCCCC;
+				text-align: center;
+				padding: 15px;
+				font-size: 15px;
+			}
+			
+			.button-bottom {
+				margin-top: 50%;
+				color: #FFFFFF;
+			}
+			
+			.padding-border {
+				padding: 10px 0;
+				color: #6C6C6C;
+				border-bottom: 1px solid #cccccc;
+			}
+			
+			.order-list {
+				z-index: -999;
+				position: absolute;
+				top: 50px !important;
+			}
+			
+			.cus-img {
+				width: 50% !important;
+				margin: 0 auto;
+				display: table;
+				padding-top: 50px;
+			}
+			
+			.mui-table-view {
+				font-size: 0.28rem;
+			}
+			
+			.change-color {
+				color: #4d7acf;
+			}
+			
+			.mui-card {
+				margin: 0px;
+				margin-top: 3px;
+				border-radius: 0px;
+				margin-bottom: 10px;
+			}
+			
+			.mui-card .mui-table-view .mui-table-view-cell:first-child,
+			.mui-card .mui-table-view .mui-table-view-divider:first-child {
+				border-top-left-radius: 0px;
+				border-top-right-radius: 12px;
+			}
+			
+			.cus-mui-title {
+				margin: 5px 0 2px 0;
+				padding-left: 7px;
+				width: 100%;
+				height: 36px;
+				line-height: 36px;
+				color: #fff;
+				background-color: #ca9090;
+			}
+			
+			.mui-confirm-button {
+				#margin-top: 160px;
+				margin-left: 6px;
+				margin-top: 37px;
+			}
+			
+			.cus-img {
+				width: 50% !important;
+				margin: 0 auto;
+				display: table;
+				padding-top: 50px;
+			}
+			
+			.dot_qiangdan {
+				text-align: center;
+				width: 20%;
+				min-height: 184px;
+			}
+			
+			.dot_qiangdan .red_km {
+				font-size: 0.22rem;
+				color: #aab940;
+				margin-top: 20px;
+			}
+			
+			.greentip {
+				position: relative !important;
+				height: 40px !important;
+				#line-height: 33px;
+				#padding-bottom: 25px;
+				width: 100% !important;
+				background-color: #aab940 !important;
+				color: #fff;
+				border-radius: 0 12px 12px 0;
+			}
+			
+			.deeptip {
+				position: relative !important;
+				height: 40px !important;
+				#line-height: 33px;
+				#padding-bottom: 25px;
+				width: 100% !important;
+				background-color: rgb(114, 177, 86) !important;
+				color: #fff;
+				border-radius: 0 12px 12px 0;
+			}
+			
+			.left {
+				float: left;
+			}
+			
+			.doctor {
+				color: #FFE5CC;
+			}
+			
+			.mui-ellipsis {
+				overflow: hidden;
+				white-space: normal;
+				text-overflow: ellipsis;
+				font-weight: bold;
+			}
+			
+			.mui-badge {
+				font-size: 12px;
+				line-height: 1;
+				display: inline-block;
+				padding: 6px 9px;
+				color: #FFFFFF;
+				border-radius: 8px;
+				background-color: #66cc99;
+				width: 55px;
+			}
+			
+			.mui-badge-huise {
+				color: #FFFFFF;
+				background: rgba(0, 0, 0, .15);
+				background-color: #aeaeae;
+				width: 72px;
+				margin-left: 6px;
+				text-align: center;
+			}
+			
+			.mui-badge-huise1 {
+				color: #FFFFFF;
+				background: rgba(0, 0, 0, .15);
+				background-color: #aeaeae;
+				width: 70px;
+				text-align: center;
+				margin-left: 6px;
+			}
+			
+			.zhangxin {
+				color: #666666;
+			}
+			
+			.wrapper {
+				bottom: 0 !important;
+			}
+			
+			.mui-navigate-right:after,
+			.mui-push-right:after {
+				right: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- 侧滑导航根容器 -->
+		<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable mui-slide-in">
+			<!-- 菜单容器 -->
+			<aside id="offCanvasSide" class="mui-off-canvas-right" style="margin-top: 70px;">
+				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="multi-select" id="multiSelect" style="border-top:1px solid #cccccc;">
+							<!--<ul class="mui-table-view">
+								<li class="mui-table-view-cell mui-collapse mui-active">
+									<a class="mui-navigate-right">上门护理</a>
+									<div class="mui-collapse-content mui-row" style="text-align: center;">
+										<div class="mui-col-xs-6 padding-10">上门输液</div>
+										<div class="mui-col-xs-6 padding-10">新生儿居家护理</div>
+										<div class="mui-col-xs-6 padding-10">上门输液</div>
+									</div>
+								</li>
+							</ul>-->
+						</div>
+					</div>
+				</div>
+			</aside>
+			<!-- 主页面容器 -->
+			<div class="mui-inner-wrap">
+				<!-- 主页面标题 -->
+				<header class="mui-bar mui-bar-nav">
+					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+					<h1 class="mui-title" id="ptitle">抢单</h1>
+				</header>
+				<div class="mui-content mui-scroll-wrapper" id="content">
+					<div id="slider" class="mui-scroll mui-slider mui-fullscreen">
+						<!-- 主界面具体展示内容 -->
+						<div class="mui-row mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="lcyh" style="text-align: center;">
+							<ul class="mui-table-view mui-col-xs-4 change-color" href="#item2order" id="homeItem">
+								<li class="mui-table-view-cell mui-collapse" id="homeItemActive">
+									<a class="mui-navigate-right padding-18 ">离家最近</a>
+									<div class="mui-collapse-content mui-row " style="text-align: center; ">
+										<div class="padding-border amountItem-active-1" id="amountItem1">
+											<div style="display: inline-flex; ">
+												<span style="padding-right: 10px; ">金额</span>
+												<img id="amountItemIcon1" src="../images/order/pxs.png " style="width: 15px;height: 15px;margin-top: 2px; " />
+											</div>
+										</div>
+										<div class="padding-border" id="filterItem1">
+											<div style="display: inline-flex; " id="homeFilter">
+												<span style="padding-right: 10px; ">筛选</span>
+												<img id="homeFilterIcon" src="../images/order/sx.png " style="width: 15px;height: 15px;margin-top: 2px; " />
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<ul class="mui-table-view mui-col-xs-4" href="#item3order " id="workItem">
+								<li class="mui-table-view-cell mui-collapse" id="workItemActive">
+									<a class="mui-navigate-right padding-18 ">离医院最近</a>
+									<div class="mui-collapse-content mui-row " style="text-align: center; ">
+										<div class="padding-border amountItem-active-2" id="amountItem2">
+											<div style="display: inline-flex; ">
+												<span style="padding-right: 10px; ">金额</span>
+												<img id="amountItemIcon2" src="../images/order/pxs.png " style="width: 15px;height: 15px;margin-top: 2px; " />
+											</div>
+										</div>
+										<div class="padding-border " id="filterItem2">
+											<div style="display: inline-flex; " id="workFilter">
+												<span style="padding-right: 10px; ">筛选</span>
+												<img id="workFilterIcon" src="../images/order/sx.png " style="width: 15px;height: 15px;margin-top: 2px; " />
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<ul class="mui-table-view mui-col-xs-4" href="#item4order" id="reportItem">
+								<li class="mui-table-view-cell" id="reportItemActive">
+									<a class="padding-18">报告解读</a>
+								</li>
+							</ul>
+						</div>
+						<div class="mui-row mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="fzyh" style="text-align: center;">
+							<ul class="mui-table-view mui-col-xs-12" href="#item4order" id="reportItem">
+								<li class="mui-table-view-cell" id="reportItemActive">
+									<a class="padding-18">报告解读</a>
+								</li>
+							</ul>
+						</div>
+						<div class="order-list mui-slider-group">
+							<div id="item2order" class="mui-slider-item mui-control-content">
+								<div id="item2wrapper" class="mui-scroll-wrapper">
+									<div id="wrapper01" class="wrapper">
+										<div id="scroller" class="scroller">
+											<div id="homeDataDiv">
+												<p><img class="cus-img " src="../images/no_data/1-02.png" data-preview-src="" data-preview-group="1"></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--<div id="item3order" class="mui-slider-item mui-control-content">
+								<div id="item3wrapper" class="mui-scroll-wrapper">
+									<div id="wrapper02" class="wrapper">
+										<div id="scroller" class="scroller">
+											<div id="workDataDiv">
+												<p><img class="cus-img" src="../images/no_data/1-02.png" data-preview-src="" data-preview-group="1"></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>-->
+						</div>
+
+						<div class="mui-off-canvas-backdrop "></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript " src="../js/mui.min.js "></script>
+	<script type="text/javascript " src="../plugs/qs/qs.immersed.js "></script>
+	<script type="text/javascript " src="../js/xiangyingshi.js "></script>
+	<script type="text/javascript " src="../js/app.js "></script>
+	<script type="text/javascript " src="../js/constants.js "></script>
+	<script type="text/javascript " src="../js/sharemethods.js "></script>
+	<script type="text/javascript " src="../js/jquery-3.1.1.min.js "></script>
+
+	<script type="text/javascript " src="../plugs/moment/moment.min.js "></script>
+	<script type="text/javascript " src="../plugs/art/template-web.js "></script>
+	<script type="text/javascript " src="../plugs/qs/qs.art.extend.js "></script>
+	<script type="text/javascript " src="../plugs/qs/qs.template.js "></script>
+	<script type="text/javascript " src="../plugs/iscroll/iscroll-probe.js "></script>
+	<script type="text/javascript " src="../plugs/qs/qs.iscroll.new.js "></script>
+	<script>
+		mui.init({
+			swipeBack: false //启用右滑
+		});
+
+		var userId = null;
+
+		var getUserInfo = function() {
+			divId = $(".mui-slider-group .change-color").attr("id");
+			if(divId == "item2order") {
+				wrapper01.page = 1;
+				processConfimAction(wrapper01)
+			}
+		}
+
+		var userId = null;
+		var wrapper01;
+		//		var wrapper02;
+		var clickDistanceNum1 = 0;
+		var clickDistanceNum2 = 0;
+		var clickWorkHome = 0;
+		var clickAmount = 0;
+		var clickFilter = 0;
+		var choiceArray = undefined;
+		var choiceButtomId = null;
+		var choiceButtomArray = [];
+		var dataArray = {};
+		var user = JSON.parse(localStorage.getItem("USER"));
+		console.log("登录人信息：--------》" + JSON.stringify(user.classType));
+		$("#fzyh").hide();
+		$("#lcyh").hide();
+		mui.plusReady(function() {
+			var currentView = plus.webview.currentWebview();
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+			//			var height = $("#header").height();
+			$("#content").css('marginTop', immersed);
+			userId = localStorage.getItem("USERID");
+			if(user.classType == "F") {
+				$("#fzyh").show();
+				clickWorkHome = 2;
+			} else {
+				$("#lcyh").show()
+			}
+
+			mui(".mui-content").on("tap", "#homeItem", function() {
+				wrapper01.refresh();
+				$("#workItem").removeClass("change-color");
+				$("#homeItem").addClass("change-color");
+				$("#workItemActive").removeClass("mui-active");
+				$("#item2order").addClass("mui-active");
+				$("#reportItem").removeClass("change-color");
+				//				$("#item3order").removeClass("mui-active");
+				clickWorkHome = 0;
+				//				alert(clickWorkHome);
+				clickDistanceNum2 = 0;
+				if(clickDistanceNum1 == 0) {
+					wrapper01.page = 1
+					processConfimAction(wrapper01);
+				}
+			});
+			mui(".mui-content").on("tap", "#workItem", function() {
+				$("#homeItem").removeClass("change-color");
+				$("#homeItemActive").removeClass("mui-active");
+				$("#workItem").addClass("change-color");
+				$("#reportItem").removeClass("change-color");
+				//				$("#item3order").addClass("mui-active");
+				//				$("#item2order").removeClass("mui-active");
+				clickWorkHome = 1;
+				//				alert(clickWorkHome);
+				clickDistanceNum1 = 0
+				if(clickDistanceNum2 == 0) {
+					wrapper01.page = 1
+					processConfimAction(wrapper01);
+				}
+			});
+			mui(".mui-content").on("tap", "#reportItem", function() {
+				$("#homeItem").removeClass("change-color");
+				$("#homeItemActive").removeClass("mui-active");
+				$("#workItem").removeClass("change-color");
+				$("#workItemActive").removeClass("mui-active");
+				//				$("#item3order").removeClass("mui-active");
+				//				$("#item2order").removeClass("mui-active");
+				$("#reportItem").addClass("change-color");
+				clickAmount = 0;
+				clickFilter = 0;
+				dataArrayChange()
+				clickWorkHome = 2;
+				wrapper01.page = 1
+				processConfimAction(wrapper01);
+			});
+			loaded();
+
+			//离家最近金额排序
+			mui(".mui-content").on("tap", ".amountItem-active-1", function() {
+				//				$("#workItemActive").removeClass("mui-active");
+				$("#amountItem1").addClass("change-color");
+				$("#amountItemIcon1").attr("src", "../images/order/pxsl.png");
+				$("#amountItem1").removeClass("amountItem-active-1");
+				$("#amountItem1").addClass("click-delete1");
+				//				$("#homeItemActive").removeClass("mui-active");
+				clickAmount = 1;
+				dataArrayChange();
+				wrapper01.page = 1
+				processConfimAction(wrapper01);
+				clickDistanceNum1 = 1
+			});
+			mui(".mui-content").on("tap", ".click-delete1", function() {
+				$("#amountItem1").removeClass("change-color");
+				$("#amountItemIcon1").attr("src", "../images/order/pxs.png");
+				$("#amountItem1").removeClass("click-delete1");
+				$("#amountItem1").addClass("amountItem-active-1");
+				clickAmount = 0;
+				dataArrayChange();
+				wrapper01.page = 1
+				processConfimAction(wrapper01);
+				clickDistanceNum1 = 1
+			});
+			//离医院最近金额排序
+			mui(".mui-content").on("tap", ".amountItem-active-2", function() {
+				$("#amountItem2").addClass("change-color");
+				$("#amountItemIcon2").attr("src", "../images/order/pxsl.png");
+				$("#amountItem2").removeClass("amountItem-active-2");
+				$("#amountItem2").addClass("click-delete2");
+				clickAmount = 1;
+				dataArrayChange()
+				wrapper01.page = 1
+				processConfimAction(wrapper01);
+				clickDistanceNum2 = 1
+			});
+			mui(".mui-content").on("tap", ".click-delete2", function() {
+				$("#amountItem2").removeClass("change-color");
+				$("#amountItemIcon2").attr("src", "../images/order/pxs.png");
+				$("#amountItem2").removeClass("click-delete2");
+				$("#amountItem2").addClass("amountItem-active-2");
+				clickAmount = 0;
+				dataArrayChange()
+				wrapper01.page = 1
+				processConfimAction(wrapper01);
+				clickDistanceNum2 = 1
+			});
+
+			//筛选获取
+			mui(".mui-content").on("tap", "#filterItem1", function() {
+				$("#homeFilter").addClass("change-color");
+				$("#homeFilterIcon").attr("src", "../images/order/sxl.png");
+
+				//侧滑容器父节点
+				var offCanvasWrapper = mui('#offCanvasWrapper');
+				//主界面容器
+				var offCanvasInner = offCanvasWrapper[0].querySelector('.mui-inner-wrap');
+				if(choiceArray) {
+					mui('.mui-off-canvas-wrap').offCanvas('show');
+					mui('#offCanvasSideScroll').scroll();
+				} else {
+					var sussessH = function(data) {
+						if(data.result == "success") {
+							clickDistanceNum1 = 1
+							mui('.mui-off-canvas-wrap').offCanvas('show');
+							mui('#offCanvasSideScroll').scroll();
+							choiceArray = data.obj;
+							console.log(JSON.stringify(data.obj));
+							$("#multiSelect").processTL(templateRegister.orderChoice, {
+								sub: data.obj.items,
+								//								arr: data.obj.project.project
+							}, 'append', function() {
+								//							myScroll.refresh()
+							});
+							//选择项目时组成数组
+							mui("#offCanvasWrapper").on("tap", "#choiceButton", function() {
+								$(this).css("background-color", "#ebedfb");
+								$(this).addClass("cancel-click");
+								choiceButtomName = this.getAttribute("data-name");
+								//								console.log("数组长度：" + choiceArray.project.project.length);
+								//								console.log("项目名称：" + choiceButtomName);
+								for(var i = 0; i < choiceArray.project.project.length; i++) {
+									if(choiceButtomName == choiceArray.project.project[i].item.fatherid) {
+										choiceButtomArray.push(choiceArray.project.project[i].item._id);
+									}
+								}
+								console.log("添加：" + choiceButtomArray);
+								//删除数组里重复的数据
+								Array.prototype.distinct = function() {
+									var arr = this,
+										result = [],
+										i,
+										j,
+										len = arr.length;
+									for(i = 0; i < len; i++) {
+										for(j = i + 1; j < len; j++) {
+											if(arr[i] === arr[j]) {
+												j = ++i;
+											}
+										}
+										result.push(arr[i]);
+									}
+									return result;
+								}
+								choiceButtomArray = choiceButtomArray.distinct();
+								console.log("去重：" + choiceButtomArray);
+							});
+							mui("#offCanvasWrapper").on("tap", ".cancel-click", function() {
+								$(this).css("background-color", "#FFFFFF");
+								//删除选中的元素
+								Array.prototype.removeByValue = function(val) {
+									for(var i = 0; i < this.length; i++) {
+										if(this[i] == val) {
+											this.splice(i, 1);
+											break;
+										}
+									}
+								}
+								for(var i = 0; i < choiceArray.project.project.length; i++) {
+									if(choiceButtomName == choiceArray.project.project[i].item.fatherid) {
+										choiceButtomArray.removeByValue(choiceArray.project.project[i].item._id);
+									}
+								}
+								console.log("删除：" + choiceButtomArray);
+								$(this).removeClass("cancel-click");
+							});
+
+							mui("#offCanvasWrapper").on("tap", "#resetChoice", function() {
+								$('.choice-button').css("background-color", "#FFFFFF");
+								choiceButtomArray = [];
+								console.log("重置：" + choiceButtomArray);
+								clickFilter = 0;
+								dataArrayChange()
+								wrapper01.page = 1
+								processConfimAction(wrapper01);
+								$("#homeFilter").removeClass("change-color");
+								$("#homeFilterIcon").attr("src", "../images/order/sx.png");
+								clickDistanceNum1 = 1
+							});
+							mui("#offCanvasWrapper").on("tap", "#confirmChoice", function() {
+								//确认筛选条件后关闭附页并自动刷新
+								clickFilter = 1;
+								dataArrayChange()
+								mui('.mui-off-canvas-wrap').offCanvas('close');
+								wrapper01.page = 1
+								processConfimAction(wrapper01);
+								clickDistanceNum1 = 1
+							});
+
+						} else {
+							mui.toast(data.msg);
+						}
+					};
+
+					commonHttpUtils(getHosServiceItemsUrl, "put", {}, sussessH, error);
+				};
+			});
+			mui(".mui-content").on("tap", "#filterItem2", function() {
+				$("#workFilter").addClass("change-color");
+				$("#workFilterIcon").attr("src", "../images/order/sxl.png");
+				//侧滑容器父节点
+				var offCanvasWrapper = mui('#offCanvasWrapper');
+				//主界面容器
+				var offCanvasInner = offCanvasWrapper[0].querySelector('.mui-inner-wrap');
+				if(choiceArray) {
+					mui('.mui-off-canvas-wrap').offCanvas('show');
+					mui('#offCanvasSideScroll').scroll();
+				} else {
+					var sussessH = function(data) {
+						if(data.result == "success") {
+							clickDistanceNum2 = 1
+							mui('.mui-off-canvas-wrap').offCanvas('show');
+							mui('#offCanvasSideScroll').scroll();
+							choiceArray = data.obj;
+							console.log(JSON.stringify(data.obj));
+							$("#multiSelect").processTL(templateRegister.orderChoice, {
+								sub: data.obj.items,
+								//								arr: data.obj.project.project
+							}, 'append', function() {
+								//							myScroll.refresh()
+							})
+							//选择项目时组成数组
+							mui("#offCanvasWrapper").on("tap", "#choiceButton", function() {
+								$(this).css("background-color", "#ebedfb");
+								$(this).addClass("cancel-click");
+								choiceButtomName = this.getAttribute("data-name");
+								//								console.log("数组长度：" + choiceArray.project.project.length);
+								//								console.log("项目名称：" + choiceButtomName);
+								for(var i = 0; i < choiceArray.project.project.length; i++) {
+									if(choiceButtomName == choiceArray.project.project[i].item.fatherid) {
+										choiceButtomArray.push(choiceArray.project.project[i].item._id);
+									}
+								}
+								console.log("添加：" + choiceButtomArray);
+								//删除数组里重复的数据
+								Array.prototype.distinct = function() {
+									var arr = this,
+										result = [],
+										i,
+										j,
+										len = arr.length;
+									for(i = 0; i < len; i++) {
+										for(j = i + 1; j < len; j++) {
+											if(arr[i] === arr[j]) {
+												j = ++i;
+											}
+										}
+										result.push(arr[i]);
+									}
+									return result;
+								}
+								choiceButtomArray = choiceButtomArray.distinct();
+								console.log("去重：" + choiceButtomArray);
+							});
+							mui("#offCanvasWrapper").on("tap", ".cancel-click", function() {
+								$(this).css("background-color", "#FFFFFF");
+								//删除选中的元素
+								Array.prototype.removeByValue = function(val) {
+									for(var i = 0; i < this.length; i++) {
+										if(this[i] == val) {
+											this.splice(i, 1);
+											break;
+										}
+									}
+								}
+								for(var i = 0; i < choiceArray.project.project.length; i++) {
+									if(choiceButtomName == choiceArray.project.project[i].item.fatherid) {
+										choiceButtomArray.removeByValue(choiceArray.project.project[i].item._id);
+									}
+								}
+								console.log("删除：" + choiceButtomArray);
+								$(this).removeClass("cancel-click");
+							});
+
+							mui("#offCanvasWrapper").on("tap", "#resetChoice", function() {
+								$('.choice-button').css("background-color", "#FFFFFF");
+								choiceButtomArray = [];
+								console.log("重置：" + choiceButtomArray);
+								clickFilter = 0;
+								dataArrayChange();
+								wrapper01.page = 1
+								processConfimAction(wrapper01);
+								$("#workFilter").removeClass("change-color");
+								$("#workFilterIcon").attr("src", "../images/order/sx.png");
+								clickDistanceNum2 = 1
+							});
+							mui("#offCanvasWrapper").on("tap", "#confirmChoice", function() {
+								//确认筛选条件后关闭附页并自动刷新
+								clickFilter = 1;
+								dataArrayChange()
+								mui('.mui-off-canvas-wrap').offCanvas('close');
+								wrapper01.page = 1
+								processConfimAction(wrapper01);
+								clickDistanceNum2 = 1
+							});
+
+						} else {
+							mui.toast(data.msg);
+						}
+					};
+
+					commonHttpUtils(getHosServiceItemsUrl, "put", {}, sussessH, error);
+				};
+			});
+
+			mui(".mui-content").on("tap", ".nui-order-detail", function() {
+				var orderId = $(this).attr("data-id");
+				mui.openWindow({
+					url: '../order/grab_order_detail.html',
+					id: 'grab_order_detail',
+					extras: {
+						orderId: orderId
+					},
+					show: {
+						autoShow: true, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true, //自动显示等待框，默认为true
+						title: '正在加载...', //等待对话框上显示的提示内容
+					}
+				});
+			});
+			mui(".mui-content").on("tap", ".report-order-detail", function() {
+				var orderId = $(this).attr("data-id");
+				mui.openWindow({
+					url: '../order/report_order_detail.html',
+					id: 'report_order_detail',
+					extras: {
+						orderId: orderId
+					},
+					show: {
+						autoShow: true, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true, //自动显示等待框，默认为true
+						title: '正在加载...', //等待对话框上显示的提示内容
+					}
+				});
+			});
+
+		});
+
+		mui(".mui-content").on("tap", ".nui-order-delBtn", function() {
+
+			var orderId = this.id;
+			mui.openWindow({
+				url: '../order/grab_order_detail.html',
+				id: 'grab_order_detail',
+				extras: {
+					orderId: orderId
+				},
+				show: {
+					autoShow: true, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+
+			//			var url = confirmorderUrl + this.id;
+			//			var btnArray = ['否', '是'];
+			//			mui.confirm('是否确认接此定单并为其服务？', '抢单提示', btnArray, function(e) {
+			//				if(e.index == 1) {
+			//					var sussess = function(data) {
+			//						//服务器返回响应，根据响应结果，分析是否登录成功；
+			//						if(data.result == "success") {
+			//							mui.toast("抢单成功");
+			//							getUserInfo();
+			//						} else {
+			//							if(data.code == "S000001") {
+			//								mui.toast("该订单已经被抢走了......");
+			//							} else {
+			//								mui.toast(data.msg);
+			//							}
+			//
+			//							getUserInfo();
+			//						}
+			//					};
+			//					commonHttpUtils(url, "put", {
+			//						id: userId
+			//					}, sussess, error);
+			//				}
+			//			})
+
+		});
+		mui(".mui-content").on("tap", ".report-order-delBtn", function() {
+
+			var orderId = this.id;
+			mui.openWindow({
+				url: '../order/report_order_detail.html',
+				id: 'report_order_detail',
+				extras: {
+					orderId: orderId
+				},
+				show: {
+					autoShow: true, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+		});
+
+		function dataArrayChange() {
+			console.log("dataArrayChange*************************")
+			if(clickAmount == 1 && clickFilter == 0) {
+				dataArray = {
+					priceSort: "desc"
+				};
+				console.log(JSON.stringify(dataArray));
+
+			} else if(clickAmount == 0 && clickFilter == 1) {
+				dataArray = {
+					serviceids: JSON.stringify(choiceButtomArray)
+				};
+				console.log(JSON.stringify(dataArray));
+
+			} else if(clickAmount == 1 && clickFilter == 1) {
+				dataArray = {
+					priceSort: "desc",
+					serviceids: JSON.stringify(choiceButtomArray)
+				}
+				console.log(JSON.stringify(dataArray));
+
+			} else {
+				dataArray = {}
+				console.log(JSON.stringify(dataArray));
+
+			}
+		}
+
+		//统一接口方法，里面写判断
+		function processConfimAction(myScroll) {
+			setTimeout(function() {
+				var homeurl
+				if(clickWorkHome == 0) {
+					homeurl = showhomenothavelistUrl + "?page=" + myScroll.page + "&limit=" + myScroll.limit;
+					if(myScroll.page == 1) {
+						$("#homeDataDiv").html('<p><img class="cus-img" src="../images/no_data/1-02.png" data-preview-src="" data-preview-group="1"></p>');
+					}
+					var sussess = function(data) {
+						console.log("获取离家最近订单："+JSON.stringify(data.obj));
+						if(data.result == "success") {
+							if(data.obj.homeorders.length != 0) {
+								if(myScroll.page == 1) {
+									$("#homeDataDiv").html('')
+								}
+								if(data.obj.homeorders.length == myScroll.limit) {
+									myScroll.page = myScroll.page + 1;
+									myScroll.upFlag = true
+								} else {
+									myScroll.upFlag = false
+								}
+								$("#homeDataDiv").processTL(templateRegister.orderGrab, {
+									sub: data.obj.homeorders
+								}, 'append', function() {
+									myScroll.refresh()
+								})
+
+							} else {
+								mui.toast("订单无更新    请过后刷新");
+							}
+						}else {
+							mui.toast(data.msg);
+						}
+					}
+				} else if(clickWorkHome == 1) {
+					homeurl = showworknothavelistUrl + "?page=" + myScroll.page + "&limit=" + myScroll.limit;
+					if(myScroll.page == 1) {
+						$("#homeDataDiv").html('<p><img class="cus-img" src="../images/no_data/1-02.png" data-preview-src="" data-preview-group="1"></p>');
+					}
+					var sussess = function(data) {
+						console.log("获取离医院最近订单："+JSON.stringify(data.obj));
+						if(data.result == "success") {
+							if(data.obj.workorders.length != 0) {
+								if(myScroll.page == 1) {
+									$("#homeDataDiv").html('')
+								}
+								if(data.obj.workorders.length == myScroll.limit) {
+									myScroll.page = myScroll.page + 1;
+									myScroll.upFlag = true
+								} else {
+									myScroll.upFlag = false
+								}
+								$("#homeDataDiv").processTL(templateRegister.orderGrab, {
+									sub: data.obj.workorders
+								}, 'append', function() {
+									myScroll.refresh()
+								})
+							}else {
+								mui.toast("订单无更新    请过后刷新");
+							}
+
+						} else {
+							mui.toast(data.msg);
+						}
+					};
+				} else {
+					homeurl = showreportnothhavelistUrl + "?page=" + myScroll.page + "&limit=" + myScroll.limit;
+					if(myScroll.page == 1) {
+						$("#homeDataDiv").html('<p><img class="cus-img" src="../images/no_data/1-02.png" data-preview-src="" data-preview-group="1"></p>');
+					}
+					var sussess = function(data) {
+						console.log("获取报告解读订单："+JSON.stringify(data.obj));
+						if(data.result == "success") {
+							if(data.obj.data.length != 0) {
+								if(myScroll.page == 1) {
+									$("#homeDataDiv").html('')
+								}
+								if(data.obj.data.length == myScroll.limit) {
+									myScroll.page = myScroll.page + 1;
+									myScroll.upFlag = true
+								} else {
+									myScroll.upFlag = false
+								}
+
+								$("#homeDataDiv").processTL(templateRegister.orderGrab, {
+									sub: data.obj.data,
+									classtype: user.classType,
+								}, 'append', function() {
+									myScroll.refresh()
+								})
+							}else {
+								mui.toast("订单无更新    请过后刷新");
+							}
+
+						} else {
+							mui.toast(data.msg);
+						}
+					};
+				}
+
+				commonHttpUtils(homeurl, "get", dataArray, sussess, error);
+			}, 1000); //1秒  
+		}
+
+		//离医院最近
+		//		function processServiceAction(myScroll) {
+		//			var homeurl = showworknothavelistUrl + "?page=" + myScroll.page + "&limit=" + myScroll.limit;
+		//			if(myScroll.page == 1) {
+		//				$("#homeDataDiv").html('<p><img class="cus-img" src="../images/no_data/1-02.png" data-preview-src="" data-preview-group="1"></p>');
+		//			}
+		//			var sussess = function(data) {
+		//				//服务器返回响应，根据响应结果，分析是否登录成功；
+		//				if(data.result == "success") {
+		//					if(data.obj.workorders.length != 0) {
+		//						if(myScroll.page == 1) {
+		//							$("#homeDataDiv").html('')
+		//						}
+		//						if(data.obj.workorders.length == myScroll.limit) {
+		//							myScroll.page = myScroll.page + 1;
+		//						}
+		//						$("#homeDataDiv").processTL(templateRegister.orderGrab, {
+		//							sub: data.obj.workorders
+		//						}, 'append', function() {
+		//							myScroll.refresh()
+		//						})
+		//					}
+		//				} else {
+		//					mui.toast(data.msg);
+		//				}
+		//			};
+		//			commonHttpUtils(homeurl, "get", dataArray, sussess, error);
+		//		};
+
+		function loaded() {
+			wrapper01 = $.initIscroll({
+				id: "wrapper01",
+				pullUpAction: processConfimAction,
+				pullDownAction: processConfimAction
+			});
+			//			wrapper01 = $.initIscroll({
+			//				id: "wrapper01",
+			//				pullUpAction: processServiceAction,
+			//				pullDownAction: processServiceAction
+			//			});
+			initFunction();
+		}
+
+		var initFunction = function() {
+			$('#item2order').addClass('change-color')
+			processConfimAction(wrapper01);
+			//						processServiceAction(wrapper01);
+		}
+
+		document.addEventListener('touchmove', function(e) {
+			e.preventDefault();
+		}, isPassive() ? {
+			capture: false,
+			passive: false
+		} : false);
+
+		function isPassive() {
+			var supportsPassiveOption = false;
+			try {
+				addEventListener("test", null, Object.defineProperty({}, 'passive', {
+					get: function() {
+						supportsPassiveOption = true;
+					}
+				}));
+			} catch(e) {}
+			return supportsPassiveOption;
+		}
+	</script>
+
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>设置</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/main.css" />
+		<style>
+			.mui-table-view {
+				margin-top: 20px;
+			}
+			
+			.mui-media-body {
+				color: #515252;
+				font-size: 0.2751rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">设置</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<!--<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="" id="">
+						<div class="mui-media-body left">
+							接单状态
+						</div>
+						<div class="mui-switch mui-switch-mini mui-active right">
+							<div class="mui-switch-handle"></div>
+						</div>
+					</a>
+				</li>
+			</ul>-->
+
+			<!--<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="paibanbiao">
+						<div class="mui-media-body">
+							排班表
+						</div>
+					</a>
+
+				</li>
+
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="setting_posit">
+						<div class="mui-media-body">
+							服务位置
+						</div>
+					</a>
+
+				</li>
+
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="fuwuxiangmu">
+						<div class="mui-media-body">
+							服务项目
+						</div>
+					</a>
+
+				</li>
+			</ul>-->
+
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a id="xiugaimima" class="mui-navigate-right">
+						<div class="mui-media-body">
+							修改密码
+						</div>
+					</a>
+				</li>
+
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="xiugaishoujihao">
+						<div class="mui-media-body">
+							修改手机号
+						</div>
+					</a>
+
+				</li>
+			</ul>
+
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a id="yhxy" class="mui-navigate-right">
+						<div class="mui-media-body">
+							服务条款
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="yijian_fankui" class="mui-navigate-right">
+						<div class="mui-media-body">
+							意见反馈
+						</div>
+					</a>
+				</li>
+				<!--<li class="mui-table-view-cell">
+					<a id="qlhc">
+						<div class="mui-media-body">
+							清理缓存<span style="float: right;" id="hcsj">0MB</span>
+						</div>
+					</a>
+				</li>-->
+
+				<!--<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="gyjh">
+						<div class="mui-media-body">
+							关于柒拾佳护
+						</div>
+					</a>
+				</li>-->
+			</ul>
+
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a id="service_object">
+						<div class="mui-media-body">
+							当前应用版本<span style="float: right;" id="appVersion"><span>
+						</div>
+					</a>
+				</li>
+			</ul>
+			
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a id="call_phone">
+						<div class="mui-media-body">
+							客服电话<span style="float: right;" id="service_phone">400-178-0800<span>
+						</div>
+					</a>
+				</li>
+			</ul>
+
+			<ul class="mui-table-view" style="margin-top: 25px; margin-bottom: 20px;" id="table-viewX">
+				<li class="mui-table-view-cell" id="quit">
+					<a style="text-align: center;color: #4a4a4a; font-size: 15px;">
+						退出登录
+					</a>
+				</li>
+			</ul>
+
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.update.js"></script>
+	<script>
+		var user = localStorage.getItem("USER");
+		var user = JSON.parse(user);
+		mui.init({
+			keyEventBind: {
+				backbutton: true //打开back按键监听
+			},
+			beforeback: function() {
+				//返回true，继续页面关闭逻辑  
+				mui.back;
+				return true;
+			}
+		});
+		//		mui('.mui-content .mui-switch').each(function() { //循环所有toggle
+		//			this.addEventListener('toggle', function(event) {
+		//				var str = event.detail.isActive ? 'true' : 'false'
+		//				
+		//				var data = {};
+		//				if(str == 'true') {
+		//					data = {
+		//						isActive: '1'
+		//					}
+		//				} else {
+		//					data = {
+		//						isActive: '0'
+		//					}
+		//				}
+		//				var sussess = function(data) {
+		//					//服务器返回响应，根据响应结果，分析是否登录成功；
+		//					if(data.result != "success") {
+		//						mui.toast(data.msg);
+		//					} else {
+		//						user.servicestatus= data.isActive
+		//						localStorage.setItem('USER', JSON.stringify(user));
+		//					}
+		//				};
+		//				commonHttpUtils(changeservicestatusUrl, "post", data, sussess, error);
+		//			});
+		//		});
+		mui.plusReady(function() {
+			//			if(plus.navigator.isImmersedStatusbar()) { // 兼容immersed状态栏模式
+			//				// 获取状态栏高度并根据业务需求处理，这里重新计算了子窗口的偏移位置
+			//				topoffset = (Math.round(plus.navigator.getStatusbarHeight()) + 45) + 'px';
+			//				document.querySelector("header").style.height = topoffset;
+			//				document.querySelector("header").style.paddingTop = "20px";
+			//				document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = topoffset;
+			//			}
+
+			// 加载完毕后关闭等待框，并展示页面
+			var currentView = plus.webview.currentWebview();
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+			
+			mui(".mui-content").on("click", "#call_phone", function() {
+						var btnArray = ['拨打', '取消'];
+						var Phone ="400-178-0800" ;
+						mui.confirm('是否拨打 ' + Phone + ' ？', '提示', btnArray, function(e) {
+							if(e.index == 0) {
+								plus.device.dial(Phone, false);
+							}
+						})
+
+					});
+
+			document.getElementById("quit").addEventListener("tap", function() {
+				closeApp();
+			});
+			document.getElementById("yijian_fankui").addEventListener('tap', function(event) {
+					mui.openWindow({
+						url: '../set/suggest_one.html',
+						id: 'set/suggest_one.html',
+						show: {
+							autoShow: false, //页面loaded事件发生后自动显示，默认为true
+							event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+						},
+						waiting: {
+							autoShow: true //自动显示等待框，默认为true
+						}
+					});
+				});
+			
+			var wgtVer = null;
+
+			// 获取本地应用资源版本号
+			plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+				wgtVer = inf.version;
+				$("#appVersion").html(wgtVer)
+			});
+
+			mui(".mui-content").on("tap", "#service_object", function() {
+				checkUpdate(wgtVer);
+			});
+
+//			plus.io.requestFileSystem(plus.io.PRIVATE_DOC, function(fs) {
+//				fs.root.getDirectory("", {
+//					create: false
+//				}, function(entry) {
+//					entry.getMetadata(function(folder) {
+//						document.querySelector("#hcsj").innerHTML = (folder.size / (1024 * 1024)).toFixed(2) + "MB";
+//					}, function() {
+//						document.querySelector("#hcsj").innerHTML = "0.00MB";
+//					}, true);
+//				});
+//			});
+		});
+
+		function closeApp() {
+			plus.nativeUI.actionSheet({
+				cancel: "取消",
+				buttons: [{
+					title: "注销当前账号"
+				}]
+			}, function(e) {
+				console.log("退出登录——————————————————————》"+e.index)
+				var index = e.index;
+				switch(index) { //case 0: 取消
+					case 1: //
+						commonHttpUtils(apploginoutUrl, "post", {}, function(data){}, error);
+						plus.storage.setItem('msgFlag', '');
+						localStorage.clear();
+						localStorage.setItem("lauchFlag","1");
+//						plus.runtime.restart();
+						var index = plus.webview.getLaunchWebview();
+							index.reload(true);
+							plus.webview.currentWebview().close(true);
+						break;
+				}
+			});
+		};
+		//		if(user.servicestatus == '0') {
+		//			$(".mui-content .mui-switch").removeClass("mui-active");
+		//		} else {
+		//			$(".mui-content .mui-switch").addClass("mui-active");
+		//		}
+
+		//		document.getElementById("setting_posit").addEventListener('tap', function() {
+		//			mui.openWindow({
+		//				url: '../set/service_position.html',
+		//				id: 'set/service_position.html',
+		//				show: {
+		//					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+		//					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+		//				},
+		//				waiting: {
+		//					autoShow: true //自动显示等待框，默认为true
+		//				}
+		//			});
+		//		});
+
+		//		document.getElementById("paibanbiao").addEventListener('tap', function() {
+		//
+		//			mui.openWindow({
+		//				url: 'account_working_schedule.html',
+		//				id: 'account_working_schedule.html',
+		//				show: {
+		//					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+		//					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+		//				},
+		//				waiting: {
+		//					autoShow: true //自动显示等待框，默认为true
+		//				}
+		//			});
+		//
+		//		});
+
+		document.getElementById("xiugaimima").addEventListener('tap', function() {
+			mui.openWindow({
+				url: 'change_password.html',
+				id: 'change_password.html',
+				show: {
+					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true //自动显示等待框，默认为true
+				}
+			});
+		});
+
+		document.getElementById("yhxy").addEventListener('tap', function() {
+			mui.openWindow({
+				url: '../login/clause_bak.html',
+				id: 'login/clause_bak.html',
+				show: {
+					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true //自动显示等待框，默认为true
+				}
+			});
+		});
+
+		//		document.getElementById("fuwuxiangmu").addEventListener('tap', function() {
+		//			mui.openWindow({
+		//				url: 'set_service_Items.html',
+		//				id: 'set_service_Items.html',
+		//				show: {
+		//					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+		//					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+		//				},
+		//				waiting: {
+		//					autoShow: true //自动显示等待框，默认为true
+		//				}
+		//			});
+		//		});
+
+		document.getElementById("xiugaishoujihao").addEventListener('tap', function() {
+			mui.openWindow({
+				url: 'change_phone.html',
+				id: 'change_phone.html',
+				show: {
+					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true //自动显示等待框，默认为true
+				}
+			});
+		});
+	</script>
+
+</html>

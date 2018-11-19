@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>我的账户</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<style>
+			html {
+				background-color: #fff;
+			}
+			
+			.mui-content {
+				background-color: #fff;
+			}
+			
+			.top-img-div {
+				margin-top: 50px;
+				text-align: center;
+			}
+			
+			.top-text-div {
+				margin-top: 5px;
+				text-align: center;
+			}
+			
+			.top-img {
+				width: 120px;
+				height: 120px;
+				border-radius: 60px;
+				#margin-top: 10px;
+			}
+			
+			.top-btn-div {
+				margin-top: 50px;
+				text-align: center;
+			}
+			
+			.cus-btn {
+				border-top-left-radius: 20px;
+				border-top-right-radius: 20px;
+				border-bottom-right-radius: 20px;
+				border-bottom-left-radius: 20px;
+				padding: 6px 30px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">微信绑定</h1>
+		</header>
+
+		<div class="mui-content" id="content">
+			<div class="top-img-div">
+				<img class="top-img mui-action-preview qs-image-item" id="head_image" src="../images/txmrt.png" />
+			</div>
+			<div class="top-text-div">
+				<span class="wxname" id="wxname"></span>
+			</div>
+			<div class="top-btn-div">
+				<button type="button" class="mui-btn mui-btn-royal mui-btn-outlined cus-btn">绑 定</button>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script>
+		mui.init({
+			keyEventBind: {
+				backbutton: true //打开back按键监听
+			},
+			beforeback: function() {
+				//返回true，继续页面关闭逻辑  
+				mui.back;
+				return true;
+			}
+		});
+
+		var userInfo = null;
+		var user = JSON.parse(localStorage.getItem("USER")); //取user的个人信息值
+		mui.plusReady(function() {
+//			/setPagePos();
+			var currentView = plus.webview.currentWebview();
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+			var auths = {};
+			plus.oauth.getServices(function(services) {
+				for(var i in services) {
+					var service = services[i];
+					auths[service.id] = service;
+				}
+				var auth = auths["weixin"];
+				auth.login(function() {
+					auth.getUserInfo(function() {
+						userInfo = auth.userInfo;
+						$("#head_image").attr("src", userInfo.headimgurl);
+						$("#wxname").html(userInfo.nickname)
+					}, function(e) {
+						plus.nativeUI.toast("用户绑定信息失败：" + e.message);
+					});
+				}, function(e) {
+					plus.nativeUI.toast("用户绑定信息失败：" + e.message);
+				});
+			}, function(e) {
+				plus.nativeUI.toast("获取登录认证失败：" + e.message);
+			});
+
+			$("#content").on('tap', '.cus-btn', function() {
+				var sussessone = function(data) {
+					if(data.result == "success") {
+						user.weixinFlag = true;
+						user.weixinInfo = userInfo;
+						localStorage.setItem('USER', JSON.stringify(user));
+
+						var template = plus.webview.getWebviewById("set/account_setting.html");
+						if(template) {
+							template.reload()
+						}
+						currentView.close()
+						mui.toast("操作成功");
+					} else {
+						mui.toast(data.msg);
+					}
+				}
+				if(userInfo) {
+					commonHttpUtils(bingWeixinUrl, "put", {
+						weixinInfo: userInfo
+					}, sussessone, error);
+				} else {
+					mui.toast("绑定失败");
+				}
+			});
+		});
+	</script>
+
+</html>

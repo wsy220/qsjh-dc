@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>订单详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<link rel="stylesheet" href="../css/mui.imageviewer.css" />
+		<link rel="stylesheet" href="../css/qs.cus.mui.css" />
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+		<style>
+
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">订单详情</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<div id="ordera"></div>
+			<div id="orderb"></div>
+			<div id="showButton" class="pull-center mui-confirm-button">
+				<img class="width-p-25 margin-top-p-10 margin-bottom-p-10" src="../images/order/qiangdan.png" alt="" />
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.zoom.js"></script>
+	<script type="text/javascript" src="../js/mui.previewimage.js"></script>
+
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+	<script type="text/javascript" src="../plugs/md5/md5.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.img.lazyload.js"></script>
+	<script>
+		var dataFormat = function(data){
+			var _data = data;
+			var diseaseArr = [];
+			for (var i=0;i<_data["disease"].length;i++) {
+				var department = _data["disease"][i];
+				for (var m = 0; m < department["diseases"].length; m++) {
+					var disease = department["diseases"][i];
+					diseaseArr.push(disease);
+				}
+			}
+			_data["disease"]=diseaseArr.toString();
+			return _data;
+		}
+		mui.init({
+			swipeBack: true, //启用右滑关闭功能
+			beforeback: function() {
+				//获得列表界面的webview
+				var i = plus.webview.getWebviewById("catch_order.html");
+				if(i) {
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+					i.evalJS("getUserInfo()");
+				}
+				return true;
+			}
+		});
+		mui.previewImage();
+		mui('.mui-scroll-wrapper').scroll({
+			indicators: true //是否显示滚动条
+		});
+		$("#showButton").hide();
+		mui.plusReady(function() {
+			var currentView = plus.webview.currentWebview();
+			currentView.setStyle({
+				softinputMode: "adjustResize"
+			});
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+
+			//setPagePos();
+
+			var currentView = plus.webview.currentWebview();
+			var orderId = currentView.orderId;
+			var userId = localStorage.getItem("USERID");
+			var orderUrl = getorderdetailGrabUrl + orderId;
+			var orderStates = null
+			var order = null;
+			
+			var ordersussess = function(data) {
+				console.log("抢单详情："+JSON.stringify(data.obj))
+				order = dataFormat(data.obj);
+				if(data.result == "success") {
+					
+					orderStates = data.obj.states;
+					if(orderStates === "orderd" || orderStates == "finish" || orderStates == "pc" || orderStates == "mc") {
+						mui.toast("该订单已经被抢走了......");
+						mui.back();
+						return false;
+					}
+					order = data.obj;
+					
+					$("#ordera").processTL(templateRegister.ordera, data.obj)
+					$("#orderb").processTL(templateRegister.orderb, data.obj, "append", function() {
+						$(".qs-img-lazyload").each(function(i, v) {
+							$$.lazyload(v)
+						})
+					});
+					$("#showButton").show();
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+
+			commonHttpUtils(orderUrl, "get", {
+				id: orderId
+			}, ordersussess, error);
+
+			mui(".mui-content").on("tap", ".mui-confirm-button", function() {
+				var url = confirmorderUrl + orderId;
+				var btnArray = ['否', '是'];
+				mui.confirm('是否确认接此定单并为其服务？', '抢单提示', btnArray, function(e) {
+					if(e.index == 1) {
+						if(orderStates == "orderd" || orderStates == "finish" || orderStates == "pc" || orderStates == "mc") {
+							mui.toast("该订单已被抢")
+							mui.back();
+							return false;
+
+						}
+
+						var sussess = function(data) {
+							if(data.result == "success") {
+								mui.toast("抢单成功");
+								var iService = plus.webview.getWebviewById("subpages/tab-webview-subpage-service.html");
+								if(iService) {
+									if(order.sparesconfirm) {
+										iService.evalJS("refIngService()");
+									} else {
+										//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+										iService.evalJS("refConfimService()");
+									}
+
+								}
+
+								var i = plus.webview.getLaunchWebview();
+								if(i) {
+									//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+									i.evalJS("setItemActive()");
+								}
+								var gListView = plus.webview.getWebviewById("catch_order.html");
+								if(gListView) {
+									gListView.close(true)
+								}
+								//								currentView.opener().close(true);
+								currentView.close(true)
+								//getUserInfo();
+							} else {
+								if(data.code == "S000001") {
+									mui.toast("该订单已经被抢走了......");
+								} else {
+									mui.toast(data.msg);
+								}
+							}
+						};
+						commonHttpUtils(url, "put", {
+							id: userId
+						}, sussess, error);
+					}
+				})
+			});
+		});
+	</script>
+
+</html>

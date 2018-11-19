@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>模版页面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+
+		<style>
+			.mui-content {
+				background: #FFFFFF !important;
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 70%;
+			}
+			
+			.mui-input-row {
+				margin: -10px 0px;
+			}
+			
+			.mui-input-row label {
+				font-size: 14px;
+				width: 80px;
+				padding: 11px 0px
+			}
+			
+			.mui-table-view-cell {
+				font-size: 14px;
+				padding: 11px 15px;
+			}
+			
+			.mui-table-view {
+				margin-top: 5px;
+			}
+			
+			textarea {
+				margin-bottom: 0px;
+				font-size: 15px;
+			}
+			
+			.mui-btn-block {
+				color: #fff;
+				font-size: 14px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">发表文章</h1>
+			<button id="myArticle" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">我的文章</button>
+		</header>
+		<div class="mui-content mui-table-view-chevron" id="content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" style="padding-right: 5px;">
+					<div class="mui-input-row">
+						<label>文章标题：</label>
+						<input id="articletitle" type="text" class="mui-input-clear" placeholder="请输入文章标题" style="float: left;padding-left: 22px;font-size: 14px;">
+						<span style="color: red;top: 10px;position: absolute;left: 70px;">*</span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell" id="wzfl-li">
+					<a href="#about" class="mui-navigate-right">文章板块：
+						<span id="wzfl-span" style="color: #8c8b8b;padding-left: 30px;">请选择文章分类 </span>
+					</a>
+					<span style="color: red;position: absolute;left: 85px;top: 15px;">*</span>
+				</li>
+				<li class="mui-table-view-cell" id="wzbq-li">
+					<a href="#about" class="mui-navigate-right">文章标签：
+						<span id="wzbq-span" style="color: #8c8b8b;padding-left: 30px;">请选择文章标签</span>
+					</a>
+					<span style="color: red;position: absolute;left: 85px;top: 15px;">*</span>
+				</li>
+				<li class="mui-table-view-cell">
+					使用昵称（不使用真实姓名）
+					<div id="realNameFlag" class="mui-switch mui-switch-blue mui-switch-mini mui-active">
+						<div class="mui-switch-handle"></div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-radio mui-left" style="padding: 5px 3%;">
+					<div class="mui-input-row" style="margin: 5px 5px;">
+						<textarea id="textarea" rows="8" placeholder="请输入近要发表的文章内容（50-1000字）"></textarea>
+					</div>
+
+					<div id="feedback" class="mui-page feedback">
+						<div class="mui-page-content">
+							<div id='image-list' class="row image-list"></div>
+						</div>
+					</div>
+					<div class="mui-input-row" style="margin: 0px 8px;">
+						<span style="color: #D74B28; font-size: 12px;">注：第一张图片为列表图片</span>
+
+					</div>
+				</li>
+				<li class="mui-content-padded" style="padding-bottom: 5%;">
+					<button id="suggestbut" class="mui-btn mui-btn-block mui-btn-warning">保存并发布</button>
+				</li>
+			</ul>
+
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+
+	<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+	<script>
+		var wzfl = null;
+		var wzbq = undefined;
+		mui.init({
+			keyEventBind: {
+				backbutton: true //打开back按键监听
+			},
+
+			beforeback: function() {
+				//获得列表界面的webview
+				var i = plus.webview.getWebviewById("subpages/tab-webview-subpage-talk.html");
+				if(i) {
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+					i.evalJS("refConfimService()");
+				}
+				return true;
+			}
+		});
+
+		var wzflButton = document.getElementById('wzfl-li');
+		var wzflResult = document.getElementById('wzfl-span');
+
+		mui.plusReady(function() {
+			var currentView = plus.webview.currentWebview();
+			//			currentView.setStyle({
+			//				softinputMode: "adjustResize"
+			//			});
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+			$("#wzbq-li").hide();
+			qs.initImageList({
+				id: 'image-list'
+			});
+
+			mui('.mui-bar').on('tap', '#myArticle', function(e) {
+				mui.openWindow({
+					url: 'my-publish-list.html',
+					id: 'my-publish-list.html',
+					show: {
+						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true, //自动显示等待框，默认为true
+						title: '正在加载...', //等待对话框上显示的提示内容
+					}
+				});
+			});
+
+			mui('.mui-content').on('tap', '#suggestbut', function(e) {
+				var articletitle = $("#articletitle").val()
+				if(!articletitle && articletitle == "") {
+					mui.toast("请输入文章标题");
+					return false;
+				}
+				if(wzfl == null) {
+					mui.toast("请选择文章分类");
+					return false;
+				}
+				
+				if(wzflResult.innerText == '经验分享') {
+					if(wzbq == null) {
+						mui.toast("请选择文章标签");
+						return false;
+					}
+				}
+
+				var realNameFlag = true;
+				if($("#realNameFlag").hasClass("mui-active")) {
+					realNameFlag = false;
+				}
+
+				var paSeeFlag = true;
+				//				if($("#paSeeFlag").hasClass("mui-active")) {
+				//					paSeeFlag = true;
+				//				}
+
+				var textarea = $("#textarea").val()
+				if(!textarea && textarea == "") {
+					mui.toast("请输入文章内容");
+					return false;
+				}
+				if(textarea.length < 50 || textarea.length > 1000) {
+					mui.toast("输入文章内容在50-1000个字符内");
+					return false;
+				}
+
+				if($$.getImageFilesPath("image-list") && $$.getImageFilesPath("image-list").length < 1) {
+					mui.toast("至少上传一张照片");
+					return false;
+				}
+				var data = {
+					articletitle: articletitle,
+					articletype: wzbq,
+					articlecontent: textarea,
+					wzfl: wzfl,
+					realNameFlag: realNameFlag,
+					paSeeFlag: paSeeFlag,
+					imgList: $$.getImageFilesPath("image-list")
+				}
+
+				console.log(JSON.stringify(data))
+
+				var sus = function(data) {
+					if(data.result == "success") {
+						mui.back();
+					} else {
+						mui.toast(data.msg);
+					}
+				};
+				commonHttpUtils(savearticlesUrl, "put", data, sus, error);
+			});
+		});
+
+		//普通示例
+		var wzflPicker = new mui.PopPicker();
+		wzflPicker.setData([{
+			value: 'wdxq',
+			text: '我的心情'
+		}, {
+			value: 'wtjl',
+			text: '问题交流'
+		}, {
+			value: 'jyfx',
+			text: '经验分享'
+		}]);
+
+		wzflButton.addEventListener('tap', function(event) {
+			wzflPicker.show(function(items) {
+				wzflResult.innerText = items[0].text;
+				wzfl = items[0].value;
+				if(wzflResult.innerText == '经验分享') {
+					$("#wzbq-li").show();
+					var ordersussess = function(data) {
+						if(data.result == "success") {
+							var pdata = [];
+							data.obj.forEach(function(v, i) {
+								var subData = {
+									value: v._id,
+									text: v.typename
+								}
+								pdata.push(subData)
+							});
+
+							var wzbqPicker = new mui.PopPicker();
+							wzbqPicker.setData(pdata)
+							var wzbqButton = document.getElementById('wzbq-li');
+							var wzbqResult = document.getElementById('wzbq-span');
+							wzbqButton.addEventListener('tap', function(event) {
+								wzbqPicker.show(function(items) {
+									wzbqResult.innerText = items[0].text;
+									wzbq = items[0].value;
+								});
+							}, false);
+
+						} else {
+							mui.toast(data.msg);
+						}
+					};
+					commonHttpUtils(articlestypeUrl, "get", {}, ordersussess, error);
+				}else if (wzflResult.innerText !== '经验分享') {
+					$("#wzbq-li").hide();
+				}
+				
+			});
+
+		}, false);
+	</script>
+
+</html>

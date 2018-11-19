@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>我的账户</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../fonts/iconfont.css" />
+		<link rel="stylesheet" href="../plugs/qs/qs.common.new.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+		<link href="../css/hover.css" rel="stylesheet" />
+		<style>
+			.right {
+				float: right;
+			}
+			
+			.cus-box {
+				text-align: center;
+				border: 1px solid #d7d7d7;
+				height: 1rem;
+			}
+			
+			.cus-box p {
+				text-align: center;
+				margin-top: 8%;
+				color: #333333;
+			}
+			
+			.cus-box a img {
+				width: 80%;
+				margin: 10px 0px;
+			}
+			
+			.top_img {
+				height: 1.7rem;
+				background-color: #fff;
+				overflow: hidden;
+			}
+			
+			.top_img_one {
+				display: inline-block;
+				width: 1.0rem;
+				margin-top: 5%;
+				margin-left: 4%;
+				float: left;
+			}
+			
+			.top_img_one img {
+				width: 1.0rem;
+			}
+			
+			.top_img_two {
+				display: inline-block;
+				width: 4.0rem;
+				height: 1.0rem;
+				line-height: 1.0rem;
+				float: left;
+				margin-top: 6%;
+				margin-left: 4%;
+			}
+			
+			.account_detail_three {
+				height: 1rem;
+				border: 1px solid #d7d7d7;
+				background-color: #ccf0f2;
+				padding-top: 0.3rem;
+				padding-left: 0.2rem;
+			}
+			
+			.mui-col-sm-12 {
+				border-bottom: 3px solid #eeeeee;
+			}
+			
+			.cus-content-padded {
+				padding: 5px 15px;
+				margin-bottom: 3px;
+				background-color: #fff;
+			}
+			
+			.shenqingtixian {
+				left: 80%;
+				top: 15%;
+			}
+			
+			.weixin-flag {
+				padding-left: 20px;
+				color: orangered;
+				font-size: 14px;
+				line-height: .5rem;
+			}
+			
+			.cus-btn {
+				float: right;
+				border-top-left-radius: 20px;
+				border-top-right-radius: 20px;
+				border-bottom-right-radius: 20px;
+				border-bottom-left-radius: 20px;
+			}
+			
+			.mui-content img {
+				width: 100%;
+			}
+			
+			.withdraw {
+				position: absolute;
+				top: 95px;
+				font-size: 16px;
+				color: #F0F0F0;
+				padding-left: 2%;
+			}
+			
+			.big-amount {
+				position: relative;
+				top: 20px;
+				font-size: 55px;
+			}
+			
+			.headings {
+				font-size: 14px;
+			}
+			
+			.mui-table-view.mui-grid-view .mui-table-view-cell {
+				margin-right: 0;
+				padding-left: 9px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-transparent">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">我的账户</h1>
+			<span style="float: right;color: #F0F0F0;padding-top: 2.5%;padding-right:1%;font-size: 12px;" id="btn_check_account_details">账户明细</span>
+		</header>
+
+		<div class="mui-content" id="content">
+			<img id="img1" src="../images/account/wdzh.png" width="100%" height="180px">
+			<div class="withdraw">可提现（元）
+				<div class="big-amount" id="lovevalue">0</div>
+			</div>
+			<ul class="mui-table-view mui-grid-view">
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a href="#">
+						<div style="border-right: 1px solid #CCCCCC;">
+							<span class="headings">30天内收入</span>
+							<h5 id="month_value">0</h5>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a href="#">
+						<div style="border-right: 1px solid #CCCCCC;">
+							<span class="headings">总收入</span>
+							<h5 id="accumulated_value">0</h5>
+						</div>
+
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a href="#">
+						<div style="border-right: 1px solid #CCCCCC;">
+							<span class="headings">已提现</span>
+							<h5 id="withdrawal">0</h5>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a href="#">
+						<div style="">
+							<span class="headings">总扣款</span>
+							<h5 id="cumulative-deduction">0</h5>
+						</div>
+					</a>
+				</li>
+				
+
+			</ul>
+			<ul class="mui-table-view" style="margin-top: 5px;margin-bottom: 5px;" id="displayShow">
+				<!--<li class="mui-table-view-cell mui-media first_one">
+					<img class="mui-media-object mui-pull-left" src="../images/account/yhk.png">
+					<div class="mui-media-body" style="margin-top: 5px;">
+						<span style="line-height: 33px;">银行卡</span>
+						<button type="button" class="mui-btn mui-btn-outlined cus-btn">绑定</button>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media first_two">
+					<img class="mui-media-object mui-pull-left" src="../images/account/yhk.png">
+					<div class="mui-media-body" style="margin-top: 5px;">
+						<span style="line-height: 33px;"><span id="cardBankName"></span> **** **** **** <span id="cardNo"></span></span>
+
+						<button type="button" class="mui-btn mui-btn-royal mui-btn-outlined cus-btn">提现</button>
+						<button type="button" style="margin-right: 5px;" class="mui-btn mui-btn-danger mui-btn-outlined cus-btn">解除绑定</button>
+					</div>
+				</li>-->
+				<li class="mui-table-view" style="padding: 11px 15px;">
+					<div>账户绑定</div>
+				</li>
+
+				<li class="mui-table-view-cell mui-media wxff">
+					<img class="mui-media-object mui-pull-left" src="../images/account/wx.png">
+					<div class="mui-media-body" style="margin-top: 5px;">
+						<span style="line-height: 33px;">微信</span>
+						<button type="button" class="mui-btn mui-btn-outlined cus-btn" id="wxbi">绑定</button>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media wxft">
+					<img class="mui-media-object mui-pull-left" src="../images/account/wx.png">
+					<div class="mui-media-body" style="margin-top: 5px;">
+						<span style="line-height: 33px;">微信</span>
+						<button type="button" class="mui-btn mui-btn-royal mui-btn-outlined cus-btn" id="wxtx">提现</button>
+						<!--<button type="button" style="margin-right: 5px;" class="mui-btn mui-btn-danger mui-btn-outlined cus-btn" id="wxjb">重新绑定</button>-->
+					</div>
+				</li>
+			</ul>
+
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/iscroll/iscroll-probe.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.iscroll.new.js"></script>
+	<script>
+		mui.init({
+			keyEventBind: {
+				backbutton: true //打开back按键监听
+			},
+			beforeback: function() {
+				//返回true，继续页面关闭逻辑  
+				mui.back;
+				return true;
+			}
+		});
+		var txa = 0;
+		var bankName = '';
+		var bankNo = '';
+		$(".wxft").hide();
+		$("#displayShow").hide();
+
+		function initAccountInfo() {
+			var sussess = function(data) {
+				//服务器返回响应，根据响应结果，分析是否登录成功；
+				if(data.result == "success") {
+					console.log("获取账户----->"+JSON.stringify(data.obj));
+					if (data.obj.hid.allowWithdraw == true) {
+						$("#displayShow").show();
+					} else{
+						$("#displayShow").hide();
+					}
+					//var all = (data.sub.all/100).fixed(2)
+					if(data.sub.ava) {
+						txa = Math.floor(data.sub.ava) / 100;
+						if(txa < 0) txa = 0;
+						$("#lovevalue").html(txa);
+					}
+
+					if(data.sub.kk) {
+						$("#cumulative-deduction").html(Math.floor(data.sub.kk) / 100);
+					}
+					if(data.sub.tx) {
+						$("#withdrawal").html(Math.floor(data.sub.tx) / 100);
+					}
+					if(data.sub.not) {
+						$("#month_value").html(Math.floor(data.sub.not) / 100);
+					}
+					if(data.sub.all) {
+						$("#accumulated_value").html(Math.floor(data.sub.all) / 100);
+					}
+					//console.log(data.obj.cardNo)
+					if(!data.obj.cardNo || data.obj.cardNo == '') { //卡号存在
+						$(".first_one").show();
+						$(".first_two").hide();
+					} else {
+						bankNo = data.obj.cardNo;
+						bankName = data.obj.cardBankName;
+						$('#cardBankName').html(data.obj.cardBankName)
+						var str = data.obj.cardNo;
+						$('#cardNo').html(str.substr(str.length - 4))
+						$(".first_two").show();
+						$(".first_one").hide();
+					}
+					console.log(JSON.stringify(data.obj.weixinFlag))
+					if(data.obj.weixinFlag) {
+						$(".wxft").show();
+						$(".wxff").hide();
+					} else {
+						$(".wxft").hide();
+						$(".wxff").show();
+					}
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+			commonHttpUtils(getdoctoraccountUrl, "get", {}, sussess, error);
+		}
+
+		mui.plusReady(function() {
+			//setPagePos();
+			var currentView = plus.webview.currentWebview();
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+			initAccountInfo();
+			$("#btn_check_account_details").click(function(event) {
+				mui.openWindow({
+					url: 'account_details.html',
+					id: 'account_details',
+					show: {
+						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true //自动显示等待框，默认为true
+					}
+				});
+			});
+
+			$("#content").on('tap', '.cus-btn', function() {
+				if(this.id == "wxbi" || this.id == "wxjb") {
+					mui.openWindow({
+						url: 'account_wx_bing.html',
+						id: 'account_wx_bing.html',
+						show: {
+							autoShow: false, //页面loaded事件发生后自动显示，默认为true
+							event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+						},
+						extras: {
+							bankName: bankName,
+							bankNo: bankNo,
+							txa: txa
+						},
+						waiting: {
+							autoShow: true //自动显示等待框，默认为true
+						}
+					});
+				} else if(this.id == "wxtx") {
+
+					var auths = {};
+					plus.oauth.getServices(function(services) {
+						for(var i in services) {
+							var service = services[i];
+							auths[service.id] = service;
+						}
+						var auth = auths["weixin"];
+						auth.login(function() {
+							auth.getUserInfo(function() {
+								var user = JSON.parse(localStorage.getItem("USER")); //取user的个人信息值
+								userInfo = auth.userInfo;
+								if(user.weixinInfo && user.weixinInfo.openid == userInfo.openid) {
+									mui.openWindow({
+										url: 'account_wx_tx.html',
+										id: 'account_wx_tx.html',
+										show: {
+											autoShow: false, //页面loaded事件发生后自动显示，默认为true
+											event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+										},
+										extras: {
+											bankName: bankName,
+											bankNo: bankNo,
+											txa: txa
+										},
+										waiting: {
+											autoShow: true //自动显示等待框，默认为true
+										}
+									});
+								} else {
+									plus.nativeUI.toast("当前登录微信与绑定微信不一致");
+								}
+
+							}, function(e) {
+								plus.nativeUI.toast("获取微信信息失败：" + e.message);
+							});
+						}, function(e) {
+							plus.nativeUI.toast("获取微信信息失败：" + e.message);
+						});
+					}, function(e) {
+						plus.nativeUI.toast("获取登录认证失败：" + e.message);
+					});
+				}
+			});
+		});
+	</script>
+
+</html>

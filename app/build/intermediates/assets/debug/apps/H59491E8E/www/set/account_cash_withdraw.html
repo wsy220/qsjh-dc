@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>现金提现</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+
+		<style>
+			.top {
+				background-color: #ffffff;
+				width: 95%;
+				margin: 2.5%;
+				height: 7rem;
+			}
+			
+			.mui-btn {
+				background-color: #169bd5;
+			}
+			
+			.top_one {
+				padding-top: 8%;
+				padding-left: 8%;
+				color: #333333;
+			}
+			
+			.top_two {
+				padding-left: 34%;
+				color: #333333;
+			}
+			
+			.top_three {
+				padding-top: 13%;
+				padding-left: 8%;
+				color: #333333;
+			}
+			
+			input[type=color],
+			input[type=date],
+			input[type=datetime-local],
+			input[type=datetime],
+			input[type=email],
+			input[type=month],
+			input[type=number],
+			input[type=password],
+			input[type=search],
+			input[type=tel],
+			input[type=text],
+			input[type=time],
+			input[type=url],
+			input[type=week],
+			select,
+			textarea {
+				line-height: 21px;
+				width: 70%;
+				height: 2rem;
+				margin-bottom: 15px;
+				padding: 10px 15px;
+				-webkit-user-select: text;
+				border: none;
+				border-radius: 3px;
+				/* outline: 0; */
+				background-color: #fff;
+				-webkit-appearance: none;
+			}
+			
+			.top_four {
+				padding-left: 8%;
+			}
+			
+			.orange-one {
+				color: #cc3300;
+				font-size: 0.24rem;
+				padding-left: 6%;
+				padding-right: 6%;
+			}
+			
+			.org-two {
+				padding-top: 6%;
+				padding-bottom: 6%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="ptitle">现金提现</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<div class="top">
+				<p class="top_one">到账银行卡 <span style="color:#4b78cf;padding-left:6%" id="bankName"></span></p>
+				<!--<p class="top_two">提现手续费率0.1%</p>-->
+
+				<p class="top_three">提现金额</p>
+
+				<img src="../images/mine/qian.png" style="width: 7%;margin-left: 5%;padding-bottom: 5px;" alt="" /><input id="amount" type="number" class="money_No" style="font-size: 1.2rem;" />
+				<p class="top_four">可提现金额：<span id="keamount">0</span></p>
+
+				<div class="mui-content-padded">
+					<button id='commBtn' class="mui-btn mui-btn-block mui-btn-primary "><span>提现</span></button>
+				</div>
+			</div>
+			<div class="footer">
+				<p class="orange-one">温馨提示：</p>
+				<p class="orange-one">如您在17：00前申请提现，1-2个工作日内即可到账；在17：00后申请的提现服务，从第二个工作日开始清算，并在之后的1-2个工作日内到账。</p>
+				<p class="orange-one">可提现金额：</p>
+				<p class="orange-one">截止到当天时间的前一个月，所有正常完成的订单总金额</p>
+				<p class="orange-one">声明：</p>
+				<p class="orange-one">医护人员通过上门服务获取酬劳，请自行到有关部门报税。</p>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script>
+		mui.init({
+			keyEventBind: {
+				backbutton: true //打开back按键监听
+			},
+			beforeback: function() {
+				//返回true，继续页面关闭逻辑  
+				mui.back;
+				return true;
+			}
+		});
+
+		mui.plusReady(function() {
+//			var topoffset = '45px';
+//			if(plus.navigator.isImmersedStatusbar()) { // 兼容immersed状态栏模式
+//				// 获取状态栏高度并根据业务需求处理，这里重新计算了子窗口的偏移位置
+//				topoffset = (Math.round(plus.navigator.getStatusbarHeight()) + 45) + 'px';
+//				document.querySelector("header").style.height = topoffset;
+//				document.querySelector("header").style.paddingTop = "20px";
+//				document.getElementById('content').style.paddingTop = (Math.round(plus.navigator.getStatusbarHeight()) + 45) + "px";
+//			}
+			var currentView = plus.webview.currentWebview();
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+
+			$('#bankName').html(currentView.bankName + '（' + currentView.bankNo.substr(currentView.bankNo.length - 4) + '）')
+			$('#keamount').html(currentView.txa)
+
+			document.getElementById("commBtn").addEventListener("tap", function() {
+
+				var amount = $("#amount").val();
+				if(!amount || amount == '' || amount == 0) {
+					mui.toast("请输入提现金额");
+					return false;
+				}
+
+				if(amount > currentView.txa) {
+					mui.toast("提现金额不能大于可提现金额");
+					return false;
+				}
+				var sussess = function(data) {
+					//服务器返回响应，根据响应结果，分析是否登录成功；
+					if(data.result == "success") {
+						mui.toast("申请提现成功");
+						var index = plus.webview.getWebviewById('set/account_setting.html');
+						index.reload(true);
+						plus.webview.currentWebview().close(true);
+					} else {
+						mui.toast(data.msg);
+					}
+				};
+
+				var data = {
+					amount: amount
+				};
+				commonHttpUtils(withdrawalsUrl, "put", data, sussess, error);
+			})
+		});
+	</script>
+
+</html>

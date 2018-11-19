@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>病患详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/feedback.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="../css/jquery-labelauty.css" />
+		<!--图标-->
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+
+		<style>
+			#gerenzhongxin {
+				background: url(../images/fdt/hzbj.png) no-repeat;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+				height: 3.0rem;
+			}
+			
+			#head-img {
+				width: 100px;
+				height: 100px;
+				margin-top: 0.4rem;
+				border-radius: 50%;
+				margin-left: 0.4rem;
+				border: 3px solid #c9e3f3;
+			}
+			
+			#gerenzhongxin .upimg {
+				padding-top: 6%;
+			}
+			
+			#gerenzhongxin .mui-table-view-cell:after {
+				height: 0;
+			}
+			
+			.fenshu {
+				font-size: 0.2916rem;
+				color: #FFFFFF;
+				line-height: 1.5;
+				vertical-align: top;
+			}
+			
+			.danshu .mui-media-body {
+				text-align: center;
+			}
+			
+			.danshu {
+				position: absolute;
+				bottom: 0.1rem;
+				width: 100%;
+			}
+			
+			.danshu a span {
+				font-size: 0.22rem;
+			}
+			
+			.danshu_span {
+				color: #000 !important;
+				font-size: 0.32rem !important;
+			}
+			
+			.danshu .mui-table-view {
+				background: none;
+			}
+			
+			.xingxing img {
+				width: 0.3rem;
+			}
+			
+			.vip-driver {
+				font-size: 15px;
+				color: #484848;
+				/*height: 20px;
+				width: 65%;*/
+			}
+			
+			.danshu_img {
+				width: 0.35rem;
+				vertical-align: middle;
+			}
+			
+			#patient_name {
+				font-size: 15px;
+			}
+			
+			.sign {
+				font-size: 15px;
+				color: #484848;
+			}
+			
+			.mui-navigate-right {
+				font-size: 15px;
+				color: #E0E0E0;
+				right: 0;
+			}
+			
+			#table-viewX {
+				font-size: 0.2916rem;
+				margin-bottom: 0.08rem;
+			}
+			
+			.mui-content-padded {
+				margin: 0;
+			}
+			
+			.mui-table-view-cell {
+				font-size: 15px;
+				left: 0;
+			}
+			
+			@media screen and (min-width: 320px) and (max-width:375px) {
+				.geren_shanchang {
+					padding: 5px 25px;
+				}
+			}
+			
+			@media screen and (min-width: 375px) and (max-width:414px) {}
+			
+			@media screen and (min-width: 414px) and (max-width:576px) {}
+			
+			@media screen and (min-width: 576px) and (max-width:720px) {}
+			
+			.mui-badge-baihui {
+				background-color: #e3f1fa;
+				border-radius: 5px;
+				border: 1px solid #96c4de;
+				padding: 4px;
+				color: #afaeae;
+			}
+			
+			.mui-badge-dabaihui {
+				background-color: #dbeefa;
+				border-radius: 5px;
+				border: 0;
+				padding: 10px;
+				padding-right: 0.62rem;
+				padding-left: 0.62rem;
+			}
+			
+			.icon-ly1:before,
+			.icon-dh:before {
+				margin-right: 5px;
+			}
+			
+			#geren_shanchang .mui-media-body {
+				text-align: center;
+			}
+			
+			.mui-table-view-chevron .mui-table-view-cell {
+				padding-right: 40px;
+			}
+			
+			.aixin {
+				color: #da4937;
+			}
+			
+			.haopin {
+				color: #0693ff;
+			}
+			
+			.fuwu {
+				color: #e59c00;
+			}
+			
+			.fensi {
+				color: #e66831;
+			}
+			
+			.iconfont {
+				font-size: 0.25rem !important;
+			}
+			
+			.icon-pingxing:before,
+			.hongzi {
+				color: #ff3300;
+				font-size: 15px;
+			}
+			
+			.dowebok li {
+				margin-top: 10px;
+				margin-right: 15px;
+				background-color: #ffffff;
+				border-radius: 10px;
+				border: 1px solid rgba(0, 0, 0, 0.15);
+				text-align: -webkit-center;
+				font-size: 12px;
+			}
+			
+			.libutton ul {
+				list-style-type: none;
+			}
+			
+			.libutton li {
+				display: inline-block;
+				margin: 5px 0;
+			}
+			
+			.libutton input.labelauty+label {
+				font: 15px "Microsoft Yahei";
+				padding-left: 15px;
+				padding-right: 15px;
+			}
+			
+			.mui-table-view-cell.mui-active {
+				background: #fff;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0 !important;
+			}
+			
+			.mui-table-view .mui-media-object {
+				line-height: 42px;
+				max-width: 125px;
+				height: 80px;
+			}
+			
+			.mui-pull-right {
+				font-size: 12px;
+				font-weight: 400;
+				line-height: 1.2;
+				position: relative;
+				display: inline-block;
+				margin-bottom: 0;
+				padding: 4px 6px;
+			}
+			
+			.mui-table-view .mui-media,
+			.mui-table-view .mui-media-body {
+				overflow: hidden;
+				font-size: 15px;
+			}
+			
+			.mui-media {
+				padding: 7px 10px !important;
+			}
+			
+			.text-size {
+				font-size: 13px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="title">病患详情</h1>
+		</header>
+		<div class="mui-content" id="content">
+			<ul class="mui-table-view mui-table-view-chevron" id="gerenzhongxin">
+				<li class="mui-media">
+					<!--<a class="" id="geren_message">-->
+					<!--<img class="mui-media-object mui-pull-left" id="head-img" src="../images/fdt/fdt_patient_img.png">-->
+					<img class="mui-media-object mui-pull-left" id="head-img" src="">
+					<div class="mui-media-body upimg">
+						<span id="patient_name"></span>
+						<span class="sign">
+								<img id="sign-yes" src="../images/wode/yrz.png" style="width: 20px;" />
+								<img id="sign-no" src="../images/wode/wrz.png" style="width: 20px;" />
+								<span id="if-sign"></span>
+						</span>
+						<div class="vip-driver">
+							<span class="patient-gender text-size"></span>
+							<span class="patient-year text-size"></span>
+						</div>
+						<div class="vip-driver">
+							<div class="patient-illness text-size mui-ellipsis-2"></div>
+						</div>
+						<div class="vip-driver-call">
+							<span class="mui-badge mui-badge-baihui mui-text-right" id="wei_button">
+									<img src="../images/fdt/u125.png" style="width: 15px;"/>
+									<span>沟通</span>
+							</span>
+							<span class="mui-badge mui-badge-baihui mui-text-right call-phone" id="tel_button">
+									<img src="../images/fdt/u97.png" style="width: 15px;"/>
+									<span>联系电话</span>
+							</span>
+						</div>
+					</div>
+					<!--</a>-->
+				</li>
+			</ul>
+			<ul class="mui-table-view" id="libiao">
+				<li class="mui-table-view-cell">
+					<a id="signatureLi">身份证：<span class="idnumber"></span> </a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="signatureLi">医保(社保)卡号：<span class="healthe-idnumber"></span></a>
+				</li>
+			</ul>
+
+			<ul class="mui-table-view" style="margin-top: 3px;">
+				<!--<li class="mui-table-view-cell" id="btn_health_management_program">
+					<a class="mui-navigate-right" >
+						健康管理方案
+					</a>
+				</li>
+				
+				<li class="mui-table-view-cell" id="btn_health_records">
+					<a class="mui-navigate-right" >
+						健康档案
+					</a>
+				</li>-->
+				<li class="mui-table-view-cell" id="un-sign-show">
+					<a class="mui-navigate-right" id="btn_upload_patient_agreement_img">
+						签约
+					</a>
+				</li>
+
+				<li class="mui-table-view-cell sign-show" id="btn_service_package">
+					<a class="mui-navigate-right">
+						服务包
+					</a>
+				</li>
+				<li class="mui-table-view-cell sign-show" id="check_certification_info">
+					<a class="mui-navigate-right">
+						查看协议
+					</a>
+				</li>
+
+				<li class="mui-table-view-cell sign-show" id="btn_reminding">
+					<a class="mui-navigate-right">
+						就诊提醒
+					</a>
+				</li>
+				<li class="mui-table-view-cell" id="btn_health_infomation">
+					<a class="mui-navigate-right">
+						健康数据
+					</a>
+				</li>
+
+				<li class="mui-table-view-cell" id="btn_patient_comments">
+					<a class="mui-navigate-right" id="change-remark">
+						备注
+					</a>
+				</li>
+			</ul>
+
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.immersed.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/sharemethods.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.zoom.js"></script>
+	<script type="text/javascript" src="../js/mui.previewimage.js"></script>
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../plugs/art/template-web.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.feedback.js"></script>
+	<script type="text/javascript" src="../plugs/md5/md5.min.js"></script>
+	<script type="text/javascript" src="../plugs/qs/qs.img.lazyload.js"></script>
+	<script type="text/javascript" src="../js/jquery-labelauty.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+	<script type="text/javascript" src="../js/exif.js"></script>
+	<script type="text/javascript" src="../js/mobileBUGFix.mini.js"></script>
+	<script>
+		mui.init({
+			keyEventBind: {
+				backbutton: true //打开back按键监听
+			},
+			beforeback: function() {
+				//返回true，继续页面关闭逻辑  
+				mui.back;
+				return true;
+			}
+		});
+
+		$("#content").hide()
+
+		var fdtPatient;
+		mui.plusReady(function() {
+			// setPagePos();
+			var currentView = plus.webview.currentWebview();
+
+			currentView.show('slide-in-right', 200);
+			plus.nativeUI.closeWaiting();
+			var fdtPatient_id = currentView.fdtPatient_id;
+
+			$("#un-sign-show").click(function(event) {
+				console.log("上传签约协议：" + currentView.fdtPatient_id);
+				//				console.log("jiance：" + currentView.fdtPatient);
+				mui.openWindow({
+					url: 'sign_up_picture.html',
+					id: 'sign_up_picture',
+					extras: {
+						patientId: fdtPatient_id,
+						//						protocol: fdtPatient.protocol
+					},
+					show: {
+						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true //自动显示等待框，默认为true
+					}
+				});
+			});
+
+			$("#check_certification_info").click(function(event) {
+				console.log("查看患者上传的健康协议：" + currentView.fdtPatient_id);
+				//				console.log("jiance：" + currentView.fdtPatient);
+				mui.openWindow({
+					url: 'patient_agreement.html',
+					id: 'patient_agreement',
+					extras: {
+						patientId: fdtPatient_id,
+						//						protocol: fdtPatient.protocol
+					},
+					show: {
+						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true //自动显示等待框，默认为true
+					}
+				});
+			});
+
+			//			$("#btn_health_records").click(function(event) {
+			//				console.log("查看患者健康档案：" + currentView.fdtPatient_id)
+			//				mui.openWindow({
+			//					url: 'patient_health_file.html',
+			//					id: 'patient_health_file.html',
+			//					extras: {
+			//						patientId: fdtPatient_id
+			//					},
+			//					show: {
+			//						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+			//						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+			//					},
+			//					waiting: {
+			//						autoShow: true //自动显示等待框，默认为true
+			//					}
+			//				});
+			//			});
+
+			$("#btn_reminding").click(function(event) {
+				console.log("查看患者就诊提醒：" + currentView.fdtPatient_id)
+				mui.openWindow({
+					url: 'doctor_reminding.html',
+					id: 'doctor_reminding',
+					extras: {
+						patientId: fdtPatient_id
+					},
+					show: {
+						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true //自动显示等待框，默认为true
+					}
+				});
+			});
+
+			$("#btn_patient_comments").click(function(event) {
+				console.log("查看家庭医生团队对该患者的备注：" + currentView.fdtPatient_id)
+				mui.openWindow({
+					url: 'doctor_comments.html',
+					id: 'doctor_comments.html',
+					extras: {
+						patientId: fdtPatient_id,
+						fdt_comments:fdtPatient.fdt_comments
+					},
+					show: {
+						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true //自动显示等待框，默认为true
+					}
+				});
+			});
+
+			$("#btn_health_infomation").click(function(event) {
+				console.log("查看患者健康数据：" + currentView.fdtPatient_id)
+				mui.openWindow({
+					url: 'echarts.html',
+					id: 'echarts.html',
+					extras: {
+						patientId: fdtPatient_id
+					},
+					show: {
+						autoShow: true, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true //自动显示等待框，默认为true
+					}
+				});
+			});
+
+			$("#btn_service_package").click(function(event) {
+				console.log("查看服务包：" + currentView.fdtPatient_id)
+				mui.openWindow({
+					url: 'service_package.html',
+					id: 'service_package.html',
+					extras: {
+						patientId: fdtPatient_id
+					},
+					show: {
+						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true //自动显示等待框，默认为true
+					}
+				});
+			});
+
+			$("#wei_button").click(function(event) {
+				var user = JSON.parse(localStorage.getItem("USER"));
+				//				console.log(fdtPatient._id)
+				mui.openWindow({
+					url: '../chat/im-chat.html',
+					id: 'im-chat.html',
+					extras: {
+						patientPic:patientPic,
+						patientName: patientName,
+						TO_ACCOUNT: fdtPatient_id
+					},
+					show: {
+						autoShow: true, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true //自动显示等待框，默认为true
+					}
+				});
+			});
+
+			refreshPage();
+		});
+		var patientName = null
+		var patientPic = null
+		var refreshPage = function() {
+			var currentView = plus.webview.currentWebview();
+			var fdtPatient_id = currentView.fdtPatient_id;
+			var fdtPatientUrl = getFdtPatientDetailUrl + fdtPatient_id;
+			var fdtpatientsussess = function(data) {
+				console.log("根據id[" + fdtPatient_id + "]查询社区病患详细信息:" + JSON.stringify(data))
+				if(data.result == "success") {
+					$("#content").show()
+					var fdt = data.obj;
+					fdtPatient = data.date;
+					//打电话
+					mui(".mui-content").on("click", ".call-phone", function() {
+						var btnArray = ['拨打', '取消'];
+						var Phone = fdtPatient.tel;
+						mui.confirm('是否拨打 ' + Phone + ' ？', '提示', btnArray, function(e) {
+							if(e.index == 0) {
+								plus.device.dial(Phone, false);
+							}
+						})
+
+					});
+
+					$("#patient_name").html(fdtPatient.realname);
+					patientName = fdtPatient.realname;
+
+					$(".idnumber").html(fdtPatient.idnumber);
+
+					//医保卡接口里现阶段没有，用身份证的，后续添加改接口
+					$(".healthe-idnumber").html(fdtPatient.idnumber);
+					if(fdtPatient.illness == null && fdtPatient.illness == undefined) {
+						$(".patient-illness").hide();
+					} else {
+						$(".patient-illness").html(fdtPatient.illness);
+					}
+
+					if(fdtPatient.birthdate != undefined) {
+						var birthdate = moment(fdtPatient.birthdate).format('YYYY');
+						$(".patient-year").html(birthdate + "年");
+					}
+
+					//备注更改没有接口，页面里面的功能实现了上传，后期接口更改去页面更改接口。
+					//$(".change-remark").html(fdtPatient.);
+
+					//						console.log("jiance：" + fdtPatient.patientavatar);
+					$("#head-img").attr("src", serverAddress + "/" + fdtPatient.patientavatar.replace('client', '').replace(/\\/g, "/"));
+					patientPic = fdtPatient.patientavatar;
+					//性别
+					if(fdtPatient.gender == '0') {
+						$(".patient-gender").html("男");
+					} else {
+						$(".patient-gender").html("女");
+					}
+
+					//已签约未签约
+					if(fdtPatient.node == "YQ") {
+						$('#un-sign-show').hide();
+						$("#sign-yes").show();
+						$("#sign-no").hide();
+						$("#if-sign").html("已签约");
+					} else {
+						$('.sign-show').hide();
+						$("#sign-no").show();
+						$("#sign-yes").hide();
+						$("#if-sign").html("未签约");
+						$('#wei_button').hide();
+
+						//						$('#waitone').show();
+					}						
+					if(fdtPatient.fdt_comments!== undefined){
+						$("#change-remark").html("备注："+fdtPatient.fdt_comments);
+					}
+					
+					
+				} else {
+					mui.toast(data.msg);
+				}
+			};
+			var erroro = function(data) {
+				console.log("根据患者id查询患者详细信息出错:" + JSON.stringify(data));
+			}
+			commonHttpUtils(fdtPatientUrl, "get", {
+				fdtPatient_id: fdtPatient_id
+			}, fdtpatientsussess, erroro);
+		}
+	</script>
+
+</html>
